@@ -55,7 +55,7 @@ The original sketch below uses synthetic data only and presents no findings. Its
 
 ## 5. Group Roles and Responsibilities
 
-**Zaozao Wang (A)** will lead source coordination, acquisition, cleaning, and analysis. **Zhengxiang Liu (B)** will lead visualization design, D3 implementation, interactions, and webpage integration. Both will review definitions, test the pipeline, interpret results, document decisions, and prepare and deliver the presentation. Both members will understand and contribute to the complete system.
+**Zaozao Wang** will lead source coordination, acquisition, cleaning, and analysis. **Zhengxiang Liu** will lead visualization design, D3 implementation, interactions, and webpage integration. Both will review definitions, test the pipeline, interpret results, document decisions, and prepare and deliver the presentation. Both members will understand and contribute to the complete system.
 
 ## 6. Interim Demonstration Deliverables
 
@@ -67,12 +67,12 @@ Collection continues through Week 6. Cleaning rules are implemented early and ru
 
 | Week | Milestone | Tasks | Leads | Expected output |
 | --- | --- | --- | --- | --- |
-| 2 | Project definition | Confirm questions, access, consent, schema, and sketches. | A + B | Proposal and collection plan. |
-| 3 | Framework foundation | Begin collection; build import adapters, synthetic fixtures, and D3 shell. | A: data; B: interface | Reusable pipeline and dashboard scaffold. |
-| 4 | Connected prototype | Continue collection; validate batches, explore coverage, implement linked views. | A: processing; B: charts | Cleaned samples and working interactions. |
-| 5 | Interim demonstration | Present framework, initial D3 views, refined questions, and data gaps. | A + B | Demonstration and feedback notes. |
-| 6 | Implementation and refinement | Continue collection; complete five views and usability checks. | A: data; B: integration | Complete dashboard and collection snapshot. |
-| 7 | Final integration | Freeze activity data; reconcile, clean, join available scores, analyze, document, and present. | A: analysis; B: delivery; both: review | Validated final tables, visualizations, and presentation. |
+| 2 | Project definition | Confirm questions, access, consent, schema, and sketches. | Zaozao Wang + Zhengxiang Liu | Proposal and collection plan. |
+| 3 | Framework foundation | Begin collection; build import adapters, synthetic fixtures, and D3 shell. | Zaozao Wang: data; Zhengxiang Liu: interface | Reusable pipeline and dashboard scaffold. |
+| 4 | Connected prototype | Continue collection; validate batches, explore coverage, implement linked views. | Zaozao Wang: processing; Zhengxiang Liu: charts | Cleaned samples and working interactions. |
+| 5 | Interim demonstration | Present framework, initial D3 views, refined questions, and data gaps. | Zaozao Wang + Zhengxiang Liu | Demonstration and feedback notes. |
+| 6 | Implementation and refinement | Continue collection; complete five views and usability checks. | Zaozao Wang: data; Zhengxiang Liu: integration | Complete dashboard and collection snapshot. |
+| 7 | Final integration | Freeze activity data; reconcile, clean, join available scores, analyze, document, and present. | Both: review, analysis, delivery | Validated final tables, visualizations, and presentation. |
 
 If final scores arrive after the deadline, we will present the framework and available activity analyses, explicitly defer score comparisons, and retain a tested import path.
 
