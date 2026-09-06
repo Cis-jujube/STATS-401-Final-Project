@@ -1,0 +1,28 @@
+CS201 proposal sketch — image generation provenance
+
+Tool: built-in image_gen (no CLI/API fallback).
+All values and marks are synthetic design illustrations, not collected data.
+
+INITIAL GENERATION PROMPT
+
+Use case: scientific-educational / ui-mockup.
+Asset type: one original dashboard sketch sheet for an undergraduate STATS 401 project proposal on CS201 online study patterns and exam outcomes.
+Primary request: Create a clean, readable, low-fidelity landscape academic wireframe containing exactly FIVE distinctly numbered visualization panels, plus a narrow process footer. Use a 3-column by 2-row composition; the fifth panel may span two columns in the lower row. Each panel needs enough room for short readable English axes and labels. White or warm-white background, thin slate outlines, restrained blue/teal/amber/purple marks, generous whitespace. Simple flat charts, no shadows, no photographic UI, no logos. Aim for 2400+ pixels wide if supported.
+Top title exactly: "CS201 Learning Across Platforms"
+Prominent badge exactly: "SYNTHETIC DATA - DESIGN ONLY"
+Subtitle: "Five connected views; no real student records or findings"
+One shared filter strip: "Weeks" | "Platform" | "Academic year" | "Major" | "Prior coding"
+A small separate source toggle: "Measured / Self-reported (separate views)"
+A consistent four-platform key: "Course site" blue, "Assignments" teal, "Ed" amber, "Canvas" purple.
+Panel 1 title "1. Weekly trends". Technique is a multi-line chart. x-axis "Course week" with W2 W3 W4 W5 W6, y-axis "Median active minutes". Four simple differently styled/color lines show different imagined weekly patterns. Include direct abbreviated line labels where space permits.
+Panel 2 title "2. Study rhythm". Technique is a heatmap. x-axis "Course week" W2 W3 W4 W5 W6; y-axis "Synthetic student ID" rows S01 S02 S03 S04 S05 S06. Cell darkness encodes active days per week. Small legend "0" through "7 active days", with separately hatched "Missing". Add small caption "Private view".
+Panel 3 title "3. Platform mix". Technique is a 100% horizontal stacked bar chart. y-axis "Academic year" Y1 Y2 Y3 Y4. x-axis "Share of comparable time (%)", 0 50 100. Use the four platform colors; all bars should sum to 100%. These are conceptual values only.
+Panel 4 title "4. Time and exam score". Technique is a scatterplot with varied synthetic individual points, no regression line or statistics. x-axis "Mean weekly active minutes"; y-axis "Exam score (%)". Show one dashed rectangular brush selection. Small caption "Private view".
+Panel 5 title "5. Regularity and exam score". Technique is a box-and-whisker plot. Exactly three boxplots with visible median lines and whiskers. x-axis "Study regularity" categories Low, Medium, High. y-axis "Exam score (%)". Show overlapping distributions with no guaranteed ordering. A short inline interaction note: "Filters update all five views".
+Narrow footer, clearly OUTSIDE all five chart panels, title "Repeatable workflow", simple arrows: "Collect through Week 6" -> "Validate each batch" -> "Refresh shared views" -> "Freeze and finalize in Week 7".
+Small bottom line: "Individual views stay private; shared results use disclosure-safe aggregates."
+All data shapes are illustrative. Do not add claims of measured correlations, significance, collected records, real names, real grades, or real study results. Do not add a sixth numbered chart. Keep text crisp and avoid dense paragraphs.
+
+FINAL CORRECTION PROMPT
+
+EDIT TARGET: the attached image, only chart marks in panel 5. Preserve the page layout, all text, all axis labels, filters, panels 1-4, and footer. COMPLETELY REPLACE the three boxplot shapes inside panel 5 with three MUCH SHORTER compact boxplots. Every black whisker cap and every colored rectangle MUST fit in the vertical band BETWEEN the y-axis ticks labeled 20 and 80. No boxplot mark may be anywhere near or above the tick labeled 100. Draw each upper whisker cap at roughly 70 on the existing y-axis, top of colored box at 60, median around 45-50, bottom of colored box at 35, and bottom whisker at 25. On this 1536 by 1024 image, the existing y-axis tick 80 is around y=666 and tick 20 is around y=771. Thus ALL replacement boxplot marks must lie between image pixel rows y=678 and y=763. In particular, delete ALL old horizontal caps near image row 615 and old vertical lines leading from them. Three small, internally valid boxplots centered above Low, Medium, High. This deliberate compact shape is required. Do not preserve the erroneous old tall boxplot silhouettes. Do not change any other chart or text.
