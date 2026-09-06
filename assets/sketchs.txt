@@ -1,9 +1,7 @@
-CS201 proposal sketch — image generation provenance
+CS201 proposal sketch
 
 Tool: built-in image_gen (no CLI/API fallback).
 All values and marks are synthetic design illustrations, not collected data.
-
-INITIAL GENERATION PROMPT
 
 Use case: scientific-educational / ui-mockup.
 Asset type: one original dashboard sketch sheet for an undergraduate STATS 401 project proposal on CS201 online study patterns and exam outcomes.
