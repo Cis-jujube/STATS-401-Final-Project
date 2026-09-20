@@ -33,6 +33,14 @@ class PublicArtifacts(unittest.TestCase):
             else:
                 self.assertIsNone(c['submissions'])
                 self.assertIsNone(c['contributors'])
+        for row in d['attempt_score_series']:
+            if row['state'] == 'visible':
+                self.assertGreaterEqual(row['contributors'], 5)
+                self.assertGreaterEqual(row['submissions'], row['contributors'])
+                self.assertTrue(0 <= row['mean_score'] <= 100)
+            else:
+                for field in ('mean_score', 'submissions', 'contributors'):
+                    self.assertIsNone(row[field])
         self.assertNotIn('student_id', json.dumps(d))
     def test_all_local_page_resources_exist(self):
         parser = References()

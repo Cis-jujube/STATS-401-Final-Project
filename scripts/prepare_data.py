@@ -56,6 +56,29 @@ def problem_progress(rows: list[dict]) -> dict:
             "best3": max(scores[:3]), "best": max(scores)}
 
 
+def attempt_score_series(groups: dict) -> list[dict]:
+    """Actual nth-attempt scores; equal weight per observed student-problem event.
+
+    Each point's cohort changes. Do not carry forward scores for stopped pairs.
+    Suppress the entire point when fewer than five distinct students contribute.
+    """
+    bins = defaultdict(list)
+    for (aid, sid, _), rows in groups.items():
+        ordered = sorted(rows, key=lambda r: (r["when"], r["submission_id"]))
+        for attempt, row in enumerate(ordered, 1):
+            bins[aid, attempt].append((sid, row["normalized_score"]))
+    output = []
+    for (aid, attempt), values in sorted(bins.items()):
+        students = len({sid for sid, _ in values})
+        visible = students >= MIN_GROUP
+        output.append({"homework": HOMEWORKS[aid], "attempt": attempt,
+                       "state": "visible" if visible else "suppressed",
+                       "submissions": len(values) if visible else None,
+                       "contributors": students if visible else None,
+                       "mean_score": statistics.mean(score for _, score in values) if visible else None})
+    return output
+
+
 def calendar(rows: list[dict], assignments: list[dict], hours: int, minimum: int) -> list[dict]:
     cells = defaultdict(list)
     for row in rows:
@@ -180,6 +203,7 @@ def prepare(bundle: dict) -> tuple[dict, dict]:
                             "suppressed_positive_cells": sum(c["state"] == "suppressed" for c in cal),
                             "visible_positive_cells": sum(c["state"] == "visible" and c["submissions"] > 0 for c in cal)},
         "assignments": summaries, "calendar": cal, "score_progression": progression,
+        "attempt_score_series": attempt_score_series(groups),
     }
     if sum(a["submissions"] for a in summaries) != len(selected):
         raise ValueError("Assignment totals do not reconcile")
@@ -207,7 +231,7 @@ def main() -> None:
         args.private_output.parent.mkdir(parents=True, exist_ok=True)
         args.private_output.write_text(json.dumps(private, ensure_ascii=False, indent=2) + "\n")
         args.private_output.chmod(0o600)
-    print(json.dumps({k: v for k, v in public.items() if k not in ("calendar", "score_progression")}, indent=2))
+    print(json.dumps({k: v for k, v in public.items() if k not in ("calendar", "score_progression", "attempt_score_series")}, indent=2))
 
 
 if __name__ == "__main__":

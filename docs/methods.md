@@ -45,4 +45,16 @@ Pseudonyms, individual scores, raw logs and linkage materials remain outside the
 
 Counts reflect recorded attempts, not effort or ability. Elapsed gaps are not active learning time. Best-score trajectories are nondecreasing by definition. Observed first-to-best differences are not causal treatment effects. Different homework problem counts and difficulty limit cross-homework comparisons.
 
-Three static figures and their mobile variants are implemented. Homework filters, metric toggles and endpoint animations are planned. Retry-interval analysis and the approximately five-participant formative evaluation are future work; no user-study results have been collected or claimed.
+Four static figures and their mobile variants are implemented. Homework filters, metric toggles and endpoint animations are planned. Retry-interval analysis and the approximately five-participant formative evaluation are future work; no user-study results have been collected or claimed.
+
+## Actual mean score by attempt number
+
+The fourth figure adds `attempt_score_series` to the public schema. Each student–homework–problem sequence is ordered by timestamp and submission ID. Attempt k is the kth retained event in that sequence, even when it occurs after an earlier AC. The point is the arithmetic mean of **actual normalized scores at k**, not the running maximum. Every observed student–problem event has equal weight. A student retrying several problems can contribute several observations to one point.
+
+Each row publishes homework, attempt, mean_score, submissions (N), contributors (S) and state. If fewer than five unique students contribute, all three numeric measures are null and state is suppressed. Later points are not a fixed cohort: stopped sequences do not carry forward. The first points include 304/290/273 student–problem events and 38/38/39 distinct students for HW1/HW2/HW3. Visible points extend through attempt 13/9/14 respectively. The common displayed x range ends at the largest visible attempt (14); additional sparse tails are withheld.
+
+No confidence bands are drawn because these are descriptive means over the observed cohort and event observations are clustered within students and problems. A future uncertainty analysis would need a justified student-level sampling/resampling approach rather than independent-event error bars. Differences across attempts can reflect selection, changing problem mix, post-acceptance submissions and other factors; they do not estimate within-student improvement.
+
+## Planned midterm comparison
+
+Once authorized midterm scores are available, add comparisons of pre-exam homework behavior with exam performance. Confirm the scoring scale and cohort, join pseudonymous records privately, report matched sample size and missingness, and exclude all post-exam behavior from predictor summaries. Candidate summaries are per-student attempt counts, submission timing and normalized score progression. Assess ceiling effects and influential cases; report exploratory associations without inferring causal effects. No midterm scores or exam-related results are currently included. Public outputs will remain aggregated; individual exam grades and linkage keys remain private.

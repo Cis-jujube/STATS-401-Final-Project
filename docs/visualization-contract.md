@@ -1,6 +1,6 @@
 # Interim visualization contract
 
-User-approved analytical direction: **CS201 Homework Submission Patterns: Timing, Retries, and Score Progression**. Deliver the first three recommended figures; retry-interval analysis is a future extension. This is a straightforward statistical report, not a concept-first/advanced art-directed composition.
+User-approved analytical direction: **CS201 Homework Submission Patterns: Timing, Retries, and Score Progression**. Deliver the first three recommended figures plus actual mean score at each within-problem attempt number; retry-interval analysis and midterm comparison are future extensions. This is a straightforward statistical report, not a concept-first/advanced art-directed composition.
 
 ## Reading path and ownership
 
@@ -16,12 +16,16 @@ All specialist passes are local; no delegation was requested. Statistical/uncert
 
 - Python standard-library aggregation reads a private external export. Only approved aggregate JSON enters this repository.
 - Figure renderer owns axes, text, scales and marks; durable SVG plus high-resolution PNG, with independent mobile compositions rather than unreadably shrinking desktop artwork.
-- Plain semantic HTML/CSS, three figure sections, no remote fonts or runtime API, no server or credentials. Standard library HTML generation shares aggregate data with figures to prevent numeric drift.
-- Three primary figures; small mobile variants and private hourly export. No animation, client state or URL filter state in this milestone. HTML anchors support deep links. Planned interactions are labeled as planned.
+- Plain semantic HTML/CSS, four figure sections, no remote fonts or runtime API, no server or credentials. Standard library HTML generation shares aggregate data with figures to prevent numeric drift.
+- Four primary figures; small mobile variants and private hourly export. No animation, client state or URL filter state in this milestone. HTML anchors support deep links. Planned interactions are labeled as planned.
 - One column on 390px mobile, bounded text width on desktop, chart evidence above long methods, 44px download targets, readable text tables in native disclosure controls, image alt text and captions. Color is not the sole discriminator.
-- Color roles: dark ink/text; teal/high activity and best-score endpoint; light outlined circles/first score; neutral connectors; gray and hatch for excluded/suppressed cells. No decorative imagery.
+- Color roles follow figures4papers: dark neutral text, blue activity and score endpoints, blue/teal/red homework series; light outlined circles/first score; neutral connectors; gray and hatch for excluded/suppressed cells. No decorative imagery.
 - QA: input/schema/foreign-key checks; meaningful unit tests for timezones, score scales, same-cohort best scores, suppression; image inspection; file-based desktop/mobile browser checks; public artifact privacy scan; final Git diff review.
 
 ## Publication boundary
 
 No student pseudonyms, raw IDs, linkage key, raw JSON, transfer text, individual grades or individual dots are shipped. Suppression is a practical disclosure reduction, not a formal privacy guarantee. Per-problem score summaries are across 30+ students; rare temporal groups remain masked. Original proposal and synthetic sketches remain labeled historical; the interim page is the current direction.
+
+## Publication-style revision
+
+User requested figures4papers and approved project-local Matplotlib plus the actual-nth-score estimand. Read SKILL.md, design-theory.md and api.md from commit 3c181f85e82c6f24948fcaaf3be6696102b41d8d. Rendering now uses Matplotlib with 300 DPI PNG and vector PDF/SVG; three-panel score layouts use a common scale. Figure 04 averages actual kth-attempt scores with event weighting, changing cohorts, N/S rows and a five-student minimum. No uncertainty bands or causal claims are introduced. The public webpage remains static HTML/CSS with planned analytical interactions.

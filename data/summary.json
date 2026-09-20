@@ -1392,5 +1392,703 @@
       "gain": 13.84615384615384
     }
   ],
+  "attempt_score_series": [
+    {
+      "homework": "HW1",
+      "attempt": 1,
+      "state": "visible",
+      "submissions": 304,
+      "contributors": 38,
+      "mean_score": 76.92983552631578
+    },
+    {
+      "homework": "HW1",
+      "attempt": 2,
+      "state": "visible",
+      "submissions": 106,
+      "contributors": 34,
+      "mean_score": 64.52830188679245
+    },
+    {
+      "homework": "HW1",
+      "attempt": 3,
+      "state": "visible",
+      "submissions": 52,
+      "contributors": 25,
+      "mean_score": 49.61538461538461
+    },
+    {
+      "homework": "HW1",
+      "attempt": 4,
+      "state": "visible",
+      "submissions": 37,
+      "contributors": 18,
+      "mean_score": 52.52256756756757
+    },
+    {
+      "homework": "HW1",
+      "attempt": 5,
+      "state": "visible",
+      "submissions": 24,
+      "contributors": 11,
+      "mean_score": 46.666666666666664
+    },
+    {
+      "homework": "HW1",
+      "attempt": 6,
+      "state": "visible",
+      "submissions": 18,
+      "contributors": 10,
+      "mean_score": 24.444444444444443
+    },
+    {
+      "homework": "HW1",
+      "attempt": 7,
+      "state": "visible",
+      "submissions": 15,
+      "contributors": 9,
+      "mean_score": 33.333333333333336
+    },
+    {
+      "homework": "HW1",
+      "attempt": 8,
+      "state": "visible",
+      "submissions": 14,
+      "contributors": 9,
+      "mean_score": 28.571428571428573
+    },
+    {
+      "homework": "HW1",
+      "attempt": 9,
+      "state": "visible",
+      "submissions": 11,
+      "contributors": 7,
+      "mean_score": 25.454545454545453
+    },
+    {
+      "homework": "HW1",
+      "attempt": 10,
+      "state": "visible",
+      "submissions": 10,
+      "contributors": 6,
+      "mean_score": 20.0
+    },
+    {
+      "homework": "HW1",
+      "attempt": 11,
+      "state": "visible",
+      "submissions": 8,
+      "contributors": 6,
+      "mean_score": 25.0
+    },
+    {
+      "homework": "HW1",
+      "attempt": 12,
+      "state": "visible",
+      "submissions": 7,
+      "contributors": 5,
+      "mean_score": 28.571428571428573
+    },
+    {
+      "homework": "HW1",
+      "attempt": 13,
+      "state": "visible",
+      "submissions": 7,
+      "contributors": 5,
+      "mean_score": 54.285714285714285
+    },
+    {
+      "homework": "HW1",
+      "attempt": 14,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 15,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 16,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 17,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 18,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 19,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 20,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 21,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 22,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 23,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 24,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 25,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 26,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 27,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 28,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 29,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 30,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 31,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 32,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 33,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 34,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 35,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 36,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 37,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 38,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 39,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 40,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 41,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 42,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW1",
+      "attempt": 43,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW2",
+      "attempt": 1,
+      "state": "visible",
+      "submissions": 290,
+      "contributors": 38,
+      "mean_score": 65.10344827586206
+    },
+    {
+      "homework": "HW2",
+      "attempt": 2,
+      "state": "visible",
+      "submissions": 134,
+      "contributors": 33,
+      "mean_score": 57.61194029850746
+    },
+    {
+      "homework": "HW2",
+      "attempt": 3,
+      "state": "visible",
+      "submissions": 74,
+      "contributors": 25,
+      "mean_score": 45.945945945945944
+    },
+    {
+      "homework": "HW2",
+      "attempt": 4,
+      "state": "visible",
+      "submissions": 49,
+      "contributors": 17,
+      "mean_score": 46.12244897959184
+    },
+    {
+      "homework": "HW2",
+      "attempt": 5,
+      "state": "visible",
+      "submissions": 36,
+      "contributors": 13,
+      "mean_score": 51.111111111111114
+    },
+    {
+      "homework": "HW2",
+      "attempt": 6,
+      "state": "visible",
+      "submissions": 21,
+      "contributors": 8,
+      "mean_score": 54.285714285714285
+    },
+    {
+      "homework": "HW2",
+      "attempt": 7,
+      "state": "visible",
+      "submissions": 16,
+      "contributors": 7,
+      "mean_score": 51.25
+    },
+    {
+      "homework": "HW2",
+      "attempt": 8,
+      "state": "visible",
+      "submissions": 11,
+      "contributors": 6,
+      "mean_score": 27.272727272727273
+    },
+    {
+      "homework": "HW2",
+      "attempt": 9,
+      "state": "visible",
+      "submissions": 10,
+      "contributors": 5,
+      "mean_score": 38.0
+    },
+    {
+      "homework": "HW2",
+      "attempt": 10,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW2",
+      "attempt": 11,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW2",
+      "attempt": 12,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW2",
+      "attempt": 13,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW2",
+      "attempt": 14,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW2",
+      "attempt": 15,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW2",
+      "attempt": 16,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 1,
+      "state": "visible",
+      "submissions": 273,
+      "contributors": 39,
+      "mean_score": 62.93040293040293
+    },
+    {
+      "homework": "HW3",
+      "attempt": 2,
+      "state": "visible",
+      "submissions": 118,
+      "contributors": 36,
+      "mean_score": 45.932203389830505
+    },
+    {
+      "homework": "HW3",
+      "attempt": 3,
+      "state": "visible",
+      "submissions": 77,
+      "contributors": 32,
+      "mean_score": 45.45454545454545
+    },
+    {
+      "homework": "HW3",
+      "attempt": 4,
+      "state": "visible",
+      "submissions": 59,
+      "contributors": 27,
+      "mean_score": 46.610169491525426
+    },
+    {
+      "homework": "HW3",
+      "attempt": 5,
+      "state": "visible",
+      "submissions": 40,
+      "contributors": 17,
+      "mean_score": 34.0
+    },
+    {
+      "homework": "HW3",
+      "attempt": 6,
+      "state": "visible",
+      "submissions": 30,
+      "contributors": 12,
+      "mean_score": 36.333333333333336
+    },
+    {
+      "homework": "HW3",
+      "attempt": 7,
+      "state": "visible",
+      "submissions": 28,
+      "contributors": 11,
+      "mean_score": 48.92857142857143
+    },
+    {
+      "homework": "HW3",
+      "attempt": 8,
+      "state": "visible",
+      "submissions": 22,
+      "contributors": 9,
+      "mean_score": 54.09090909090909
+    },
+    {
+      "homework": "HW3",
+      "attempt": 9,
+      "state": "visible",
+      "submissions": 16,
+      "contributors": 8,
+      "mean_score": 53.75
+    },
+    {
+      "homework": "HW3",
+      "attempt": 10,
+      "state": "visible",
+      "submissions": 15,
+      "contributors": 7,
+      "mean_score": 43.333333333333336
+    },
+    {
+      "homework": "HW3",
+      "attempt": 11,
+      "state": "visible",
+      "submissions": 13,
+      "contributors": 6,
+      "mean_score": 40.76923076923077
+    },
+    {
+      "homework": "HW3",
+      "attempt": 12,
+      "state": "visible",
+      "submissions": 11,
+      "contributors": 6,
+      "mean_score": 36.36363636363637
+    },
+    {
+      "homework": "HW3",
+      "attempt": 13,
+      "state": "visible",
+      "submissions": 9,
+      "contributors": 5,
+      "mean_score": 33.333333333333336
+    },
+    {
+      "homework": "HW3",
+      "attempt": 14,
+      "state": "visible",
+      "submissions": 9,
+      "contributors": 5,
+      "mean_score": 44.44444444444444
+    },
+    {
+      "homework": "HW3",
+      "attempt": 15,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 16,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 17,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 18,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 19,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 20,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 21,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 22,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 23,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 24,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 25,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 26,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 27,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW3",
+      "attempt": 28,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    }
+  ],
   "input_sha256": "5312ca13c3dbdda8c2d7073ec365919dd615d1322f714c5a62085c98090b2ed9"
 }
