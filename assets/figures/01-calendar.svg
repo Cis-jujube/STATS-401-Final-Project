@@ -1,0 +1,500 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="800" viewBox="0 0 1120 800" role="img"><title>When submissions happen: count and distinct contributors</title><defs><pattern id="mask" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#f1eee8"/><path d="M0 6L6 0" stroke="#c1bdb4"/></pattern></defs>
+<rect width="1120" height="800" fill="#fffefa"/>
+<text x="30" y="30" fill="#12655f" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="700">01 / TIMING</text>
+<text x="30" y="67" fill="#192f38" text-anchor="start" font-family="Arial, sans-serif" font-size="25" font-weight="700">When submissions happen</text>
+<text x="30" y="94" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="400">Recorded activity in Beijing time (UTC+08:00).</text>
+<text x="30" y="114" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="400">Four-hour cells. Small groups are masked; masked does not mean zero.</text>
+<text x="30.0" y="147" fill="#192f38" text-anchor="start" font-family="Arial, sans-serif" font-size="17" font-weight="700">Submission count</text>
+<rect x="255.0" y="135" width="3" height="10" fill="#f3f7f4" stroke="none"/>
+<rect x="258.0" y="135" width="3" height="10" fill="#eef4f1" stroke="none"/>
+<rect x="261.0" y="135" width="3" height="10" fill="#eaf1ee" stroke="none"/>
+<rect x="264.0" y="135" width="3" height="10" fill="#e5eeeb" stroke="none"/>
+<rect x="267.0" y="135" width="3" height="10" fill="#e1ebe8" stroke="none"/>
+<rect x="270.0" y="135" width="3" height="10" fill="#dce8e5" stroke="none"/>
+<rect x="273.0" y="135" width="3" height="10" fill="#d7e5e2" stroke="none"/>
+<rect x="276.0" y="135" width="3" height="10" fill="#d3e2df" stroke="none"/>
+<rect x="279.0" y="135" width="3" height="10" fill="#cedfdc" stroke="none"/>
+<rect x="282.0" y="135" width="3" height="10" fill="#cadcd9" stroke="none"/>
+<rect x="285.0" y="135" width="3" height="10" fill="#c5d9d6" stroke="none"/>
+<rect x="288.0" y="135" width="3" height="10" fill="#c0d6d3" stroke="none"/>
+<rect x="291.0" y="135" width="3" height="10" fill="#bcd3d0" stroke="none"/>
+<rect x="294.0" y="135" width="3" height="10" fill="#b7d0cc" stroke="none"/>
+<rect x="297.0" y="135" width="3" height="10" fill="#b3cdc9" stroke="none"/>
+<rect x="300.0" y="135" width="3" height="10" fill="#aecac6" stroke="none"/>
+<rect x="303.0" y="135" width="3" height="10" fill="#aac7c3" stroke="none"/>
+<rect x="306.0" y="135" width="3" height="10" fill="#a5c4c0" stroke="none"/>
+<rect x="309.0" y="135" width="3" height="10" fill="#a0c1bd" stroke="none"/>
+<rect x="312.0" y="135" width="3" height="10" fill="#9cbeba" stroke="none"/>
+<rect x="315.0" y="135" width="3" height="10" fill="#97bbb7" stroke="none"/>
+<rect x="318.0" y="135" width="3" height="10" fill="#93b8b4" stroke="none"/>
+<rect x="321.0" y="135" width="3" height="10" fill="#8eb5b1" stroke="none"/>
+<rect x="324.0" y="135" width="3" height="10" fill="#89b2ae" stroke="none"/>
+<rect x="327.0" y="135" width="3" height="10" fill="#85afab" stroke="none"/>
+<rect x="330.0" y="135" width="3" height="10" fill="#80ada8" stroke="none"/>
+<rect x="333.0" y="135" width="3" height="10" fill="#7caaa5" stroke="none"/>
+<rect x="336.0" y="135" width="3" height="10" fill="#77a7a2" stroke="none"/>
+<rect x="339.0" y="135" width="3" height="10" fill="#72a49f" stroke="none"/>
+<rect x="342.0" y="135" width="3" height="10" fill="#6ea19c" stroke="none"/>
+<rect x="345.0" y="135" width="3" height="10" fill="#699e99" stroke="none"/>
+<rect x="348.0" y="135" width="3" height="10" fill="#659b96" stroke="none"/>
+<rect x="351.0" y="135" width="3" height="10" fill="#609893" stroke="none"/>
+<rect x="354.0" y="135" width="3" height="10" fill="#5b9590" stroke="none"/>
+<rect x="357.0" y="135" width="3" height="10" fill="#57928d" stroke="none"/>
+<rect x="360.0" y="135" width="3" height="10" fill="#528f8a" stroke="none"/>
+<rect x="363.0" y="135" width="3" height="10" fill="#4e8c87" stroke="none"/>
+<rect x="366.0" y="135" width="3" height="10" fill="#498983" stroke="none"/>
+<rect x="369.0" y="135" width="3" height="10" fill="#458680" stroke="none"/>
+<rect x="372.0" y="135" width="3" height="10" fill="#40837d" stroke="none"/>
+<rect x="375.0" y="135" width="3" height="10" fill="#3b807a" stroke="none"/>
+<rect x="378.0" y="135" width="3" height="10" fill="#377d77" stroke="none"/>
+<rect x="381.0" y="135" width="3" height="10" fill="#327a74" stroke="none"/>
+<rect x="384.0" y="135" width="3" height="10" fill="#2e7771" stroke="none"/>
+<rect x="387.0" y="135" width="3" height="10" fill="#29746e" stroke="none"/>
+<rect x="390.0" y="135" width="3" height="10" fill="#24716b" stroke="none"/>
+<rect x="393.0" y="135" width="3" height="10" fill="#206e68" stroke="none"/>
+<rect x="396.0" y="135" width="3" height="10" fill="#1b6b65" stroke="none"/>
+<rect x="399.0" y="135" width="3" height="10" fill="#176862" stroke="none"/>
+<rect x="402.0" y="135" width="3" height="10" fill="#12655f" stroke="none"/>
+<text x="255.0" y="160" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="10" font-weight="400">0</text>
+<text x="405.0" y="160" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="10" font-weight="400">153</text>
+<text x="138.66666666666666" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">00</text>
+<text x="212.0" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">04</text>
+<text x="285.3333333333333" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">08</text>
+<text x="358.66666666666663" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">12</text>
+<text x="432.0" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">16</text>
+<text x="505.3333333333333" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">20</text>
+<text x="92.0" y="201" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 26</text>
+<rect x="102.0" y="186" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="175.33333333333331" y="186" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="248.66666666666666" y="186" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="322.0" y="186" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="395.3333333333333" y="186" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="468.66666666666663" y="186" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<text x="92.0" y="222" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 27</text>
+<rect x="102.0" y="207" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="175.33333333333331" y="207" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="248.66666666666666" y="207" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="322.0" y="207" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="395.3333333333333" y="207" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="468.66666666666663" y="207" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="92.0" y="243" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 28</text>
+<rect x="102.0" y="228" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="175.33333333333331" y="228" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="248.66666666666666" y="228" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="228" width="71.33333333333333" height="19" fill="#9fc1bc" stroke="none"/>
+<text x="358.66666666666663" y="242" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">57</text>
+<rect x="395.3333333333333" y="228" width="71.33333333333333" height="19" fill="#cedfdc" stroke="none"/>
+<text x="432.0" y="242" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">25</text>
+<rect x="468.66666666666663" y="228" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="92.0" y="264" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 29</text>
+<rect x="102.0" y="249" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="175.33333333333331" y="249" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="248.66666666666666" y="249" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="249" width="71.33333333333333" height="19" fill="#12655f" stroke="none"/>
+<text x="358.66666666666663" y="263" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">153</text>
+<rect x="395.3333333333333" y="249" width="71.33333333333333" height="19" fill="#9fc1bc" stroke="none"/>
+<text x="432.0" y="263" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">57</text>
+<rect x="468.66666666666663" y="249" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="92.0" y="285" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 30</text>
+<rect x="102.0" y="270" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="175.33333333333331" y="270" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="248.66666666666666" y="270" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="322.0" y="270" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="395.3333333333333" y="270" width="71.33333333333333" height="19" fill="#afcbc7" stroke="none"/>
+<text x="432.0" y="284" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">46</text>
+<rect x="468.66666666666663" y="270" width="71.33333333333333" height="19" fill="#dae7e3" stroke="none"/>
+<text x="505.3333333333333" y="284" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">17</text>
+<text x="92.0" y="306" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 31</text>
+<rect x="102.0" y="291" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="175.33333333333331" y="291" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="248.66666666666666" y="291" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="291" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="395.3333333333333" y="291" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="468.66666666666663" y="291" width="71.33333333333333" height="19" fill="#c7dad7" stroke="none"/>
+<text x="505.3333333333333" y="305" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">30</text>
+<text x="92.0" y="327" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 01</text>
+<rect x="102.0" y="312" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="175.33333333333331" y="312" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="248.66666666666666" y="312" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="312" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="395.3333333333333" y="312" width="71.33333333333333" height="19" fill="#c5d9d6" stroke="none"/>
+<text x="432.0" y="326" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">31</text>
+<rect x="468.66666666666663" y="312" width="71.33333333333333" height="19" fill="#afcbc7" stroke="none"/>
+<text x="505.3333333333333" y="326" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">46</text>
+<text x="92.0" y="348" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 02</text>
+<rect x="102.0" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="175.33333333333331" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="248.66666666666666" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="322.0" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="395.3333333333333" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="468.66666666666663" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<text x="92.0" y="369" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 03</text>
+<rect x="102.0" y="354" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="175.33333333333331" y="354" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="248.66666666666666" y="354" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="322.0" y="354" width="71.33333333333333" height="19" fill="#dae7e3" stroke="none"/>
+<text x="358.66666666666663" y="368" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">17</text>
+<rect x="395.3333333333333" y="354" width="71.33333333333333" height="19" fill="#cbddda" stroke="none"/>
+<text x="432.0" y="368" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">27</text>
+<rect x="468.66666666666663" y="354" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="92.0" y="390" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 04</text>
+<rect x="102.0" y="375" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="175.33333333333331" y="375" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="248.66666666666666" y="375" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="375" width="71.33333333333333" height="19" fill="#bdd4d0" stroke="none"/>
+<text x="358.66666666666663" y="389" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">37</text>
+<rect x="395.3333333333333" y="375" width="71.33333333333333" height="19" fill="#98bcb8" stroke="none"/>
+<text x="432.0" y="389" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">62</text>
+<rect x="468.66666666666663" y="375" width="71.33333333333333" height="19" fill="#c4d8d5" stroke="none"/>
+<text x="505.3333333333333" y="389" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">32</text>
+<text x="92.0" y="411" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 05</text>
+<rect x="102.0" y="396" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="175.33333333333331" y="396" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="248.66666666666666" y="396" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="396" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="395.3333333333333" y="396" width="71.33333333333333" height="19" fill="#86b0ac" stroke="none"/>
+<text x="432.0" y="410" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">74</text>
+<rect x="468.66666666666663" y="396" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="92.0" y="432" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 06</text>
+<rect x="102.0" y="417" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="175.33333333333331" y="417" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="248.66666666666666" y="417" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="417" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="395.3333333333333" y="417" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="468.66666666666663" y="417" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="92.0" y="453" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 07</text>
+<rect x="102.0" y="438" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="175.33333333333331" y="438" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="248.66666666666666" y="438" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="438" width="71.33333333333333" height="19" fill="#b4ceca" stroke="none"/>
+<text x="358.66666666666663" y="452" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">43</text>
+<rect x="395.3333333333333" y="438" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="468.66666666666663" y="438" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="92.0" y="474" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 08</text>
+<rect x="102.0" y="459" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="175.33333333333331" y="459" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="248.66666666666666" y="459" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="459" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="395.3333333333333" y="459" width="71.33333333333333" height="19" fill="#b8d1cd" stroke="none"/>
+<text x="432.0" y="473" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">40</text>
+<rect x="468.66666666666663" y="459" width="71.33333333333333" height="19" fill="#9cbfbb" stroke="none"/>
+<text x="505.3333333333333" y="473" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">59</text>
+<text x="92.0" y="495" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 09</text>
+<rect x="102.0" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="175.33333333333331" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="248.66666666666666" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="322.0" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="395.3333333333333" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="468.66666666666663" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<text x="92.0" y="516" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 10</text>
+<rect x="102.0" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="175.33333333333331" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="248.66666666666666" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="322.0" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="395.3333333333333" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="468.66666666666663" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<text x="92.0" y="537" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 11</text>
+<rect x="102.0" y="522" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="175.33333333333331" y="522" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="248.66666666666666" y="522" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="522" width="71.33333333333333" height="19" fill="#75a5a0" stroke="none"/>
+<text x="358.66666666666663" y="536" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">86</text>
+<rect x="395.3333333333333" y="522" width="71.33333333333333" height="19" fill="#7aa9a4" stroke="none"/>
+<text x="432.0" y="536" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">82</text>
+<rect x="468.66666666666663" y="522" width="71.33333333333333" height="19" fill="#c0d6d2" stroke="none"/>
+<text x="505.3333333333333" y="536" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">35</text>
+<text x="92.0" y="558" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 12</text>
+<rect x="102.0" y="543" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="175.33333333333331" y="543" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="248.66666666666666" y="543" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="543" width="71.33333333333333" height="19" fill="#b7d0cc" stroke="none"/>
+<text x="358.66666666666663" y="557" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">41</text>
+<rect x="395.3333333333333" y="543" width="71.33333333333333" height="19" fill="#bbd3cf" stroke="none"/>
+<text x="432.0" y="557" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">38</text>
+<rect x="468.66666666666663" y="543" width="71.33333333333333" height="19" fill="#bed5d1" stroke="none"/>
+<text x="505.3333333333333" y="557" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">36</text>
+<text x="92.0" y="579" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 13</text>
+<rect x="102.0" y="564" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="175.33333333333331" y="564" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="248.66666666666666" y="564" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="564" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="395.3333333333333" y="564" width="71.33333333333333" height="19" fill="#98bcb8" stroke="none"/>
+<text x="432.0" y="578" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">62</text>
+<rect x="468.66666666666663" y="564" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="92.0" y="600" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 14</text>
+<rect x="102.0" y="585" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="175.33333333333331" y="585" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="248.66666666666666" y="585" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="585" width="71.33333333333333" height="19" fill="#c5d9d6" stroke="none"/>
+<text x="358.66666666666663" y="599" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">31</text>
+<rect x="395.3333333333333" y="585" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="468.66666666666663" y="585" width="71.33333333333333" height="19" fill="#98bcb8" stroke="none"/>
+<text x="505.3333333333333" y="599" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">62</text>
+<text x="92.0" y="621" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 15</text>
+<rect x="102.0" y="606" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="175.33333333333331" y="606" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="248.66666666666666" y="606" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="322.0" y="606" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="395.3333333333333" y="606" width="71.33333333333333" height="19" fill="#b2cdc9" stroke="none"/>
+<text x="432.0" y="620" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">44</text>
+<rect x="468.66666666666663" y="606" width="71.33333333333333" height="19" fill="#a4c3bf" stroke="none"/>
+<text x="505.3333333333333" y="620" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">54</text>
+<circle cx="377.0" cy="196.5" r="4" fill="#fffefa" stroke="#a56728" stroke-width="2"/>
+<path d="M541.6944444444445 318.5l4 4l-4 4l-4 -4Z" fill="#a56728"/>
+<circle cx="322.0" cy="364.5" r="4" fill="#fffefa" stroke="#a56728" stroke-width="2"/>
+<path d="M541.6944444444445 465.5l4 4l-4 4l-4 -4Z" fill="#a56728"/>
+<circle cx="303.66666666666663" cy="532.5" r="4" fill="#fffefa" stroke="#a56728" stroke-width="2"/>
+<path d="M541.6944444444445 612.5l4 4l-4 4l-4 -4Z" fill="#a56728"/>
+<text x="102.0" y="652" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400">Hour of day · cell start</text>
+<text x="570.0" y="147" fill="#192f38" text-anchor="start" font-family="Arial, sans-serif" font-size="17" font-weight="700">Distinct contributors</text>
+<rect x="795.0" y="135" width="3" height="10" fill="#f3f7f4" stroke="none"/>
+<rect x="798.0" y="135" width="3" height="10" fill="#eef4f1" stroke="none"/>
+<rect x="801.0" y="135" width="3" height="10" fill="#eaf1ee" stroke="none"/>
+<rect x="804.0" y="135" width="3" height="10" fill="#e5eeeb" stroke="none"/>
+<rect x="807.0" y="135" width="3" height="10" fill="#e1ebe8" stroke="none"/>
+<rect x="810.0" y="135" width="3" height="10" fill="#dce8e5" stroke="none"/>
+<rect x="813.0" y="135" width="3" height="10" fill="#d7e5e2" stroke="none"/>
+<rect x="816.0" y="135" width="3" height="10" fill="#d3e2df" stroke="none"/>
+<rect x="819.0" y="135" width="3" height="10" fill="#cedfdc" stroke="none"/>
+<rect x="822.0" y="135" width="3" height="10" fill="#cadcd9" stroke="none"/>
+<rect x="825.0" y="135" width="3" height="10" fill="#c5d9d6" stroke="none"/>
+<rect x="828.0" y="135" width="3" height="10" fill="#c0d6d3" stroke="none"/>
+<rect x="831.0" y="135" width="3" height="10" fill="#bcd3d0" stroke="none"/>
+<rect x="834.0" y="135" width="3" height="10" fill="#b7d0cc" stroke="none"/>
+<rect x="837.0" y="135" width="3" height="10" fill="#b3cdc9" stroke="none"/>
+<rect x="840.0" y="135" width="3" height="10" fill="#aecac6" stroke="none"/>
+<rect x="843.0" y="135" width="3" height="10" fill="#aac7c3" stroke="none"/>
+<rect x="846.0" y="135" width="3" height="10" fill="#a5c4c0" stroke="none"/>
+<rect x="849.0" y="135" width="3" height="10" fill="#a0c1bd" stroke="none"/>
+<rect x="852.0" y="135" width="3" height="10" fill="#9cbeba" stroke="none"/>
+<rect x="855.0" y="135" width="3" height="10" fill="#97bbb7" stroke="none"/>
+<rect x="858.0" y="135" width="3" height="10" fill="#93b8b4" stroke="none"/>
+<rect x="861.0" y="135" width="3" height="10" fill="#8eb5b1" stroke="none"/>
+<rect x="864.0" y="135" width="3" height="10" fill="#89b2ae" stroke="none"/>
+<rect x="867.0" y="135" width="3" height="10" fill="#85afab" stroke="none"/>
+<rect x="870.0" y="135" width="3" height="10" fill="#80ada8" stroke="none"/>
+<rect x="873.0" y="135" width="3" height="10" fill="#7caaa5" stroke="none"/>
+<rect x="876.0" y="135" width="3" height="10" fill="#77a7a2" stroke="none"/>
+<rect x="879.0" y="135" width="3" height="10" fill="#72a49f" stroke="none"/>
+<rect x="882.0" y="135" width="3" height="10" fill="#6ea19c" stroke="none"/>
+<rect x="885.0" y="135" width="3" height="10" fill="#699e99" stroke="none"/>
+<rect x="888.0" y="135" width="3" height="10" fill="#659b96" stroke="none"/>
+<rect x="891.0" y="135" width="3" height="10" fill="#609893" stroke="none"/>
+<rect x="894.0" y="135" width="3" height="10" fill="#5b9590" stroke="none"/>
+<rect x="897.0" y="135" width="3" height="10" fill="#57928d" stroke="none"/>
+<rect x="900.0" y="135" width="3" height="10" fill="#528f8a" stroke="none"/>
+<rect x="903.0" y="135" width="3" height="10" fill="#4e8c87" stroke="none"/>
+<rect x="906.0" y="135" width="3" height="10" fill="#498983" stroke="none"/>
+<rect x="909.0" y="135" width="3" height="10" fill="#458680" stroke="none"/>
+<rect x="912.0" y="135" width="3" height="10" fill="#40837d" stroke="none"/>
+<rect x="915.0" y="135" width="3" height="10" fill="#3b807a" stroke="none"/>
+<rect x="918.0" y="135" width="3" height="10" fill="#377d77" stroke="none"/>
+<rect x="921.0" y="135" width="3" height="10" fill="#327a74" stroke="none"/>
+<rect x="924.0" y="135" width="3" height="10" fill="#2e7771" stroke="none"/>
+<rect x="927.0" y="135" width="3" height="10" fill="#29746e" stroke="none"/>
+<rect x="930.0" y="135" width="3" height="10" fill="#24716b" stroke="none"/>
+<rect x="933.0" y="135" width="3" height="10" fill="#206e68" stroke="none"/>
+<rect x="936.0" y="135" width="3" height="10" fill="#1b6b65" stroke="none"/>
+<rect x="939.0" y="135" width="3" height="10" fill="#176862" stroke="none"/>
+<rect x="942.0" y="135" width="3" height="10" fill="#12655f" stroke="none"/>
+<text x="795.0" y="160" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="10" font-weight="400">0</text>
+<text x="945.0" y="160" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="10" font-weight="400">12</text>
+<text x="678.6666666666666" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">00</text>
+<text x="752.0" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">04</text>
+<text x="825.3333333333333" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">08</text>
+<text x="898.6666666666666" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">12</text>
+<text x="972.0" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">16</text>
+<text x="1045.3333333333333" y="175" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">20</text>
+<text x="632.0" y="201" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 26</text>
+<rect x="642.0" y="186" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="715.3333333333334" y="186" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="788.6666666666666" y="186" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="862.0" y="186" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="935.3333333333333" y="186" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="1008.6666666666666" y="186" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<text x="632.0" y="222" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 27</text>
+<rect x="642.0" y="207" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="715.3333333333334" y="207" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="788.6666666666666" y="207" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="862.0" y="207" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="935.3333333333333" y="207" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="1008.6666666666666" y="207" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="632.0" y="243" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 28</text>
+<rect x="642.0" y="228" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="715.3333333333334" y="228" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="788.6666666666666" y="228" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="228" width="71.33333333333333" height="19" fill="#4a8a84" stroke="none"/>
+<text x="898.6666666666666" y="242" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">9</text>
+<rect x="935.3333333333333" y="228" width="71.33333333333333" height="19" fill="#82aeaa" stroke="none"/>
+<text x="972.0" y="242" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">6</text>
+<rect x="1008.6666666666666" y="228" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="632.0" y="264" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 29</text>
+<rect x="642.0" y="249" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="715.3333333333334" y="249" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="788.6666666666666" y="249" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="249" width="71.33333333333333" height="19" fill="#12655f" stroke="none"/>
+<text x="898.6666666666666" y="263" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">12</text>
+<rect x="935.3333333333333" y="249" width="71.33333333333333" height="19" fill="#5d9691" stroke="none"/>
+<text x="972.0" y="263" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">8</text>
+<rect x="1008.6666666666666" y="249" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="632.0" y="285" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 30</text>
+<rect x="642.0" y="270" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="715.3333333333334" y="270" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="788.6666666666666" y="270" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="862.0" y="270" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="935.3333333333333" y="270" width="71.33333333333333" height="19" fill="#70a29d" stroke="none"/>
+<text x="972.0" y="284" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">7</text>
+<rect x="1008.6666666666666" y="270" width="71.33333333333333" height="19" fill="#82aeaa" stroke="none"/>
+<text x="1045.3333333333333" y="284" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">6</text>
+<text x="632.0" y="306" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Aug 31</text>
+<rect x="642.0" y="291" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="715.3333333333334" y="291" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="788.6666666666666" y="291" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="291" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="935.3333333333333" y="291" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="1008.6666666666666" y="291" width="71.33333333333333" height="19" fill="#95bab6" stroke="none"/>
+<text x="1045.3333333333333" y="305" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">5</text>
+<text x="632.0" y="327" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 01</text>
+<rect x="642.0" y="312" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="715.3333333333334" y="312" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="788.6666666666666" y="312" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="312" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="935.3333333333333" y="312" width="71.33333333333333" height="19" fill="#70a29d" stroke="none"/>
+<text x="972.0" y="326" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">7</text>
+<rect x="1008.6666666666666" y="312" width="71.33333333333333" height="19" fill="#70a29d" stroke="none"/>
+<text x="1045.3333333333333" y="326" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">7</text>
+<text x="632.0" y="348" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 02</text>
+<rect x="642.0" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="715.3333333333334" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="788.6666666666666" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="862.0" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="935.3333333333333" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="1008.6666666666666" y="333" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<text x="632.0" y="369" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 03</text>
+<rect x="642.0" y="354" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="715.3333333333334" y="354" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="788.6666666666666" y="354" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="862.0" y="354" width="71.33333333333333" height="19" fill="#95bab6" stroke="none"/>
+<text x="898.6666666666666" y="368" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">5</text>
+<rect x="935.3333333333333" y="354" width="71.33333333333333" height="19" fill="#82aeaa" stroke="none"/>
+<text x="972.0" y="368" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">6</text>
+<rect x="1008.6666666666666" y="354" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="632.0" y="390" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 04</text>
+<rect x="642.0" y="375" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="715.3333333333334" y="375" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="788.6666666666666" y="375" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="375" width="71.33333333333333" height="19" fill="#5d9691" stroke="none"/>
+<text x="898.6666666666666" y="389" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">8</text>
+<rect x="935.3333333333333" y="375" width="71.33333333333333" height="19" fill="#25716b" stroke="none"/>
+<text x="972.0" y="389" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">11</text>
+<rect x="1008.6666666666666" y="375" width="71.33333333333333" height="19" fill="#82aeaa" stroke="none"/>
+<text x="1045.3333333333333" y="389" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">6</text>
+<text x="632.0" y="411" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 05</text>
+<rect x="642.0" y="396" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="715.3333333333334" y="396" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="788.6666666666666" y="396" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="396" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="935.3333333333333" y="396" width="71.33333333333333" height="19" fill="#82aeaa" stroke="none"/>
+<text x="972.0" y="410" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">6</text>
+<rect x="1008.6666666666666" y="396" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="632.0" y="432" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 06</text>
+<rect x="642.0" y="417" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="715.3333333333334" y="417" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="788.6666666666666" y="417" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="417" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="935.3333333333333" y="417" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="1008.6666666666666" y="417" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="632.0" y="453" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 07</text>
+<rect x="642.0" y="438" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="715.3333333333334" y="438" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="788.6666666666666" y="438" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="438" width="71.33333333333333" height="19" fill="#82aeaa" stroke="none"/>
+<text x="898.6666666666666" y="452" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">6</text>
+<rect x="935.3333333333333" y="438" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="1008.6666666666666" y="438" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="632.0" y="474" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 08</text>
+<rect x="642.0" y="459" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="715.3333333333334" y="459" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="788.6666666666666" y="459" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="459" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="935.3333333333333" y="459" width="71.33333333333333" height="19" fill="#95bab6" stroke="none"/>
+<text x="972.0" y="473" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">5</text>
+<rect x="1008.6666666666666" y="459" width="71.33333333333333" height="19" fill="#82aeaa" stroke="none"/>
+<text x="1045.3333333333333" y="473" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">6</text>
+<text x="632.0" y="495" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 09</text>
+<rect x="642.0" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="715.3333333333334" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="788.6666666666666" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="862.0" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="935.3333333333333" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="1008.6666666666666" y="480" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<text x="632.0" y="516" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 10</text>
+<rect x="642.0" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="715.3333333333334" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="788.6666666666666" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="862.0" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="935.3333333333333" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="1008.6666666666666" y="501" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<text x="632.0" y="537" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 11</text>
+<rect x="642.0" y="522" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="715.3333333333334" y="522" width="71.33333333333333" height="19" fill="#e1e3df" stroke="none"/>
+<rect x="788.6666666666666" y="522" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="522" width="71.33333333333333" height="19" fill="#82aeaa" stroke="none"/>
+<text x="898.6666666666666" y="536" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">6</text>
+<rect x="935.3333333333333" y="522" width="71.33333333333333" height="19" fill="#5d9691" stroke="none"/>
+<text x="972.0" y="536" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">8</text>
+<rect x="1008.6666666666666" y="522" width="71.33333333333333" height="19" fill="#95bab6" stroke="none"/>
+<text x="1045.3333333333333" y="536" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">5</text>
+<text x="632.0" y="558" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 12</text>
+<rect x="642.0" y="543" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="715.3333333333334" y="543" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="788.6666666666666" y="543" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="543" width="71.33333333333333" height="19" fill="#70a29d" stroke="none"/>
+<text x="898.6666666666666" y="557" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">7</text>
+<rect x="935.3333333333333" y="543" width="71.33333333333333" height="19" fill="#387d78" stroke="none"/>
+<text x="972.0" y="557" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">10</text>
+<rect x="1008.6666666666666" y="543" width="71.33333333333333" height="19" fill="#70a29d" stroke="none"/>
+<text x="1045.3333333333333" y="557" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">7</text>
+<text x="632.0" y="579" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 13</text>
+<rect x="642.0" y="564" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="715.3333333333334" y="564" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="788.6666666666666" y="564" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="564" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="935.3333333333333" y="564" width="71.33333333333333" height="19" fill="#5d9691" stroke="none"/>
+<text x="972.0" y="578" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">8</text>
+<rect x="1008.6666666666666" y="564" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<text x="632.0" y="600" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 14</text>
+<rect x="642.0" y="585" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="715.3333333333334" y="585" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="788.6666666666666" y="585" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="585" width="71.33333333333333" height="19" fill="#95bab6" stroke="none"/>
+<text x="898.6666666666666" y="599" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">5</text>
+<rect x="935.3333333333333" y="585" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="1008.6666666666666" y="585" width="71.33333333333333" height="19" fill="#387d78" stroke="none"/>
+<text x="1045.3333333333333" y="599" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">10</text>
+<text x="632.0" y="621" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="11" font-weight="400">Sep 15</text>
+<rect x="642.0" y="606" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="715.3333333333334" y="606" width="71.33333333333333" height="19" fill="#f3f7f4" stroke="none"/>
+<rect x="788.6666666666666" y="606" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="862.0" y="606" width="71.33333333333333" height="19" fill="url(#mask)" stroke="none"/>
+<rect x="935.3333333333333" y="606" width="71.33333333333333" height="19" fill="#4a8a84" stroke="none"/>
+<text x="972.0" y="620" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">9</text>
+<rect x="1008.6666666666666" y="606" width="71.33333333333333" height="19" fill="#4a8a84" stroke="none"/>
+<text x="1045.3333333333333" y="620" fill="white" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="400">9</text>
+<circle cx="917.0" cy="196.5" r="4" fill="#fffefa" stroke="#a56728" stroke-width="2"/>
+<path d="M1081.6944444444443 318.5l4 4l-4 4l-4 -4Z" fill="#a56728"/>
+<circle cx="862.0" cy="364.5" r="4" fill="#fffefa" stroke="#a56728" stroke-width="2"/>
+<path d="M1081.6944444444443 465.5l4 4l-4 4l-4 -4Z" fill="#a56728"/>
+<circle cx="843.6666666666666" cy="532.5" r="4" fill="#fffefa" stroke="#a56728" stroke-width="2"/>
+<path d="M1081.6944444444443 612.5l4 4l-4 4l-4 -4Z" fill="#a56728"/>
+<text x="642.0" y="652" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400">Hour of day · cell start</text>
+<rect x="30" y="683" width="17" height="17" fill="url(#mask)" stroke="none"/>
+<text x="55" y="696" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400">&lt;5 contributors: masked</text>
+<rect x="295" y="683" width="17" height="17" fill="#e1e3df" stroke="none"/>
+<text x="320" y="696" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400">No homework window</text>
+<circle cx="38" cy="723" r="4" fill="#fffefa" stroke="#a56728" stroke-width="2"/>
+<text x="55" y="727" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400">Opens</text>
+<path d="M300 719l4 4l-4 4l-4 -4Z" fill="#a56728"/>
+<text x="320" y="727" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400">Configured deadline</text>
+<text x="30" y="773" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">Source: CS201 OJ · 20 Sep 2026 snapshot · own homework windows only</text>
+</svg>

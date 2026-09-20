@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.cache/
+raw/
+private/
+artifacts/
+transfer.txt
+dataset.json
+*linkage_key*
+.env
+.env.*

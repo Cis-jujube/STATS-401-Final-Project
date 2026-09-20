@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="1320" viewBox="0 0 560 1320" role="img"><title>First and best observed normalized scores for each homework problem</title><defs><pattern id="mask" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#f1eee8"/><path d="M0 6L6 0" stroke="#c1bdb4"/></pattern></defs>
+<rect width="560" height="1320" fill="#fffefa"/>
+<text x="30" y="30" fill="#12655f" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="700">03 / SCORE PROGRESSION</text>
+<text x="30" y="67" fill="#192f38" text-anchor="start" font-family="Arial, sans-serif" font-size="25" font-weight="700">High final scores hide different starts</text>
+<text x="30" y="94" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="400">Same attempters at both endpoints; means on a 0–100 scale.</text>
+<text x="30" y="114" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="400">Rows sorted by first-to-best difference within each homework.</text>
+<circle cx="40" cy="146" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<text x="53" y="150" fill="#192f38" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400">Mean first score</text>
+<path d="M245 141l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="258" y="150" fill="#192f38" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400">Mean best observed score</text>
+<line x1="110.0" y1="195" x2="110.0" y2="1190" stroke="#dbe2df" stroke-width="1"/>
+<text x="110.0" y="183" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">0</text>
+<line x1="186.0" y1="195" x2="186.0" y2="1190" stroke="#dbe2df" stroke-width="1"/>
+<text x="186.0" y="183" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">20</text>
+<line x1="262.0" y1="195" x2="262.0" y2="1190" stroke="#dbe2df" stroke-width="1"/>
+<text x="262.0" y="183" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">40</text>
+<line x1="338.0" y1="195" x2="338.0" y2="1190" stroke="#dbe2df" stroke-width="1"/>
+<text x="338.0" y="183" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">60</text>
+<line x1="414.0" y1="195" x2="414.0" y2="1190" stroke="#dbe2df" stroke-width="1"/>
+<text x="414.0" y="183" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">80</text>
+<line x1="490.0" y1="195" x2="490.0" y2="1190" stroke="#dbe2df" stroke-width="1"/>
+<text x="490.0" y="183" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">100</text>
+<text x="30" y="220" fill="#12655f" text-anchor="start" font-family="Arial, sans-serif" font-size="15" font-weight="700">HW1</text>
+<text x="95" y="258" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P2</text>
+<line x1="340.0" y1="254" x2="490.0" y2="254" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="340.0" cy="254" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 249l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="258" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=38</text>
+<text x="95" y="293" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P6</text>
+<line x1="360.0" y1="289" x2="490.0" y2="289" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="360.0" cy="289" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 284l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="293" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=38</text>
+<text x="95" y="328" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P7</text>
+<line x1="392.00000000000006" y1="324" x2="490.0" y2="324" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="392.00000000000006" cy="324" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 319l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="328" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=38</text>
+<text x="95" y="363" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P5</text>
+<line x1="399.99999999999994" y1="359" x2="490.0" y2="359" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="399.99999999999994" cy="359" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 354l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="363" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=38</text>
+<text x="95" y="398" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P4</text>
+<line x1="414.0" y1="394" x2="490.0" y2="394" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="414.0" cy="394" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 389l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="398" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=38</text>
+<text x="95" y="433" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P3</text>
+<line x1="414.0" y1="429" x2="488.0" y2="429" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="414.0" cy="429" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M488.0 424l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="433" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=38</text>
+<text x="95" y="468" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P8</text>
+<line x1="446.66700000000003" y1="464" x2="490.0" y2="464" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="446.66700000000003" cy="464" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 459l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="468" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=38</text>
+<text x="95" y="503" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P1</text>
+<line x1="452.0" y1="499" x2="490.0" y2="499" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="452.0" cy="499" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 494l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="503" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=38</text>
+<text x="30" y="570" fill="#12655f" text-anchor="start" font-family="Arial, sans-serif" font-size="15" font-weight="700">HW2</text>
+<text x="95" y="608" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P7</text>
+<line x1="311.9428571428572" y1="604" x2="479.1428571428571" y2="604" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="311.9428571428572" cy="604" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M479.1428571428571 599l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="608" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=35</text>
+<text x="95" y="643" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P8</text>
+<line x1="327.1428571428571" y1="639" x2="490.0" y2="639" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="327.1428571428571" cy="639" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 634l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="643" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=35</text>
+<text x="95" y="678" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P3</text>
+<line x1="327.72972972972974" y1="674" x2="479.72972972972974" y2="674" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="327.72972972972974" cy="674" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M479.72972972972974 669l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="678" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=37</text>
+<text x="95" y="713" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P5</text>
+<line x1="354.88888888888886" y1="709" x2="490.0" y2="709" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="354.88888888888886" cy="709" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 704l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="713" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=36</text>
+<text x="95" y="748" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P2</text>
+<line x1="360.5945945945946" y1="744" x2="479.72972972972974" y2="744" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="360.5945945945946" cy="744" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M479.72972972972974 739l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="748" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=37</text>
+<text x="95" y="783" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P6</text>
+<line x1="354.88888888888886" y1="779" x2="468.8888888888889" y2="779" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="354.88888888888886" cy="779" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M468.8888888888889 774l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="783" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=36</text>
+<text x="95" y="818" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P4</text>
+<line x1="397.56756756756755" y1="814" x2="490.0" y2="814" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="397.56756756756755" cy="814" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 809l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="818" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=37</text>
+<text x="95" y="853" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P1</text>
+<line x1="420.1621621621622" y1="849" x2="490.0" y2="849" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="420.1621621621622" cy="849" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 844l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="853" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=37</text>
+<text x="30" y="920" fill="#12655f" text-anchor="start" font-family="Arial, sans-serif" font-size="15" font-weight="700">HW3</text>
+<text x="95" y="958" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P7</text>
+<line x1="254.2051282051282" y1="954" x2="490.0" y2="954" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="254.2051282051282" cy="954" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 949l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="958" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=39</text>
+<text x="95" y="993" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P1</text>
+<line x1="263.94871794871796" y1="989" x2="490.0" y2="989" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="263.94871794871796" cy="989" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 984l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="993" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=39</text>
+<text x="95" y="1028" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P2</text>
+<line x1="353.5897435897436" y1="1024" x2="490.0" y2="1024" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="353.5897435897436" cy="1024" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 1019l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="1028" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=39</text>
+<text x="95" y="1063" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P3</text>
+<line x1="367.2307692307692" y1="1059" x2="490.0" y2="1059" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="367.2307692307692" cy="1059" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 1054l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="1063" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=39</text>
+<text x="95" y="1098" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P5</text>
+<line x1="367.2307692307692" y1="1094" x2="490.0" y2="1094" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="367.2307692307692" cy="1094" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 1089l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="1098" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=39</text>
+<text x="95" y="1133" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P4</text>
+<line x1="412.05128205128204" y1="1129" x2="490.0" y2="1129" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="412.05128205128204" cy="1129" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M490.0 1124l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="1133" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=39</text>
+<text x="95" y="1168" fill="#192f38" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">P6</text>
+<line x1="425.6923076923077" y1="1164" x2="478.30769230769226" y2="1164" stroke="#91b7aa" stroke-width="3"/>
+<circle cx="425.6923076923077" cy="1164" r="5" fill="#fffefa" stroke="#12655f" stroke-width="2"/>
+<path d="M478.30769230769226 1159l5 5l-5 5l-5 -5Z" fill="#12655f"/>
+<text x="505" y="1168" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">n=39</text>
+<text x="110" y="1230" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="400">Normalized score (%)</text>
+<text x="30" y="1263" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400">Best scores cannot decrease by definition; this is not causal learning gain.</text>
+<text x="30" y="1286" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">P numbers follow assignment order; names and exact means are in the data table.</text>
+</svg>

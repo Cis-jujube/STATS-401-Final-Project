@@ -1,0 +1,1396 @@
+{
+  "snapshot_utc": "2026-09-20 11:00:33.817071",
+  "timezone": "Asia/Shanghai (UTC+08:00)",
+  "cohort_members": 42,
+  "all_course_submissions": 2343,
+  "all_homework_submissions": 2171,
+  "window_submissions": 2101,
+  "window_submitters": 39,
+  "outside_window": 70,
+  "partial_scores_all_homework": 189,
+  "partial_scores_in_window": 178,
+  "submissions_after_first_ac": 318,
+  "peak_day": {
+    "date": "2026-08-29",
+    "submissions": 233,
+    "contributors": 14
+  },
+  "calendar_policy": {
+    "hours_per_bin": 4,
+    "minimum_distinct_contributors": 5,
+    "suppressed_positive_cells": 51,
+    "visible_positive_cells": 29
+  },
+  "assignments": [
+    {
+      "homework": "HW1",
+      "assignment_id": 95,
+      "start_local": "2026-08-26T15:00:00+08:00",
+      "end_local": "2026-09-01T23:59:00+08:00",
+      "problems": 8,
+      "submissions": 673,
+      "outside_window": 14,
+      "all_attempts": {
+        "n": 38,
+        "min": 8,
+        "q1": 9.25,
+        "median": 12.5,
+        "q3": 17.0,
+        "max": 98
+      },
+      "through_first_ac": {
+        "n": 38,
+        "min": 8,
+        "q1": 9.0,
+        "median": 11.5,
+        "q3": 14.75,
+        "max": 93
+      },
+      "mode0_records": 40,
+      "mode0_full_score_records": 37
+    },
+    {
+      "homework": "HW2",
+      "assignment_id": 120,
+      "start_local": "2026-09-03T12:00:00+08:00",
+      "end_local": "2026-09-08T23:59:00+08:00",
+      "problems": 8,
+      "submissions": 664,
+      "outside_window": 35,
+      "all_attempts": {
+        "n": 38,
+        "min": 3,
+        "q1": 10.0,
+        "median": 13.0,
+        "q3": 17.75,
+        "max": 62
+      },
+      "through_first_ac": {
+        "n": 38,
+        "min": 3,
+        "q1": 9.0,
+        "median": 12.5,
+        "q3": 16.0,
+        "max": 62
+      },
+      "mode0_records": 39,
+      "mode0_full_score_records": 33
+    },
+    {
+      "homework": "HW3",
+      "assignment_id": 145,
+      "start_local": "2026-09-11T11:00:00+08:00",
+      "end_local": "2026-09-15T23:59:00+08:00",
+      "problems": 7,
+      "submissions": 764,
+      "outside_window": 21,
+      "all_attempts": {
+        "n": 39,
+        "min": 7,
+        "q1": 9.5,
+        "median": 14.0,
+        "q3": 19.0,
+        "max": 108
+      },
+      "through_first_ac": {
+        "n": 39,
+        "min": 7,
+        "q1": 9.0,
+        "median": 12.0,
+        "q3": 17.5,
+        "max": 47
+      },
+      "mode0_records": 39,
+      "mode0_full_score_records": 37
+    }
+  ],
+  "calendar": [
+    {
+      "date": "2026-08-26",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-26",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-26",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-26",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-26",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-26",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-27",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-27",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-27",
+      "hour": 8,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-27",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-27",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-27",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-28",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-28",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-28",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-28",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 57,
+      "contributors": 9
+    },
+    {
+      "date": "2026-08-28",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 25,
+      "contributors": 6
+    },
+    {
+      "date": "2026-08-28",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-29",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-29",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-29",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-29",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 153,
+      "contributors": 12
+    },
+    {
+      "date": "2026-08-29",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 57,
+      "contributors": 8
+    },
+    {
+      "date": "2026-08-29",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-30",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-30",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-30",
+      "hour": 8,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-30",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-30",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 46,
+      "contributors": 7
+    },
+    {
+      "date": "2026-08-30",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 17,
+      "contributors": 6
+    },
+    {
+      "date": "2026-08-31",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-31",
+      "hour": 4,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-31",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-31",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-08-31",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-08-31",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 30,
+      "contributors": 5
+    },
+    {
+      "date": "2026-09-01",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-01",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-01",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-01",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-01",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 31,
+      "contributors": 7
+    },
+    {
+      "date": "2026-09-01",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 46,
+      "contributors": 7
+    },
+    {
+      "date": "2026-09-02",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-02",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-02",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-02",
+      "hour": 12,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-02",
+      "hour": 16,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-02",
+      "hour": 20,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-03",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-03",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-03",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-03",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 17,
+      "contributors": 5
+    },
+    {
+      "date": "2026-09-03",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 27,
+      "contributors": 6
+    },
+    {
+      "date": "2026-09-03",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-04",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-04",
+      "hour": 4,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-04",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-04",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 37,
+      "contributors": 8
+    },
+    {
+      "date": "2026-09-04",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 62,
+      "contributors": 11
+    },
+    {
+      "date": "2026-09-04",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 32,
+      "contributors": 6
+    },
+    {
+      "date": "2026-09-05",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-05",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-05",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-05",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-05",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 74,
+      "contributors": 6
+    },
+    {
+      "date": "2026-09-05",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-06",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-06",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-06",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-06",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-06",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-06",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-07",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-07",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-07",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-07",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 43,
+      "contributors": 6
+    },
+    {
+      "date": "2026-09-07",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-07",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-08",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-08",
+      "hour": 4,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-08",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-08",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-08",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 40,
+      "contributors": 5
+    },
+    {
+      "date": "2026-09-08",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 59,
+      "contributors": 6
+    },
+    {
+      "date": "2026-09-09",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-09",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-09",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-09",
+      "hour": 12,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-09",
+      "hour": 16,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-09",
+      "hour": 20,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-10",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-10",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-10",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-10",
+      "hour": 12,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-10",
+      "hour": 16,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-10",
+      "hour": 20,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-11",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-11",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-11",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-11",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 86,
+      "contributors": 6
+    },
+    {
+      "date": "2026-09-11",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 82,
+      "contributors": 8
+    },
+    {
+      "date": "2026-09-11",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 35,
+      "contributors": 5
+    },
+    {
+      "date": "2026-09-12",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-12",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-12",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-12",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 41,
+      "contributors": 7
+    },
+    {
+      "date": "2026-09-12",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 38,
+      "contributors": 10
+    },
+    {
+      "date": "2026-09-12",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 36,
+      "contributors": 7
+    },
+    {
+      "date": "2026-09-13",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-13",
+      "hour": 4,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-13",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-13",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-13",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 62,
+      "contributors": 8
+    },
+    {
+      "date": "2026-09-13",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-14",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-14",
+      "hour": 4,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-14",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-14",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 31,
+      "contributors": 5
+    },
+    {
+      "date": "2026-09-14",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-14",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 62,
+      "contributors": 10
+    },
+    {
+      "date": "2026-09-15",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-15",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-15",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-15",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-15",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 44,
+      "contributors": 9
+    },
+    {
+      "date": "2026-09-15",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 54,
+      "contributors": 9
+    }
+  ],
+  "score_progression": [
+    {
+      "homework": "HW1",
+      "problem_id": 851,
+      "problem_name": "Exercise2.5-EggsGrossDozensLeftover",
+      "problem_order": 2,
+      "n": 38,
+      "first": 60.526315789473685,
+      "best2": 72.63157894736842,
+      "best3": 76.3157894736842,
+      "best": 100.0,
+      "gain": 39.473684210526315
+    },
+    {
+      "homework": "HW1",
+      "problem_id": 871,
+      "problem_name": "Exercise3.3-SimpleCalculator",
+      "problem_order": 6,
+      "n": 38,
+      "first": 65.78947368421052,
+      "best2": 73.6842105263158,
+      "best3": 81.57894736842105,
+      "best": 100.0,
+      "gain": 34.21052631578948
+    },
+    {
+      "homework": "HW1",
+      "problem_id": 11,
+      "problem_name": "HW1-ConsectiveFours",
+      "problem_order": 7,
+      "n": 38,
+      "first": 74.21052631578948,
+      "best2": 89.47368421052632,
+      "best3": 94.73684210526316,
+      "best": 100.0,
+      "gain": 25.78947368421052
+    },
+    {
+      "homework": "HW1",
+      "problem_id": 12,
+      "problem_name": "HW1-SentinelValue",
+      "problem_order": 5,
+      "n": 38,
+      "first": 76.3157894736842,
+      "best2": 90.0,
+      "best3": 94.73684210526316,
+      "best": 100.0,
+      "gain": 23.684210526315795
+    },
+    {
+      "homework": "HW1",
+      "problem_id": 366,
+      "problem_name": "Exercise1.2.15 Triangle Sides",
+      "problem_order": 4,
+      "n": 38,
+      "first": 80.0,
+      "best2": 93.6842105263158,
+      "best3": 97.89473684210526,
+      "best": 100.0,
+      "gain": 20.0
+    },
+    {
+      "homework": "HW1",
+      "problem_id": 16,
+      "problem_name": "HW1-LargeToSmall",
+      "problem_order": 3,
+      "n": 38,
+      "first": 80.0,
+      "best2": 94.21052631578948,
+      "best3": 96.3157894736842,
+      "best": 99.47368421052632,
+      "gain": 19.473684210526315
+    },
+    {
+      "homework": "HW1",
+      "problem_id": 447,
+      "problem_name": "Exercise1.4.15-InPlaceTranspose",
+      "problem_order": 8,
+      "n": 38,
+      "first": 88.59657894736843,
+      "best2": 97.36842105263158,
+      "best3": 100.0,
+      "best": 100.0,
+      "gain": 11.403421052631572
+    },
+    {
+      "homework": "HW1",
+      "problem_id": 15,
+      "problem_name": "HW1-ComputeDisplacement",
+      "problem_order": 1,
+      "n": 38,
+      "first": 90.0,
+      "best2": 92.63157894736842,
+      "best3": 92.63157894736842,
+      "best": 100.0,
+      "gain": 10.0
+    },
+    {
+      "homework": "HW2",
+      "problem_id": 1281,
+      "problem_name": "IntQuestion",
+      "problem_order": 7,
+      "n": 35,
+      "first": 53.142857142857146,
+      "best2": 81.14285714285714,
+      "best3": 84.0,
+      "best": 97.14285714285714,
+      "gain": 43.99999999999999
+    },
+    {
+      "homework": "HW2",
+      "problem_id": 1282,
+      "problem_name": "ShapeZoo",
+      "problem_order": 8,
+      "n": 35,
+      "first": 57.142857142857146,
+      "best2": 71.42857142857143,
+      "best3": 82.85714285714286,
+      "best": 100.0,
+      "gain": 42.857142857142854
+    },
+    {
+      "homework": "HW2",
+      "problem_id": 1277,
+      "problem_name": "PairOfDice",
+      "problem_order": 3,
+      "n": 37,
+      "first": 57.2972972972973,
+      "best2": 78.91891891891892,
+      "best3": 83.78378378378379,
+      "best": 97.29729729729729,
+      "gain": 39.99999999999999
+    },
+    {
+      "homework": "HW2",
+      "problem_id": 1279,
+      "problem_name": "Complex",
+      "problem_order": 5,
+      "n": 36,
+      "first": 64.44444444444444,
+      "best2": 89.44444444444444,
+      "best3": 95.55555555555556,
+      "best": 100.0,
+      "gain": 35.55555555555556
+    },
+    {
+      "homework": "HW2",
+      "problem_id": 1276,
+      "problem_name": "CreditCard",
+      "problem_order": 2,
+      "n": 37,
+      "first": 65.94594594594595,
+      "best2": 83.24324324324324,
+      "best3": 89.72972972972973,
+      "best": 97.29729729729729,
+      "gain": 31.35135135135134
+    },
+    {
+      "homework": "HW2",
+      "problem_id": 1280,
+      "problem_name": "CampusDirectory",
+      "problem_order": 6,
+      "n": 36,
+      "first": 64.44444444444444,
+      "best2": 83.88888888888889,
+      "best3": 89.44444444444444,
+      "best": 94.44444444444444,
+      "gain": 30.0
+    },
+    {
+      "homework": "HW2",
+      "problem_id": 1278,
+      "problem_name": "Charge",
+      "problem_order": 4,
+      "n": 37,
+      "first": 75.67567567567568,
+      "best2": 78.37837837837837,
+      "best3": 81.08108108108108,
+      "best": 100.0,
+      "gain": 24.324324324324323
+    },
+    {
+      "homework": "HW2",
+      "problem_id": 1275,
+      "problem_name": "Normalization",
+      "problem_order": 1,
+      "n": 37,
+      "first": 81.62162162162163,
+      "best2": 89.72972972972973,
+      "best3": 92.43243243243244,
+      "best": 100.0,
+      "gain": 18.378378378378372
+    },
+    {
+      "homework": "HW3",
+      "problem_id": 1354,
+      "problem_name": "TicTacToe",
+      "problem_order": 7,
+      "n": 39,
+      "first": 37.94871794871795,
+      "best2": 60.51282051282051,
+      "best3": 73.84615384615384,
+      "best": 100.0,
+      "gain": 62.05128205128205
+    },
+    {
+      "homework": "HW3",
+      "problem_id": 169,
+      "problem_name": "26s3HW3-EvenOrOdd",
+      "problem_order": 1,
+      "n": 39,
+      "first": 40.51282051282051,
+      "best2": 48.97435897435897,
+      "best3": 66.15384615384616,
+      "best": 100.0,
+      "gain": 59.48717948717949
+    },
+    {
+      "homework": "HW3",
+      "problem_id": 171,
+      "problem_name": "26s3HW3-DigitProcessing",
+      "problem_order": 2,
+      "n": 39,
+      "first": 64.1025641025641,
+      "best2": 74.35897435897436,
+      "best3": 82.05128205128206,
+      "best": 100.0,
+      "gain": 35.8974358974359
+    },
+    {
+      "homework": "HW3",
+      "problem_id": 1351,
+      "problem_name": "Hanoi",
+      "problem_order": 3,
+      "n": 39,
+      "first": 67.6923076923077,
+      "best2": 89.74358974358974,
+      "best3": 92.3076923076923,
+      "best": 100.0,
+      "gain": 32.30769230769231
+    },
+    {
+      "homework": "HW3",
+      "problem_id": 1355,
+      "problem_name": "Rectangle",
+      "problem_order": 5,
+      "n": 39,
+      "first": 67.6923076923077,
+      "best2": 90.25641025641026,
+      "best3": 94.87179487179488,
+      "best": 100.0,
+      "gain": 32.30769230769231
+    },
+    {
+      "homework": "HW3",
+      "problem_id": 1352,
+      "problem_name": "MeasureBox",
+      "problem_order": 4,
+      "n": 39,
+      "first": 79.48717948717949,
+      "best2": 94.87179487179488,
+      "best3": 97.43589743589743,
+      "best": 100.0,
+      "gain": 20.51282051282051
+    },
+    {
+      "homework": "HW3",
+      "problem_id": 1353,
+      "problem_name": "LargeNumber",
+      "problem_order": 6,
+      "n": 39,
+      "first": 83.07692307692308,
+      "best2": 90.25641025641026,
+      "best3": 92.82051282051282,
+      "best": 96.92307692307692,
+      "gain": 13.84615384615384
+    }
+  ],
+  "input_sha256": "5312ca13c3dbdda8c2d7073ec365919dd615d1322f714c5a62085c98090b2ed9"
+}

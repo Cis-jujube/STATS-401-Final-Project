@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="720" viewBox="0 0 560 720" role="img"><title>Per-student homework submission counts: min-max boxplots</title><defs><pattern id="mask" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#f1eee8"/><path d="M0 6L6 0" stroke="#c1bdb4"/></pattern></defs>
+<rect width="560" height="720" fill="#fffefa"/>
+<text x="30" y="30" fill="#12655f" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="700">02 / RETRIES</text>
+<text x="30" y="67" fill="#192f38" text-anchor="start" font-family="Arial, sans-serif" font-size="25" font-weight="700">Similar medians, wide ranges</text>
+<text x="30" y="94" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="400">Per-student counts among window submitters.</text>
+<text x="30" y="114" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="13" font-weight="400">Box = middle 50%; line = median; whiskers = minimum to maximum.</text>
+<line x1="75" y1="570.0" x2="525" y2="570.0" stroke="#dbe2df" stroke-width="1"/>
+<text x="63" y="574.0" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">0</text>
+<line x1="75" y1="502.5" x2="525" y2="502.5" stroke="#dbe2df" stroke-width="1"/>
+<text x="63" y="506.5" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">20</text>
+<line x1="75" y1="435.0" x2="525" y2="435.0" stroke="#dbe2df" stroke-width="1"/>
+<text x="63" y="439.0" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">40</text>
+<line x1="75" y1="367.5" x2="525" y2="367.5" stroke="#dbe2df" stroke-width="1"/>
+<text x="63" y="371.5" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">60</text>
+<line x1="75" y1="300.0" x2="525" y2="300.0" stroke="#dbe2df" stroke-width="1"/>
+<text x="63" y="304.0" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">80</text>
+<line x1="75" y1="232.5" x2="525" y2="232.5" stroke="#dbe2df" stroke-width="1"/>
+<text x="63" y="236.5" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">100</text>
+<line x1="75" y1="165.0" x2="525" y2="165.0" stroke="#dbe2df" stroke-width="1"/>
+<text x="63" y="169.0" fill="#52636a" text-anchor="end" font-family="Arial, sans-serif" font-size="12" font-weight="400">120</text>
+<text x="75" y="148" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400">Submissions</text>
+<line x1="150.0" y1="543.0" x2="150.0" y2="239.25" stroke="#12655f" stroke-width="2"/>
+<line x1="138.75" y1="543.0" x2="161.25" y2="543.0" stroke="#12655f" stroke-width="2"/>
+<line x1="138.75" y1="239.25" x2="161.25" y2="239.25" stroke="#12655f" stroke-width="2"/>
+<rect x="127.5" y="512.625" width="45" height="26.15625" fill="#cde4da" stroke="#12655f"/>
+<line x1="127.5" y1="527.8125" x2="172.5" y2="527.8125" stroke="#12655f" stroke-width="3"/>
+<text x="150.0" y="229.25" fill="#12655f" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">max 98</text>
+<text x="179.5" y="531.8125" fill="#12655f" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="700">12.5</text>
+<text x="150.0" y="598" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700">HW1</text>
+<text x="150.0" y="621" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">n = 38</text>
+<text x="150.0" y="641" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">8 problems</text>
+<line x1="300.0" y1="559.875" x2="300.0" y2="360.75" stroke="#12655f" stroke-width="2"/>
+<line x1="288.75" y1="559.875" x2="311.25" y2="559.875" stroke="#12655f" stroke-width="2"/>
+<line x1="288.75" y1="360.75" x2="311.25" y2="360.75" stroke="#12655f" stroke-width="2"/>
+<rect x="277.5" y="510.09375" width="45" height="26.15625" fill="#cde4da" stroke="#12655f"/>
+<line x1="277.5" y1="526.125" x2="322.5" y2="526.125" stroke="#12655f" stroke-width="3"/>
+<text x="300.0" y="350.75" fill="#12655f" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">max 62</text>
+<text x="329.5" y="530.125" fill="#12655f" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="700">13</text>
+<text x="300.0" y="598" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700">HW2</text>
+<text x="300.0" y="621" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">n = 38</text>
+<text x="300.0" y="641" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">8 problems</text>
+<line x1="450.0" y1="546.375" x2="450.0" y2="205.5" stroke="#12655f" stroke-width="2"/>
+<line x1="438.75" y1="546.375" x2="461.25" y2="546.375" stroke="#12655f" stroke-width="2"/>
+<line x1="438.75" y1="205.5" x2="461.25" y2="205.5" stroke="#12655f" stroke-width="2"/>
+<rect x="427.5" y="505.875" width="45" height="32.0625" fill="#cde4da" stroke="#12655f"/>
+<line x1="427.5" y1="522.75" x2="472.5" y2="522.75" stroke="#12655f" stroke-width="3"/>
+<text x="450.0" y="195.5" fill="#12655f" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">max 108</text>
+<text x="479.5" y="526.75" fill="#12655f" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="700">14</text>
+<text x="450.0" y="598" fill="#192f38" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700">HW3</text>
+<text x="450.0" y="621" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">n = 39</text>
+<text x="450.0" y="641" fill="#52636a" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="400">7 problems</text>
+<text x="30" y="677" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="12" font-weight="400">More submissions do not directly measure effort or difficulty.</text>
+<text x="30" y="697" fill="#52636a" text-anchor="start" font-family="Arial, sans-serif" font-size="11" font-weight="400">Source: CS201 OJ · inclusive quartiles · no individual student points</text>
+</svg>

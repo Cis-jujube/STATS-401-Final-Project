@@ -1,0 +1,1428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Three actual-data visualizations of CS201 homework submission timing, retries, and score progression.">
+<title>CS201 Homework Submission Patterns</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<a class="brand" href="#">CS201 / PROCESS NOTES</a>
+<nav aria-label="Main navigation">
+<a href="#timing">Figures</a>
+<a href="#dataset">Dataset</a>
+<a href="#evaluation">Evaluation</a>
+</nav>
+</header>
+<main id="main">
+<section class="hero">
+<p class="eyebrow">STATS 401 · FINAL PROJECT · IN-CLASS PROGRESS CHECK</p>
+<h1>Similar scores.<br>
+<em>Different paths.</em>
+</h1>
+<p class="lead">CS201 Homework Submission Patterns:<br>Timing, Retries, and Score Progression</p>
+<p class="intro">When homework scores cluster near full marks, the submission process still varies. We examine when students submit, how often they retry, and how first scores compare with the best scores they reach.</p>
+<p class="byline">Zaozao Wang &amp; Zhengxiang Liu · Snapshot: 20 September 2026</p>
+<div class="stats">
+<div>
+<strong>2,101</strong>
+<span>submissions within homework windows</span>
+</div>
+<div>
+<strong>39 / 42</strong>
+<span>roster members with window submissions</span>
+</div>
+<div>
+<strong>3</strong>
+<span>homeworks · 23 problem slots</span>
+</div>
+</div>
+<p class="status">Current milestone: three implemented static figures using actual project data. Interactions and the user evaluation below are planned.</p>
+</section>
+<section class="opening">
+<p class="eyebrow">THE QUESTION</p>
+<h2>What do near-perfect scores leave out?</h2>
+<p>In the <code>participation_mode=0</code> records, 37/40 HW1 scores, 33/39 HW2 scores and 37/39 HW3 scores are 100. The formal interpretation of this participation field still needs confirmation. These records motivate a process-focused analysis; they are not a substitute for verifying the official grading rules.</p>
+<p>Within the observation windows, <strong>178 submissions earned partial credit</strong>. The figures below describe that recorded process. Submission gaps are not measured study time, and more attempts do not establish greater effort or better learning.</p>
+</section>
+<section class="chart-section" id="timing">
+<div class="section-heading">
+<span class="number">01</span>
+<div>
+<p class="eyebrow">TIMING</p>
+<h2>Activity volume and participation<br>tell different stories.</h2>
+</div>
+</div>
+<p class="reading">Across the full day on <strong>29 August, 233 submissions came from 14 students</strong>. In the visible 12:00–16:00 cell, 153 submissions came from 12 students. A busy period need not mean the whole class was working then.</p>
+<figure>
+<picture>
+<source media="(max-width: 640px)" srcset="assets/figures/01-calendar-mobile.svg">
+<img src="assets/figures/01-calendar.svg" alt="Paired date-by-time heatmaps show submission counts and distinct contributors. August 29, 12–16 Beijing time has 153 submissions from 12 contributors." loading="lazy">
+</picture>
+<figcaption>Both panels describe the same windows but have separate color scales. Public cells cover four hours; 51 positive cells with fewer than five contributors are masked. Blank light cells are zero, hatched cells are suppressed, and gray cells are outside all homework windows. A separate full-hour version is retained locally.</figcaption>
+</figure>
+<div class="downloads">
+<a href="assets/figures/01-calendar.png" download>Download PNG ↗</a>
+<a href="assets/figures/01-calendar.svg" download>Download SVG ↗</a>
+</div>
+<details>
+<summary>Accessible data table · calendar</summary>
+<div class="table-scroll">
+<table>
+<caption>Public four-hour calendar cells. Suppressed cells have 1–4 contributors. Inactive cells have no configured homework window.</caption>
+<thead>
+<tr>
+<th scope="col">Date</th>
+<th scope="col">Hours (Beijing)</th>
+<th scope="col">Status</th>
+<th scope="col">Submissions</th>
+<th scope="col">Distinct contributors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-08-26</td>
+<td>00:00–04:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-26</td>
+<td>04:00–08:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-26</td>
+<td>08:00–12:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-26</td>
+<td>12:00–16:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-26</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-26</td>
+<td>20:00–24:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-27</td>
+<td>00:00–04:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-27</td>
+<td>04:00–08:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-27</td>
+<td>08:00–12:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-27</td>
+<td>12:00–16:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-27</td>
+<td>16:00–20:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-27</td>
+<td>20:00–24:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-28</td>
+<td>00:00–04:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-28</td>
+<td>04:00–08:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-28</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-28</td>
+<td>12:00–16:00</td>
+<td>visible</td>
+<td>57</td>
+<td>9</td>
+</tr>
+<tr>
+<td>2026-08-28</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>25</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2026-08-28</td>
+<td>20:00–24:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-29</td>
+<td>00:00–04:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-29</td>
+<td>04:00–08:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-29</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-29</td>
+<td>12:00–16:00</td>
+<td>visible</td>
+<td>153</td>
+<td>12</td>
+</tr>
+<tr>
+<td>2026-08-29</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>57</td>
+<td>8</td>
+</tr>
+<tr>
+<td>2026-08-29</td>
+<td>20:00–24:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-30</td>
+<td>00:00–04:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-30</td>
+<td>04:00–08:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-30</td>
+<td>08:00–12:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-30</td>
+<td>12:00–16:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-30</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>46</td>
+<td>7</td>
+</tr>
+<tr>
+<td>2026-08-30</td>
+<td>20:00–24:00</td>
+<td>visible</td>
+<td>17</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2026-08-31</td>
+<td>00:00–04:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-31</td>
+<td>04:00–08:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-31</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-31</td>
+<td>12:00–16:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-08-31</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-08-31</td>
+<td>20:00–24:00</td>
+<td>visible</td>
+<td>30</td>
+<td>5</td>
+</tr>
+<tr>
+<td>2026-09-01</td>
+<td>00:00–04:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-01</td>
+<td>04:00–08:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-09-01</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-01</td>
+<td>12:00–16:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-01</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>31</td>
+<td>7</td>
+</tr>
+<tr>
+<td>2026-09-01</td>
+<td>20:00–24:00</td>
+<td>visible</td>
+<td>46</td>
+<td>7</td>
+</tr>
+<tr>
+<td>2026-09-02</td>
+<td>00:00–04:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-02</td>
+<td>04:00–08:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-02</td>
+<td>08:00–12:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-02</td>
+<td>12:00–16:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-02</td>
+<td>16:00–20:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-02</td>
+<td>20:00–24:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-03</td>
+<td>00:00–04:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-03</td>
+<td>04:00–08:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-03</td>
+<td>08:00–12:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-03</td>
+<td>12:00–16:00</td>
+<td>visible</td>
+<td>17</td>
+<td>5</td>
+</tr>
+<tr>
+<td>2026-09-03</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>27</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2026-09-03</td>
+<td>20:00–24:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-04</td>
+<td>00:00–04:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-09-04</td>
+<td>04:00–08:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-04</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-04</td>
+<td>12:00–16:00</td>
+<td>visible</td>
+<td>37</td>
+<td>8</td>
+</tr>
+<tr>
+<td>2026-09-04</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>62</td>
+<td>11</td>
+</tr>
+<tr>
+<td>2026-09-04</td>
+<td>20:00–24:00</td>
+<td>visible</td>
+<td>32</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2026-09-05</td>
+<td>00:00–04:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-05</td>
+<td>04:00–08:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-09-05</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-05</td>
+<td>12:00–16:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-05</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>74</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2026-09-05</td>
+<td>20:00–24:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-06</td>
+<td>00:00–04:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-06</td>
+<td>04:00–08:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-09-06</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-06</td>
+<td>12:00–16:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-06</td>
+<td>16:00–20:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-06</td>
+<td>20:00–24:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-07</td>
+<td>00:00–04:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-07</td>
+<td>04:00–08:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-09-07</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-07</td>
+<td>12:00–16:00</td>
+<td>visible</td>
+<td>43</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2026-09-07</td>
+<td>16:00–20:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-07</td>
+<td>20:00–24:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-08</td>
+<td>00:00–04:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-09-08</td>
+<td>04:00–08:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-08</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-08</td>
+<td>12:00–16:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-08</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>40</td>
+<td>5</td>
+</tr>
+<tr>
+<td>2026-09-08</td>
+<td>20:00–24:00</td>
+<td>visible</td>
+<td>59</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2026-09-09</td>
+<td>00:00–04:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-09</td>
+<td>04:00–08:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-09</td>
+<td>08:00–12:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-09</td>
+<td>12:00–16:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-09</td>
+<td>16:00–20:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-09</td>
+<td>20:00–24:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-10</td>
+<td>00:00–04:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-10</td>
+<td>04:00–08:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-10</td>
+<td>08:00–12:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-10</td>
+<td>12:00–16:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-10</td>
+<td>16:00–20:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-10</td>
+<td>20:00–24:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-11</td>
+<td>00:00–04:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-11</td>
+<td>04:00–08:00</td>
+<td>inactive</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-11</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-11</td>
+<td>12:00–16:00</td>
+<td>visible</td>
+<td>86</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2026-09-11</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>82</td>
+<td>8</td>
+</tr>
+<tr>
+<td>2026-09-11</td>
+<td>20:00–24:00</td>
+<td>visible</td>
+<td>35</td>
+<td>5</td>
+</tr>
+<tr>
+<td>2026-09-12</td>
+<td>00:00–04:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-12</td>
+<td>04:00–08:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-09-12</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-12</td>
+<td>12:00–16:00</td>
+<td>visible</td>
+<td>41</td>
+<td>7</td>
+</tr>
+<tr>
+<td>2026-09-12</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>38</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2026-09-12</td>
+<td>20:00–24:00</td>
+<td>visible</td>
+<td>36</td>
+<td>7</td>
+</tr>
+<tr>
+<td>2026-09-13</td>
+<td>00:00–04:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-13</td>
+<td>04:00–08:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-13</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-13</td>
+<td>12:00–16:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-13</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>62</td>
+<td>8</td>
+</tr>
+<tr>
+<td>2026-09-13</td>
+<td>20:00–24:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-14</td>
+<td>00:00–04:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-14</td>
+<td>04:00–08:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-14</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-14</td>
+<td>12:00–16:00</td>
+<td>visible</td>
+<td>31</td>
+<td>5</td>
+</tr>
+<tr>
+<td>2026-09-14</td>
+<td>16:00–20:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-14</td>
+<td>20:00–24:00</td>
+<td>visible</td>
+<td>62</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2026-09-15</td>
+<td>00:00–04:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-15</td>
+<td>04:00–08:00</td>
+<td>visible</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2026-09-15</td>
+<td>08:00–12:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-15</td>
+<td>12:00–16:00</td>
+<td>suppressed</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>2026-09-15</td>
+<td>16:00–20:00</td>
+<td>visible</td>
+<td>44</td>
+<td>9</td>
+</tr>
+<tr>
+<td>2026-09-15</td>
+<td>20:00–24:00</td>
+<td>visible</td>
+<td>54</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<div class="plan">
+<h3>Planned interaction / animation</h3>
+<p>Filter by HW1, HW2 or HW3; switch between submissions and distinct contributors; select a day to inspect its time distribution. These controls will distinguish broad participation from repeated attempts. The public view will retain suppression after filtering. No animation is needed to read timing accurately.</p>
+</div>
+</section>
+<section class="chart-section" id="retries">
+<div class="section-heading">
+<span class="number">02</span>
+<div>
+<p class="eyebrow">RETRIES</p>
+<h2>A typical count hides a wide range.</h2>
+</div>
+</div>
+<p class="reading">Median counts are <strong>12.5, 13 and 14</strong>, but observed ranges are 8–98, 3–62 and 7–108. The distributions include only students who submitted within each homework window. The underlying tasks also differ: HW1 and HW2 have eight problems; HW3 has seven.</p>
+<figure>
+<picture>
+<source media="(max-width: 640px)" srcset="assets/figures/02-attempts-mobile.svg">
+<img src="assets/figures/02-attempts.svg" alt="Three boxplots of student submission counts. HW1 median 12.5 and range 8–98; HW2 median 13 and range 3–62; HW3 median 14 and range 7–108." loading="lazy">
+</picture>
+<figcaption>Whiskers show the observed minimum and maximum, not 1.5×IQR. Boxes use inclusive quartiles. No individual student points are published. Different problem counts and difficulty limit comparisons across homeworks.</figcaption>
+</figure>
+<div class="downloads">
+<a href="assets/figures/02-attempts.png" download>Download PNG ↗</a>
+<a href="assets/figures/02-attempts.svg" download>Download SVG ↗</a>
+</div>
+<details>
+<summary>Accessible data table · attempt counts</summary>
+<div class="table-scroll">
+<table>
+<caption>Window-based attempt counts; one observation per student and homework with ≥1 submission.</caption>
+<thead>
+<tr>
+<th scope="col">Homework</th>
+<th scope="col">Problems</th>
+<th scope="col">Submitters</th>
+<th scope="col">Submissions</th>
+<th scope="col">Minimum</th>
+<th scope="col">Q1</th>
+<th scope="col">Median</th>
+<th scope="col">Q3</th>
+<th scope="col">Maximum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HW1</td>
+<td>8</td>
+<td>38</td>
+<td>673</td>
+<td>8</td>
+<td>9.25</td>
+<td>12.5</td>
+<td>17</td>
+<td>98</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>8</td>
+<td>38</td>
+<td>664</td>
+<td>3</td>
+<td>10</td>
+<td>13</td>
+<td>17.75</td>
+<td>62</td>
+</tr>
+<tr>
+<td>HW3</td>
+<td>7</td>
+<td>39</td>
+<td>764</td>
+<td>7</td>
+<td>9.5</td>
+<td>14</td>
+<td>19</td>
+<td>108</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<div class="plan">
+<h3>Planned interaction / animation</h3>
+<p>Switch between all attempts and attempts through the first accepted submission for each student–problem pair, including that successful attempt. Retain all observed attempts for pairs that never reach acceptance. Animate the box transition briefly, with a reduced-motion option, to show how <strong>318 post-acceptance submissions</strong> affect the distributions. Acceptance uses the recorded AC verdict; it is distinct from normalized full score.</p>
+</div>
+</section>
+<section class="chart-section" id="scores">
+<div class="section-heading">
+<span class="number">03</span>
+<div>
+<p class="eyebrow">SCORE PROGRESSION</p>
+<h2>The endpoint does not tell<br>the whole story.</h2>
+</div>
+</div>
+<p class="reading">
+<strong>HW3 TicTacToe</strong> has the largest first-to-best difference: its 39 attempters average 37.95 on their first submission and 100 for their best observed score, a difference of 62.05 percentage points. Both means use the same students.</p>
+<figure>
+<picture>
+<source media="(max-width: 640px)" srcset="assets/figures/03-score-progression-mobile.svg">
+<img src="assets/figures/03-score-progression.svg" alt="Dumbbell chart of 23 homework problem slots. First scores use open circles and best scores use diamonds. HW3 TicTacToe has the largest mean difference, 62.05 percentage points." loading="lazy">
+</picture>
+<figcaption>Scores are normalized within each homework problem. Endpoints are means across the same attempters, including students who submit only once. Best scores increase or stay constant by construction; the gap is not an estimate of learning caused by retrying. Mobile labels use the problem order shown in the table.</figcaption>
+</figure>
+<div class="downloads">
+<a href="assets/figures/03-score-progression.png" download>Download PNG ↗</a>
+<a href="assets/figures/03-score-progression.svg" download>Download SVG ↗</a>
+</div>
+<details>
+<summary>Accessible data table · first and best scores</summary>
+<div class="table-scroll">
+<table>
+<caption>Per-problem means of normalized scores, sorted by difference within each homework.</caption>
+<thead>
+<tr>
+<th scope="col">Homework</th>
+<th scope="col">Problem</th>
+<th scope="col">Name</th>
+<th scope="col">Attempters</th>
+<th scope="col">First mean</th>
+<th scope="col">Best mean</th>
+<th scope="col">Difference (pp)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HW1</td>
+<td>P2</td>
+<td>Exercise2.5-EggsGrossDozensLeftover</td>
+<td>38</td>
+<td>60.53</td>
+<td>100.00</td>
+<td>39.47</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P6</td>
+<td>Exercise3.3-SimpleCalculator</td>
+<td>38</td>
+<td>65.79</td>
+<td>100.00</td>
+<td>34.21</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P7</td>
+<td>HW1-ConsectiveFours</td>
+<td>38</td>
+<td>74.21</td>
+<td>100.00</td>
+<td>25.79</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P5</td>
+<td>HW1-SentinelValue</td>
+<td>38</td>
+<td>76.32</td>
+<td>100.00</td>
+<td>23.68</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P4</td>
+<td>Exercise1.2.15 Triangle Sides</td>
+<td>38</td>
+<td>80.00</td>
+<td>100.00</td>
+<td>20.00</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P3</td>
+<td>HW1-LargeToSmall</td>
+<td>38</td>
+<td>80.00</td>
+<td>99.47</td>
+<td>19.47</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P8</td>
+<td>Exercise1.4.15-InPlaceTranspose</td>
+<td>38</td>
+<td>88.60</td>
+<td>100.00</td>
+<td>11.40</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P1</td>
+<td>HW1-ComputeDisplacement</td>
+<td>38</td>
+<td>90.00</td>
+<td>100.00</td>
+<td>10.00</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P7</td>
+<td>IntQuestion</td>
+<td>35</td>
+<td>53.14</td>
+<td>97.14</td>
+<td>44.00</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P8</td>
+<td>ShapeZoo</td>
+<td>35</td>
+<td>57.14</td>
+<td>100.00</td>
+<td>42.86</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P3</td>
+<td>PairOfDice</td>
+<td>37</td>
+<td>57.30</td>
+<td>97.30</td>
+<td>40.00</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P5</td>
+<td>Complex</td>
+<td>36</td>
+<td>64.44</td>
+<td>100.00</td>
+<td>35.56</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P2</td>
+<td>CreditCard</td>
+<td>37</td>
+<td>65.95</td>
+<td>97.30</td>
+<td>31.35</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P6</td>
+<td>CampusDirectory</td>
+<td>36</td>
+<td>64.44</td>
+<td>94.44</td>
+<td>30.00</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P4</td>
+<td>Charge</td>
+<td>37</td>
+<td>75.68</td>
+<td>100.00</td>
+<td>24.32</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P1</td>
+<td>Normalization</td>
+<td>37</td>
+<td>81.62</td>
+<td>100.00</td>
+<td>18.38</td>
+</tr>
+<tr>
+<td>HW3</td>
+<td>P7</td>
+<td>TicTacToe</td>
+<td>39</td>
+<td>37.95</td>
+<td>100.00</td>
+<td>62.05</td>
+</tr>
+<tr>
+<td>HW3</td>
+<td>P1</td>
+<td>26s3HW3-EvenOrOdd</td>
+<td>39</td>
+<td>40.51</td>
+<td>100.00</td>
+<td>59.49</td>
+</tr>
+<tr>
+<td>HW3</td>
+<td>P2</td>
+<td>26s3HW3-DigitProcessing</td>
+<td>39</td>
+<td>64.10</td>
+<td>100.00</td>
+<td>35.90</td>
+</tr>
+<tr>
+<td>HW3</td>
+<td>P3</td>
+<td>Hanoi</td>
+<td>39</td>
+<td>67.69</td>
+<td>100.00</td>
+<td>32.31</td>
+</tr>
+<tr>
+<td>HW3</td>
+<td>P5</td>
+<td>Rectangle</td>
+<td>39</td>
+<td>67.69</td>
+<td>100.00</td>
+<td>32.31</td>
+</tr>
+<tr>
+<td>HW3</td>
+<td>P4</td>
+<td>MeasureBox</td>
+<td>39</td>
+<td>79.49</td>
+<td>100.00</td>
+<td>20.51</td>
+</tr>
+<tr>
+<td>HW3</td>
+<td>P6</td>
+<td>LargeNumber</td>
+<td>39</td>
+<td>83.08</td>
+<td>96.92</td>
+<td>13.85</td>
+</tr>
+</tbody>
+</table>
+</div>
+</details>
+<div class="plan">
+<h3>Planned interaction / animation</h3>
+<p>Filter by homework and switch the best-score endpoint between the first two attempts, first three attempts and all observed attempts. Keep the original set of attempters: for students with fewer attempts, use their best observed score so far. A short endpoint transition will reveal where gains accumulate without changing the comparison cohort.</p>
+</div>
+</section>
+<section id="dataset" class="methods">
+<p class="eyebrow">DATASET &amp; PROCESSING</p>
+<h2>From private event logs<br>to reproducible summaries.</h2>
+<div class="two-col">
+<div>
+<h3>Raw dataset · private</h3>
+<p>A read-only CS201 course export contains nine tables: metadata, course, roster, assignments, submissions, assignment–problem mappings, problems, participations and submission–assignment links. The scoped export contains 42 non-staff/non-superuser roster members and 2,343 submission events from 40 members, across seven assignments. It excludes source code and direct identity fields from the analysis bundle. Pseudonyms remain private.</p>
+<p>The export is a snapshot, not a live connection. The website never queries the production server. Raw logs, individual scores and the linkage key are not published.</p>
+</div>
+<div>
+<h3>Processed dataset · public</h3>
+<p>The three homework assignments contain 2,171 submission events. Restricting each event to its own configured homework opening and deadline retains <strong>2,101 events from 39 students</strong>; 70 events outside these windows remain in the raw export but are excluded from these figures.</p>
+<p>The published <a href="data/summary.json">aggregate JSON</a> contains masked time bins, homework count distributions and per-problem score means. It contains no student identifiers or event-level records. Public bins require at least five contributors; suppression reduces disclosure but is not a formal privacy guarantee.</p>
+</div>
+</div>
+<h3>Completed processing</h3>
+<ol>
+<li>Confirmed the CS201 roster scope, removed staff/superuser accounts, and recorded the user's confirmation that no extra accounts need exclusion.</li>
+<li>Checked unique keys and join coverage for submissions, assignment links and problem maxima. Repeated attempts remain separate events; they are not treated as accidental duplicates.</li>
+<li>Converted UTC timestamps to Asia/Shanghai before assigning dates or time bins; selected the configured homework windows below.</li>
+<li>Validated finite scores and positive maxima, then calculated <code>100 × assignment_submission_score / problem_max_points</code>. Raw cross-problem scores are not mixed.</li>
+<li>Sorted student–homework–problem events by timestamp and submission ID, computed first and running-best scores, and aggregated over the same attempters.</li>
+<li>Created summary boxplots and masked calendar bins. Zero-submitters remain in the roster count but are excluded from attempt-count distributions.</li>
+</ol>
+<div class="table-scroll">
+<table>
+<caption>Configured assignment windows. Individual extensions have not been incorporated.</caption>
+<thead>
+<tr>
+<th scope="col">Homework</th>
+<th scope="col">Opens (UTC+08)</th>
+<th scope="col">Configured deadline (UTC+08)</th>
+<th scope="col">Outside-window records</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HW1</td>
+<td>2026-08-26 15:00</td>
+<td>2026-09-01 23:59</td>
+<td>14</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>2026-09-03 12:00</td>
+<td>2026-09-08 23:59</td>
+<td>35</td>
+</tr>
+<tr>
+<td>HW3</td>
+<td>2026-09-11 11:00</td>
+<td>2026-09-15 23:59</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="caution">Scope limitations: configured deadlines may differ from individual extensions. These are recorded submissions, not all work a student performed. No exam outcomes, AI-platform logs or causal claims are part of the current analysis.</p>
+<p>
+<a href="docs/methods.md">Detailed methods and data dictionary ↗</a> · <a href="https://github.com/Cis-jujube/STATS-401-Final-Project">Source and reproduction instructions ↗</a>
+</p>
+</section>
+<section id="evaluation" class="evaluation">
+<p class="eyebrow">EVALUATION PLAN · NOT YET RUN</p>
+<h2>Can readers answer the questions<br>without overinterpreting the data?</h2>
+<p>We plan a formative study with approximately five classmates or teaching assistants. Participants will use the static page first, then repeat comparable tasks after interactions are implemented. We will rotate task order, use think-aloud observation, and avoid treating this small convenience sample as a representative experiment.</p>
+<div class="table-scroll">
+<table>
+<caption>Tasks, evaluation criteria and feedback to collect</caption>
+<thead>
+<tr>
+<th scope="col">Task</th>
+<th scope="col">What we evaluate</th>
+<th scope="col">What we collect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Find a visible submission peak and compare its two panels.</td>
+<td>Reading dates, color scales, counts vs distinct people, and suppression.</td>
+<td>Answer correctness, completion time, help requests and misread cells.</td>
+</tr>
+<tr>
+<td>Compare the medians and ranges of the three homeworks.</td>
+<td>Understanding boxes, min–max whiskers, denominators and unequal problem counts.</td>
+<td>Correctness, time, confidence (1–5), and confusing labels.</td>
+</tr>
+<tr>
+<td>Identify the largest first-to-best score difference.</td>
+<td>Reading endpoints, normalized scores and the same-cohort comparison.</td>
+<td>Selected problem, estimated gap, time and explanation.</td>
+</tr>
+<tr>
+<td>Explain what more attempts and longer submission gaps can tell us.</td>
+<td>Whether the page prevents effort, study-time and causal-learning misconceptions.</td>
+<td>Open-ended explanation, misconception notes and wording suggestions.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Before testing, we will derive an answer key from the aggregate JSON. We will summarize task accuracy, median completion time and repeated points of confusion, then revise labels, legends and interaction defaults. Feedback will be recorded without names; no evaluation results are claimed at this milestone.</p>
+</section>
+<section class="next">
+<p class="eyebrow">FUTURE EXTENSION / FIGURE 04</p>
+<h2>Does the next attempt set a new best?</h2>
+<p>Explore adjacent submissions within the same student, homework and problem, restricted to cases where the prior best is below full credit and a next attempt is observed. Compare the proportion exceeding the historical best across retry-gap bins, reporting both pair counts and distinct contributors.</p>
+<p>Stratify by problem, prior score and prior verdict. Sparse bins will be combined or withheld. Any uncertainty estimates must account for repeated observations within students. A retry gap is elapsed clock time, not study duration; this remains an exploratory association. This fourth figure is not part of the three completed static visualizations.</p>
+</section>
+</main>
+<footer>
+<p>CS201 Homework Submission Patterns · Zaozao Wang &amp; Zhengxiang Liu</p>
+<p>Actual project data · Static progress check · 20 Sep 2026</p>
+<a href="proposal.md">Original proposal (historical, superseded scope)</a>
+</footer>
+</body>
+</html>
