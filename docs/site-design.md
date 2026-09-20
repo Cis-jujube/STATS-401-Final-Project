@@ -1,12 +1,12 @@
 # Website design and motion
 
-The published design uses two primary page text sizes, foreground figure cards, four navigable evidence scenes and a dark satin-style background. The background and card changes indicate which question is selected; they do not animate underlying observations or imply learning progress. Data, normalization, privacy suppression and figure artwork retain their existing definitions.
+The published design uses two primary page text sizes, four full-screen desktop chapters with left-hand text and right-hand transparent figures and a dark satin-style background. The continuous background movement and figure expansion guide reading between questions; they do not animate underlying observations or imply learning progress. Data, normalization, privacy suppression and figure artwork retain their existing definitions.
 
 ## Implementation and controls
 
-Native HTML, CSS, SVG, Canvas and JavaScript; no remote runtime libraries, fonts, videos or production API calls. Scroll or use the scene buttons to change figures. Open a large figure directly, or hold the desktop focus button for 900 ms. Enter/Space provides direct keyboard access; Escape closes the dialog. The motion toggle disables decorative movement; system reduced-motion takes priority. Background drift pauses while reading the document details and when the tab is hidden. Without JavaScript, the page shows the full evidence document and static figures.
+Native HTML, CSS, SVG, Canvas and JavaScript; no remote runtime libraries, fonts, videos or production API calls. Scroll naturally through the four chapters, or follow each chapter’s next-section link. The figure grows from scale 0.72 to 1.08 during the first 46% of its pinned scroll interval, then holds steady for reading. There are no numbered tabs, rounded chart frames, stacked cards or wheel interception. Open a large figure directly, or hold its desktop text button for 900 ms. Enter/Space provides direct keyboard access; Escape closes the dialog. The motion toggle disables decorative movement; system reduced-motion takes priority. Background movement is driven by scroll rather than an endless animation. Reduced-motion and no-JavaScript modes use ordinary flowing sections at full figure scale. Mobile chapters stack text above the figure and allow tall charts to scroll at readable width.
 
-The build entrypoint is `scripts/build_page.py`; `scripts/render_site.py` applies the presentation to the generated evidence sections. Shared fragments are under `scripts/templates/`. CSS and JavaScript are `styles.css` and `assets/site.js`.
+The build entrypoint is `scripts/build_page.py`; `scripts/render_site.py` applies the presentation to the generated evidence sections. Shared fragments are under `scripts/templates/`. CSS and JavaScript are `styles.css` and `assets/site.js`. Transparent website figures come from `scripts/render_figures.py --web`; the white-background publication figures remain the download versions.
 
 ## References and scope of reuse
 

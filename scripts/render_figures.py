@@ -22,7 +22,8 @@ PALETTE = {'blue': '#0F4D92', 'blue_light': '#3775BA', 'green': '#8BCF8B',
 HW_COLORS = [PALETTE['blue'], '#42949E', PALETTE['red']]
 
 
-def apply_publication_style():
+def apply_publication_style(web=False):
+    plt.rcdefaults()
     plt.rcParams.update({
         'font.family': ['DejaVu Sans', 'Helvetica', 'Arial', 'sans-serif'],
         'font.size': 13, 'axes.labelsize': 12, 'axes.titlesize': 15,
@@ -34,29 +35,39 @@ def apply_publication_style():
         'axes.labelcolor': PALETTE['ink'], 'xtick.color': PALETTE['ink'],
         'ytick.color': PALETTE['ink'], 'savefig.facecolor': 'white',
     })
+    if web:
+        plt.rcParams.update({
+            'figure.facecolor': 'none', 'axes.facecolor': 'none',
+            'text.color': '#e8eeeb', 'axes.labelcolor': '#b9c5c0',
+            'axes.edgecolor': '#8a9690', 'xtick.color': '#b9c5c0',
+            'ytick.color': '#b9c5c0', 'grid.color': '#a3b6ac',
+            'boxplot.whiskerprops.color': '#c2cdc8',
+            'boxplot.capprops.color': '#c2cdc8',
+        })
 
 
-def finalize_figure(fig, out_path, title):
+def finalize_figure(fig, out_path, title, web=False):
     out_path.parent.mkdir(parents=True, exist_ok=True)
     metadata = {'Title': title, 'Creator': 'CS201 Homework Submission Patterns'}
-    for extension in ('svg', 'pdf', 'png'):
+    for extension in (('svg',) if web else ('svg', 'pdf', 'png')):
         md = dict(metadata)
         if extension == 'pdf':
             md.update(CreationDate=None, ModDate=None)
         if extension == 'svg':
             md['Date'] = None
         target = out_path.with_suffix('.'+extension)
-        fig.savefig(target, dpi=300, metadata=md)
+        options = {'transparent': True, 'bbox_inches': 'tight', 'pad_inches': .08} if web else {}
+        fig.savefig(target, dpi=300, metadata=md, **options)
         if extension == 'svg':
             target.write_text('\n'.join(line.rstrip() for line in target.read_text().splitlines())+'\n')
     plt.close(fig)
 
 
-def footnote(fig, lines, y=.025):
-    fig.text(.04, y, '\n'.join(lines), fontsize=9, color=PALETTE['gray'], va='bottom', linespacing=1.55)
+def footnote(fig, lines, y=.025, web=False):
+    fig.text(.04, y, '\n'.join(lines), fontsize=9, color='#9eaea4' if web else PALETTE['gray'], va='bottom', linespacing=1.55)
 
 
-def calendar(data, out, mobile=False, private=None):
+def calendar(data, out, mobile=False, private=None, web=False):
     cells = private if private is not None else data['calendar']
     hours = cells[0]['hours']
     dates = sorted({c['date'] for c in cells})
@@ -108,21 +119,21 @@ def calendar(data, out, mobile=False, private=None):
     fig.legend(handles=handles[1:] if private else handles,loc='lower left',bbox_to_anchor=(.03,.065),
                ncol=2 if mobile else 4,fontsize=10)
     footnote(fig,['CS201 · HW1–HW3 configured windows · 20 Sep 2026 snapshot.',
-                  'PRIVATE hourly view. Do not publish.' if private else 'White/light cells = zero; hatched cells are withheld, not zero. Public cells span four hours.'])
+                  'PRIVATE hourly view. Do not publish.' if private else 'White/light cells = zero; hatched cells are withheld, not zero. Public cells span four hours.'],web=web)
     fig.tight_layout(pad=2,rect=(0,.15 if not mobile else .13,1,.96),h_pad=4)
     name='01-calendar-private-hourly' if private else '01-calendar'+('-mobile' if mobile else '')
-    finalize_figure(fig,out/name,'Submission timing and distinct contributors')
+    finalize_figure(fig,out/name,'Submission timing and distinct contributors',web=web)
 
 
-def attempts(data,out,mobile=False):
+def attempts(data,out,mobile=False,web=False):
     fig,ax=plt.subplots(figsize=(6.5,6.5) if mobile else (10,6.2))
     stats=[{'label':a['homework'],'med':a['all_attempts']['median'],'q1':a['all_attempts']['q1'],
             'q3':a['all_attempts']['q3'],'whislo':a['all_attempts']['min'],'whishi':a['all_attempts']['max']}
            for a in data['assignments']]
     boxes=ax.bxp(stats,showfliers=False,patch_artist=True,widths=.42,
-                 medianprops={'color':'#272727','linewidth':2.5},
+                 medianprops={'color':'#dce7e1' if web else '#272727','linewidth':2.5},
                  boxprops={'linewidth':2},whiskerprops={'linewidth':1.8},capprops={'linewidth':1.8})
-    for box,color in zip(boxes['boxes'],HW_COLORS): box.set(facecolor=color,alpha=.25,edgecolor=color)
+    for box,color in zip(boxes['boxes'],['#8bb9df','#8ccac2','#deaaa4'] if web else HW_COLORS): box.set(facecolor=color,alpha=.25,edgecolor=color)
     for i,a in enumerate(data['assignments'],1):
         q=a['all_attempts']
         ax.text(i+.26,q['median'],f"{q['median']:g}",fontsize=13,weight='bold',va='center')
@@ -133,77 +144,139 @@ def attempts(data,out,mobile=False):
     ax.grid(axis='y',alpha=.18,linewidth=.8);ax.set_axisbelow(True)
     fig.tight_layout(pad=2,rect=(0,.16,1,1))
     footnote(fig,['Boxes: middle 50% · bold line: median · whiskers: min–max.',
-                  'Window submitters only; counts do not measure effort or ability.'])
-    finalize_figure(fig,out/('02-attempts'+('-mobile' if mobile else '')),'Per-student homework attempt counts')
+                  'Window submitters only; counts do not measure effort or ability.'],web=web)
+    finalize_figure(fig,out/('02-attempts'+('-mobile' if mobile else '')),'Per-student homework attempt counts',web=web)
 
 
 def short_name(row):
     return row['problem_name'].split('-')[-1].replace('Exercise1.2.15 ','')
 
 
-def scores(data,out,mobile=False):
+def score_story(data, out, mobile=False):
+    """One shared score axis keeps all 23 problem labels readable on the website."""
+    fig, ax = plt.subplots(figsize=(6, 13) if mobile else (11, 10))
+    positions, labels = [], []
+    position = 0
+    blue = '#a4c6eb'
+    for assignment in data['assignments']:
+        rows = [r for r in data['score_progression'] if r['homework'] == assignment['homework']]
+        ax.text(0, position - .8, assignment['homework'], fontsize=12, weight='bold')
+        for row in rows:
+            ax.plot([row['first'], row['best']], [position, position], color='#94adbd', lw=2)
+            ax.plot(row['first'], position, 'o', mfc='#0c1012', mec=blue, mew=1.6, ms=6)
+            ax.plot(row['best'], position, 'D', color=blue, ms=5)
+            ax.text(1.02, position, f"n={row['n']}", transform=ax.get_yaxis_transform(), fontsize=10, va='center')
+            positions.append(position)
+            labels.append(short_name(row))
+            position += 1
+        position += 1.7
+    ax.set_yticks(positions, labels, fontsize=12)
+    ax.set_ylim(position - 1.7, -1.5)
+    ax.set_xlim(0, 103)
+    ax.set_xticks([0, 25, 50, 75, 100])
+    ax.set_xlabel('Normalized score (%)')
+    ax.grid(axis='x', alpha=.2)
+    ax.spines['left'].set_visible(False)
+    ax.tick_params(axis='y', length=0)
+    handles = [Line2D([], [], marker='o', ls='', mfc='#0c1012', mec=blue, label='Mean first score'),
+               Line2D([], [], marker='D', ls='', color=blue, label='Mean best score')]
+    fig.legend(handles=handles, loc='upper right', bbox_to_anchor=(.97, .995), ncol=2, fontsize=10)
+    fig.tight_layout(pad=1.5, rect=(0, .06, .94, .96))
+    footnote(fig, ['Same attempters at both endpoints; ranked within homework.',
+                  'Best scores cannot decrease. Differences are not causal learning effects.'], web=True)
+    finalize_figure(fig, out/('03-score-progression'+('-mobile' if mobile else '')),
+                    'First versus best normalized scores', web=True)
+
+
+def scores(data,out,mobile=False,web=False):
+    if web:
+        score_story(data, out, mobile)
+        return
     fig,axes=plt.subplots(3 if mobile else 1,1 if mobile else 3,figsize=(8,15) if mobile else (19,6.8),squeeze=False)
+    blue = '#a4c6eb' if web else PALETTE['blue']
     for i,(ax,a) in enumerate(zip(axes.flat,data['assignments'])):
         rows=[r for r in data['score_progression'] if r['homework']==a['homework']]
         for y,r in enumerate(rows):
             ax.plot([r['first'],r['best']],[y,y],color='#b5c5d7',linewidth=2.5,zorder=1)
-            ax.plot(r['first'],y,'o',mfc='white',mec=PALETTE['blue'],mew=1.8,ms=7,zorder=2)
-            ax.plot(r['best'],y,'D',color=PALETTE['blue'],ms=6,zorder=2)
+            ax.plot(r['first'],y,'o',mfc='white',mec=blue,mew=1.8,ms=7,zorder=2)
+            ax.plot(r['best'],y,'D',color=blue,ms=6,zorder=2)
             ax.text(1.04,y,f"n={r['n']}",transform=ax.get_yaxis_transform(),fontsize=10,va='center')
         ax.set_yticks(range(len(rows)),[short_name(r) for r in rows],fontsize=10)
         ax.set_ylim(len(rows)-.5,-.7);ax.set_xlim(0,103);ax.set_xticks([0,25,50,75,100])
         ax.set_xlabel('Normalized score (%)');ax.set_title(f"({chr(97+i)})  {a['homework']}",loc='left',pad=17)
         ax.grid(axis='x',alpha=.18);ax.spines['left'].set_visible(False);ax.tick_params(axis='y',length=0)
-    fig.legend(handles=[Line2D([],[],marker='o',ls='',mfc='white',mec=PALETTE['blue'],mew=1.8,label='Mean first score'),
-                        Line2D([],[],marker='D',ls='',color=PALETTE['blue'],label='Mean best observed score')],
+    fig.legend(handles=[Line2D([],[],marker='o',ls='',mfc='white',mec=blue,mew=1.8,label='Mean first score'),
+                        Line2D([],[],marker='D',ls='',color=blue,label='Mean best observed score')],
                loc='upper center',bbox_to_anchor=(.55,.99),ncol=2,fontsize=12)
     fig.tight_layout(pad=2,rect=(0,.10 if mobile else .16,.96,.95 if mobile else .90),h_pad=3,w_pad=3)
     footnote(fig,['Same attempters at both endpoints; rows ranked by difference within each homework.',
-                  'Best scores cannot decrease by definition. Differences are not causal learning effects.'])
-    finalize_figure(fig,out/('03-score-progression'+('-mobile' if mobile else '')),'First versus best normalized scores')
+                  'Best scores cannot decrease by definition. Differences are not causal learning effects.'],web=web)
+    finalize_figure(fig,out/('03-score-progression'+('-mobile' if mobile else '')),'First versus best normalized scores',web=web)
 
 
-def attempt_scores(data,out,mobile=False):
-    fig,axes=plt.subplots(3 if mobile else 1,1 if mobile else 3,figsize=(8,16) if mobile else (18,6.5),squeeze=False)
+def attempt_scores(data,out,mobile=False,web=False):
+    vertical = mobile or web
+    size = (7, 16) if mobile and web else (12, 12) if web else (8, 16) if mobile else (18, 6.5)
+    fig,axes=plt.subplots(3 if vertical else 1,1 if vertical else 3,figsize=size,squeeze=False)
     visible=[r for r in data['attempt_score_series'] if r['state']=='visible']
     xmax=max(r['attempt'] for r in visible)
-    for i,(ax,a,color) in enumerate(zip(axes.flat,data['assignments'],HW_COLORS)):
+    for i,(ax,a,color) in enumerate(zip(axes.flat,data['assignments'],['#8bb9df','#8ccac2','#deaaa4'] if web else HW_COLORS)):
         rows=[r for r in visible if r['homework']==a['homework']]
         x=np.asarray([r['attempt'] for r in rows]); y=np.asarray([r['mean_score'] for r in rows])
         ax.plot(x,y,marker=['o','s','D'][i],color=color,lw=2.5,ms=6)
         for r in (rows[0],rows[-1]):
             ax.annotate(f"{r['mean_score']:.1f}",(r['attempt'],r['mean_score']),xytext=(0,12),textcoords='offset points',ha='center',fontsize=11,color=color)
         if x[-1]<xmax:
-            ax.axvspan(x[-1]+.5,xmax+.5,color='#f0f0f0',zorder=-1)
+            ax.axvspan(x[-1]+.5,xmax+.5,color='#242b2c' if web else '#f0f0f0',zorder=-1)
         ax.set_xlim(.5,xmax+.5);ax.set_ylim(0,105);ax.set_yticks([0,25,50,75,100])
         ax.set_xticks(range(1,xmax+1));ax.tick_params(axis='x',labelsize=10)
         ax.set_ylabel('Mean score at this attempt (%)')
         ax.set_title(f"({chr(97+i)})  {a['homework']}",loc='left',pad=18)
         ax.grid(axis='y',alpha=.18);ax.set_axisbelow(True)
         ax.set_xlabel('Attempt number within the same problem')
-        ax.xaxis.set_label_coords(.5, -.49)
+        if web:
+            ax.set_xlabel('')
+            ax.annotate('Attempt number within the same problem', (.5, 0), xycoords='axes fraction',
+                        xytext=(0, -68), textcoords='offset points', ha='center', va='top', fontsize=12)
+        else:
+            ax.xaxis.set_label_coords(.5, -.49)
         lookup={r['attempt']:r for r in rows}
         for row_index,(key,label) in enumerate([('submissions','N'),('contributors','S')]):
             yy=-.21-row_index*.09
-            ax.text(-.025,yy,label,transform=ax.transAxes,ha='right',fontsize=10,weight='bold')
+            if web:
+                offset = -29-row_index*17
+                ax.annotate(label, (-.025, 0), xycoords='axes fraction', xytext=(0, offset),
+                            textcoords='offset points', ha='right', va='top', fontsize=11, weight='bold')
+            else:
+                ax.text(-.025,yy,label,transform=ax.transAxes,ha='right',fontsize=10,weight='bold')
             for k in range(1,xmax+1):
-                ax.text(k,yy,str(lookup[k][key]) if k in lookup else '—',transform=ax.get_xaxis_transform(),ha='center',fontsize=9)
+                value = str(lookup[k][key]) if k in lookup else '—'
+                if web:
+                    ax.annotate(value, (k, 0), xycoords=ax.get_xaxis_transform(), xytext=(0, offset),
+                                textcoords='offset points', ha='center', va='top', fontsize=11)
+                else:
+                    ax.text(k,yy,value,transform=ax.get_xaxis_transform(),ha='center',fontsize=9)
     fig.tight_layout(pad=2,rect=(.01,.065 if mobile else .04,1,.99),h_pad=4)
     footnote(fig,['N = submitted student–problem events; S = distinct students. Equal weight per event.',
                   'Different cohorts at each attempt; no score carry-forward. Later means do not track a fixed group.',
-                  'Points with fewer than five students are withheld. No causal claim or independent-sample error bars.'])
-    finalize_figure(fig,out/('04-attempt-scores'+('-mobile' if mobile else '')),'Mean actual score by within-problem attempt number')
+                  'Points with fewer than five students are withheld. No causal claim or independent-sample error bars.'],web=web)
+    finalize_figure(fig,out/('04-attempt-scores'+('-mobile' if mobile else '')),'Mean actual score by within-problem attempt number',web=web)
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--input',type=Path,default=Path('data/summary.json'))
-    parser.add_argument('--output',type=Path,default=Path('assets/figures'))
+    parser.add_argument('--output',type=Path)
     parser.add_argument('--private-hourly',type=Path)
-    args=parser.parse_args();data=json.loads(args.input.read_text())
-    apply_publication_style()
+    parser.add_argument('--web', action='store_true', help='Transparent SVGs for the dark fullscreen website')
+    args=parser.parse_args()
+    if args.web and args.private_hourly:
+        parser.error('Web figures use public aggregates only')
+    args.output = args.output or Path('assets/story' if args.web else 'assets/figures')
+    data=json.loads(args.input.read_text())
+    apply_publication_style(web=args.web)
     for mobile in (False,True):
-        for draw in (calendar,attempts,scores,attempt_scores): draw(data,args.output,mobile)
+        for draw in (calendar,attempts,scores,attempt_scores): draw(data,args.output,mobile,web=args.web)
     if args.private_hourly:
         if args.private_hourly.resolve().is_relative_to(Path(__file__).resolve().parents[1]):
             raise ValueError('Private hourly input/output must remain outside the repository')

@@ -22,7 +22,7 @@ When homework scores cluster near full marks, how do students' submission proces
 | First and best normalized scores | [SVG](assets/figures/03-score-progression.svg) | [PNG](assets/figures/03-score-progression.png) | [PDF](assets/figures/03-score-progression.pdf) |
 | Actual mean score by attempt | [SVG](assets/figures/04-attempt-scores.svg) | [PNG](assets/figures/04-attempt-scores.png) | [PDF](assets/figures/04-attempt-scores.pdf) |
 
-All charts have separate mobile compositions and accessible HTML tables. The page has no remote runtime libraries, fonts, API calls or production database connection. Static figures and scene navigation are implemented. The page includes a satin-style animated background, four figure scenes, large-figure dialog, pointer glow and motion controls. Analytical chart filters and the formative reader evaluation remain planned. The four figures and their tables remain readable without JavaScript.
+All charts have separate mobile compositions and accessible HTML tables. The page has no remote runtime libraries, fonts, API calls or production database connection. Static figures and continuous scene navigation are implemented. Each desktop chapter fills a screen with text on the left and a transparent figure on the right. Scroll expansion, a moving satin background, large-figure dialog, pointer glow and motion controls are implemented; there are no numbered tabs or chart cards. Analytical chart filters and the formative reader evaluation remain planned. The four figures and their tables remain readable without JavaScript.
 
 ## Reproduce from public aggregates
 
@@ -31,11 +31,12 @@ Python 3.13 and Matplotlib 3.11.2 are captured by `.python-version`, `pyproject.
 ```sh
 uv sync --locked
 uv run python scripts/render_figures.py
+uv run python scripts/render_figures.py --web
 uv run python scripts/build_page.py
 uv run python -m unittest discover -s tests -v
 ```
 
-The page builder assembles the same aggregate evidence with `scripts/render_site.py` and the HTML fragments in `scripts/templates/`. `styles.css` and `assets/site.js` provide the native CSS/JavaScript presentation. No frontend install or development server is required.
+The page builder assembles the same aggregate evidence with `scripts/render_site.py` and the HTML fragments in `scripts/templates/`. `styles.css` and `assets/site.js` provide the native CSS/JavaScript presentation. The `--web` figure export writes eight transparent SVG compositions to `assets/story/`; the publication PNG/PDF/SVG files remain in `assets/figures/`. No frontend install or development server is required.
 
 The renderer exports eight compositions (four desktop + four mobile), each as a 300 DPI PNG and vector SVG/PDF. It follows [figures4papers / scientific-figure-making](https://github.com/ChenLiu-1996/figures4papers/tree/3c181f85e82c6f24948fcaaf3be6696102b41d8d/scientific-figure-making): shared sans-serif typography, minimal spines, consistent colors, frameless legends and vector text. See [style provenance](docs/figure-style.md). The previous optional Sharp rasterizer is retained for historical compatibility; it is not required for the current pipeline.
 

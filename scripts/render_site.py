@@ -1,22 +1,73 @@
-"""Present aggregate evidence in the approved animated static-page layout."""
+"""Render a continuous, fullscreen visual narrative from the public evidence."""
+from html import escape
 from pathlib import Path
 import re
-ROOT=Path(__file__).resolve().parents[1]
+
+ROOT = Path(__file__).resolve().parents[1]
+SCENES = [
+    ('timing', '01-calendar', 'Timing', '233 submissions.<br>14 people.',
+     'On 29 August, activity volume and participation told different stories. A busy period does not mean the whole class was working.',
+     'Four-hour cells · Beijing time · groups below five masked'),
+    ('retries', '02-attempts', 'Retries', 'Similar medians.<br>Different paths.',
+     'Typical counts are 12.5, 13 and 14. Behind those medians, the observed ranges are 8–98, 3–62 and 7–108.',
+     'Window submitters only · counts do not measure effort'),
+    ('scores', '03-score-progression', 'First to best', 'The endpoint<br>leaves things out.',
+     'For HW3 TicTacToe, the same 39 attempters average 37.95 first and 100 best. The final score hides that difference.',
+     'Same attempters · normalized scores · no causal claim'),
+    ('attempt-scores', '04-attempt-scores', 'Actual attempt scores', 'A new attempt.<br>A different cohort.',
+     'Each point averages the actual nth submission to a problem. Pairs that stop submitting leave the later points.',
+     'N = events · S = students · no carry-forward'),
+]
+
 
 def render_page(source: str) -> str:
-    text=source
-    sections=re.findall(r'<section\b.*?</section>',text,re.S)
-    def section(id):
-        s=next(s for s in sections if f'id="{id}"' in s)
-        return s.replace('<br>',' ')
-    items=[('timing','01-calendar','When do submissions gather?','233 submissions. 14 people.','On 29 August, submission volume and participation told different stories. Public time cells span four hours; small groups are masked.'),('retries','02-attempts','How many attempts?','Similar medians. Different ranges.','Median counts are 12.5, 13 and 14. More submissions do not directly measure effort or ability.'),('scores','03-score-progression','What did final scores hide?','First attempts change the picture.','Compare first and best normalized scores for the same attempters of each problem. The gap is not a causal learning effect.'),('attempt-scores','04-attempt-scores','What does each attempt score?','The cohort changes with the curve.','These are actual nth-attempt scores, not running best. N counts events; S counts distinct students. Stopped pairs do not carry forward.')]
-    cards='';nav='';copies='';details=''
-    for i,(id,file,title,headline,description) in enumerate(items):
-        nav+=f'<button class="scene-link" data-index="{i}" aria-pressed="{str(i==0).lower()}"><span>0{i+1}</span> {title}</button>'
-        cards+=f'<article class="scene-card {"active" if i==0 else ""}" data-card="{i}" aria-hidden="{str(i!=0).lower()}"><div class="card-label"><span>CS201 / Figure 0{i+1}</span><span>{title}</span></div><picture><source media="(max-width:700px)" srcset="assets/figures/{file}-mobile.svg"><img src="assets/figures/{file}.svg" alt="{title} {description}"></picture></article>'
-        copies+=f'<div class="scene-copy {"active" if i==0 else ""}" data-copy="{i}" {"" if i==0 else "hidden"}><h2>{headline}</h2><p>{description}</p><a href="#{id}">Read the evidence &amp; data table ↘</a></div>'
-        details+=section(id)
-    evaluation=(ROOT/'scripts/templates/evaluation.html').read_text()
-    background=(ROOT/'scripts/templates/background-material.html').read_text()
-    html=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CS201 Homework Submission Patterns</title><meta name="description" content="Four actual-data visualizations of CS201 homework submission timing, retries, and score progression."><link rel="stylesheet" href="styles.css"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"></head><body data-scene="0"><a class="skip" href="#main">Skip to content</a>{background}<canvas id="cursor-light" aria-hidden="true"></canvas><header class="topbar"><a href="index.html">CS201 / Living evidence</a><nav aria-label="Main navigation"><a href="#journey">Explore</a><a href="#dataset">Dataset</a><a href="#evaluation">Evaluation</a><button id="motion-toggle" aria-pressed="true"><svg class="bell" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16V10a7 7 0 0 1 14 0v6l2 3H3zM9 22h6"/></svg><span>Motion on</span></button></nav></header><main id="main"><section class="hero"><p>Homework submission patterns / STATS 401</p><h1 class="depth-title"><span>Beyond the</span><span class="depth-word" data-text="final score.">final score.</span></h1><div class="hero-bottom"><p>Near-perfect scores leave different paths behind.<br>Four views. 2,101 submissions. 39 window submitters.</p><a class="enter" href="#journey">Enter the evidence <span>↓</span></a></div><p class="preview-note">Zaozao Wang &amp; Zhengxiang Liu · 20 September 2026</p></section><section class="journey" id="journey" aria-label="Four evidence scenes"><div class="theatre"><div class="scene-heading"><span id="scene-counter" aria-live="polite">01 / 04 · Timing</span><span>Scroll to change scene · or select below</span></div><nav class="scene-nav" aria-label="Choose a figure">{nav}</nav><div class="stage-layout"><div class="copy-stack">{copies}</div><div class="deck"><div class="backplate plate-one"></div><div class="backplate plate-two"></div>{cards}</div></div><div class="stage-controls"><div><button id="previous" aria-label="Previous figure">←</button><button id="next" aria-label="Next figure">→</button></div><div class="focus-controls"><button id="hold-focus"><span class="hold-fill"></span><span class="hold-label">Hold to focus</span></button><button id="open-focus">Open large figure ↗</button></div></div><div class="progress-track" aria-hidden="true"><div id="scene-progress"></div></div></div></section><section class="bridge"><p>From the scene to the evidence.</p><h2>Keep the detail.<br>Keep the caveats.</h2><p>All four figures, their data tables, methods and the planned reader evaluation remain available below.</p></section><div class="evidence-detail">{section("research-question")}{details}{section('dataset')}{evaluation}{section('retry-intervals')}{section('midterm-plan')}</div></main><footer><p>CS201 Homework Submission Patterns · Zaozao Wang &amp; Zhengxiang Liu</p><p>Four completed static figures. Analytical filters and reader evaluation are planned.</p><p><a href="https://github.com/Cis-jujube/STATS-401-Final-Project">Project source ↗</a> · <a href="docs/site-design.md">Design references</a> · <a href="proposal.md">Original proposal (historical)</a></p></footer><dialog id="focus-dialog" aria-labelledby="focus-title"><div class="dialog-head"><h2 id="focus-title">Figure focus</h2><button id="close-focus" autofocus>Close ×</button></div><img id="focus-image" alt=""><p id="focus-note"></p></dialog><noscript><style>.journey,#motion-toggle,#cursor-light{{display:none}}.satin{{animation:none}}</style></noscript><script src="assets/site.js"></script></body></html>'''
-    return html
+    sections = re.findall(r'<section\b.*?</section>', source, re.S)
+
+    def evidence(section_id):
+        section = next(s for s in sections if f'id="{section_id}"' in s)
+        return section.replace('<br>', ' ')
+
+    chapters = []
+    for i, (section_id, file, topic, title, description, note) in enumerate(SCENES):
+        next_id = 'scene-' + SCENES[i + 1][0] if i < len(SCENES) - 1 else 'evidence'
+        next_label = 'Next: ' + SCENES[i + 1][2] if i < len(SCENES) - 1 else 'Methods & evidence'
+        chapters.append(f'''
+<section class="story-chapter" id="scene-{section_id}" data-scene="{i}" aria-labelledby="title-{section_id}">
+  <div class="chapter-stage">
+    <div class="chapter-copy">
+      <p class="eyebrow">{topic}</p>
+      <h2 id="title-{section_id}">{title}</h2>
+      <p>{description}</p>
+      <p class="reading-note">{note}</p>
+      <div class="chapter-actions">
+        <button class="focus-link" data-figure="{file}" data-title="{topic}" data-note="{escape(note)}"><span class="hold-fill" aria-hidden="true"></span>View full figure ↗</button>
+        <a href="#{section_id}">Data &amp; interpretation ↗</a>
+      </div>
+    </div>
+    <figure class="chapter-figure">
+      <picture><source media="(max-width:700px)" srcset="assets/story/{file}-mobile.svg"><img src="assets/story/{file}.svg" alt="{escape(topic + '. ' + description + ' ' + note)}" decoding="async"></picture>
+    </figure>
+    <a class="next-chapter" href="#{next_id}">{next_label} <span>↓</span></a>
+  </div>
+</section>''')
+
+    background = (ROOT / 'scripts/templates/background-material.html').read_text()
+    evaluation = (ROOT / 'scripts/templates/evaluation.html').read_text()
+    detail = evidence('research-question') + ''.join(evidence(s[0]) for s in SCENES)
+    detail += evidence('dataset') + evaluation + evidence('retry-intervals') + evidence('midterm-plan')
+    return f'''<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CS201 Homework Submission Patterns</title>
+<meta name="description" content="Four actual-data visualizations of CS201 homework submission timing, retries, and score progression.">
+<link rel="stylesheet" href="styles.css"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"></head>
+<body data-scene="0"><a class="skip" href="#main">Skip to content</a>
+{background}<canvas id="cursor-light" aria-hidden="true"></canvas>
+<header class="topbar"><a href="#main">CS201 / Process notes</a><nav aria-label="Main navigation"><a href="#scene-timing">Explore</a><a href="#dataset">Dataset</a><a href="#evaluation">Evaluation</a><button id="motion-toggle" aria-pressed="true"><svg class="bell" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16V10a7 7 0 0 1 14 0v6l2 3H3zM9 22h6"/></svg><span>Motion on</span></button></nav></header>
+<main id="main">
+<section class="hero-track"><div class="hero-stage"><div class="hero-copy"><p class="eyebrow">Homework submission patterns / STATS 401</p><h1>Beyond the<br><span>final score.</span></h1><p>Near-perfect scores leave different paths behind.</p><p class="reading-note">2,101 submissions. 39 window submitters.<br>Three homeworks. Four views of the process.</p><a class="enter" href="#scene-timing">Follow the submissions <span>↓</span></a></div><p class="byline">Zaozao Wang &amp; Zhengxiang Liu · 20 September 2026</p></div></section>
+<div id="journey">{''.join(chapters)}</div>
+<div id="evidence" class="evidence-detail">{detail}</div>
+</main>
+<footer><p>CS201 Homework Submission Patterns · Zaozao Wang &amp; Zhengxiang Liu</p><p>Four completed static figures. Analytical filters and reader evaluation are planned.</p><p><a href="https://github.com/Cis-jujube/STATS-401-Final-Project">Project source ↗</a> · <a href="docs/site-design.md">Design references</a> · <a href="proposal.md">Original proposal (historical)</a></p></footer>
+<dialog id="focus-dialog" aria-labelledby="focus-title"><div class="dialog-head"><h2 id="focus-title">Figure focus</h2><button id="close-focus" autofocus>Close ×</button></div><img id="focus-image" alt=""><p id="focus-note"></p></dialog>
+<script src="assets/site.js"></script></body></html>'''

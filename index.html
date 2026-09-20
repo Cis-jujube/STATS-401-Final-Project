@@ -50,9 +50,9 @@
 <canvas id="cursor-light" aria-hidden="true">
 </canvas>
 <header class="topbar">
-<a href="index.html">CS201 / Living evidence</a>
+<a href="#main">CS201 / Process notes</a>
 <nav aria-label="Main navigation">
-<a href="#journey">Explore</a>
+<a href="#scene-timing">Explore</a>
 <a href="#dataset">Dataset</a>
 <a href="#evaluation">Evaluation</a>
 <button id="motion-toggle" aria-pressed="true">
@@ -64,131 +64,120 @@
 </nav>
 </header>
 <main id="main">
-<section class="hero">
-<p>Homework submission patterns / STATS 401</p>
-<h1 class="depth-title">
-<span>Beyond the</span>
-<span class="depth-word" data-text="final score.">final score.</span>
+<section class="hero-track">
+<div class="hero-stage">
+<div class="hero-copy">
+<p class="eyebrow">Homework submission patterns / STATS 401</p>
+<h1>Beyond the<br>
+<span>final score.</span>
 </h1>
-<div class="hero-bottom">
-<p>Near-perfect scores leave different paths behind.<br>Four views. 2,101 submissions. 39 window submitters.</p>
-<a class="enter" href="#journey">Enter the evidence <span>↓</span>
+<p>Near-perfect scores leave different paths behind.</p>
+<p class="reading-note">2,101 submissions. 39 window submitters.<br>Three homeworks. Four views of the process.</p>
+<a class="enter" href="#scene-timing">Follow the submissions <span>↓</span>
 </a>
 </div>
-<p class="preview-note">Zaozao Wang &amp; Zhengxiang Liu · 20 September 2026</p>
-</section>
-<section class="journey" id="journey" aria-label="Four evidence scenes">
-<div class="theatre">
-<div class="scene-heading">
-<span id="scene-counter" aria-live="polite">01 / 04 · Timing</span>
-<span>Scroll to change scene · or select below</span>
-</div>
-<nav class="scene-nav" aria-label="Choose a figure">
-<button class="scene-link" data-index="0" aria-pressed="true">
-<span>01</span> When do submissions gather?</button>
-<button class="scene-link" data-index="1" aria-pressed="false">
-<span>02</span> How many attempts?</button>
-<button class="scene-link" data-index="2" aria-pressed="false">
-<span>03</span> What did final scores hide?</button>
-<button class="scene-link" data-index="3" aria-pressed="false">
-<span>04</span> What does each attempt score?</button>
-</nav>
-<div class="stage-layout">
-<div class="copy-stack">
-<div class="scene-copy active" data-copy="0" >
-<h2>233 submissions. 14 people.</h2>
-<p>On 29 August, submission volume and participation told different stories. Public time cells span four hours; small groups are masked.</p>
-<a href="#timing">Read the evidence &amp; data table ↘</a>
-</div>
-<div class="scene-copy " data-copy="1" hidden>
-<h2>Similar medians. Different ranges.</h2>
-<p>Median counts are 12.5, 13 and 14. More submissions do not directly measure effort or ability.</p>
-<a href="#retries">Read the evidence &amp; data table ↘</a>
-</div>
-<div class="scene-copy " data-copy="2" hidden>
-<h2>First attempts change the picture.</h2>
-<p>Compare first and best normalized scores for the same attempters of each problem. The gap is not a causal learning effect.</p>
-<a href="#scores">Read the evidence &amp; data table ↘</a>
-</div>
-<div class="scene-copy " data-copy="3" hidden>
-<h2>The cohort changes with the curve.</h2>
-<p>These are actual nth-attempt scores, not running best. N counts events; S counts distinct students. Stopped pairs do not carry forward.</p>
-<a href="#attempt-scores">Read the evidence &amp; data table ↘</a>
-</div>
-</div>
-<div class="deck">
-<div class="backplate plate-one">
-</div>
-<div class="backplate plate-two">
-</div>
-<article class="scene-card active" data-card="0" aria-hidden="false">
-<div class="card-label">
-<span>CS201 / Figure 01</span>
-<span>When do submissions gather?</span>
-</div>
-<picture>
-<source media="(max-width:700px)" srcset="assets/figures/01-calendar-mobile.svg">
-<img src="assets/figures/01-calendar.svg" alt="When do submissions gather? On 29 August, submission volume and participation told different stories. Public time cells span four hours; small groups are masked.">
-</picture>
-</article>
-<article class="scene-card " data-card="1" aria-hidden="true">
-<div class="card-label">
-<span>CS201 / Figure 02</span>
-<span>How many attempts?</span>
-</div>
-<picture>
-<source media="(max-width:700px)" srcset="assets/figures/02-attempts-mobile.svg">
-<img src="assets/figures/02-attempts.svg" alt="How many attempts? Median counts are 12.5, 13 and 14. More submissions do not directly measure effort or ability.">
-</picture>
-</article>
-<article class="scene-card " data-card="2" aria-hidden="true">
-<div class="card-label">
-<span>CS201 / Figure 03</span>
-<span>What did final scores hide?</span>
-</div>
-<picture>
-<source media="(max-width:700px)" srcset="assets/figures/03-score-progression-mobile.svg">
-<img src="assets/figures/03-score-progression.svg" alt="What did final scores hide? Compare first and best normalized scores for the same attempters of each problem. The gap is not a causal learning effect.">
-</picture>
-</article>
-<article class="scene-card " data-card="3" aria-hidden="true">
-<div class="card-label">
-<span>CS201 / Figure 04</span>
-<span>What does each attempt score?</span>
-</div>
-<picture>
-<source media="(max-width:700px)" srcset="assets/figures/04-attempt-scores-mobile.svg">
-<img src="assets/figures/04-attempt-scores.svg" alt="What does each attempt score? These are actual nth-attempt scores, not running best. N counts events; S counts distinct students. Stopped pairs do not carry forward.">
-</picture>
-</article>
-</div>
-</div>
-<div class="stage-controls">
-<div>
-<button id="previous" aria-label="Previous figure">←</button>
-<button id="next" aria-label="Next figure">→</button>
-</div>
-<div class="focus-controls">
-<button id="hold-focus">
-<span class="hold-fill">
-</span>
-<span class="hold-label">Hold to focus</span>
-</button>
-<button id="open-focus">Open large figure ↗</button>
-</div>
-</div>
-<div class="progress-track" aria-hidden="true">
-<div id="scene-progress">
-</div>
-</div>
+<p class="byline">Zaozao Wang &amp; Zhengxiang Liu · 20 September 2026</p>
 </div>
 </section>
-<section class="bridge">
-<p>From the scene to the evidence.</p>
-<h2>Keep the detail.<br>Keep the caveats.</h2>
-<p>All four figures, their data tables, methods and the planned reader evaluation remain available below.</p>
+<div id="journey">
+<section class="story-chapter" id="scene-timing" data-scene="0" aria-labelledby="title-timing">
+  <div class="chapter-stage">
+    <div class="chapter-copy">
+      <p class="eyebrow">Timing</p>
+      <h2 id="title-timing">233 submissions.<br>14 people.</h2>
+      <p>On 29 August, activity volume and participation told different stories. A busy period does not mean the whole class was working.</p>
+      <p class="reading-note">Four-hour cells · Beijing time · groups below five masked</p>
+      <div class="chapter-actions">
+        <button class="focus-link" data-figure="01-calendar" data-title="Timing" data-note="Four-hour cells · Beijing time · groups below five masked">
+<span class="hold-fill" aria-hidden="true">
+</span>View full figure ↗</button>
+        <a href="#timing">Data &amp; interpretation ↗</a>
+      </div>
+    </div>
+    <figure class="chapter-figure">
+      <picture>
+<source media="(max-width:700px)" srcset="assets/story/01-calendar-mobile.svg">
+<img src="assets/story/01-calendar.svg" alt="Timing. On 29 August, activity volume and participation told different stories. A busy period does not mean the whole class was working. Four-hour cells · Beijing time · groups below five masked" decoding="async">
+</picture>
+    </figure>
+    <a class="next-chapter" href="#scene-retries">Next: Retries <span>↓</span>
+</a>
+  </div>
 </section>
-<div class="evidence-detail">
+<section class="story-chapter" id="scene-retries" data-scene="1" aria-labelledby="title-retries">
+  <div class="chapter-stage">
+    <div class="chapter-copy">
+      <p class="eyebrow">Retries</p>
+      <h2 id="title-retries">Similar medians.<br>Different paths.</h2>
+      <p>Typical counts are 12.5, 13 and 14. Behind those medians, the observed ranges are 8–98, 3–62 and 7–108.</p>
+      <p class="reading-note">Window submitters only · counts do not measure effort</p>
+      <div class="chapter-actions">
+        <button class="focus-link" data-figure="02-attempts" data-title="Retries" data-note="Window submitters only · counts do not measure effort">
+<span class="hold-fill" aria-hidden="true">
+</span>View full figure ↗</button>
+        <a href="#retries">Data &amp; interpretation ↗</a>
+      </div>
+    </div>
+    <figure class="chapter-figure">
+      <picture>
+<source media="(max-width:700px)" srcset="assets/story/02-attempts-mobile.svg">
+<img src="assets/story/02-attempts.svg" alt="Retries. Typical counts are 12.5, 13 and 14. Behind those medians, the observed ranges are 8–98, 3–62 and 7–108. Window submitters only · counts do not measure effort" decoding="async">
+</picture>
+    </figure>
+    <a class="next-chapter" href="#scene-scores">Next: First to best <span>↓</span>
+</a>
+  </div>
+</section>
+<section class="story-chapter" id="scene-scores" data-scene="2" aria-labelledby="title-scores">
+  <div class="chapter-stage">
+    <div class="chapter-copy">
+      <p class="eyebrow">First to best</p>
+      <h2 id="title-scores">The endpoint<br>leaves things out.</h2>
+      <p>For HW3 TicTacToe, the same 39 attempters average 37.95 first and 100 best. The final score hides that difference.</p>
+      <p class="reading-note">Same attempters · normalized scores · no causal claim</p>
+      <div class="chapter-actions">
+        <button class="focus-link" data-figure="03-score-progression" data-title="First to best" data-note="Same attempters · normalized scores · no causal claim">
+<span class="hold-fill" aria-hidden="true">
+</span>View full figure ↗</button>
+        <a href="#scores">Data &amp; interpretation ↗</a>
+      </div>
+    </div>
+    <figure class="chapter-figure">
+      <picture>
+<source media="(max-width:700px)" srcset="assets/story/03-score-progression-mobile.svg">
+<img src="assets/story/03-score-progression.svg" alt="First to best. For HW3 TicTacToe, the same 39 attempters average 37.95 first and 100 best. The final score hides that difference. Same attempters · normalized scores · no causal claim" decoding="async">
+</picture>
+    </figure>
+    <a class="next-chapter" href="#scene-attempt-scores">Next: Actual attempt scores <span>↓</span>
+</a>
+  </div>
+</section>
+<section class="story-chapter" id="scene-attempt-scores" data-scene="3" aria-labelledby="title-attempt-scores">
+  <div class="chapter-stage">
+    <div class="chapter-copy">
+      <p class="eyebrow">Actual attempt scores</p>
+      <h2 id="title-attempt-scores">A new attempt.<br>A different cohort.</h2>
+      <p>Each point averages the actual nth submission to a problem. Pairs that stop submitting leave the later points.</p>
+      <p class="reading-note">N = events · S = students · no carry-forward</p>
+      <div class="chapter-actions">
+        <button class="focus-link" data-figure="04-attempt-scores" data-title="Actual attempt scores" data-note="N = events · S = students · no carry-forward">
+<span class="hold-fill" aria-hidden="true">
+</span>View full figure ↗</button>
+        <a href="#attempt-scores">Data &amp; interpretation ↗</a>
+      </div>
+    </div>
+    <figure class="chapter-figure">
+      <picture>
+<source media="(max-width:700px)" srcset="assets/story/04-attempt-scores-mobile.svg">
+<img src="assets/story/04-attempt-scores.svg" alt="Actual attempt scores. Each point averages the actual nth submission to a problem. Pairs that stop submitting leave the later points. N = events · S = students · no carry-forward" decoding="async">
+</picture>
+    </figure>
+    <a class="next-chapter" href="#evidence">Methods & evidence <span>↓</span>
+</a>
+  </div>
+</section>
+</div>
+<div id="evidence" class="evidence-detail">
 <section class="opening" id="research-question">
 <p class="eyebrow">THE QUESTION</p>
 <h2>What do near-perfect scores leave out?</h2>
@@ -1919,9 +1908,6 @@
 <p id="focus-note">
 </p>
 </dialog>
-<noscript>
-<style>.journey,#motion-toggle,#cursor-light{display:none}.satin{animation:none}</style>
-</noscript>
 <script src="assets/site.js">
 </script>
 </body>
