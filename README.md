@@ -5,6 +5,7 @@ STATS 401 Final Project · Zaozao Wang and Zhengxiang Liu
 
 When homework scores cluster near full marks, how do students' submission processes differ? The current progress-check page presents four implemented visualizations using actual CS201 data: a submission calendar, attempt-count boxplots, first-to-best score dumbbells, and actual mean score by within-problem attempt number. It includes raw/processed dataset descriptions, completed cleaning steps, planned interactions and an evaluation plan.
 
+- [Live project website](https://cis-jujube.github.io/STATS-401-Final-Project/) — GitHub Pages, published from `main` / root.
 - [Project page source](index.html) — open locally in a browser; no server is needed.
 - [Dataset and methods](docs/methods.md)
 - [Public aggregate data](data/summary.json)
