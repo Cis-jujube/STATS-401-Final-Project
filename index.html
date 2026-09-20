@@ -2,48 +2,194 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Four actual-data visualizations of CS201 homework submission timing, retries, and score progression.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CS201 Homework Submission Patterns</title>
+<meta name="description" content="Four actual-data visualizations of CS201 homework submission timing, retries, and score progression.">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
-<body>
+<body data-scene="0">
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header">
-<a class="brand" href="#">CS201 / PROCESS NOTES</a>
+<div class="world" aria-hidden="true">
+  <div class="material-scene">
+    <svg class="satin" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="satin-wide" gradientUnits="userSpaceOnUse" x1="650" y1="0" x2="1700" y2="550">
+          <stop offset="0" stop-color="#0a0d0f"/>
+<stop offset=".35" stop-color="#101719"/>
+          <stop offset=".48" class="material-shade"/>
+<stop offset=".65" class="material-mid"/>
+          <stop offset=".76" class="material-light"/>
+<stop offset=".86" stop-color="#3d4748"/>
+<stop offset="1" stop-color="#080b0d"/>
+        </linearGradient>
+        <linearGradient id="satin-fold" x1="0" y1="0" x2=".85" y2="1">
+          <stop offset="0" stop-color="#030507"/>
+<stop offset=".42" stop-color="#0b0e10"/>
+          <stop offset=".63" class="material-shade"/>
+<stop offset=".72" class="material-mid"/>
+          <stop offset=".78" class="material-light"/>
+<stop offset=".85" stop-color="#1b2527"/>
+          <stop offset="1" stop-color="#06080b"/>
+        </linearGradient>
+        <linearGradient id="satin-edge" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#899995" stop-opacity="0"/>
+<stop offset=".53" class="material-light" stop-opacity=".6"/>
+<stop offset="1" stop-color="#899995" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#satin-wide)" d="M930 -220 C540 100 710 420 1200 660 C1470 790 1480 1070 1140 1280 L1990 1300 L1970 -220 Z"/>
+      <path fill="url(#satin-fold)" d="M1320 -250 C670 130 1040 320 1360 540 C1720 790 1630 1040 1330 1260 L1770 1300 C2060 830 1650 550 1360 340 C1010 90 1090 -50 1550 -250 Z"/>
+      <path fill="none" stroke="url(#satin-edge)" stroke-width="1.5" d="M1320 -250 C670 130 1040 320 1360 540 C1720 790 1630 1040 1330 1260"/>
+      <path fill="url(#satin-fold)" opacity=".65" d="M-150 1140 C300 920 710 1190 1160 740 C1300 595 1390 480 1690 370 L1900 940 L1640 1300 L-150 1300 Z"/>
+    </svg>
+  </div>
+  <div class="material-vignette">
+</div>
+</div>
+<canvas id="cursor-light" aria-hidden="true">
+</canvas>
+<header class="topbar">
+<a href="index.html">CS201 / Living evidence</a>
 <nav aria-label="Main navigation">
-<a href="#timing">Figures</a>
+<a href="#journey">Explore</a>
 <a href="#dataset">Dataset</a>
 <a href="#evaluation">Evaluation</a>
+<button id="motion-toggle" aria-pressed="true">
+<svg class="bell" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M5 16V10a7 7 0 0 1 14 0v6l2 3H3zM9 22h6"/>
+</svg>
+<span>Motion on</span>
+</button>
 </nav>
 </header>
 <main id="main">
 <section class="hero">
-<p class="eyebrow">STATS 401 · FINAL PROJECT · IN-CLASS PROGRESS CHECK</p>
-<h1>Similar scores.<br>
-<em>Different paths.</em>
+<p>Homework submission patterns / STATS 401</p>
+<h1 class="depth-title">
+<span>Beyond the</span>
+<span class="depth-word" data-text="final score.">final score.</span>
 </h1>
-<p class="lead">CS201 Homework Submission Patterns:<br>Timing, Retries, and Score Progression</p>
-<p class="intro">When homework scores cluster near full marks, the submission process still varies. We examine when students submit, how often they retry, and how first scores compare with the best scores they reach.</p>
-<p class="byline">Zaozao Wang &amp; Zhengxiang Liu · Snapshot: 20 September 2026</p>
-<div class="stats">
-<div>
-<strong>2,101</strong>
-<span>submissions within homework windows</span>
+<div class="hero-bottom">
+<p>Near-perfect scores leave different paths behind.<br>Four views. 2,101 submissions. 39 window submitters.</p>
+<a class="enter" href="#journey">Enter the evidence <span>↓</span>
+</a>
 </div>
-<div>
-<strong>39 / 42</strong>
-<span>roster members with window submissions</span>
-</div>
-<div>
-<strong>3</strong>
-<span>homeworks · 23 problem slots</span>
-</div>
-</div>
-<p class="status">Current milestone: four implemented static figures using actual project data. Interactions and the user evaluation below are planned.</p>
+<p class="preview-note">Zaozao Wang &amp; Zhengxiang Liu · 20 September 2026</p>
 </section>
-<section class="opening">
+<section class="journey" id="journey" aria-label="Four evidence scenes">
+<div class="theatre">
+<div class="scene-heading">
+<span id="scene-counter" aria-live="polite">01 / 04 · Timing</span>
+<span>Scroll to change scene · or select below</span>
+</div>
+<nav class="scene-nav" aria-label="Choose a figure">
+<button class="scene-link" data-index="0" aria-pressed="true">
+<span>01</span> When do submissions gather?</button>
+<button class="scene-link" data-index="1" aria-pressed="false">
+<span>02</span> How many attempts?</button>
+<button class="scene-link" data-index="2" aria-pressed="false">
+<span>03</span> What did final scores hide?</button>
+<button class="scene-link" data-index="3" aria-pressed="false">
+<span>04</span> What does each attempt score?</button>
+</nav>
+<div class="stage-layout">
+<div class="copy-stack">
+<div class="scene-copy active" data-copy="0" >
+<h2>233 submissions. 14 people.</h2>
+<p>On 29 August, submission volume and participation told different stories. Public time cells span four hours; small groups are masked.</p>
+<a href="#timing">Read the evidence &amp; data table ↘</a>
+</div>
+<div class="scene-copy " data-copy="1" hidden>
+<h2>Similar medians. Different ranges.</h2>
+<p>Median counts are 12.5, 13 and 14. More submissions do not directly measure effort or ability.</p>
+<a href="#retries">Read the evidence &amp; data table ↘</a>
+</div>
+<div class="scene-copy " data-copy="2" hidden>
+<h2>First attempts change the picture.</h2>
+<p>Compare first and best normalized scores for the same attempters of each problem. The gap is not a causal learning effect.</p>
+<a href="#scores">Read the evidence &amp; data table ↘</a>
+</div>
+<div class="scene-copy " data-copy="3" hidden>
+<h2>The cohort changes with the curve.</h2>
+<p>These are actual nth-attempt scores, not running best. N counts events; S counts distinct students. Stopped pairs do not carry forward.</p>
+<a href="#attempt-scores">Read the evidence &amp; data table ↘</a>
+</div>
+</div>
+<div class="deck">
+<div class="backplate plate-one">
+</div>
+<div class="backplate plate-two">
+</div>
+<article class="scene-card active" data-card="0" aria-hidden="false">
+<div class="card-label">
+<span>CS201 / Figure 01</span>
+<span>When do submissions gather?</span>
+</div>
+<picture>
+<source media="(max-width:700px)" srcset="assets/figures/01-calendar-mobile.svg">
+<img src="assets/figures/01-calendar.svg" alt="When do submissions gather? On 29 August, submission volume and participation told different stories. Public time cells span four hours; small groups are masked.">
+</picture>
+</article>
+<article class="scene-card " data-card="1" aria-hidden="true">
+<div class="card-label">
+<span>CS201 / Figure 02</span>
+<span>How many attempts?</span>
+</div>
+<picture>
+<source media="(max-width:700px)" srcset="assets/figures/02-attempts-mobile.svg">
+<img src="assets/figures/02-attempts.svg" alt="How many attempts? Median counts are 12.5, 13 and 14. More submissions do not directly measure effort or ability.">
+</picture>
+</article>
+<article class="scene-card " data-card="2" aria-hidden="true">
+<div class="card-label">
+<span>CS201 / Figure 03</span>
+<span>What did final scores hide?</span>
+</div>
+<picture>
+<source media="(max-width:700px)" srcset="assets/figures/03-score-progression-mobile.svg">
+<img src="assets/figures/03-score-progression.svg" alt="What did final scores hide? Compare first and best normalized scores for the same attempters of each problem. The gap is not a causal learning effect.">
+</picture>
+</article>
+<article class="scene-card " data-card="3" aria-hidden="true">
+<div class="card-label">
+<span>CS201 / Figure 04</span>
+<span>What does each attempt score?</span>
+</div>
+<picture>
+<source media="(max-width:700px)" srcset="assets/figures/04-attempt-scores-mobile.svg">
+<img src="assets/figures/04-attempt-scores.svg" alt="What does each attempt score? These are actual nth-attempt scores, not running best. N counts events; S counts distinct students. Stopped pairs do not carry forward.">
+</picture>
+</article>
+</div>
+</div>
+<div class="stage-controls">
+<div>
+<button id="previous" aria-label="Previous figure">←</button>
+<button id="next" aria-label="Next figure">→</button>
+</div>
+<div class="focus-controls">
+<button id="hold-focus">
+<span class="hold-fill">
+</span>
+<span class="hold-label">Hold to focus</span>
+</button>
+<button id="open-focus">Open large figure ↗</button>
+</div>
+</div>
+<div class="progress-track" aria-hidden="true">
+<div id="scene-progress">
+</div>
+</div>
+</div>
+</section>
+<section class="bridge">
+<p>From the scene to the evidence.</p>
+<h2>Keep the detail.<br>Keep the caveats.</h2>
+<p>All four figures, their data tables, methods and the planned reader evaluation remain available below.</p>
+</section>
+<div class="evidence-detail">
+<section class="opening" id="research-question">
 <p class="eyebrow">THE QUESTION</p>
 <h2>What do near-perfect scores leave out?</h2>
 <p>In the <code>participation_mode=0</code> records, 37/40 HW1 scores, 33/39 HW2 scores and 37/39 HW3 scores are 100. The formal interpretation of this participation field still needs confirmation. These records motivate a process-focused analysis; they are not a substitute for verifying the official grading rules.</p>
@@ -54,7 +200,7 @@
 <span class="number">01</span>
 <div>
 <p class="eyebrow">TIMING</p>
-<h2>Activity volume and participation<br>tell different stories.</h2>
+<h2>Activity volume and participation tell different stories.</h2>
 </div>
 </div>
 <p class="reading">Across the full day on <strong>29 August, 233 submissions came from 14 students</strong>. In the visible 12:00–16:00 cell, 153 submissions came from 12 students. A busy period need not mean the whole class was working then.</p>
@@ -1063,7 +1209,7 @@
 <span class="number">03</span>
 <div>
 <p class="eyebrow">SCORE PROGRESSION</p>
-<h2>The endpoint does not tell<br>the whole story.</h2>
+<h2>The endpoint does not tell the whole story.</h2>
 </div>
 </div>
 <p class="reading">
@@ -1318,7 +1464,7 @@
 <span class="number">04</span>
 <div>
 <p class="eyebrow">MEAN SCORE BY ATTEMPT</p>
-<h2>What does each successive<br>submission actually score?</h2>
+<h2>What does each successive submission actually score?</h2>
 </div>
 </div>
 <p class="reading">Each point averages the <strong>actual score on the nth submission to the same homework problem</strong>, normalized to 0–100. HW1, HW2 and HW3 are separate panels. This is not a running-best curve.</p>
@@ -1614,7 +1760,7 @@
 </section>
 <section id="dataset" class="methods">
 <p class="eyebrow">DATASET &amp; PROCESSING</p>
-<h2>From private event logs<br>to reproducible summaries.</h2>
+<h2>From private event logs to reproducible summaries.</h2>
 <div class="two-col">
 <div>
 <h3>Raw dataset · private</h3>
@@ -1675,51 +1821,74 @@
 </p>
 </section>
 <section id="evaluation" class="evaluation">
-<p class="eyebrow">EVALUATION PLAN · NOT YET RUN</p>
-<h2>Can readers answer the questions<br>without overinterpreting the data?</h2>
-<p>We plan a formative study with approximately five classmates or teaching assistants. Participants will use the static page first, then repeat comparable tasks after interactions are implemented. We will rotate task order, use think-aloud observation, and avoid treating this small convenience sample as a representative experiment.</p>
+<p class="eyebrow">EVALUATION PLAN · NOT YET CONDUCTED</p>
+<h2>Can readers interpret the evidence correctly?</h2>
+<p class="lead">A 15–20 minute formative study with approximately five classmates or teaching assistants. We will test the selected layout and revise the specific places where readers struggle.</p>
+<div class="eval-grid">
+<div>
+<h3>Who &amp; how</h3>
+<p>Aim for three classmates and two TAs, after a separate pilot. Include desktop and mobile sessions. Allow up to 90 seconds per information task; collect explanations afterward. Participation is voluntary, and no grades or names are collected.</p>
+</div>
+<div>
+<h3>What we measure</h3>
+<p>Answer accuracy, completion time, assistance, confidence and recurring misunderstandings. Record successful, partial, failed and timed-out attempts separately; use anonymous participant codes.</p>
+</div>
+</div>
 <div class="table-scroll">
 <table>
-<caption>Tasks, evaluation criteria and feedback to collect</caption>
+<caption>Four information tasks</caption>
 <thead>
 <tr>
-<th scope="col">Task</th>
-<th scope="col">What we evaluate</th>
-<th scope="col">What we collect</th>
+<th>Task</th>
+<th>Reader action</th>
+<th>Evidence of understanding</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Find a visible submission peak and compare its two panels.</td>
-<td>Reading dates, color scales, counts vs distinct people, and suppression.</td>
-<td>Answer correctness, completion time, help requests and misread cells.</td>
+<td>Timing</td>
+<td>Find the largest visible time cell and read both panels.</td>
+<td>Correct time, submission count and distinct people.</td>
 </tr>
 <tr>
-<td>Compare the medians and ranges of the three homeworks.</td>
-<td>Understanding boxes, min–max whiskers, denominators and unequal problem counts.</td>
-<td>Correctness, time, confidence (1–5), and confusing labels.</td>
+<td>Retries</td>
+<td>Compare the three medians and observed ranges.</td>
+<td>Correct homework, median and min–max interpretation.</td>
 </tr>
 <tr>
-<td>Identify the largest first-to-best score difference.</td>
-<td>Reading endpoints, normalized scores and the same-cohort comparison.</td>
-<td>Selected problem, estimated gap, time and explanation.</td>
+<td>Score progression</td>
+<td>Find the largest first-to-best difference.</td>
+<td>Correct problem and approximate percentage-point gap.</td>
 </tr>
 <tr>
-<td>Read the first and second attempt means and their N/S rows.</td>
-<td>Distinguishing actual-attempt scores from running best and recognizing cohort attrition.</td>
-<td>Correctness, time and explanation of why a falling mean need not indicate individual decline.</td>
-</tr>
-<tr>
-<td>Explain what more attempts and longer submission gaps can tell us.</td>
-<td>Whether the page prevents effort, study-time and causal-learning misconceptions.</td>
-<td>Open-ended explanation, misconception notes and wording suggestions.</td>
+<td>Actual attempt scores</td>
+<td>Explain HW1's first-to-second mean change using N/S.</td>
+<td>Recognizes a changing cohort; does not infer individual decline.</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Before testing, we will derive an answer key from the aggregate JSON. We will summarize task accuracy, median completion time and repeated points of confusion, then revise labels, legends and interaction defaults. Feedback will be recorded without names; no evaluation results are claimed at this milestone.</p>
+<div class="eval-grid">
+<div>
+<h3>Check misconceptions</h3>
+<p>Ask whether masked cells mean zero and whether submission gaps measure study time. Also check if readers mistake repeated attempts for causal learning gains. Ask them to find the score formula and download a PDF.</p>
+</div>
+<div>
+<h3>Decide what to revise</h3>
+<p>Revise when fewer than four of five readers fully solve a task, two repeat the same misconception, or anyone encounters a blocked keyboard/mobile operation. These are formative triggers, not statistical evidence of effectiveness.</p>
+</div>
+</div>
+<p>
+<strong>Motion and navigation:</strong> also test switching scenes and returning, opening a large figure, and disabling motion. Record accidental navigation, lost reading position, comfort and whether transitions are mistaken for changes in the data. These checks are planned; no participant evaluation has been conducted.</p>
+<details>
+<summary>Scoring, reporting &amp; retest procedure</summary>
+<p>Score each information task 0–2 with a predefined answer key. Report counts, assistance and timeouts; summarize successful-task times with their denominator. Retest revisions with fresh participants when feasible, or acknowledge practice effects. Five volunteers support finding usability problems, not population-level or causal claims.</p>
+<p>
+<a href="docs/evaluation-plan.md">Full protocol and facilitator answer key</a> · <a href="docs/evaluation-record-template.csv" download>Blank observation sheet</a>
+</p>
+</details>
 </section>
-<section class="next">
+<section class="next" id="retry-intervals">
 <p class="eyebrow">FUTURE EXTENSION / RETRY INTERVALS</p>
 <h2>Does the next attempt set a new best?</h2>
 <p>Explore adjacent submissions within the same student, homework and problem, restricted to cases where the prior best is below full credit and a next attempt is observed. Compare the proportion exceeding the historical best across retry-gap bins, reporting both pair counts and distinct contributors.</p>
@@ -1727,17 +1896,33 @@
 </section>
 <section class="next" id="midterm-plan">
 <p class="eyebrow">FUTURE WORK / MIDTERM COMPARISON</p>
-<h2>Add exam outcomes<br>when the data become available.</h2>
+<h2>Add exam outcomes when the data become available.</h2>
 <p>After we obtain authorized midterm examination scores, we plan to add comparisons between pre-exam homework submission patterns and exam performance. The current export contains no midterm scores, and no exam-related findings are claimed.</p>
 <p>We will confirm the exam scale, cohort and missing-score rules, match records locally with private pseudonymous identifiers, and use only homework activity observed before the exam. Candidate comparisons include per-student attempt counts, timing summaries and normalized score progression versus the midterm score. We will report the matched sample size and missingness, assess ceiling effects and outliers, and use descriptive comparisons or exploratory associations rather than causal claims.</p>
 <p>Individual grades and linkage keys will stay private; public outputs will use appropriately aggregated results. Exam difficulty, prior knowledge and problem difficulty may explain associations, so the extension will not treat submission intervals as study time or claim that more attempts cause higher exam scores.</p>
 </section>
+</div>
 </main>
 <footer>
 <p>CS201 Homework Submission Patterns · Zaozao Wang &amp; Zhengxiang Liu</p>
-<p>Actual project data · Static progress check · 20 Sep 2026</p>
-<p>Figure style follows <a href="https://github.com/ChenLiu-1996/figures4papers/tree/main/scientific-figure-making">figures4papers / Scientific Figure Making</a>; generated with Matplotlib.</p>
-<a href="proposal.md">Original proposal (historical, superseded scope)</a>
+<p>Four completed static figures. Analytical filters and reader evaluation are planned.</p>
+<p>
+<a href="https://github.com/Cis-jujube/STATS-401-Final-Project">Project source ↗</a> · <a href="docs/site-design.md">Design references</a> · <a href="proposal.md">Original proposal (historical)</a>
+</p>
 </footer>
+<dialog id="focus-dialog" aria-labelledby="focus-title">
+<div class="dialog-head">
+<h2 id="focus-title">Figure focus</h2>
+<button id="close-focus" autofocus>Close ×</button>
+</div>
+<img id="focus-image" alt="">
+<p id="focus-note">
+</p>
+</dialog>
+<noscript>
+<style>.journey,#motion-toggle,#cursor-light{display:none}.satin{animation:none}</style>
+</noscript>
+<script src="assets/site.js">
+</script>
 </body>
 </html>
