@@ -323,9 +323,9 @@ body[data-surface="paper"] #motion-toggle { border-color:#25211e55; }
  .figure-shard { display:none!important; }
 }
 
-/* Gentle section alignment preserves the animated approach and readable hold. */
-html.scene-snapping { scroll-snap-type:y proximity; scroll-padding-top:0; }
-.scene-snapping .story-chapter { scroll-snap-align:start; scroll-margin-top:0; }
+/* Strong chart stops activate only after the opening and interlude. */
+html.scene-snapping { scroll-snap-type:y mandatory; scroll-padding-top:0; }
+.scene-snapping .story-chapter { scroll-snap-align:start; scroll-snap-stop:always; scroll-margin-top:0; }
 .story-ending { min-height:65svh; padding:120px 7% 80px; background:var(--paper); color:#25211e; position:relative; z-index:20; }
 .story-ending .eyebrow { color:#a53521; }
 .story-ending .enter { border-color:#25211e66; }

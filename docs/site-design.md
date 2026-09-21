@@ -84,3 +84,9 @@ The latest refinement keeps the interlude, enlarged figures and scene-specific t
 The interlude retains opposing travel with eased spring-following progress. Navigation hover, header color transitions, opening typography and the focus dialog use softer acceleration and small settling accents. Animation stops at rest rather than continuously pulsing during reading. Native scroll and proximity alignment remain unchanged. Reduced-motion and the motion toggle bypass springs; returning from a hidden tab resets stale chapter velocities.
 
 `node tests/test_motion_math.cjs` validates slow-fast-slow progression, bounded overshoot, reverse settling, and 30/60/120Hz consistency. The DOM motion harness verifies idle termination, reduced motion and scheduling. All 27 Python checks and JS syntax checks pass. These are implementation checks; live visual smoothness and device performance have not been measured.
+
+## Stronger chart landing points
+
+The opening and animated interlude remain free-flowing. On eligible desktop viewports, mandatory native snap alignment and `scroll-snap-stop: always` activate only as the first chart approaches, and deactivate toward the ending. When wheel-driven navigation reaches a chart anchor, a 550ms landing pause catches residual wheel events. Continued momentum cannot unlock it; after that pause, a fresh gesture separated by 180ms resumes native scrolling. No scroll positions are synthesized and no slide controls are introduced. Keyboard/anchor arrivals, dialogs, reduced-motion and small-screen reading bypass the wheel pause. Existing spring motion, expansion, interlude and analysis page remain unchanged.
+
+Validation: motion scheduling harness, spring and landing-pause unit checks, 27 Python tests, JS syntax and diff checks pass. Real-device wheel feel remains unverified.

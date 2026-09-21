@@ -20,7 +20,21 @@
     const settled = Math.abs(offset) < .0002 && Math.abs(velocity) < .003;
     return {value: settled ? target : target + offset, velocity: settled ? 0 : velocity, settled};
   }
-  const api = {clamp, ease, spring};
+  class LandingPause {
+    constructor() { this.lastWheel = -Infinity; this.until = 0; this.armed = false; }
+    land(now) {
+      if (now - this.lastWheel < 250) { this.until = now + 550; this.armed = true; }
+    }
+    wheel(now) {
+      const quiet = now - this.lastWheel > 180;
+      this.lastWheel = now;
+      if (!this.armed) return false;
+      if (now >= this.until && quiet) { this.armed = false; return false; }
+      return true;
+    }
+    reset() { this.armed = false; this.lastWheel = -Infinity; }
+  }
+  const api = {clamp, ease, spring, LandingPause};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.StoryMotion = api;
 })(globalThis);

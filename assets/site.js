@@ -20,7 +20,10 @@
   const finePointer = matchMedia('(pointer: fine)');
   const desktop = matchMedia('(min-width: 701px)');
   const sceneViewport = matchMedia('(min-width: 1001px) and (min-height: 650px)');
-  const {clamp, ease, spring} = StoryMotion;
+  const {clamp, ease, spring, LandingPause} = StoryMotion;
+  const landingPause = new LandingPause();
+  let chapterZone = false;
+  let lastLanding = -1;
   const springs = new WeakMap();
   let springPending = false;
   function follow(element, target, elapsed) {
@@ -66,6 +69,14 @@
     const elapsed = Math.min(64, Math.max(1, now - (lastFrameTime || now - 16)));
     lastFrameTime = now;
     springPending = false;
+    // Opening stays free-flowing; stronger stops begin as the first chart approaches.
+    chapterZone = rects[0].top < height * .45 && evidenceTop > height * .45;
+    syncSceneMode();
+    const landed = rects.findIndex(rect => Math.abs(rect.top) < 4);
+    if (landed !== lastLanding) {
+      if (landed >= 0 && motion && sceneViewport.matches) landingPause.land(now);
+      lastLanding = landed;
+    }
     // Ease decorative movement only; actual document scrolling stays native.
     visualScroll = motion ? visualScroll + (y - visualScroll) * (1 - Math.exp(-elapsed / 45)) : y;
     if (Math.abs(y - visualScroll) < .25) visualScroll = y;
@@ -118,6 +129,13 @@
     if (!scrollFrame && !document.hidden) scrollFrame = requestAnimationFrame(updateScroll);
   }
   addEventListener('scroll', queueScroll, {passive: true});
+  addEventListener('wheel', event => {
+    if (event.ctrlKey || !motion || !sceneViewport.matches || !chapterZone || dialog.open) {
+      landingPause.reset(); return;
+    }
+    // Only cancel residual wheel momentum after landing; never synthesize scrolling.
+    if (landingPause.wheel(performance.now())) event.preventDefault();
+  }, {passive: false});
 
   const dialog = $('#focus-dialog');
   function openFocus(button) {
@@ -194,7 +212,7 @@
   }, {passive: true});
 
   function syncSceneMode() {
-    const enabled = motion && sceneViewport.matches;
+    const enabled = motion && sceneViewport.matches && chapterZone;
     document.documentElement.classList.toggle('scene-snapping', enabled);
   }
   sceneViewport.addEventListener('change', () => { syncSceneMode(); queueScroll(); });
@@ -209,7 +227,7 @@
     $('#motion-toggle').setAttribute('aria-pressed', String(motion));
     $('#motion-toggle span').textContent = reduced.matches ? 'Reduced motion' : `Motion ${motion ? 'on' : 'off'}`;
     $('#motion-toggle').disabled = reduced.matches;
-    if (!motion) { cancelHold(); clearTrail(); }
+    if (!motion) { cancelHold(); clearTrail(); landingPause.reset(); }
     if (anchor) scrollBy({top: anchor.getBoundingClientRect().top - before, behavior: 'instant'});
     visualScroll = scrollY;
     queueScroll();
