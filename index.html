@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 </head>
-<body data-scene="0">
+<body data-scene="0" data-surface="paper">
 <a class="skip" href="#main">Skip to content</a>
 <div class="world" aria-hidden="true">
   <div class="material-scene">
@@ -49,6 +49,8 @@
 </div>
 <canvas id="cursor-light" aria-hidden="true">
 </canvas>
+<div class="reading-progress" aria-hidden="true">
+</div>
 <header class="topbar">
 <a href="#main">CS201 / Process notes</a>
 <nav aria-label="Main navigation">
@@ -64,22 +66,50 @@
 </nav>
 </header>
 <main id="main">
-<section class="hero-track">
+<section class="hero-track" aria-labelledby="hero-title">
 <div class="hero-stage">
-<div class="hero-copy">
+<div class="hero-heading">
+<div>
 <p class="eyebrow">Homework submission patterns / STATS 401</p>
-<h1>Beyond the<br>
-<span>final score.</span>
+<h1 id="hero-title">
+<span class="title-line">The score</span>
+<span class="title-line">has a past.</span>
 </h1>
-<p>Near-perfect scores leave different paths behind.</p>
-<p class="reading-note">2,101 submissions. 39 window submitters.<br>Three homeworks. Four views of the process.</p>
-<a class="enter" href="#scene-timing">Follow the submissions <span>↓</span>
+</div>
+<p class="hero-context">2,101 submissions.<br>39 window submitters.<br>Three homeworks.<br>Four views of the process.</p>
+</div>
+<div class="score-composition" aria-label="HW3 TicTacToe: mean first score 37.95, mean best score 100, same 39 attempters">
+<div class="score-start">
+<p>First submission <span>Mean / 100</span>
+</p>
+<strong>37.95</strong>
+</div>
+<svg class="score-arrow" viewBox="0 0 200 80" aria-hidden="true">
+<path d="M2 40H190M157 8L190 40L157 72"/>
+</svg>
+<div class="score-end">
+<p>Best submission <span>Mean / 100</span>
+</p>
+<strong>100</strong>
+</div>
+</div>
+<div class="hero-bottom">
+<p>HW3 TicTacToe · Same 39 attempters<br>
+<span>First and best scores describe submissions, not a causal learning effect.</span>
+</p>
+<a class="enter" href="#scene-timing">Look behind the score <span>↓</span>
 </a>
 </div>
 <p class="byline">Zaozao Wang &amp; Zhengxiang Liu · 20 September 2026</p>
+<div class="hero-rule" aria-hidden="true">
+</div>
 </div>
 </section>
 <div id="journey">
+<div class="journey-opening" aria-hidden="true">
+<span>Follow the</span>
+<span>submissions.</span>
+</div>
 <section class="story-chapter" id="scene-timing" data-scene="0" aria-labelledby="title-timing">
   <div class="chapter-stage">
     <div class="chapter-copy">
@@ -94,7 +124,7 @@
         <a href="#timing">Data &amp; interpretation ↗</a>
       </div>
     </div>
-    <figure class="chapter-figure">
+    <figure class="chapter-figure" data-entrance="scan">
       <picture>
 <source media="(max-width:700px)" srcset="assets/story/01-calendar-mobile.svg">
 <img src="assets/story/01-calendar.svg" alt="Timing. On 29 August, activity volume and participation told different stories. A busy period does not mean the whole class was working. Four-hour cells · Beijing time · groups below five masked" decoding="async">
@@ -118,7 +148,7 @@
         <a href="#retries">Data &amp; interpretation ↗</a>
       </div>
     </div>
-    <figure class="chapter-figure">
+    <figure class="chapter-figure" data-entrance="curtain">
       <picture>
 <source media="(max-width:700px)" srcset="assets/story/02-attempts-mobile.svg">
 <img src="assets/story/02-attempts.svg" alt="Retries. Typical counts are 12.5, 13 and 14. Behind those medians, the observed ranges are 8–98, 3–62 and 7–108. Window submitters only · counts do not measure effort" decoding="async">
@@ -142,7 +172,7 @@
         <a href="#scores">Data &amp; interpretation ↗</a>
       </div>
     </div>
-    <figure class="chapter-figure">
+    <figure class="chapter-figure" data-entrance="trace">
       <picture>
 <source media="(max-width:700px)" srcset="assets/story/03-score-progression-mobile.svg">
 <img src="assets/story/03-score-progression.svg" alt="First to best. For HW3 TicTacToe, the same 39 attempters average 37.95 first and 100 best. The final score hides that difference. Same attempters · normalized scores · no causal claim" decoding="async">
@@ -166,7 +196,7 @@
         <a href="#attempt-scores">Data &amp; interpretation ↗</a>
       </div>
     </div>
-    <figure class="chapter-figure">
+    <figure class="chapter-figure" data-entrance="layers">
       <picture>
 <source media="(max-width:700px)" srcset="assets/story/04-attempt-scores-mobile.svg">
 <img src="assets/story/04-attempt-scores.svg" alt="Actual attempt scores. Each point averages the actual nth submission to a problem. Pairs that stop submitting leave the later points. N = events · S = students · no carry-forward" decoding="async">
