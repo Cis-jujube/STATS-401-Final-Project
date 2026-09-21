@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="601.92pt" height="432.1335pt" viewBox="0 0 601.92 432.1335" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>Midterm score distribution in the available excerpt</title>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>Midterm score distribution in the available excerpt</dc:title>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>CS201 Homework Submission Patterns</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 432.1335
+L 601.92 432.1335
+L 601.92 0
+L 0 0
+L 0 432.1335
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 164.16 330.3975
+L 596.16 330.3975
+L 596.16 75.9495
+L 164.16 75.9495
+L 164.16 330.3975
+z
+" style="fill: none"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 164.16 330.3975
+L 164.16 75.9495
+" clip-path="url(#p85da50abf2)" style="fill: none; stroke: #b6a594; stroke-opacity: 0.16; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="mb9d640f63a" d="M 0 0
+L 0 3.5
+" style="stroke: #c4b7aa; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mb9d640f63a" x="164.16" y="330.3975" style="fill: #c4b7aa; stroke: #c4b7aa; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 13px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: middle; fill: #c4b7aa" x="164.16" y="347.274453" transform="rotate(-0 164.16 347.274453)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 325.35403 330.3975
+L 325.35403 75.9495
+" clip-path="url(#p85da50abf2)" style="fill: none; stroke: #b6a594; stroke-opacity: 0.16; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#mb9d640f63a" x="325.35403" y="330.3975" style="fill: #c4b7aa; stroke: #c4b7aa; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 13px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: middle; fill: #c4b7aa" x="325.35403" y="347.274453" transform="rotate(-0 325.35403 347.274453)">5</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 486.54806 330.3975
+L 486.54806 75.9495
+" clip-path="url(#p85da50abf2)" style="fill: none; stroke: #b6a594; stroke-opacity: 0.16; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#mb9d640f63a" x="486.54806" y="330.3975" style="fill: #c4b7aa; stroke: #c4b7aa; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 13px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: middle; fill: #c4b7aa" x="486.54806" y="347.274453" transform="rotate(-0 486.54806 347.274453)">10</text>
+     </g>
+    </g>
+    <g id="text_4">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: middle; fill: #c4b7aa" x="380.16" y="363.515625" transform="rotate(-0 380.16 363.515625)">Students in the available grade excerpt</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_7"/>
+     <g id="text_5">
+      <text style="font-size: 13px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: end; fill: #c4b7aa" x="160.66" y="108.407155" transform="rotate(-0 160.66 108.407155)">Below 80</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_8"/>
+     <g id="text_6">
+      <text style="font-size: 13px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: end; fill: #c4b7aa" x="160.66" y="174.876867" transform="rotate(-0 160.66 174.876867)">80–&lt;90</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_9"/>
+     <g id="text_7">
+      <text style="font-size: 13px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: end; fill: #c4b7aa" x="160.66" y="241.347086" transform="rotate(-0 160.66 241.347086)">90–&lt;100</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_10"/>
+     <g id="text_8">
+      <text style="font-size: 13px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: end; fill: #c4b7aa" x="160.66" y="307.817814" transform="rotate(-0 160.66 307.817814)">100 or above</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 164.16 87.515318
+L 325.35403 87.515318
+L 325.35403 119.421024
+L 164.16 119.421024
+z
+" clip-path="url(#p85da50abf2)" style="fill: #ed977b"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 164.16 153.985538
+L 325.35403 153.985538
+L 325.35403 185.891243
+L 164.16 185.891243
+z
+" clip-path="url(#p85da50abf2)" style="fill: #ed977b"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 164.16 220.455757
+L 486.54806 220.455757
+L 486.54806 252.361462
+L 164.16 252.361462
+z
+" clip-path="url(#p85da50abf2)" style="fill: #ed977b"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 164.16 286.925976
+L 357.592836 286.925976
+L 357.592836 318.831682
+L 164.16 318.831682
+z
+" clip-path="url(#p85da50abf2)" style="fill: #ed977b"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 164.16 330.3975
+L 596.16 330.3975
+" style="fill: none; stroke: #a99a8c; stroke-width: 2; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #f4f2e9" x="331.801791" y="106.585827" transform="rotate(-0 331.801791 106.585827)">5 students</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #f4f2e9" x="331.801791" y="173.056047" transform="rotate(-0 331.801791 173.056047)">5 students</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #f4f2e9" x="492.995821" y="239.526266" transform="rotate(-0 492.995821 239.526266)">10 students</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #f4f2e9" x="364.040597" y="305.996485" transform="rotate(-0 364.040597 305.996485)">6 students</text>
+   </g>
+  </g>
+  <g id="text_13">
+   <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #f4f2e9" x="5.76" y="17.9175" transform="rotate(-0 5.76 17.9175)">Midterm scores / partial cohort</text>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; text-anchor: start; fill: #bcb1a7" x="5.76" y="49.1655" transform="rotate(-0 5.76 49.1655)">n = 26 of 41 eligible roster members  ·  Mean 90.02</text>
+  </g>
+  <g id="text_15">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #bcb1a7" transform="translate(5.76 393.981937)">Canvas raw points; nominal maximum 100. Scores above 100 retained.</text>
+   <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #bcb1a7" transform="translate(5.76 407.931937)">Bins are categories of unequal width. Every positive bin has at least 5 students.</text>
+   <text style="font-size: 9px; font-family: 'DejaVu Sans', 'Helvetica', 'Arial', 'Bitstream Vera Sans', 'Computer Modern Sans Serif', 'Lucida Grande', 'Verdana', 'Geneva', 'Lucid', 'Avant Garde', sans-serif; fill: #bcb1a7" transform="translate(5.76 421.881937)">15 roster members are not in the supplied excerpt; their grades are unknown.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p85da50abf2">
+   <rect x="164.16" y="75.9495" width="432" height="254.448"/>
+  </clipPath>
+ </defs>
+</svg>

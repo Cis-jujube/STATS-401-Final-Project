@@ -45,8 +45,9 @@ class PublicArtifacts(unittest.TestCase):
     def test_all_local_page_resources_exist(self):
         parser = References()
         parser.feed((ROOT/'index.html').read_text())
+        parser.feed((ROOT/'analysis.html').read_text())
         for path in parser.paths:
-            self.assertTrue((ROOT/path).is_file(), path)
+            self.assertTrue((ROOT/urlparse(path).path).is_file(), path)
 
 if __name__ == '__main__':
     unittest.main()

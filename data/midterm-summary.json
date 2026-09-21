@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "grade_source": "User-provided Canvas gradebook excerpt, 21 September 2026",
+  "oj_extracted_at": "2026-09-21T07:08:23+00:00",
+  "homework_window_end": "2026-09-15T23:59:00+08:00",
+  "exam_started_at": "2026-09-16T12:00:00+08:00",
+  "pre_exam_verified": true,
+  "eligible_roster": 41,
+  "excluded_test_accounts": 1,
+  "available_grades": 26,
+  "matched": 26,
+  "grades_not_in_excerpt": 15,
+  "window_submitters": 39,
+  "window_submissions": 2101,
+  "matched_submissions": 1507,
+  "homework_discrepancies": 2,
+  "mean": 90.02,
+  "median": 93.25,
+  "distribution": [
+    {
+      "label": "Below 80",
+      "n": 5
+    },
+    {
+      "label": "80–<90",
+      "n": 5
+    },
+    {
+      "label": "90–<100",
+      "n": 10
+    },
+    {
+      "label": "100 or above",
+      "n": 6
+    }
+  ],
+  "associations": [
+    {
+      "metric": "attempts",
+      "label": "Submission count",
+      "n": 26,
+      "rho": 0.3515,
+      "bootstrap_interval": [
+        -0.0691,
+        0.6948
+      ],
+      "valid_bootstrap_draws": 5000,
+      "leave_one_out_range": [
+        0.2704,
+        0.4568
+      ],
+      "complete_problem_coverage": {
+        "n": 23,
+        "rho": 0.2548
+      },
+      "without_homework_discrepancies": {
+        "n": 24,
+        "rho": 0.2587
+      }
+    },
+    {
+      "metric": "first_score",
+      "label": "Mean first-submission score",
+      "n": 26,
+      "rho": -0.2498,
+      "bootstrap_interval": [
+        -0.6034,
+        0.137
+      ],
+      "valid_bootstrap_draws": 5000,
+      "leave_one_out_range": [
+        -0.3438,
+        -0.1851
+      ],
+      "complete_problem_coverage": {
+        "n": 23,
+        "rho": -0.2873
+      },
+      "without_homework_discrepancies": {
+        "n": 24,
+        "rho": -0.2472
+      }
+    },
+    {
+      "metric": "late_pct",
+      "label": "Share submitted in final 24 hours",
+      "n": 26,
+      "rho": -0.4774,
+      "bootstrap_interval": [
+        -0.7848,
+        -0.0684
+      ],
+      "valid_bootstrap_draws": 5000,
+      "leave_one_out_range": [
+        -0.6045,
+        -0.4246
+      ],
+      "complete_problem_coverage": {
+        "n": 23,
+        "rho": -0.4299
+      },
+      "without_homework_discrepancies": {
+        "n": 24,
+        "rho": -0.4741
+      }
+    }
+  ],
+  "attempt_groups": [
+    {
+      "label": "Under 35",
+      "n": 9,
+      "mean": 81.0,
+      "q1": 69.5,
+      "median": 84.5,
+      "q3": 92.5
+    },
+    {
+      "label": "35–59",
+      "n": 11,
+      "mean": 95.27,
+      "q1": 89.0,
+      "median": 94.5,
+      "q3": 102.5
+    },
+    {
+      "label": "60 or more",
+      "n": 6,
+      "mean": 93.92,
+      "q1": 92.25,
+      "median": 96.25,
+      "q3": 98.38
+    }
+  ],
+  "bootstrap": {
+    "draws": 5000,
+    "seed": 20260921,
+    "unit": "student",
+    "method": "paired percentile 95%"
+  },
+  "privacy": "Aggregate-only; group n >= 5; no identifiers, individual marks, minima or maxima. Not a formal privacy guarantee.",
+  "input_sha256": {
+    "oj_metrics.tsv": "508918130c0b871c9d7ae7f232cafa00c8eab4e75ed04308f603af9d6f115886",
+    "canvas_midterm.csv": "0b9ef3cc836dd1e7aa90861259916afbcc949ff0badfbf7ff73f4e4b51edbf63",
+    "provenance.json": "c0a7ee4f9122f0423651b42b8bd4f45ba59b723455c2ca28f3253e053d631d65"
+  }
+}

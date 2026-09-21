@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "matched": 26,
+  "eligible_roster": 41,
+  "recorded_users": 11,
+  "resource_users": 9,
+  "tracking_started_at": "2026-09-08T05:49:32.270Z",
+  "cutoff_utc": "2026-09-16T00:00:00+00:00",
+  "exam_utc": "2026-09-16T04:00:00+00:00",
+  "bootstrap_draws": 5000,
+  "seed": 20260921,
+  "groups": [
+    {
+      "label": "Recorded usage",
+      "n": 11,
+      "mean": 95.27,
+      "q1": 93.25,
+      "median": 94.5,
+      "q3": 99.0
+    },
+    {
+      "label": "No recorded usage",
+      "n": 15,
+      "mean": 86.17,
+      "q1": 75.0,
+      "median": 87.5,
+      "q3": 100.75
+    }
+  ],
+  "associations": [
+    {
+      "metric": "active_ms",
+      "label": "Platform active time",
+      "n": 26,
+      "rho": 0.31839759573343906,
+      "bootstrap_interval": [
+        -0.06307650894012211,
+        0.6617522508299742
+      ],
+      "valid_bootstrap_draws": 5000,
+      "sensitivity_rho": 0.31839759573343906
+    },
+    {
+      "metric": "active_days",
+      "label": "Platform recorded days",
+      "n": 26,
+      "rho": 0.3138980792856078,
+      "bootstrap_interval": [
+        -0.07374571822499892,
+        0.6771163426483887
+      ],
+      "valid_bootstrap_draws": 5000,
+      "sensitivity_rho": 0.3138980792856078
+    },
+    {
+      "metric": "resource_open",
+      "label": "Resource opens",
+      "n": 26,
+      "rho": 0.23492701262724522,
+      "bootstrap_interval": [
+        -0.15456530900015322,
+        0.5924849083279163
+      ],
+      "valid_bootstrap_draws": 5000,
+      "sensitivity_rho": 0.23492701262724522
+    }
+  ],
+  "oj_associations": [
+    {
+      "metric": "attempts",
+      "label": "Submission count",
+      "n": 26,
+      "rho": 0.3515,
+      "bootstrap_interval": [
+        -0.0691,
+        0.6948
+      ],
+      "valid_bootstrap_draws": 5000,
+      "leave_one_out_range": [
+        0.2704,
+        0.4568
+      ],
+      "complete_problem_coverage": {
+        "n": 23,
+        "rho": 0.2548
+      },
+      "without_homework_discrepancies": {
+        "n": 24,
+        "rho": 0.2587
+      }
+    },
+    {
+      "metric": "late_pct",
+      "label": "Share submitted in final 24 hours",
+      "n": 26,
+      "rho": -0.4774,
+      "bootstrap_interval": [
+        -0.7848,
+        -0.0684
+      ],
+      "valid_bootstrap_draws": 5000,
+      "leave_one_out_range": [
+        -0.6045,
+        -0.4246
+      ],
+      "complete_problem_coverage": {
+        "n": 23,
+        "rho": -0.4299
+      },
+      "without_homework_discrepancies": {
+        "n": 24,
+        "rho": -0.4741
+      }
+    }
+  ],
+  "source_sha256": {
+    "accounts.csv": "61db905317631f535ef7a3e70095b8455fa00f0643bba17d9ac9db32f13ddde5",
+    "usage_account_daily.csv": "97dd58a6ce04ffca2e55e57423891115296fcaabb549b220b35bf98b3b0d21c6",
+    "canvas_midterm.csv": "0b9ef3cc836dd1e7aa90861259916afbcc949ff0badfbf7ff73f4e4b51edbf63"
+  }
+}

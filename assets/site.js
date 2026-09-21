@@ -19,8 +19,18 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = matchMedia('(pointer: fine)');
   const desktop = matchMedia('(min-width: 701px)');
-  const clamp = value => Math.max(0, Math.min(1, value));
-  const ease = value => { const t = clamp(value); return t * t * (3 - 2 * t); };
+  const sceneViewport = matchMedia('(min-width: 1001px) and (min-height: 650px)');
+  const {clamp, ease, spring} = StoryMotion;
+  const springs = new WeakMap();
+  let springPending = false;
+  function follow(element, target, elapsed) {
+    const previous = springs.get(element);
+    const next = motion && previous ? spring(previous, target, elapsed / 1000)
+      : {value: target, velocity: 0, settled: true};
+    springs.set(element, next);
+    if (!next.settled) springPending = true;
+    return next.value;
+  }
   const poses = [
     [-100, 0, -12, 1.05, .95],
     [-390, -80, -28, 1.4, .30],
@@ -55,8 +65,9 @@
     const documentHeight = document.documentElement.scrollHeight;
     const elapsed = Math.min(64, Math.max(1, now - (lastFrameTime || now - 16)));
     lastFrameTime = now;
+    springPending = false;
     // Ease decorative movement only; actual document scrolling stays native.
-    visualScroll = motion ? visualScroll + (y - visualScroll) * (1 - Math.exp(-elapsed / 65)) : y;
+    visualScroll = motion ? visualScroll + (y - visualScroll) * (1 - Math.exp(-elapsed / 45)) : y;
     if (Math.abs(y - visualScroll) < .25) visualScroll = y;
     const delta = y - visualScroll;
     const surface = heroRect.bottom > 90 || evidenceTop < 70 ? 'paper' : 'dark';
@@ -65,26 +76,43 @@
     const heroProgress = motion ? ease(-(heroRect.top + delta) / Math.max(1, heroRect.height - height)) : 0;
     setStyle(hero, '--hero-progress', heroProgress.toFixed(4));
     setStyle(hero, '--hero-rule', motion ? Math.max(.08, heroProgress).toFixed(4) : '1');
-    setStyle(opening, '--interlude-x', motion ? `${((clamp((openingRect.top + delta) / height) - .3) * 80).toFixed(2)}px` : '0px');
+    const interlude = follow(opening, ease(clamp((openingRect.top + delta) / height)), elapsed);
+    setStyle(opening, '--interlude-x', motion ? `${((interlude - .3) * 100).toFixed(2)}px` : '0px');
     chapters.forEach((chapter, i) => {
-      const reveal = motion ? ease((height - rects[i].top - delta) / (height * .95)) : 1;
+      const target = motion ? ease((height - rects[i].top - delta) / (height * .95)) : 1;
+      const elasticReveal = follow(chapter, target, elapsed);
+      const reveal = clamp(elasticReveal);
       setStyle(chapter, '--chapter-reveal', reveal.toFixed(4));
-      const figureReveal = motion && figureRects
-        ? ease((height - figureRects[i].top - delta) / (height * .65)) : reveal;
+      const elasticFigure = motion && figureRects
+        ? follow(figures[i], ease((height - figureRects[i].top - delta) / (height * .65)), elapsed) : elasticReveal;
+      const figureReveal = clamp(elasticFigure);
+      // Masks stay bounded; only the complete visual surface has a tiny overshoot.
+      setStyle(chapter, '--figure-expand', (.82 + .18 * Math.max(0, Math.min(1.025, elasticFigure))).toFixed(4));
       setStyle(chapter, '--entry', (1 - figureReveal).toFixed(4));
       setStyle(chapter, '--entry-flash', (4 * figureReveal * (1 - figureReveal)).toFixed(4));
-      setStyle(chapter, '--copy-x', `${(-70 * (1 - reveal)).toFixed(2)}px`);
-      setStyle(chapter, '--copy-y', `${(30 * (1 - reveal)).toFixed(2)}px`);
+      const entry = 1 - Math.max(-.025, Math.min(1.025, elasticReveal));
+      const departure = motion && desktop.matches ? ease((height - rects[i].bottom) / (height * .75)) : 0;
+      const directions = {left: [-280, 0], right: [280, 0], up: [0, 70], down: [0, -55], diagonal: [190, 95]};
+      const [dx, dy] = directions[chapter.dataset.direction] || directions.down;
+      // Whole compositions travel; data marks never animate independently.
+      setStyle(chapter, '--panel-x', `${(dx * (entry - departure * .7)).toFixed(2)}px`);
+      setStyle(chapter, '--panel-y', `${(dy * (entry - departure * .4)).toFixed(2)}px`);
+      setStyle(chapter, '--copy-x', `${(-dx * .45 * entry).toFixed(2)}px`);
+      setStyle(chapter, '--copy-y', `${(20 * entry).toFixed(2)}px`);
+      setStyle(chapter, '--figure-x', `${(dx * (1 - figureReveal)).toFixed(2)}px`);
+      setStyle(chapter, '--wash-opacity', (.3 + .7 * reveal).toFixed(3));
+      setStyle(chapter, '--shards-visible', motion && figureReveal < .999 ? '1' : '0');
     });
     if (motion) {
       // Adjacent intervals share their endpoint: no midpoint pose resets.
       const anchors = [0, ...rects.map(rect => rect.top + y)];
       let segment = 0;
       while (segment < anchors.length - 2 && visualScroll > anchors[segment + 1]) segment++;
-      paintPose(poses[segment], poses[segment + 1],
+      // Reuse the established palette of poses for any number of chapters.
+      paintPose(poses[segment % poses.length], poses[(segment + 1) % poses.length],
         (visualScroll - anchors[segment]) / Math.max(1, anchors[segment + 1] - anchors[segment]));
     }
-    if (visualScroll !== y && !document.hidden) queueScroll();
+    if ((visualScroll !== y || springPending) && !document.hidden) queueScroll();
   }
   function queueScroll() {
     if (!scrollFrame && !document.hidden) scrollFrame = requestAnimationFrame(updateScroll);
@@ -165,11 +193,17 @@
     if (!trailFrame) trailFrame = requestAnimationFrame(drawTrail);
   }, {passive: true});
 
+  function syncSceneMode() {
+    const enabled = motion && sceneViewport.matches;
+    document.documentElement.classList.toggle('scene-snapping', enabled);
+  }
+  sceneViewport.addEventListener('change', () => { syncSceneMode(); queueScroll(); });
   function updateMotion(preservePosition = false) {
     const anchor = preservePosition ? document.elementFromPoint(innerWidth / 2, innerHeight / 2)?.closest('.chapter-stage,.hero-stage,section') : null;
     const before = anchor?.getBoundingClientRect().top;
     motion = requestedMotion && !reduced.matches;
     document.body.classList.toggle('motion-ready', motion);
+    syncSceneMode();
     document.body.classList.toggle('motion-off', !motion);
     document.documentElement.style.scrollBehavior = motion ? 'smooth' : 'auto';
     $('#motion-toggle').setAttribute('aria-pressed', String(motion));
@@ -204,7 +238,7 @@
   addEventListener('blur', () => { cancelHold(); clearTrail(); });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) { cancelHold(); clearTrail(); cancelAnimationFrame(scrollFrame); scrollFrame = 0; }
-    else { visualScroll = scrollY; queueScroll(); }
+    else { visualScroll = scrollY; lastFrameTime = 0; chapters.forEach(c => springs.delete(c)); figures.forEach(f => springs.delete(f)); springs.delete(opening); queueScroll(); }
   });
   updateMotion();
   resize();

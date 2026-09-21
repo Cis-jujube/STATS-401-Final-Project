@@ -50,3 +50,19 @@ Data/engineering checks validate normalized scores, cohort definitions, privacy 
 Ask the reader to move to the third chart and back, open a figure at large size, and disable motion. Record completion, assistance, accidental scene changes, loss of reading position and any discomfort. Ask whether the animated exchange seemed to change the data itself. A scene transition only changes the presented figure; it is not a time-series animation of student learning.
 
 Run the same operations once with reduced-motion enabled during technical QA. Any inaccessible chart/control is a revision trigger. Repeated confusion about navigation or about whether scores animate is also a revision trigger. Collect an optional 1–5 comfort rating and open comments. Report this separately from accuracy and do not claim that animation improves comprehension without a comparative study. These checks are planned, not conducted participant research.
+
+## Midterm extension tasks (21 September; planned, not conducted)
+
+- Identify coverage: 26 matched grades from 41 eligible roster members; the 15 not in the excerpt are not assigned zero.
+- Interpret the final-24h association: Spearman rho approximately -0.48; the interval is student-bootstrap uncertainty conditional on a partial cohort, not a causal effect. Count and first-score intervals cross zero.
+- Explain the submission-group bands: middle 50% of scores, not confidence intervals. The middle group has the highest mean, while the highest-count group has the highest median. No submission-count target follows from this comparison.
+
+Use the existing 0–2 scoring scheme. The seven information tasks may require extending the session beyond the original four-task timing estimate; pilot the revised protocol before recruiting readers. No evaluation results are claimed.
+
+## Course Pulse extension tasks
+
+8. Explain the nested coverage counts 41 → 26 → 11 → 9; distinguish unavailable grades from no recorded activity and identify the late tracking start.
+9. Read the two platform groups (means 95.27 / 86.17; n=11 / 15). Explain why their 9.11-point difference is not a causal platform effect, and why quartile bands are not confidence intervals.
+10. Identify that all three platform correlation intervals cross zero. Explain differing source windows, unmeasured prior ability and the exploratory status of all associations.
+
+These are planned reader tasks, not completed evaluation results.

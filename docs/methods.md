@@ -1,6 +1,6 @@
 # Dataset, processing and interpretation
 
-The current project studies **CS201 homework submission timing, retries and score progression**. The original cross-platform/exam proposal is historical. The current analysis does not require exam or AI-platform data.
+The current project studies **CS201 homework submission timing, retries and score progression**. The original cross-platform/exam proposal is historical. The first four figures use homework data only. The separate [midterm extension](midterm-methods.md) adds 26 verified grades and documents its different cohort and sources. The [Course Pulse extension](platform-methods.md) adds recorded platform use for the same partial grade cohort; AI-message effectiveness is not estimated.
 
 ## Source and grain
 
@@ -45,7 +45,7 @@ Pseudonyms, individual scores, raw logs and linkage materials remain outside the
 
 Counts reflect recorded attempts, not effort or ability. Elapsed gaps are not active learning time. Best-score trajectories are nondecreasing by definition. Observed first-to-best differences are not causal treatment effects. Different homework problem counts and difficulty limit cross-homework comparisons.
 
-Four static figures and their mobile variants are implemented. Homework filters, metric toggles and endpoint animations are planned. Retry-interval analysis and the approximately five-participant formative evaluation are future work; no user-study results have been collected or claimed.
+Ten static figures and their mobile variants are implemented: four original homework-process views, three midterm views and three Course Pulse views. Homework filters, metric toggles and endpoint animations are planned. Retry-interval analysis and the approximately five-participant formative evaluation are future work; no user-study results have been collected or claimed.
 
 ## Actual mean score by attempt number
 
@@ -55,6 +55,6 @@ Each row publishes homework, attempt, mean_score, submissions (N), contributors 
 
 No confidence bands are drawn because these are descriptive means over the observed cohort and event observations are clustered within students and problems. A future uncertainty analysis would need a justified student-level sampling/resampling approach rather than independent-event error bars. Differences across attempts can reflect selection, changing problem mix, post-acceptance submissions and other factors; they do not estimate within-student improvement.
 
-## Planned midterm comparison
+## Implemented midterm comparison
 
-Once authorized midterm scores are available, add comparisons of pre-exam homework behavior with exam performance. Confirm the scoring scale and cohort, join pseudonymous records privately, report matched sample size and missingness, and exclude all post-exam behavior from predictor summaries. Candidate summaries are per-student attempt counts, submission timing and normalized score progression. Assess ceiling effects and influential cases; report exploratory associations without inferring causal effects. No midterm scores or exam-related results are currently included. Public outputs will remain aggregated; individual exam grades and linkage keys remain private.
+The [midterm extension](midterm-methods.md) is now implemented with three additional figures and a separate aggregate input (`data/midterm-summary.json`). The original four figures retain their historical snapshot. The extension excludes the named test account, uses 26 supplied grades from 41 eligible roster members, and verifies that all selected homework windows precede the user-confirmed 16 September noon exam. See its methods for linkage, uncertainty and sensitivity checks.
