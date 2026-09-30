@@ -3,10 +3,12 @@
 **Timing, Retries, Score Progression, and Midterm Outcomes**
 STATS 401 Final Project · Zaozao Wang and Zhengxiang Liu
 
-When homework scores cluster near full marks, how do students' submission processes differ? The current page presents ten implemented visualizations using actual CS201 data: the original four homework-process views plus a partial-cohort midterm score distribution, behavior–exam rank correlations with bootstrap intervals, and exam-score dispersion by submission-count group. Three Course Pulse views add coverage, observed-use score groups and cross-platform associations. It includes raw/processed dataset descriptions, completed cleaning steps, planned interactions and an evaluation plan.
+When homework scores cluster near full marks, how do students' submission processes differ? The main story presents five featured figures, with ten complete downloadable figures and accessible tables in the analysis companion. The timing view compares participation and repeat intensity in publishable four-hour cells; 51 positive cells remain masked, so it does not identify the overall four-hour peak. The problem view ranks the remaining mean score gap after three attempts, with nine selected rows on desktop and six on mobile; the downloadable figure and analysis table show all 23. Actual-attempt means expose changing cohorts, the homework–exam chart separates bootstrap uncertainty from robustness checks, and combined evidence retains platform coverage and zero-crossing intervals.
 
-- [Live project website](https://cis-jujube.github.io/STATS-401-Final-Project/) — GitHub Pages, published from `main` / root.
-- [Project page source](index.html) — open locally in a browser; no server is needed.
+Future analyses of whether each repeat establishes a new personal best and when progress occurs relative to deadlines require student–problem event sequences. They are separate from the implemented five-figure story. No student-level counts, progress timing, or substitute results are inferred from the public means.
+
+- [Project website](https://cis-jujube.github.io/STATS-401-Final-Project/) — GitHub Pages from `main` / root.
+- [Project page source](index.html) — static HTML; use an HTTP preview for browser testing.
 - [Dataset and methods](docs/methods.md)
 - [Public homework aggregate data](data/summary.json)
 - [Public midterm aggregate data](data/midterm-summary.json) · [Midterm methods](docs/midterm-methods.md)
@@ -18,19 +20,22 @@ When homework scores cluster near full marks, how do students' submission proces
 
 | Figure | SVG | 300 DPI PNG | Vector PDF |
 |---|---|---|---|
-| Submission timing and distinct contributors | [SVG](assets/figures/01-calendar.svg) | [PNG](assets/figures/01-calendar.png) | [PDF](assets/figures/01-calendar.pdf) |
+| Visible submission peaks, reach and repeat intensity | [SVG](assets/figures/01-calendar.svg) | [PNG](assets/figures/01-calendar.png) | [PDF](assets/figures/01-calendar.pdf) |
 | Per-student attempt distributions | [SVG](assets/figures/02-attempts.svg) | [PNG](assets/figures/02-attempts.png) | [PDF](assets/figures/02-attempts.pdf) |
-| First and best normalized scores | [SVG](assets/figures/03-score-progression.svg) | [PNG](assets/figures/03-score-progression.png) | [PDF](assets/figures/03-score-progression.pdf) |
+| Remaining problem gaps after three attempts | [SVG](assets/figures/03-score-progression.svg) | [PNG](assets/figures/03-score-progression.png) | [PDF](assets/figures/03-score-progression.pdf) |
 | Actual mean score by attempt | [SVG](assets/figures/04-attempt-scores.svg) | [PNG](assets/figures/04-attempt-scores.png) | [PDF](assets/figures/04-attempt-scores.pdf) |
 | Midterm distribution | [SVG](assets/figures/05-midterm-distribution.svg) | [PNG](assets/figures/05-midterm-distribution.png) | [PDF](assets/figures/05-midterm-distribution.pdf) |
-| Behavior–exam associations | [SVG](assets/figures/06-midterm-associations.svg) | [PNG](assets/figures/06-midterm-associations.png) | [PDF](assets/figures/06-midterm-associations.pdf) |
+| Behavior–exam robustness analysis | [SVG](assets/figures/06-midterm-associations.svg) | [PNG](assets/figures/06-midterm-associations.png) | [PDF](assets/figures/06-midterm-associations.pdf) |
 | Exam scores by submission group | [SVG](assets/figures/07-midterm-attempt-groups.svg) | [PNG](assets/figures/07-midterm-attempt-groups.png) | [PDF](assets/figures/07-midterm-attempt-groups.pdf) |
+| Course Pulse coverage | [SVG](assets/figures/08-platform-coverage.svg) | [PNG](assets/figures/08-platform-coverage.png) | [PDF](assets/figures/08-platform-coverage.pdf) |
+| Exam scores by recorded platform use | [SVG](assets/figures/09-platform-groups.svg) | [PNG](assets/figures/09-platform-groups.png) | [PDF](assets/figures/09-platform-groups.pdf) |
+| OJ and platform associations | [SVG](assets/figures/10-platform-associations.svg) | [PNG](assets/figures/10-platform-associations.png) | [PDF](assets/figures/10-platform-associations.pdf) |
 
-All charts have separate mobile compositions and accessible HTML tables. The page has no remote runtime libraries, fonts, API calls or production database connection. Static figures and continuous scene navigation are implemented. Each desktop chapter fills a screen with text on the left and a transparent figure on the right. Scroll expansion, a moving satin background, large-figure dialog, pointer glow and motion controls are implemented; there are no numbered tabs or chart cards. Analytical chart filters and the formative reader evaluation remain planned. All ten figures and their tables remain readable without JavaScript.
+All charts have separate mobile compositions and accessible HTML tables. The page has no remote runtime libraries, fonts, API calls or production database connection. The five featured chapters support continuous scrolling, manual presentation and a seekable 70.1-second full story. Supporting distributions and group comparisons remain in `analysis.html` with their tables and downloads. Analytical chart filters and the formative reader evaluation remain planned. All ten figures and their tables remain readable without JavaScript.
 
 ## Reproduce from public aggregates
 
-Python 3.13 and Matplotlib 3.11.2 are captured by `.python-version`, `pyproject.toml` and `uv.lock`. The user approved the project-local dependency. No global installation is needed.
+Python 3.13 and Matplotlib 3.11.2 are captured by `.python-version`, `pyproject.toml` and `uv.lock`. No global installation is needed.
 
 ```sh
 uv sync --locked
@@ -41,7 +46,7 @@ uv run python scripts/build_page.py
 uv run python -m unittest discover -s tests -v
 ```
 
-The page builder assembles the same aggregate evidence with `scripts/render_site.py` and the HTML fragments in `scripts/templates/`. `styles.css` and `assets/site.js` provide the native CSS/JavaScript presentation. The `--web` figure export writes eight transparent SVG compositions to `assets/story/`; the publication PNG/PDF/SVG files remain in `assets/figures/`. No frontend install or development server is required.
+The page builder assembles the same aggregate evidence with `scripts/render_site.py` and the HTML fragments in `scripts/templates/`. `styles.css` and `assets/site.js` provide the native CSS/JavaScript presentation. The `--web` homework export writes four desktop and four mobile SVG compositions to `assets/story/`; the midterm and platform renderers export their story assets separately. Publication PNG/PDF/SVG files remain in `assets/figures/`. No frontend install or development server is required.
 
 The renderer exports eight compositions (four desktop + four mobile), each as a 300 DPI PNG and vector SVG/PDF. It follows [figures4papers / scientific-figure-making](https://github.com/ChenLiu-1996/figures4papers/tree/3c181f85e82c6f24948fcaaf3be6696102b41d8d/scientific-figure-making): shared sans-serif typography, minimal spines, consistent colors, frameless legends and vector text. See [style provenance](docs/figure-style.md). The previous optional Sharp rasterizer is retained for historical compatibility; it is not required for the current pipeline.
 
@@ -57,7 +62,7 @@ For a private hourly calendar, supply `--private-output /path/outside/repository
 
 The 20 September 2026 snapshot contains 42 roster members and 2,343 course submissions. The three homework windows retain 2,101 submissions from 39 members. Public temporal cells are four hours wide and positive cells with fewer than five contributors are masked. The source export, student pseudonyms, individual scores and linkage key are private.
 
-Submission counts are not measures of effort; submission gaps are not study duration. Best scores cannot decrease by definition, and score progression does not establish causal learning improvement. Homework windows use configured deadlines and do not incorporate individual extensions. See the methods for denominators and normalization.
+Submission counts are not measures of effort; submission gaps are not study duration. Best scores cannot decrease by definition, and score progression does not establish causal learning improvement. The public timing figure includes only the 29 positive cells meeting the five-contributor threshold; 677 submissions remain in masked cells. Homework windows use configured deadlines and do not incorporate individual extensions. See the methods for denominators and normalization.
 
 ## Implemented extension: midterm examination scores
 
@@ -81,7 +86,7 @@ The earlier cross-platform/exam-outcome scope is superseded by the current homew
 
 ## Course Pulse extension · 21 September 2026
 
-The site now contains ten completed static figures. Chapters 08–10 add linked-cohort coverage, exam-score dispersion by observed platform use, and OJ/platform correlations with bootstrap intervals. Personal tracking starts on 8 September; main platform analysis ends at 08:00 Beijing on exam day. No recorded usage does not mean no learning, and group differences are not platform effects.
+The analysis companion contains ten completed static figures. Featured Course Pulse chapters add linked-cohort coverage, exam-score dispersion by observed platform use, and OJ/platform correlations with bootstrap intervals. Personal tracking starts on 8 September; main platform analysis ends at 08:00 Beijing on exam day. No recorded usage does not mean no learning, and group differences are not platform effects.
 
 See [platform methods](docs/platform-methods.md) for private-input reproduction, identity matching, UTC cutoff sensitivity and exclusions. Only `data/platform-summary.json` and aggregate figures are published. No raw exports, names, account identifiers, messages or code belong in this repository. Local generation does not constitute GitHub push or deployment.
 
@@ -89,4 +94,8 @@ See [platform methods](docs/platform-methods.md) for private-input reproduction,
 
 The main page retains native downward scrolling. Desktop chapters now have native scroll-snap stops and full-page directional cover transitions; this is not a discrete slide player and does not intercept wheel events. Narrow/short screens and reduced-motion settings retain normal reading flow. Detailed interpretations, tables, sources and methods live in `analysis.html`, linked from each chart. Live scroll feel remains unverified.
 
-Latest visual refinement restores the animated “Follow the submissions” interlude and chart expansion/reveals. The main page uses gentle proximity alignment, not mandatory stops or fixed slide planes. Charts have a larger share of the layout; page text uses three levels. The separate analysis companion is retained.
+The animated “Follow the submissions” interlude and chart expansion/reveals remain in the main page. The simpler four-bin exam distribution and submission-count grouping have moved from full-screen chapters to the analysis companion so the two deeper figures receive more attention. The main page uses gentle proximity alignment; the separate analysis companion retains all ten figures.
+
+## Live presentation mode
+
+The main story features Timing, Problem bottlenecks, Actual attempt scores, Process and exam, and Combined evidence. Click **Start presentation** to use an authored playback clock: each Continue animates to the next complete figure and then waits indefinitely. **Play full story** runs the complete 70.1-second sequence, with pause, seek and Hold for explanation. Previous figure, directory, replay, full-figure view, optional fullscreen and reduced motion are available. Ordinary scrolling remains the default. See [controls, architecture, verification and device limits](docs/presentation-mode.md).

@@ -28,7 +28,7 @@ Attempt distributions have one observation per student–homework with at least 
 
 ## Public aggregate schema
 
-`data/summary.json` is sufficient to regenerate all public SVG figures without private source data.
+`data/summary.json` is sufficient to regenerate the four public homework figures without private source data. The midterm and Course Pulse figures use their own published aggregate inputs.
 
 - `snapshot_utc`, `timezone`: extraction time and analysis timezone.
 - Cohort/event counts: explicitly scoped descriptive totals.
@@ -45,7 +45,9 @@ Pseudonyms, individual scores, raw logs and linkage materials remain outside the
 
 Counts reflect recorded attempts, not effort or ability. Elapsed gaps are not active learning time. Best-score trajectories are nondecreasing by definition. Observed first-to-best differences are not causal treatment effects. Different homework problem counts and difficulty limit cross-homework comparisons.
 
-Ten static figures and their mobile variants are implemented: four original homework-process views, three midterm views and three Course Pulse views. Homework filters, metric toggles and endpoint animations are planned. Retry-interval analysis and the approximately five-participant formative evaluation are future work; no user-study results have been collected or claimed.
+Ten static figures and their mobile variants are implemented: four homework-process views, three midterm views and three Course Pulse views. Five are featured in the scroll story; all ten remain in the analysis companion. The timing figure plots only the 29 positive four-hour cells with at least five contributors: one panel compares contributors with submissions per active contributor, and the other shows submissions by Beijing clock-time bin. Marker area represents submission count. Because 677 events remain in masked cells, the public figure cannot establish the overall busiest four-hour period or study-time habits.
+
+The full problem-gap figure and desktop story mark mean first, cumulative best through three attempts, and best observed on one 0–100 scale for the same attempters in each problem. The mobile story uses compact bars for the remaining mean gap. It sorts rows by best observed minus best through three, emphasizing the nine of 23 problem slots with a remaining mean gap above ten percentage points. The publication versions show all 23 slots; the desktop story selects a high, middle and low gap row from each homework, and the mobile story selects the top two remaining gaps per homework. The exact table retains the four-stage values, including best through two. The selected rows illustrate the named problems, not the full distribution. These intermediate stages are cumulative bests, not actual second or third submission scores. Homework filters and metric toggles are planned. Retry productivity and progress timing require private event-level data and remain uncomputed; no synthetic substitute is published. The approximately five-participant formative evaluation is future work, with no user-study results claimed.
 
 ## Actual mean score by attempt number
 

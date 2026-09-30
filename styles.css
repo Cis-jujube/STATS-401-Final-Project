@@ -86,6 +86,13 @@ dialog::backdrop { background: #100e0dee; }
 #close-focus { border: 0; border-bottom: 1px solid #a99a8c; background: none; padding: 8px 0; min-height: 44px; }
 #focus-image { display: block; max-width: 100%; max-height: 77svh; width: auto; height: auto; object-fit: contain; margin: 20px auto; }
 #focus-note { color: #c4b7aa; margin: 0; }
+@media (max-width:700px) {
+  #focus-dialog[data-figure="03-score-progression"] { overflow:auto; }
+  #focus-dialog[data-figure="03-score-progression"] .dialog-head { position:sticky; top:0; left:0; z-index:2; width:92vw; background:#191614; }
+  #focus-dialog[data-figure="03-score-progression"] #focus-image { max-width:none; max-height:none; width:600px; }
+  .evidence-detail .score-detail picture { display:block; overflow-x:auto; }
+  .evidence-detail .score-detail img { width:700px; max-width:none; }
+}
 .motion-off *, .motion-off *::before, .motion-off *::after { animation: none!important; transition: none!important; }
 .motion-off #cursor-light { display: none; }
 .motion-off .material-scene { transform: none!important; opacity: .25!important; }
@@ -284,16 +291,7 @@ body[data-surface="paper"] #motion-toggle { border-color:#25211e55; }
  transform:translate3d(calc(var(--entry,0) * 50px),calc(var(--entry,0) * 35px),0);
 }
 .motion-ready [data-entrance="iris"]>picture { clip-path:inset(calc(var(--entry,0) * 48%) 0); transform:scale(calc(1 - var(--entry,0) * .07)); }
-.figure-shard { display:none; position:absolute; inset:0; pointer-events:none; z-index:2; }
-.motion-ready [data-entrance="shards"]>.figure-shard { display:block; opacity:var(--shards-visible,0); }
-.motion-ready [data-entrance="shards"]>picture { opacity:calc(1 - var(--shards-visible,0)); }
-.figure-shard picture,.figure-shard img { width:100%; height:100%; }
-.shard-0 { clip-path:polygon(0 0,50% 0,50% 50%,0 50%); transform:translate3d(calc(var(--entry,0) * -65px),calc(var(--entry,0) * -40px),0); }
-.shard-1 { clip-path:polygon(50% 0,100% 0,100% 50%,50% 50%); transform:translate3d(calc(var(--entry,0) * 70px),calc(var(--entry,0) * -25px),0); }
-.shard-2 { clip-path:polygon(0 50%,50% 50%,50% 100%,0 100%); transform:translate3d(calc(var(--entry,0) * -40px),calc(var(--entry,0) * 50px),0); }
-.shard-3 { clip-path:polygon(50% 50%,100% 50%,100% 100%,50% 100%); transform:translate3d(calc(var(--entry,0) * 55px),calc(var(--entry,0) * 45px),0); }
 .motion-off .chapter-layout,.motion-off .chapter-copy,.motion-off .chapter-figure>picture { transform:none!important; clip-path:none!important; opacity:1!important; }
-.motion-off .figure-shard { display:none!important; }
 /* Constrained screens keep all reading content in normal flow. */
 @media(max-width:1000px), (max-height:800px) {
  .motion-ready .story-chapter { height:auto; }
@@ -320,7 +318,6 @@ body[data-surface="paper"] #motion-toggle { border-color:#25211e55; }
 }
 @media(prefers-reduced-motion:reduce) {
  .chapter-layout,.chapter-copy,.chapter-figure>picture { transform:none!important; clip-path:none!important; opacity:1!important; }
- .figure-shard { display:none!important; }
 }
 
 /* Strong chart stops activate only after the opening and interlude. */

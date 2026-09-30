@@ -63,11 +63,13 @@ def finalize_figure(fig, out_path, title, web=False):
     plt.close(fig)
 
 
-def footnote(fig, lines, y=.025, web=False):
-    fig.text(.04, y, '\n'.join(lines), fontsize=9, color='#bcb1a7' if web else PALETTE['gray'], va='bottom', linespacing=1.55)
+def footnote(fig, lines, y=.025, web=False, fontsize=9):
+    fig.text(.04, y, '\n'.join(lines), fontsize=fontsize,
+             color='#bcb1a7' if web else PALETTE['gray'],
+             va='bottom', linespacing=1.55)
 
 
-def calendar(data, out, mobile=False, private=None, web=False):
+def private_calendar(data, out, mobile=False, private=None, web=False):
     cells = private if private is not None else data['calendar']
     hours = cells[0]['hours']
     dates = sorted({c['date'] for c in cells})
@@ -128,6 +130,85 @@ def calendar(data, out, mobile=False, private=None, web=False):
     finalize_figure(fig,out/name,'Submission timing and distinct contributors',web=web)
 
 
+def calendar(data, out, mobile=False, web=False):
+    """Compare reach, repeat intensity, and clock time in publishable cells only."""
+    visible = [cell for cell in data['calendar']
+               if cell['state'] == 'visible' and cell['submissions'] > 0]
+    if not visible:
+        raise ValueError('No publishable positive calendar cells')
+    colors = dict(zip(('HW1', 'HW2', 'HW3'),
+                      ['#ed977b', '#d9bc7d', '#c5b6a7'] if web else HW_COLORS))
+    markers = {'HW1': 'o', 'HW2': 's', 'HW3': 'D'}
+    plotted = []
+    for cell in visible:
+        start = datetime.fromisoformat(f"{cell['date']}T{cell['hour']:02d}:00:00+08:00")
+        homework = next((a['homework'] for a in data['assignments']
+                         if datetime.fromisoformat(a['start_local']) <= start
+                         <= datetime.fromisoformat(a['end_local'])), None)
+        # A boundary cell can start before a homework opens; its events still
+        # belong to that sole configured window on the date.
+        if homework is None:
+            homework = next(a['homework'] for a in data['assignments']
+                            if a['start_local'][:10] <= cell['date'] <= a['end_local'][:10])
+        plotted.append({**cell, 'plot_homework': homework})
+    visible = plotted
+
+    fig, axes = plt.subplots(2 if mobile else 1, 1 if mobile else 2,
+                             figsize=(7.2, 12) if mobile else (14.5, 7.7),
+                             squeeze=False)
+    reach, clock = axes.flat
+    for homework in ('HW1', 'HW2', 'HW3'):
+        rows = [cell for cell in visible if cell['plot_homework'] == homework]
+        size = [35 + cell['submissions'] * 2.1 for cell in rows]
+        reach.scatter([cell['contributors'] for cell in rows],
+                      [cell['submissions'] / cell['contributors'] for cell in rows],
+                      s=size, marker=markers[homework], color=colors[homework],
+                      edgecolor='#25211E' if not web else '#f4f2e9',
+                      linewidth=.7, alpha=.82, label=homework, zorder=3)
+        clock.scatter([cell['hour'] + 2 for cell in rows],
+                      [cell['submissions'] for cell in rows], s=size,
+                      marker=markers[homework], color=colors[homework],
+                      edgecolor='#25211E' if not web else '#f4f2e9',
+                      linewidth=.7, alpha=.82, zorder=3)
+
+    peak = max(visible, key=lambda cell: cell['submissions'])
+    reach.annotate(f"{peak['submissions']} submissions\n{peak['date'][5:]} · {peak['hour']:02d}–{peak['hour']+4:02d}",
+                   (peak['contributors'], peak['submissions']/peak['contributors']),
+                   xytext=(-10, -42), textcoords='offset points', ha='right',
+                   fontsize=10, weight='bold', color=colors[peak['plot_homework']])
+    for cell in sorted(visible, key=lambda c: c['submissions'], reverse=True)[:3]:
+        clock.annotate(f"{cell['date'][5:]}\n{cell['submissions']} / {cell['contributors']}",
+                       (cell['hour']+2, cell['submissions']),
+                       xytext=(0, 11), textcoords='offset points', ha='center',
+                       fontsize=9, color=colors[cell['plot_homework']])
+    reach.set(xlim=(4, 13.5), ylim=(0, max(c['submissions']/c['contributors'] for c in visible)+4),
+              xlabel='Distinct contributors in a four-hour cell',
+              ylabel='Submissions per active contributor')
+    reach.set_xticks(range(5, 13))
+    reach.set_title('(a)  Reach versus repeat intensity', loc='left', pad=18)
+    reach.legend(loc='upper left', fontsize=10, ncol=3)
+    clock.set(xlim=(0, 24), ylim=(0, max(c['submissions'] for c in visible)*1.22),
+              xlabel='Beijing time · four-hour cell', ylabel='Submissions in cell')
+    clock.set_xticks(range(2, 24, 4), [f'{hour:02d}–{hour+4:02d}' for hour in range(0, 24, 4)],
+                     fontsize=9)
+    clock.set_title('(b)  When visible bursts occurred', loc='left', pad=18)
+    for ax in (reach, clock):
+        ax.grid(alpha=.15)
+        ax.set_axisbelow(True)
+    masked = data['window_submissions'] - sum(cell['submissions'] or 0 for cell in data['calendar'])
+    fig.suptitle('Visible submission peaks / reach and intensity', x=.04, y=.98,
+                 ha='left', fontsize=18, weight='bold')
+    fig.text(.04, .925, f"{len(visible)} publishable positive cells · peak day {data['peak_day']['date']}: "
+             f"{data['peak_day']['submissions']} submissions from {data['peak_day']['contributors']} students",
+             fontsize=11, color='#c4b7aa' if web else PALETTE['gray'])
+    footnote(fig, [f'{masked} submissions fall in masked cells; an overall four-hour peak cannot be inferred from this public view.',
+                   'Marker area scales with submissions. Ratios describe active contributors, not all students or study time.'],
+             y=.025, web=web)
+    fig.tight_layout(rect=(0, .11 if mobile else .12, 1, .88), w_pad=2.8, h_pad=3)
+    finalize_figure(fig, out/('01-calendar'+('-mobile' if mobile else '')),
+                    'Visible submission peaks and distinct contributors', web=web)
+
+
 def attempts(data,out,mobile=False,web=False):
     fig,ax=plt.subplots(figsize=(6.5,6.5) if mobile else (10,6.2))
     stats=[{'label':a['homework'],'med':a['all_attempts']['median'],'q1':a['all_attempts']['q1'],
@@ -155,66 +236,139 @@ def short_name(row):
     return row['problem_name'].split('-')[-1].replace('Exercise1.2.15 ','')
 
 
-def score_story(data, out, mobile=False):
-    """One shared score axis keeps all 23 problem labels readable on the website."""
-    fig, ax = plt.subplots(figsize=(6, 13) if mobile else (11, 10))
-    positions, labels = [], []
-    position = 0
-    score_color = '#ed977b'
-    for assignment in data['assignments']:
-        rows = [r for r in data['score_progression'] if r['homework'] == assignment['homework']]
-        ax.text(0, position - .8, assignment['homework'], fontsize=12, weight='bold')
-        for row in rows:
-            ax.plot([row['first'], row['best']], [position, position], color='#a88170', lw=2)
-            ax.plot(row['first'], position, 'o', mfc='#191614', mec=score_color, mew=1.6, ms=6)
-            ax.plot(row['best'], position, 'D', color=score_color, ms=5)
-            ax.text(1.02, position, f"n={row['n']}", transform=ax.get_yaxis_transform(), fontsize=10, va='center')
-            positions.append(position)
-            labels.append(short_name(row))
-            position += 1
-        position += 1.7
-    ax.set_yticks(positions, labels, fontsize=12)
-    ax.set_ylim(position - 1.7, -1.5)
-    ax.set_xlim(0, 103)
-    ax.set_xticks([0, 25, 50, 75, 100])
-    ax.set_xlabel('Normalized score (%)')
-    ax.grid(axis='x', alpha=.2)
+def score_story_mobile(data, out):
+    """Use a compact gap ranking for the narrow story viewport."""
+    ranked = sorted(data['score_progression'],
+                    key=lambda row: (-(row['best'] - row['best3']),
+                                     row['homework'], row['problem_order']))
+    rows = []
+    for homework in ('HW1', 'HW2', 'HW3'):
+        hw_rows = [row for row in ranked if row['homework'] == homework]
+        rows.extend(hw_rows[:2])
+    rows.sort(key=lambda row: (-(row['best'] - row['best3']),
+                               row['homework'], row['problem_order']))
+    fig, ax = plt.subplots(figsize=(6.4, 8.2))
+    fig.subplots_adjust(left=.09, right=.91, top=.77, bottom=.18)
+    ink, muted, accent = '#f4f2e9', '#c4b7aa', '#ed977b'
+    for y, row in enumerate(rows):
+        gap = row['best'] - row['best3']
+        ax.text(0, y - .12, f"{row['homework']} · {short_name(row)}",
+                color=ink, fontsize=14, va='bottom')
+        ax.text(40, y - .12, f"+{gap:.1f} pp · n={row['n']}",
+                color=accent, fontsize=12, ha='right', va='bottom')
+        ax.barh(y + .24, gap, height=.18, color=accent, zorder=3)
+        ax.plot(gap, y + .24, 'D', color=accent, ms=6, zorder=4)
+    ax.set_xlim(0, 40)
+    ax.set_ylim(len(rows) - .13, -.5)
+    ax.set_xticks((0, 10, 20, 30, 40))
+    ax.tick_params(axis='x', labelsize=12)
+    ax.set_yticks([])
+    ax.set_xlabel('Remaining mean gap (percentage points)', labelpad=11,
+                  fontsize=13)
     ax.spines['left'].set_visible(False)
-    ax.tick_params(axis='y', length=0)
-    handles = [Line2D([], [], marker='o', ls='', mfc='#191614', mec=score_color, label='Mean first score'),
-               Line2D([], [], marker='D', ls='', color=score_color, label='Mean best score')]
-    fig.legend(handles=handles, loc='upper right', bbox_to_anchor=(.97, .995), ncol=2, fontsize=10)
-    fig.tight_layout(pad=1.5, rect=(0, .06, .94, .96))
-    footnote(fig, ['Same attempters at both endpoints; ranked within homework.',
-                  'Best scores cannot decrease. Differences are not causal learning effects.'], web=True)
-    finalize_figure(fig, out/('03-score-progression'+('-mobile' if mobile else '')),
-                    'First versus best normalized scores', web=True)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.grid(axis='x', alpha=.18)
+    ax.set_axisbelow(True)
+    count = sum(row['best'] - row['best3'] > 10 for row in ranked)
+    fig.text(.04, .97, 'Remaining gap after\nthree attempts',
+             fontsize=20, weight='bold', color=ink, va='top')
+    fig.text(.04, .86, f'{count} of {len(ranked)} problem slots have a >10 pp mean gap',
+             fontsize=12, color=muted, va='top')
+    footnote(fig, ['Six selected: top two remaining gaps within each homework.',
+                   'All 23 problems and exact values are in the analysis page.',
+                   'Gap = best observed minus cumulative best through three; no causal claim.'],
+             y=.025, web=True, fontsize=10)
+    finalize_figure(fig, out/'03-score-progression-mobile',
+                    'Selected remaining problem score gaps after three attempts',
+                    web=True)
 
 
 def scores(data,out,mobile=False,web=False):
-    if web:
-        score_story(data, out, mobile)
+    """Show which problem gaps remain after the first three attempts.
+
+    First, best-through-three, and best-observed means use the same attempters
+    within each problem. The highlighted segment is descriptive, not causal.
+    """
+    if web and mobile:
+        score_story_mobile(data, out)
         return
-    fig,axes=plt.subplots(3 if mobile else 1,1 if mobile else 3,figsize=(8,15) if mobile else (19,6.8),squeeze=False)
-    score_color = '#ed977b' if web else PALETTE['primary']
-    for i,(ax,a) in enumerate(zip(axes.flat,data['assignments'])):
-        rows=[r for r in data['score_progression'] if r['homework']==a['homework']]
-        for y,r in enumerate(rows):
-            ax.plot([r['first'],r['best']],[y,y],color='#d6ab98',linewidth=2.5,zorder=1)
-            ax.plot(r['first'],y,'o',mfc='white',mec=score_color,mew=1.8,ms=7,zorder=2)
-            ax.plot(r['best'],y,'D',color=score_color,ms=6,zorder=2)
-            ax.text(1.04,y,f"n={r['n']}",transform=ax.get_yaxis_transform(),fontsize=10,va='center')
-        ax.set_yticks(range(len(rows)),[short_name(r) for r in rows],fontsize=10)
-        ax.set_ylim(len(rows)-.5,-.7);ax.set_xlim(0,103);ax.set_xticks([0,25,50,75,100])
-        ax.set_xlabel('Normalized score (%)');ax.set_title(f"({chr(97+i)})  {a['homework']}",loc='left',pad=17)
-        ax.grid(axis='x',alpha=.18);ax.spines['left'].set_visible(False);ax.tick_params(axis='y',length=0)
-    fig.legend(handles=[Line2D([],[],marker='o',ls='',mfc='white',mec=score_color,mew=1.8,label='Mean first score'),
-                        Line2D([],[],marker='D',ls='',color=score_color,label='Mean best observed score')],
-               loc='upper center',bbox_to_anchor=(.55,.99),ncol=2,fontsize=12)
-    fig.tight_layout(pad=2,rect=(0,.10 if mobile else .16,.96,.95 if mobile else .90),h_pad=3,w_pad=3)
-    footnote(fig,['Same attempters at both endpoints; rows ranked by difference within each homework.',
-                  'Best scores cannot decrease by definition. Differences are not causal learning effects.'],web=web)
-    finalize_figure(fig,out/('03-score-progression'+('-mobile' if mobile else '')),'First versus best normalized scores',web=web)
+    all_rows = sorted(data['score_progression'],
+                      key=lambda row: (-(row['best']-row['best3']),
+                                       row['homework'], row['problem_order']))
+    if web:
+        # The story selects within each homework; the downloadable figure
+        # and accessible table retain every problem slot.
+        selected = []
+        for homework in ('HW1', 'HW2', 'HW3'):
+            hw_rows = [row for row in all_rows if row['homework'] == homework]
+            indices = (0, len(hw_rows)//2, -1)
+            selected.extend(hw_rows[index] for index in indices)
+        rows = sorted(selected, key=lambda row: -(row['best']-row['best3']))
+    else:
+        rows = all_rows
+
+    fig, ax = plt.subplots(figsize=(7.8, 17) if mobile else
+                           (8.5, 8.8) if web else (11.5, 12.0))
+    fig.subplots_adjust(left=.40 if mobile else .37 if web else .35,
+                        right=.76 if mobile else .77 if web else .79,
+                        top=.81 if mobile else .79 if web else .84,
+                        bottom=.13)
+    ink = '#f4f2e9' if web else PALETTE['ink']
+    muted = '#c4b7aa' if web else PALETTE['gray']
+    early = '#b9a99c' if web else '#b7a99c'
+    gold = '#d9bc7d' if web else '#967222'
+    red = '#ed977b' if web else PALETTE['primary']
+    for y, row in enumerate(rows):
+        ax.plot((row['first'], row['best3']), (y, y), color=early, lw=2,
+                solid_capstyle='round', zorder=1)
+        ax.plot((row['best3'], row['best']), (y, y), color=red, lw=5,
+                solid_capstyle='round', zorder=2)
+        ax.plot(row['first'], y, 'o', ms=7, mec=ink, mfc='none', mew=1.5, zorder=4)
+        ax.plot(row['best3'], y, 's', ms=7, color=gold, zorder=5)
+        ax.plot(row['best'], y, 'D', ms=6, color=red, zorder=5)
+        ax.text(1.04, y, f"+{row['best']-row['best3']:.1f} pp · n={row['n']}",
+                transform=ax.get_yaxis_transform(), va='center',
+                fontsize=10 if web else 9,
+                color=red if row['best']-row['best3'] > 10 else muted)
+    ax.set_yticks(range(len(rows)),
+                  [f"{row['homework']} · {short_name(row)}" for row in rows],
+                  fontsize=10 if web or mobile else 11)
+    ax.set_ylim(len(rows)-.45, -.65)
+    ax.set_xlim(0, 103)
+    ax.set_xticks((0, 25, 50, 75, 100))
+    ax.set_xlabel('Mean normalized problem score (%)', labelpad=11)
+    ax.tick_params(axis='y', length=0, pad=9)
+    ax.grid(axis='x', alpha=.16)
+    ax.set_axisbelow(True)
+    ax.spines['left'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    legend = [
+        Line2D([], [], marker='o', ls='', mfc='none', mec=ink, mew=1.5,
+               color=ink, label='First'),
+        Line2D([], [], marker='s', ls='', color=gold, label='Best by 3'),
+        Line2D([], [], marker='D', ls='', color=red, label='Best observed'),
+    ]
+    ax.legend(handles=legend, loc='lower left', bbox_to_anchor=(0, 1.01),
+              ncol=3, fontsize=10 if web else 11, handletextpad=.35,
+              columnspacing=1.1)
+    count = sum(row['best']-row['best3'] > 10 for row in all_rows)
+    title = ('Remaining gap after\nthree attempts' if mobile else
+             'The remaining gap after three attempts')
+    fig.text(.04, .97, title, fontsize=18 if mobile else 21,
+             weight='bold', color=ink, va='top')
+    fig.text(.04, .90 if mobile else .925,
+             f"{count} of {len(all_rows)} problem slots have a >10 pp remaining mean gap",
+             fontsize=11, color=muted, va='top')
+    note = ('Desktop story: 9 selected rows; full figure: all 23.'
+            if web else 'Rows sorted by remaining gap; all 23 problem slots shown.')
+    footnote(fig, [note,
+                   'Same attempters per row. Red = best observed minus best through three.',
+                   'Cumulative best is not the actual third score or a causal gain.'],
+             y=.018, web=web)
+    finalize_figure(fig,out/('03-score-progression'+('-mobile' if mobile else '')),
+                    'Remaining problem score gaps after three attempts',web=web)
 
 
 def attempt_scores(data,out,mobile=False,web=False):
@@ -284,6 +438,6 @@ def main():
         if args.private_hourly.resolve().is_relative_to(Path(__file__).resolve().parents[1]):
             raise ValueError('Private hourly input/output must remain outside the repository')
         private=json.loads(args.private_hourly.read_text())
-        calendar(data,args.private_hourly.parent,private=private['calendar'])
+        private_calendar(data,args.private_hourly.parent,private=private['calendar'])
 
 if __name__=='__main__':main()

@@ -20,15 +20,15 @@
 <section>
 <p class="eyebrow">RESEARCH COMPANION</p>
 <h1>Analysis &amp; methods</h1>
-<p>Interpretations, accessible data tables, sources and limitations for the visual story.</p>
+<p>Five featured chapters and ten downloadable figures. Attempt counts, midterm distribution, submission groups, platform coverage and platform score groups remain here as supporting evidence.</p>
 <nav class="analysis-toc" aria-label="Chart analysis">
-<a href="#timing">Timing</a>
+<a href="#timing">Visible submission peaks</a>
 <a href="#retries">Retries</a>
-<a href="#scores">First to best</a>
+<a href="#scores">Problem bottlenecks</a>
 <a href="#attempt-scores">Actual attempt scores</a>
 <a href="#midterm-distribution">Midterm scores</a>
 <a href="#midterm-associations">Process and exam</a>
-<a href="#midterm-attempt-groups">Overlapping outcomes</a>
+<a href="#midterm-attempt-groups">Submission groups</a>
 <a href="#platform-coverage">Platform coverage</a>
 <a href="#platform-groups">Platform and scores</a>
 <a href="#platform-associations">Combined evidence</a>
@@ -44,17 +44,17 @@
 <div class="section-heading">
 <span class="number">01</span>
 <div>
-<p class="eyebrow">TIMING</p>
-<h2>Activity volume and participation tell different stories.</h2>
+<p class="eyebrow">TIMING / VISIBLE CELLS</p>
+<h2>When does a burst reflect broad participation?</h2>
 </div>
 </div>
-<p class="reading">Across the full day on <strong>29 August, 233 submissions came from 14 students</strong>. In the visible 12:00–16:00 cell, 153 submissions came from 12 students. A busy period need not mean the whole class was working then.</p>
+<p class="reading">Across the full day on <strong>29 August, 233 submissions came from 14 students</strong>. The busiest <em>publicly visible</em> four-hour cell is 12:00–16:00 that day: 153 submissions from 12 students, or 12.75 submissions per active contributor. It was a Saturday before HW1's configured deadline. This identifies a submission burst, not study time.</p>
 <figure>
 <picture>
 <source media="(max-width: 900px)" srcset="assets/figures/01-calendar-mobile.svg">
-<img src="assets/figures/01-calendar.svg" alt="Paired date-by-time heatmaps show submission counts and distinct contributors. August 29, 12–16 Beijing time has 153 submissions from 12 contributors." loading="lazy">
+<img src="assets/figures/01-calendar.svg" alt="Two panels plot publicly visible positive four-hour cells. Reach versus submissions per active contributor, and Beijing clock time versus submissions. The largest visible cell is August 29, 12 to 16, with 153 submissions from 12 contributors." loading="lazy">
 </picture>
-<figcaption>Both panels describe the same windows but have separate color scales. Public cells cover four hours; 51 positive cells with fewer than five contributors are masked. Blank light cells are zero, hatched cells are suppressed, and gray cells are outside all homework windows. A separate full-hour version is retained locally.</figcaption>
+<figcaption>Marker shape identifies homework and marker area scales with submission count. Only 29 positive cells with at least five contributors appear. The other 51 positive cells contain 677 submissions but are masked, so the true busiest four-hour cell cannot be established from this public figure. Ratios do not describe every student equally.</figcaption>
 </figure>
 <div class="downloads">
 <a href="assets/figures/01-calendar.png" download>Download PNG ↗</a>
@@ -963,8 +963,8 @@
 </div>
 </details>
 <div class="plan">
-<h3>Planned interaction / animation</h3>
-<p>Filter by HW1, HW2 or HW3; switch between submissions and distinct contributors; select a day to inspect its time distribution. These controls will distinguish broad participation from repeated attempts. The public view will retain suppression after filtering. No animation is needed to read timing accurately.</p>
+<h3>Next analysis when event data are available</h3>
+<p>Recalculate activity relative to each homework deadline and compare time-of-day patterns after accounting for how long each interval was open. Review any public aggregation for sparse-cell disclosure before replacing this visible-cell figure. Submission time is not a measure of study duration.</p>
 </div>
 </section>
 <section class="chart-section" id="retries">
@@ -1053,18 +1053,18 @@
 <div class="section-heading">
 <span class="number">03</span>
 <div>
-<p class="eyebrow">SCORE PROGRESSION</p>
-<h2>The endpoint does not tell the whole story.</h2>
+<p class="eyebrow">PROBLEM BOTTLENECKS</p>
+<h2>Which problems remain difficult after three attempts?</h2>
 </div>
 </div>
-<p class="reading">
-<strong>HW3 TicTacToe</strong> has the largest first-to-best difference: its 39 attempters average 37.95 on their first submission and 100 for their best observed score, a difference of 62.05 percentage points. Both means use the same students.</p>
-<figure>
+<p class="reading">The chart ranks problem slots by the gap between mean best observed and mean best through three attempts. <strong>HW3 EvenOrOdd</strong> has the largest remaining gap: 66.15 through three versus 100 eventually, a 33.85-point difference among the same 39 attempters. That makes it a candidate for reviewing the task statement and feedback, not proof of a defective problem.</p>
+<p>For <strong>9 of 23 problem slots</strong>, this remaining gap exceeds 10 percentage points. The red segment shows that gap; the lighter segment places it beside the first-submission mean. These are problem-level means, not the number of students who improved.</p>
+<figure class="score-detail">
 <picture>
 <source media="(max-width: 900px)" srcset="assets/figures/03-score-progression-mobile.svg">
-<img src="assets/figures/03-score-progression.svg" alt="Dumbbell chart of 23 homework problem slots. First scores use open circles and best scores use diamonds. HW3 TicTacToe has the largest mean difference, 62.05 percentage points." loading="lazy">
+<img src="assets/figures/03-score-progression.svg" alt="Ranked problem score paths show first submission, best through three attempts, and best observed. The red segment marks the remaining mean gap after three attempts. Nine of 23 problem slots have a gap above ten points." loading="lazy">
 </picture>
-<figcaption>Scores are normalized within each homework problem. Endpoints are means across the same attempters, including students who submit only once. Best scores increase or stay constant by construction; the gap is not an estimate of learning caused by retrying. Problem labels omit assignment/exercise prefixes; full names appear in the table.</figcaption>
+<figcaption>Scores are normalized within each homework problem, with the same attempters at all three stages, including one-attempt pairs. Best through three is a cumulative maximum, not the actual third score. The gap helps prioritize questions for review but does not identify its cause or establish a learning effect. Exact values, including best through two, appear in the table.</figcaption>
 </figure>
 <div class="downloads">
 <a href="assets/figures/03-score-progression.png" download>Download PNG ↗</a>
@@ -1072,10 +1072,10 @@
 <a href="assets/figures/03-score-progression.pdf" download>Download PDF ↗</a>
 </div>
 <details>
-<summary>Accessible data table · first and best scores</summary>
+<summary>Accessible data table · four score stages</summary>
 <div class="table-scroll">
 <table>
-<caption>Per-problem means of normalized scores, sorted by difference within each homework.</caption>
+<caption>Per-problem mean normalized scores for the same attempters, sorted by best observed minus best through three. Intermediate columns are cumulative best through two or three attempts.</caption>
 <thead>
 <tr>
 <th scope="col">Homework</th>
@@ -1083,154 +1083,23 @@
 <th scope="col">Name</th>
 <th scope="col">Attempters</th>
 <th scope="col">First mean</th>
-<th scope="col">Best mean</th>
-<th scope="col">Difference (pp)</th>
+<th scope="col">Best through 2</th>
+<th scope="col">Best through 3</th>
+<th scope="col">Best observed</th>
+<th scope="col">Remaining gap after 3 (pp)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>HW1</td>
-<td>P2</td>
-<td>Exercise2.5-EggsGrossDozensLeftover</td>
-<td>38</td>
-<td>60.53</td>
-<td>100.00</td>
-<td>39.47</td>
-</tr>
-<tr>
-<td>HW1</td>
-<td>P6</td>
-<td>Exercise3.3-SimpleCalculator</td>
-<td>38</td>
-<td>65.79</td>
-<td>100.00</td>
-<td>34.21</td>
-</tr>
-<tr>
-<td>HW1</td>
-<td>P7</td>
-<td>HW1-ConsectiveFours</td>
-<td>38</td>
-<td>74.21</td>
-<td>100.00</td>
-<td>25.79</td>
-</tr>
-<tr>
-<td>HW1</td>
-<td>P5</td>
-<td>HW1-SentinelValue</td>
-<td>38</td>
-<td>76.32</td>
-<td>100.00</td>
-<td>23.68</td>
-</tr>
-<tr>
-<td>HW1</td>
-<td>P4</td>
-<td>Exercise1.2.15 Triangle Sides</td>
-<td>38</td>
-<td>80.00</td>
-<td>100.00</td>
-<td>20.00</td>
-</tr>
-<tr>
-<td>HW1</td>
-<td>P3</td>
-<td>HW1-LargeToSmall</td>
-<td>38</td>
-<td>80.00</td>
-<td>99.47</td>
-<td>19.47</td>
-</tr>
-<tr>
-<td>HW1</td>
-<td>P8</td>
-<td>Exercise1.4.15-InPlaceTranspose</td>
-<td>38</td>
-<td>88.60</td>
-<td>100.00</td>
-<td>11.40</td>
-</tr>
-<tr>
-<td>HW1</td>
+<td>HW3</td>
 <td>P1</td>
-<td>HW1-ComputeDisplacement</td>
-<td>38</td>
-<td>90.00</td>
+<td>26s3HW3-EvenOrOdd</td>
+<td>39</td>
+<td>40.51</td>
+<td>48.97</td>
+<td>66.15</td>
 <td>100.00</td>
-<td>10.00</td>
-</tr>
-<tr>
-<td>HW2</td>
-<td>P7</td>
-<td>IntQuestion</td>
-<td>35</td>
-<td>53.14</td>
-<td>97.14</td>
-<td>44.00</td>
-</tr>
-<tr>
-<td>HW2</td>
-<td>P8</td>
-<td>ShapeZoo</td>
-<td>35</td>
-<td>57.14</td>
-<td>100.00</td>
-<td>42.86</td>
-</tr>
-<tr>
-<td>HW2</td>
-<td>P3</td>
-<td>PairOfDice</td>
-<td>37</td>
-<td>57.30</td>
-<td>97.30</td>
-<td>40.00</td>
-</tr>
-<tr>
-<td>HW2</td>
-<td>P5</td>
-<td>Complex</td>
-<td>36</td>
-<td>64.44</td>
-<td>100.00</td>
-<td>35.56</td>
-</tr>
-<tr>
-<td>HW2</td>
-<td>P2</td>
-<td>CreditCard</td>
-<td>37</td>
-<td>65.95</td>
-<td>97.30</td>
-<td>31.35</td>
-</tr>
-<tr>
-<td>HW2</td>
-<td>P6</td>
-<td>CampusDirectory</td>
-<td>36</td>
-<td>64.44</td>
-<td>94.44</td>
-<td>30.00</td>
-</tr>
-<tr>
-<td>HW2</td>
-<td>P4</td>
-<td>Charge</td>
-<td>37</td>
-<td>75.68</td>
-<td>100.00</td>
-<td>24.32</td>
-</tr>
-<tr>
-<td>HW2</td>
-<td>P1</td>
-<td>Normalization</td>
-<td>37</td>
-<td>81.62</td>
-<td>100.00</td>
-<td>18.38</td>
+<td>33.85</td>
 </tr>
 <tr>
 <td>HW3</td>
@@ -1238,17 +1107,43 @@
 <td>TicTacToe</td>
 <td>39</td>
 <td>37.95</td>
+<td>60.51</td>
+<td>73.85</td>
 <td>100.00</td>
-<td>62.05</td>
+<td>26.15</td>
 </tr>
 <tr>
-<td>HW3</td>
-<td>P1</td>
-<td>26s3HW3-EvenOrOdd</td>
-<td>39</td>
-<td>40.51</td>
+<td>HW1</td>
+<td>P2</td>
+<td>Exercise2.5-EggsGrossDozensLeftover</td>
+<td>38</td>
+<td>60.53</td>
+<td>72.63</td>
+<td>76.32</td>
 <td>100.00</td>
-<td>59.49</td>
+<td>23.68</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P4</td>
+<td>Charge</td>
+<td>37</td>
+<td>75.68</td>
+<td>78.38</td>
+<td>81.08</td>
+<td>100.00</td>
+<td>18.92</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P6</td>
+<td>Exercise3.3-SimpleCalculator</td>
+<td>38</td>
+<td>65.79</td>
+<td>73.68</td>
+<td>81.58</td>
+<td>100.00</td>
+<td>18.42</td>
 </tr>
 <tr>
 <td>HW3</td>
@@ -1256,8 +1151,43 @@
 <td>26s3HW3-DigitProcessing</td>
 <td>39</td>
 <td>64.10</td>
+<td>74.36</td>
+<td>82.05</td>
 <td>100.00</td>
-<td>35.90</td>
+<td>17.95</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P8</td>
+<td>ShapeZoo</td>
+<td>35</td>
+<td>57.14</td>
+<td>71.43</td>
+<td>82.86</td>
+<td>100.00</td>
+<td>17.14</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P3</td>
+<td>PairOfDice</td>
+<td>37</td>
+<td>57.30</td>
+<td>78.92</td>
+<td>83.78</td>
+<td>97.30</td>
+<td>13.51</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P7</td>
+<td>IntQuestion</td>
+<td>35</td>
+<td>53.14</td>
+<td>81.14</td>
+<td>84.00</td>
+<td>97.14</td>
+<td>13.14</td>
 </tr>
 <tr>
 <td>HW3</td>
@@ -1265,8 +1195,65 @@
 <td>Hanoi</td>
 <td>39</td>
 <td>67.69</td>
+<td>89.74</td>
+<td>92.31</td>
 <td>100.00</td>
-<td>32.31</td>
+<td>7.69</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P2</td>
+<td>CreditCard</td>
+<td>37</td>
+<td>65.95</td>
+<td>83.24</td>
+<td>89.73</td>
+<td>97.30</td>
+<td>7.57</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P1</td>
+<td>Normalization</td>
+<td>37</td>
+<td>81.62</td>
+<td>89.73</td>
+<td>92.43</td>
+<td>100.00</td>
+<td>7.57</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P1</td>
+<td>HW1-ComputeDisplacement</td>
+<td>38</td>
+<td>90.00</td>
+<td>92.63</td>
+<td>92.63</td>
+<td>100.00</td>
+<td>7.37</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P7</td>
+<td>HW1-ConsectiveFours</td>
+<td>38</td>
+<td>74.21</td>
+<td>89.47</td>
+<td>94.74</td>
+<td>100.00</td>
+<td>5.26</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P5</td>
+<td>HW1-SentinelValue</td>
+<td>38</td>
+<td>76.32</td>
+<td>90.00</td>
+<td>94.74</td>
+<td>100.00</td>
+<td>5.26</td>
 </tr>
 <tr>
 <td>HW3</td>
@@ -1274,17 +1261,32 @@
 <td>Rectangle</td>
 <td>39</td>
 <td>67.69</td>
+<td>90.26</td>
+<td>94.87</td>
 <td>100.00</td>
-<td>32.31</td>
+<td>5.13</td>
 </tr>
 <tr>
-<td>HW3</td>
-<td>P4</td>
-<td>MeasureBox</td>
-<td>39</td>
-<td>79.49</td>
+<td>HW2</td>
+<td>P6</td>
+<td>CampusDirectory</td>
+<td>36</td>
+<td>64.44</td>
+<td>83.89</td>
+<td>89.44</td>
+<td>94.44</td>
+<td>5.00</td>
+</tr>
+<tr>
+<td>HW2</td>
+<td>P5</td>
+<td>Complex</td>
+<td>36</td>
+<td>64.44</td>
+<td>89.44</td>
+<td>95.56</td>
 <td>100.00</td>
-<td>20.51</td>
+<td>4.44</td>
 </tr>
 <tr>
 <td>HW3</td>
@@ -1292,16 +1294,62 @@
 <td>LargeNumber</td>
 <td>39</td>
 <td>83.08</td>
+<td>90.26</td>
+<td>92.82</td>
 <td>96.92</td>
-<td>13.85</td>
+<td>4.10</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P3</td>
+<td>HW1-LargeToSmall</td>
+<td>38</td>
+<td>80.00</td>
+<td>94.21</td>
+<td>96.32</td>
+<td>99.47</td>
+<td>3.16</td>
+</tr>
+<tr>
+<td>HW3</td>
+<td>P4</td>
+<td>MeasureBox</td>
+<td>39</td>
+<td>79.49</td>
+<td>94.87</td>
+<td>97.44</td>
+<td>100.00</td>
+<td>2.56</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P4</td>
+<td>Exercise1.2.15 Triangle Sides</td>
+<td>38</td>
+<td>80.00</td>
+<td>93.68</td>
+<td>97.89</td>
+<td>100.00</td>
+<td>2.11</td>
+</tr>
+<tr>
+<td>HW1</td>
+<td>P8</td>
+<td>Exercise1.4.15-InPlaceTranspose</td>
+<td>38</td>
+<td>88.60</td>
+<td>97.37</td>
+<td>100.00</td>
+<td>100.00</td>
+<td>0.00</td>
 </tr>
 </tbody>
 </table>
 </div>
 </details>
 <div class="plan">
-<h3>Planned interaction / animation</h3>
-<p>Filter by homework and switch the best-score endpoint between the first two attempts, first three attempts and all observed attempts. Keep the original set of attempters: for students with fewer attempts, use their best observed score so far. A short endpoint transition will reveal where gains accumulate without changing the comparison cohort.</p>
+<h3>Next analysis when event data are available</h3>
+<p>Calculate, by problem and attempt number, the share of eligible repeats that set a new personal best or first reach acceptance. The current problem-level mean gaps cannot tell us how many students improved or why a particular problem remained difficult.</p>
 </div>
 </section>
 <section class="chart-section" id="attempt-scores">
@@ -1663,17 +1711,17 @@
 <span class="number">06</span>
 <div>
 <p class="eyebrow">HOMEWORK PROCESS / EXAM OUTCOME</p>
-<h2>Signals worth testing. Not a prediction model.</h2>
+<h2>Test the association from several angles.</h2>
 </div>
 </div>
-<p class="reading">In this excerpt, final-day submission share has the clearest negative rank association with exam scores (<strong>ρ = -0.48</strong>). Submission count is positively associated and mean first-submission score negatively associated, but both corresponding bootstrap intervals cross zero.</p>
+<p class="reading">In this excerpt, final-day submission share has the clearest negative rank association with exam scores (<strong>ρ = -0.48</strong>). Its leave-one-out correlations range from -0.60 to -0.42, while the all-23-problem and discrepancy-excluded subsets give -0.43 and -0.47. All three leave-one-out ranges retain their original signs, yet the submission-count and mean-first-score bootstrap intervals cross zero. Stability to one-record deletion does not imply a precise estimate. These checks do not remove selection bias or confounding.</p>
 <p>All selected homework windows end before the user-confirmed exam start.</p>
 <figure>
 <picture>
 <source media="(max-width: 900px)" srcset="assets/figures/06-midterm-associations-mobile.svg">
-<img src="assets/figures/06-midterm-associations.svg" alt="Three Spearman correlations with 95 percent paired student bootstrap intervals; count and first-score intervals cross zero." loading="lazy">
+<img src="assets/figures/06-midterm-associations.svg" alt="Robustness chart for three homework-behavior correlations with midterm score: main 26-student Spearman rho and 95 percent paired bootstrap intervals, leave-one-out ranges, all-23-problem subset, and discrepancy-excluded subset. Final-day share is negative in every check." loading="lazy">
 </picture>
-<figcaption>One observation per student. Dots show Spearman rank correlation; lines show 95% percentile intervals from 5,000 paired student bootstrap draws (fixed seed). These intervals do not account for non-random grade availability, unmeasured prior knowledge or multiple comparisons. No p-values or causal claims are made.</figcaption>
+<figcaption>One observation per student in each calculation. The 95% percentile intervals come from 5,000 paired-student bootstrap draws with a fixed seed. Leave-one-out ranges are a separate sensitivity diagnostic, not confidence intervals. The 23-person full-coverage and 24-person discrepancy-excluded subsets change cohort composition. No adjusted, predictive or causal model is fitted; non-random grade availability and multiple comparisons remain limitations.</figcaption>
 </figure>
 <div class="downloads">
 <a href="assets/figures/06-midterm-associations.png" download>Download PNG ↗</a>
@@ -2152,8 +2200,8 @@
 </tr>
 <tr>
 <td>Score progression</td>
-<td>Find the largest first-to-best difference.</td>
-<td>Correct problem and approximate percentage-point gap.</td>
+<td>Find the largest mean gap remaining after three attempts.</td>
+<td>Correct problem, best-through-three value and remaining percentage-point gap.</td>
 </tr>
 <tr>
 <td>Actual attempt scores</td>

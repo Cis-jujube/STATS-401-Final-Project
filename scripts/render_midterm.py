@@ -48,30 +48,80 @@ def distribution(d, out, mobile=False, web=False):
 
 
 def associations(d, out, mobile=False, web=False):
-    accent, _, muted = colors(web)
-    fig, ax = plt.subplots(figsize=(6.6, 8) if mobile else (10, 6.6))
-    labels = ["Submission\ncount", "Mean first\nsubmission score", "Final-24h\nsubmission share"]
-    for y, row in enumerate(d["associations"]):
+    accent, gold, muted = colors(web)
+    fig = plt.figure(figsize=(6.8, 11.8) if mobile else (10.8, 9.1))
+    left = .35 if mobile else .28
+    width = .42 if mobile else .49
+    rows = sorted(d["associations"],
+                  key=lambda row: {"late_pct": 0, "attempts": 1, "first_score": 2}[row["metric"]])
+    labels = ["Final-24h\nsubmission share", "Submission\ncount",
+              "Mean first\nsubmission score"]
+    headings = [
+        "A  Full cohort · dot = ρ, bar = 95% bootstrap interval",
+        "B  Leave-one-out range · hollow dot = full estimate",
+        "C  Subsets · diamond = all slots; square = omit discrepancies",
+    ]
+    axes = []
+    for bottom, heading_y, heading in zip((.68, .43, .18), (.865, .615, .365), headings):
+        fig.text(.04, heading_y, heading, fontsize=10 if mobile else 11,
+                 weight="bold")
+        ax = fig.add_axes((left, bottom, width, .145))
+        ax.set_xlim(-1, 1)
+        ax.set_ylim(-.45, 2.45)
+        ax.set_yticks((2, 1, 0), labels)
+        ax.set_xticks((-1, 0, 1) if mobile else (-1, -.5, 0, .5, 1))
+        ax.axvline(0, color=muted, ls="--", lw=1)
+        ax.axhspan(1.65, 2.35, color=accent, alpha=.055, zorder=0)
+        ax.grid(axis="x", alpha=.13)
+        ax.set_axisbelow(True)
+        ax.spines["left"].set_visible(False)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.tick_params(axis="y", length=0, pad=9, labelsize=10 if mobile else 11)
+        if len(axes) < 2:
+            ax.tick_params(axis="x", labelbottom=False, bottom=False)
+            ax.spines["bottom"].set_visible(False)
+        axes.append(ax)
+
+    for i, row in enumerate(rows):
+        y = 2 - i
         low, high = row["bootstrap_interval"]
-        ax.plot([low, high], [y, y], color=accent, lw=3, solid_capstyle="round")
-        ax.plot(row["rho"], y, "o", color=accent, ms=9)
-        ax.text(1.04, y, f"{row['rho']:+.2f}", transform=ax.get_yaxis_transform(),
-                va="center", fontsize=13, weight="bold")
-    ax.axvline(0, color=muted, ls="--", lw=1.1)
-    ax.set_xlim(-1, 1)
-    ax.set_xticks([-1, -.5, 0, .5, 1])
-    ax.set_yticks(range(3), labels)
-    ax.set_ylim(2.6, -.6)
-    ax.set_xlabel("Spearman rank correlation with midterm score")
-    ax.spines["left"].set_visible(False)
-    ax.tick_params(axis="y", length=0)
-    ax.grid(axis="x", alpha=.12)
-    fig.text(.04, .94, "Process and exam / associations", fontsize=16, weight="bold")
-    fig.text(.04, .87, f"n = {d['matched']} students  ·  Dots: rank correlation  ·  Lines: bootstrap interval", fontsize=11, color=muted)
-    finish(fig, out, "06-midterm-associations", "Homework behavior and midterm rank correlations",
-           ["Paired student bootstrap: 5,000 resamples; 95% percentile intervals.",
-            "Intervals describe resampling variability, not selection bias or causality.",
-            "Exploratory, unadjusted associations; no significance or predictive claim."], mobile, web)
+        axes[0].plot((low, high), (y, y), color=accent, lw=3,
+                     solid_capstyle="round")
+        axes[0].plot(row["rho"], y, "o", color=accent, ms=8)
+        axes[0].text(1.04, y, f"{row['rho']:+.2f}",
+                     transform=axes[0].get_yaxis_transform(), va="center",
+                     fontsize=11, weight="bold")
+
+        low, high = row["leave_one_out_range"]
+        axes[1].plot((low, high), (y, y), color=gold, lw=2)
+        axes[1].plot((low, high), (y, y), "|", color=gold, ms=9)
+        axes[1].plot(row["rho"], y, "o", mfc="none", mec=gold, mew=1.5, ms=7)
+        axes[1].text(1.04, y, f"{low:+.2f} to {high:+.2f}",
+                     transform=axes[1].get_yaxis_transform(), va="center",
+                     fontsize=9 if mobile else 10)
+
+        complete = row["complete_problem_coverage"]["rho"]
+        consistent = row["without_homework_discrepancies"]["rho"]
+        axes[2].plot(complete, y + .12, "D", color=accent, ms=7)
+        axes[2].plot(consistent, y - .12, "s", color=gold, ms=7)
+        axes[2].text(1.04, y, f"{complete:+.2f} / {consistent:+.2f}",
+                     transform=axes[2].get_yaxis_transform(), va="center",
+                     fontsize=9 if mobile else 10)
+
+    axes[2].set_xlabel("Spearman ρ with midterm score", labelpad=8)
+    fig.text(.04, .967, "Deadline timing and exam / robustness", fontsize=16,
+             weight="bold")
+    fig.text(.04, .925, f"{d['matched']} of {d['eligible_roster']} eligible students have supplied grades",
+             fontsize=11, color=muted)
+    footnote(fig, [
+        "A: 5,000 paired-student bootstrap draws; intervals reflect resampling variability.",
+        "B: 26 re-fits of n=25; the line is a range, not a confidence interval.",
+        "C: all 23 slots n=23; omit two discrepancies n=24. Exploratory, unadjusted associations.",
+    ], y=.025, web=web)
+    finalize_figure(fig, out / ("06-midterm-associations" +
+                               ("-mobile" if mobile else "")),
+                    "Homework behavior and midterm association robustness", web=web)
 
 
 def groups(d, out, mobile=False, web=False):
