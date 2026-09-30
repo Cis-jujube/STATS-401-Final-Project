@@ -1,0 +1,96 @@
+/* The cinematic layer shares site.js's scroll clock. All data settles flat. */
+.score-portal, .score-echo, .scene-orbit, .scene-thread, .figure-depth,
+.cinema-strip, #journey-field, .journey-rule { display:none; pointer-events:none; }
+.score-sculpture { position:relative; }
+.hero-heading, .score-composition, .hero-bottom, .hero-stage>.byline { position:relative; z-index:1; }
+.title-mask { display:inline-block; vertical-align:bottom; overflow:clip; padding-bottom:.1em; margin-bottom:-.1em; }
+.title-mask>span { display:inline-block; }
+.journey-type { position:relative; z-index:1; }
+.journey-type>span { transform-origin:center; }
+.story-ending { display:grid; grid-template-columns:1fr 1fr; align-items:start; gap:8vw; }
+.ending-intro { max-width:500px; }
+.evidence-archive { border-top:1px solid #25211e; }
+.evidence-archive a { display:flex; align-items:center; justify-content:space-between; gap:20px; min-height:58px; padding:14px 0; border-bottom:1px solid #25211e40; text-decoration:none; position:relative; }
+.evidence-archive a::before { content:''; position:absolute; inset:0; background:#bd3d240b; transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease-silk); }
+.evidence-archive a>span { position:relative; transition:transform .4s var(--ease-silk); }
+.evidence-archive a:hover::before,.evidence-archive a:focus-visible::before { transform:scaleX(1); }
+.evidence-archive a:hover>span:first-child,.evidence-archive a:focus-visible>span:first-child { transform:translateX(10px); }
+.evidence-archive a:hover>span:last-child { transform:translate(3px,-3px); }
+
+/* A line-drawn tunnel and outlined echoes make the actual 100 a type sculpture. */
+.motion-ready .score-portal { display:block; position:absolute; width:75%; height:95%; right:-15%; top:3%; fill:none; stroke:var(--vermillion); stroke-width:.7; opacity:calc(.10 + var(--hero-progress,0) * .17); transform:perspective(900px) rotateY(calc(-38deg + var(--hero-progress,0) * 52deg)) rotateZ(calc(-18deg + var(--hero-progress,0) * 32deg)) scale(calc(.85 + var(--hero-progress,0) * .7)); }
+.motion-ready .score-echo { display:block; position:absolute; inset:0; font-size:clamp(90px,15.2vw,230px); font-weight:500; letter-spacing:-.085em; line-height:.88; color:transparent; -webkit-text-stroke:1px var(--vermillion); opacity:calc(var(--hero-progress,0) * .42); transform:translate(calc(var(--hero-progress,0) * -30px),calc(var(--hero-progress,0) * 23px)); }
+.motion-ready .score-echo:nth-child(2) { opacity:calc(var(--hero-progress,0) * .2); transform:translate(calc(var(--hero-progress,0) * -60px),calc(var(--hero-progress,0) * 46px)); }
+.score-sculpture strong { position:relative; }
+
+/* Keep the two familiar opposing lines; the tunnel moves behind their letters. */
+.motion-ready .journey-opening { padding-top:clamp(100px,17vh,180px); padding-bottom:clamp(100px,17vh,180px); isolation:isolate; perspective:1200px; }
+.motion-ready #journey-field { display:block; position:absolute; inset:0; width:100%; height:100%; z-index:0; }
+.motion-ready .journey-type { transform:rotateX(calc(var(--interlude-tilt,0) * 10deg)); }
+.motion-ready .journey-type>span:first-child { transform:translateX(var(--interlude-x,0px)) rotateY(calc(var(--interlude-tilt,0) * -7deg)); }
+.motion-ready .journey-type>span:last-child { transform:translateX(calc(var(--interlude-x,0px) * -1)) rotateY(calc(var(--interlude-tilt,0) * 7deg)); }
+.motion-ready .journey-rule { display:block; position:absolute; bottom:0; left:6%; width:88%; height:1px; background:var(--paper); transform-origin:left; transform:scaleX(var(--interlude-progress,0)); opacity:.65; }
+
+/* Each chapter opens on a different spatial gesture, then releases its scenery. */
+.motion-ready .scene-orbit { display:block; position:absolute; right:-8%; top:10%; width:60vw; height:60vw; max-height:100vh; opacity:calc(var(--entry-flash,0) * .18); transform:rotate(calc(var(--entry,0) * -25deg)); color:var(--scene-accent); }
+.scene-orbit i { position:absolute; inset:8%; border:1px solid currentColor; border-radius:50%; transform:rotateX(62deg); }
+.scene-orbit i:nth-child(2) { inset:18%; transform:rotateX(62deg) rotateY(25deg); }
+.scene-orbit i:nth-child(3) { inset:28%; transform:rotateX(62deg) rotateY(-25deg); }
+.motion-ready .scene-thread { display:block; position:absolute; top:85px; left:4.5%; height:1px; width:91%; background:linear-gradient(90deg,var(--scene-accent),transparent); transform:scaleX(var(--chapter-reveal,1)); transform-origin:left; opacity:.35; }
+.motion-ready .scene-index { transform:translateY(calc(var(--entry,0) * -80px)); }
+.motion-ready .title-mask>span { transform:translateY(calc(var(--entry,0) * (105% + var(--line) * 28%))) rotate(calc(var(--entry,0) * -4deg)); transform-origin:left bottom; }
+.motion-ready .story-chapter[data-cinema] .chapter-figure { overflow:visible; }
+.motion-ready .figure-depth { display:block; position:absolute; inset:4% 3%; color:var(--scene-accent); opacity:calc(var(--entry-flash,0) * .45); }
+.figure-depth i { position:absolute; inset:0; border:1px solid currentColor; transform:translate3d(calc(var(--entry,0) * var(--plane) * 20px),calc(var(--entry,0) * var(--plane) * -22px),0); }
+.motion-ready [data-cinema] .chapter-figure>picture { clip-path:none; transform:none; }
+.motion-ready [data-cinema="perspective"] .chapter-figure { transform:perspective(1600px) rotateX(calc(var(--entry,0) * 36deg)) rotateY(calc(var(--entry,0) * -14deg)) scale(var(--figure-expand,1)); transform-origin:center bottom; }
+.motion-ready [data-cinema="perspective"] .chapter-figure>picture { clip-path:inset(0 0 calc(var(--entry,0) * 100%) 0); }
+.motion-ready [data-cinema="hinge"] .chapter-figure { transform:perspective(1400px) rotateY(calc(var(--entry,0) * 42deg)) rotateZ(calc(var(--entry,0) * -4deg)) scale(var(--figure-expand,1)); transform-origin:left center; }
+.motion-ready [data-cinema="focus"] .chapter-figure>picture { clip-path:inset(0 calc(var(--entry,0) * 49%)); }
+.motion-ready [data-cinema="focus"] .figure-depth i { transform:translateX(calc(var(--entry,0) * var(--plane) * -24px)); }
+.motion-ready [data-cinema="stack"] .chapter-figure { transform:perspective(1400px) rotateX(calc(var(--entry,0) * 26deg)) rotateZ(calc(var(--entry,0) * 7deg)) scale(var(--figure-expand,1)); }
+.motion-ready [data-cinema="aperture"] .chapter-figure>picture { clip-path:inset(calc(var(--entry,0) * 48%) 0); }
+.motion-ready [data-cinema="aperture"] .figure-depth i { transform:scaleY(calc(1 - var(--entry,0) * var(--plane) * .19)); }
+.motion-ready [data-cinema="converge"] .chapter-figure { transform:perspective(1400px) rotateY(calc(var(--entry,0) * -26deg)) scale(var(--figure-expand,1)); }
+.motion-ready [data-cinema="converge"] .figure-depth i { transform:translate(calc(var(--entry,0) * var(--plane) * -25px),calc(var(--entry,0) * var(--plane) * 12px)); }
+
+/* Six film strips, all sourced from the same chart, assemble without reordering. */
+.motion-ready [data-cinema="slices"] .chapter-figure>picture { opacity:calc(1 - var(--shards-visible,0)); }
+.motion-ready .cinema-strip { display:block; position:absolute; inset:0; clip-path:inset(var(--cut-top) 0 var(--cut-bottom) 0); opacity:var(--shards-visible,0); transform:translateX(calc(var(--entry,0) * (var(--strip) - 2.5) * 34px)); }
+.cinema-strip picture,.cinema-strip img { width:100%; height:100%; }
+.motion-ready #scene-attempt-scores .cinema-strip { transform:translateX(calc(var(--entry,0) * (2.5 - var(--strip)) * 44px)); }
+/* The offset layout used top padding; strips must share the original bounds. */
+[data-cinema="slices"] .chapter-figure { padding-top:0; }
+
+.motion-ready .story-ending .ending-intro { transform:translateY(calc((1 - var(--ending-reveal,1)) * 35px)); }
+.motion-ready .evidence-archive { transform:translateY(calc((1 - var(--ending-reveal,1)) * 65px)); }
+.chapter-actions>a,.focus-link { transition:color .25s, border-color .25s; }
+.chapter-actions>a:hover,.focus-link:hover { color:var(--scene-accent); border-color:currentColor; }
+
+/* Flat, complete charts on constrained screens; typography retains its rhythm. */
+@media(max-width:1000px), (max-height:800px) {
+  .motion-ready .story-chapter[data-cinema] .chapter-figure { transform:scale(calc(.96 + var(--chapter-reveal,1) * .04)); }
+  .motion-ready .figure-depth,.motion-ready .scene-orbit { display:none; }
+}
+@media(max-height:780px) and (min-width:701px) {
+  .motion-ready .score-echo { font-size:clamp(85px,13vw,180px); }
+}
+@media(max-width:700px) {
+  .motion-ready .score-echo { display:none; }
+  .motion-ready .score-portal { width:120%; right:-45%; top:4%; opacity:.1; transform:rotate(-25deg); }
+  .motion-ready .journey-opening { padding:95px 6%; }
+  .motion-ready .journey-type { transform:none; }
+  .motion-ready .journey-type>span:first-child { transform:translateX(calc(var(--interlude-x,0px) * .4)); }
+  .motion-ready .journey-type>span:last-child { transform:translateX(calc(var(--interlude-x,0px) * -.4)); }
+  .motion-ready .scene-thread { top:122px; left:6%; width:88%; }
+  .motion-ready .cinema-strip { display:none; }
+  .motion-ready .story-chapter[data-cinema] .chapter-figure>picture { opacity:1; clip-path:none; transform:none; }
+  .motion-ready .title-mask>span { transform:translateY(calc(var(--entry,0) * 24px)); }
+  .story-ending { grid-template-columns:1fr; gap:45px; padding:80px 6%; }
+  .evidence-archive a { min-height:54px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .score-portal,.score-echo,.scene-orbit,.scene-thread,.figure-depth,.cinema-strip,#journey-field,.journey-rule { display:none!important; }
+  .title-mask>span,.journey-type,.journey-type>span,.story-ending .ending-intro,.evidence-archive { transform:none!important; }
+  .story-chapter[data-cinema] .chapter-figure>picture { opacity:1!important; clip-path:none!important; transform:none!important; }
+}

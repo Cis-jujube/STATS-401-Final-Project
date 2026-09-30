@@ -81,10 +81,16 @@ class MidtermRules(unittest.TestCase):
 
     def test_public_artifact_reconciles_and_contains_no_identity_fields(self):
         d = json.loads((ROOT / "data/midterm-summary.json").read_text())
-        old = json.loads((ROOT / "data/summary.json").read_text())
+        current = json.loads((ROOT / "data/summary.json").read_text())
         self.assertEqual(d["matched"]+d["grades_not_in_excerpt"], d["eligible_roster"])
         self.assertEqual(d["matched"], 26)
-        self.assertEqual(d["window_submissions"], old["window_submissions"])
+        # HW4 is post-exam: refreshing the homework snapshot must not extend
+        # the historical pre-exam exposure used by the grade associations.
+        pre_exam = [a for a in current['assignments'] if a['homework'] in ('HW1','HW2','HW3')]
+        self.assertEqual(d["window_submissions"], sum(a['submissions'] for a in pre_exam))
+        self.assertEqual(d["eligible_roster"],41)
+        self.assertEqual(len(pre_exam),3)
+        self.assertGreater(current['window_submissions'],d['window_submissions'])
         self.assertTrue(d["pre_exam_verified"])
         self.assertEqual(sum(r["n"] for r in d["distribution"]), d["matched"])
         self.assertEqual(sum(r["n"] for r in d["attempt_groups"]), d["matched"])

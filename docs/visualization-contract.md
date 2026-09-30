@@ -1,31 +1,21 @@
-# Interim visualization contract
+# Visualization contract · completed event-data refresh
 
-User-approved analytical direction: **CS201 Homework Submission Patterns: Timing, Retries, and Score Progression**. Deliver the first three recommended figures plus actual mean score at each within-problem attempt number; retry-interval analysis and midterm comparison are future extensions. This is a straightforward statistical report, not a concept-first/advanced art-directed composition.
+The question is **what recorded submission behavior reveals beyond near-perfect homework scores**. The two previously pending event analyses are now implemented from the authorized 30 September Beijing snapshot. All six homework-process figures include HW4; exam and Course Pulse figures keep their pre-exam cohorts. The main story retains the existing supporting chapters and adds the two new views: ten featured chapters and twelve downloadable figures. No existing figure or interaction is removed.
 
-## Reading path and ownership
+| Research view | Current evidence and encoding | Interpretation boundary |
+|---|---|---|
+| Timing, reach and intensity (01) | 37 visible positive four-hour cells; contributor count versus attempts per contributor, and clock-time bin versus events. Shape identifies HW1–HW4. | 74 positive cells with 979 submissions are masked; the overall four-hour peak and study hours are unknown. |
+| Problem bottlenecks (03) | First, best-through-three and best-observed means; 10 of 31 slots retain a >10 pp mean gap. Publication figures retain 31 rows; the story selects 12 on desktop and 8 on mobile. | Same attempters per row; cumulative best is not an actual third score, a count of improved students or a causal effect. |
+| Productive retries (11) | New bests / eligible retries by homework and elapsed gap; numeric numerator, denominator and distinct contributors. The companion also gives a masked per-problem table. | Strict improvement above historical best, only while prior best <100. First scores, IE and post-full-credit attempts are excluded. Gaps are clock time, not study time. |
+| Progress relative to deadlines (12) | Matrix of five equal-duration phases per homework. Color encodes rate on 0–100%; text gives new bests / eligible retries and contributors. Four cells are hatched and withheld. | Counts are repeated events; phase widths differ in hours across homework. Configured deadlines do not incorporate individual extensions. No deadline effect is estimated. |
+| Process and midterm (06) | Paired-student bootstrap, leave-one-out and two sensitivity-cohort estimates from the existing pre-exam input. | Only 26 of the historical 41 eligible students have supplied grades. HW4 is post-exam and excluded. Associations are exploratory. |
 
-All specialist passes are local; no delegation was requested. Statistical/uncertainty guidance owns denominators, distributions and paired score cohorts; report/export guidance owns durable assets; accessibility guidance owns direct labels and tabular alternatives.
+Attempt distributions (02), actual nth-attempt scores (04) and Course Pulse context remain in the main story. Midterm distribution (05) and submission-group comparison (07) remain in the companion. The earlier five-main-figure proposal is a design option, not an instruction to remove supporting features during this refresh.
 
-| Figure | Question / grain | Encoding | Evidence and QA |
-|---|---|---|---|
-| Calendar | When do submissions occur, and how broad is participation? Date × time bin, Beijing time, all three homework windows | Sequential heatmaps for submissions and distinct contributors; separate scales; zero, masked and inactive distinguished | Sum private hourly bins to 2,101; public cells with 1–4 contributors masked. Public bins are four hours to reduce sparse-group exposure. Full hourly version stays local. |
-| Attempts | How variable are per-student homework attempt counts? Student × homework, positive submitters only | Boxplots; median, inclusive quartiles, min–max whiskers; no individual dots | n=38/38/39; medians=12.5/13/14; no inference about effort/ability; 8/8/7 assigned problems |
-| Score progression | How far apart are first and best observed normalized scores? Student × homework × problem, then problem means | First score as an open circle, best as a filled diamond; connected pair per problem; x=0–100 | Same attempters at both endpoints; score=assignment submission points / assignment problem maximum; all n≥5; best is nondecreasing by definition |
+## Artifact and verification contract
 
-## Implementation design
-
-- Python standard-library aggregation reads a private external export. Only approved aggregate JSON enters this repository.
-- Figure renderer owns axes, text, scales and marks; durable SVG plus high-resolution PNG, with independent mobile compositions rather than unreadably shrinking desktop artwork.
-- Plain semantic HTML/CSS, four figure sections, no remote fonts or runtime API, no server or credentials. Standard library HTML generation shares aggregate data with figures to prevent numeric drift.
-- Four primary figures; small mobile variants and private hourly export. No animation, client state or URL filter state in this milestone. HTML anchors support deep links. Planned interactions are labeled as planned.
-- One column on 390px mobile, bounded text width on desktop, chart evidence above long methods, 44px download targets, readable text tables in native disclosure controls, image alt text and captions. Color is not the sole discriminator.
-- Color roles follow figures4papers: dark neutral text, blue activity and score endpoints, blue/teal/red homework series; light outlined circles/first score; neutral connectors; gray and hatch for excluded/suppressed cells. No decorative imagery.
-- QA: input/schema/foreign-key checks; meaningful unit tests for timezones, score scales, same-cohort best scores, suppression; image inspection; file-based desktop/mobile browser checks; public artifact privacy scan; final Git diff review.
-
-## Publication boundary
-
-No student pseudonyms, raw IDs, linkage key, raw JSON, transfer text, individual grades or individual dots are shipped. Suppression is a practical disclosure reduction, not a formal privacy guarantee. Per-problem score summaries are across 30+ students; rare temporal groups remain masked. Original proposal and synthetic sketches remain labeled historical; the interim page is the current direction.
-
-## Publication-style revision
-
-User requested figures4papers and approved project-local Matplotlib plus the actual-nth-score estimand. Read SKILL.md, design-theory.md and api.md from commit 3c181f85e82c6f24948fcaaf3be6696102b41d8d. Rendering now uses Matplotlib with 300 DPI PNG and vector PDF/SVG; three-panel score layouts use a common scale. Figure 04 averages actual kth-attempt scores with event weighting, changing cohorts, N/S rows and a five-student minimum. No uncertainty bands or causal claims are introduced. The public webpage remains static HTML/CSS with planned analytical interactions.
+- `prepare_data.py` derives only public aggregates from private inputs, applying the previously confirmed account exclusion to a copy. Full definitions and masking rules are in [methods](methods.md) and [event methods](event-methods.md).
+- `render_figures.py` renders the four existing homework views; `render_events.py` renders Figures 11–12. Both produce publication PNG/PDF/SVG and transparent SVG with `--web`. The midterm/platform renderers use separate unchanged aggregate inputs.
+- `build_page.py`, `homework_sections.py` and `render_site.py` derive homework captions, tables and story descriptions from the refreshed JSON. The existing continuous scroll, “Follow the submissions” interlude, motion controls and focus dialog remain.
+- All views require mobile compositions, denominators, alt text, accessible tables and downloads. Private identities, raw events and linkage keys remain outside the repository. Numeric suppressed fields are null; zeros are explicit.
+- Verify calculations, raw-input preservation, public privacy fields, resource/anchor integrity and rendered chart legibility. Browser interaction evidence must be reported separately from static and figure-level checks. Local output does not imply push, deployment or reader-study completion.

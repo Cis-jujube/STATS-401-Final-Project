@@ -89,6 +89,12 @@
     setStyle(hero, '--hero-rule', motion ? Math.max(.08, heroProgress).toFixed(4) : '1');
     const interlude = follow(opening, ease(clamp((openingRect.top + delta) / height)), elapsed);
     setStyle(opening, '--interlude-x', motion ? `${((interlude - .3) * 100).toFixed(2)}px` : '0px');
+    const passage = motion ? clamp((height - openingRect.top - delta) / (height + openingRect.height)) : .5;
+    setStyle(opening, '--interlude-progress', passage.toFixed(4));
+    setStyle(opening, '--interlude-tilt', motion ? (1 - passage * 2).toFixed(4) : '0');
+    setStyle(evidence, '--ending-reveal', motion ? ease((height - evidenceTop) / (height * .65)).toFixed(4) : '1');
+    globalThis.StoryCinema?.render({width: openingRect.width, height: openingRect.height,
+      progress: passage, visible: openingRect.bottom > 0 && openingRect.top < height, motion});
     chapters.forEach((chapter, i) => {
       const target = motion ? ease((height - rects[i].top - delta) / (height * .95)) : 1;
       const elasticReveal = follow(chapter, target, elapsed);
@@ -141,6 +147,7 @@
   function openFocus(button) {
     const image = button.closest('.story-chapter').querySelector('img');
     const file = button.dataset.figure + (desktop.matches ? '' : '-mobile');
+    dialog.dataset.figure = button.dataset.figure;
     $('#focus-image').src = `assets/story/${file}.svg`;
     $('#focus-image').alt = image.alt;
     $('#focus-title').textContent = button.dataset.title;
