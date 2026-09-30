@@ -20,13 +20,13 @@ Allow 15–20 minutes per session: consent and orientation (2 min), four informa
 | Task prompt | Answer key from the current aggregate snapshot | Scoring (0–2) |
 |---|---|---|
 | T1. In Figure 01's visible-cell scatterplots, find the plotted four-hour cell with the most submissions. Report its date, time, submissions and distinct contributors. | 29 August, 12:00–16:00 Beijing time; 153 submissions; 12 people. This is the largest *visible* cell; masked cells prevent an overall four-hour peak claim. | 2: all four elements correct. 1: cell located correctly but one metric omitted/misread. 0: wrong cell or people/events confused. |
-| T2. Which homework has the highest median submission count? Which has the widest observed min–max range? | HW3 for both. Median 14; range 7–108 (width 101). Compare HW1 8–98 and HW2 3–62. | 2: both choices and supporting values correct. 1: correct choices without values or only one correct comparison. 0: neither correct. |
+| T2. Which homework has the highest median submission count? Which has the widest observed min–max range? | HW4 for both. Median 15; range 8–141 (width 133). Compare HW1 8–98, HW2 3–62 and HW3 7–108. | 2: both choices and supporting values correct. 1: correct choices without values or only one correct comparison. 0: neither correct. |
 | T3. In Figure 03, which problem has the largest mean gap remaining after three attempts? Read the best-through-three and best-observed means. Is best-through-three the actual third submission score? | HW3 EvenOrOdd: 66.15 → 100, a 33.85 percentage-point remaining mean gap across the same 39 attempters. Best-through-three is a cumulative maximum, not the actual third score. | 2: correct problem, values and cumulative-best interpretation. 1: correct problem but misses a value or its meaning. 0: wrong problem or calls cumulative best an actual attempt score. |
 | T4. Compare HW1's first and second actual-attempt means. Does the lower second mean show that the same group got worse? Use the N/S rows. | 76.93 → 64.53; N 304 → 106 and S 38 → 34. No: only pairs reaching attempt 2 remain; this is a changing cohort. | 2: correct direction plus explicit changing-cohort explanation supported by N or S. 1: correct direction but insufficient explanation. 0: incorrect direction or individual-decline claim. |
 
 Two additional interpretation probes (record explanations, not an aggregate score):
 
-- Do unplotted four-hour cells mean no submissions? Expected: no; 51 positive cells with fewer than five contributors are masked, so the figure includes only publishable positive cells.
+- Do unplotted four-hour cells mean no submissions? Expected: no; 74 positive cells with fewer than five contributors are masked, so the figure includes only publishable positive cells.
 - Do longer submission gaps prove more studying, or more attempts prove learning improvement? Expected: neither; gaps are elapsed time and these descriptive comparisons do not identify causation.
 
 Navigation task: find the method defining normalized score and open/download Figure 04 as PDF. Record success, time, route, keyboard/touch difficulties and errors. On mobile also check table access and chart zoom/download discoverability. Do not require a download to a particular private directory.
@@ -66,3 +66,10 @@ Use the existing 0–2 scoring scheme. The seven information tasks may require e
 10. Identify that all three platform correlation intervals cross zero. Explain differing source windows, unmeasured prior ability and the exploratory status of all associations.
 
 These are planned reader tasks, not completed evaluation results.
+
+## Event-progress tasks · 30 September (planned)
+
+11. Read the HW4 productive-retry rate: 129 new bests out of 306 eligible retries, 42.2%, from 29 distinct eligible contributors. Explain why this is a percentage of retries, not students. First scores establish baselines; equal scores do not count; attempts after full credit are excluded.
+12. Read the HW4 60–80% window phase: 40 new bests out of 64 eligible retries, 62.5%, S=10. Each phase is 26.8 hours for HW4. A hatched cell is withheld, not zero; timing does not identify a deadline effect.
+
+Use the same 0–2 rubric and pilot the expanded twelve-task protocol before fixing session duration. These additions do not imply that reader evaluation has occurred.

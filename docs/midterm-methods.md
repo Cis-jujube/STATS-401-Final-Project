@@ -1,6 +1,6 @@
 # Midterm extension: partial-cohort exploratory associations
 
-The extension adds three figures to the original four homework-process views. It uses actual supplied Canvas grades and a new read-only OJ metrics query. It does not change Canvas, the database, or the historical public aggregate file.
+The extension adds three figures to the original four homework-process views. It uses actual supplied Canvas grades and a new read-only OJ metrics query. It does not change Canvas, the database, or the source grade records.
 
 ## Sources and linkage
 
@@ -10,7 +10,7 @@ The extension adds three figures to the original four homework-process views. It
 - **Cohort:** 42 non-staff/non-superuser roster entries include one explicitly named test account. Excluding it leaves 41 eligible members. The 26 supplied grades match 26 OJ members; 15 roster members were not in the supplied excerpt. This is availability in an excerpt, not evidence of missing exams, non-attendance or zero scores.
 - **Temporal boundary:** the user confirmed the exam began on Wednesday 16 September 2026 at 12:00 Asia/Shanghai. HW3's configured window ends on 15 September at 23:59; HW1 and HW2 end earlier. All included events are therefore pre-exam.
 
-The old private export was not found at its previously documented location. This extension uses a fresh database query, not reconstructed identities inferred from aggregate data. The 39 in-window submitters and 2,101 events reconcile to the original figures. The 26 matched students contribute 1,507 events. Original figures retain their 20 September snapshot and historical 42-member roster denominator; their counts have not silently been relabeled as the new 41-member cohort.
+The old private export was not found at its previously documented location. This extension uses a fresh database query, not reconstructed identities inferred from aggregate data. The 39 in-window submitters and 2,101 events reconcile to the original figures. The 26 matched students contribute 1,507 events. The homework-process figures were refreshed separately on 30 September with HW4 and a later 42-member roster after test-account exclusion. The midterm input remains the 21 September pre-exam HW1–HW3 extract and 41-member eligible roster; HW4 is post-exam and is excluded from these associations.
 
 ## Metrics and unit of analysis
 

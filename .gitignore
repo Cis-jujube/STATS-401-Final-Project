@@ -11,3 +11,5 @@ dataset.json
 *linkage_key*
 .env
 .env.*
+.claude/
+.trigger-tree/

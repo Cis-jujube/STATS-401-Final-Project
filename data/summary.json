@@ -1,15 +1,15 @@
 {
-  "snapshot_utc": "2026-09-20 11:00:33.817071",
+  "snapshot_utc": "2026-09-29 16:27:16.665506",
   "timezone": "Asia/Shanghai (UTC+08:00)",
   "cohort_members": 42,
-  "all_course_submissions": 2343,
-  "all_homework_submissions": 2171,
-  "window_submissions": 2101,
+  "all_course_submissions": 3070,
+  "all_homework_submissions": 2900,
+  "window_submissions": 2807,
   "window_submitters": 39,
-  "outside_window": 70,
-  "partial_scores_all_homework": 189,
-  "partial_scores_in_window": 178,
-  "submissions_after_first_ac": 318,
+  "outside_window": 93,
+  "partial_scores_all_homework": 321,
+  "partial_scores_in_window": 305,
+  "submissions_after_first_ac": 441,
   "peak_day": {
     "date": "2026-08-29",
     "submissions": 233,
@@ -18,8 +18,8 @@
   "calendar_policy": {
     "hours_per_bin": 4,
     "minimum_distinct_contributors": 5,
-    "suppressed_positive_cells": 51,
-    "visible_positive_cells": 29
+    "suppressed_positive_cells": 74,
+    "visible_positive_cells": 37
   },
   "assignments": [
     {
@@ -46,7 +46,7 @@
         "q3": 14.75,
         "max": 93
       },
-      "mode0_records": 40,
+      "mode0_records": 39,
       "mode0_full_score_records": 37
     },
     {
@@ -73,7 +73,7 @@
         "q3": 16.0,
         "max": 62
       },
-      "mode0_records": 39,
+      "mode0_records": 38,
       "mode0_full_score_records": 33
     },
     {
@@ -83,7 +83,7 @@
       "end_local": "2026-09-15T23:59:00+08:00",
       "problems": 7,
       "submissions": 764,
-      "outside_window": 21,
+      "outside_window": 44,
       "all_attempts": {
         "n": 39,
         "min": 7,
@@ -102,6 +102,33 @@
       },
       "mode0_records": 39,
       "mode0_full_score_records": 37
+    },
+    {
+      "homework": "HW4",
+      "assignment_id": 178,
+      "start_local": "2026-09-24T10:00:00+08:00",
+      "end_local": "2026-09-29T23:59:00+08:00",
+      "problems": 8,
+      "submissions": 706,
+      "outside_window": 0,
+      "all_attempts": {
+        "n": 33,
+        "min": 8,
+        "q1": 9.0,
+        "median": 15.0,
+        "q3": 21.0,
+        "max": 141
+      },
+      "through_first_ac": {
+        "n": 33,
+        "min": 8,
+        "q1": 9.0,
+        "median": 12.0,
+        "q3": 18.0,
+        "max": 130
+      },
+      "mode0_records": 35,
+      "mode0_full_score_records": 33
     }
   ],
   "calendar": [
@@ -1112,6 +1139,678 @@
       "state": "visible",
       "submissions": 54,
       "contributors": 9
+    },
+    {
+      "date": "2026-09-16",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-16",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-16",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-16",
+      "hour": 12,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-16",
+      "hour": 16,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-16",
+      "hour": 20,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-17",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-17",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-17",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-17",
+      "hour": 12,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-17",
+      "hour": 16,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-17",
+      "hour": 20,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-18",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-18",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-18",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-18",
+      "hour": 12,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-18",
+      "hour": 16,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-18",
+      "hour": 20,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-19",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-19",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-19",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-19",
+      "hour": 12,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-19",
+      "hour": 16,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-19",
+      "hour": 20,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-20",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-20",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-20",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-20",
+      "hour": 12,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-20",
+      "hour": 16,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-20",
+      "hour": 20,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-21",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-21",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-21",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-21",
+      "hour": 12,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-21",
+      "hour": 16,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-21",
+      "hour": 20,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-22",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-22",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-22",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-22",
+      "hour": 12,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-22",
+      "hour": 16,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-22",
+      "hour": 20,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-23",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-23",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-23",
+      "hour": 8,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-23",
+      "hour": 12,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-23",
+      "hour": 16,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-23",
+      "hour": 20,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-24",
+      "hour": 0,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-24",
+      "hour": 4,
+      "hours": 4,
+      "state": "inactive",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-24",
+      "hour": 8,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-24",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-24",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-24",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-25",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-25",
+      "hour": 4,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-25",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-25",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-25",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-25",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-26",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-26",
+      "hour": 4,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-26",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-26",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 32,
+      "contributors": 6
+    },
+    {
+      "date": "2026-09-26",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 62,
+      "contributors": 6
+    },
+    {
+      "date": "2026-09-26",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-27",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-27",
+      "hour": 4,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-27",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-27",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-27",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 60,
+      "contributors": 5
+    },
+    {
+      "date": "2026-09-27",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-28",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-28",
+      "hour": 4,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-28",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-28",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 53,
+      "contributors": 9
+    },
+    {
+      "date": "2026-09-28",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 28,
+      "contributors": 5
+    },
+    {
+      "date": "2026-09-28",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 35,
+      "contributors": 9
+    },
+    {
+      "date": "2026-09-29",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-29",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-29",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-29",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 52,
+      "contributors": 7
+    },
+    {
+      "date": "2026-09-29",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-29",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "submissions": 82,
+      "contributors": 9
     }
   ],
   "score_progression": [
@@ -1390,6 +2089,102 @@
       "best3": 92.82051282051282,
       "best": 96.92307692307692,
       "gain": 13.84615384615384
+    },
+    {
+      "homework": "HW4",
+      "problem_id": 1463,
+      "problem_name": "Postfix",
+      "problem_order": 7,
+      "n": 33,
+      "first": 53.333333333333336,
+      "best2": 75.15151515151516,
+      "best3": 87.87878787878788,
+      "best": 100.0,
+      "gain": 46.666666666666664
+    },
+    {
+      "homework": "HW4",
+      "problem_id": 1462,
+      "problem_name": "Parentheses",
+      "problem_order": 6,
+      "n": 33,
+      "first": 60.60606060606061,
+      "best2": 81.81818181818181,
+      "best3": 92.72727272727273,
+      "best": 100.0,
+      "gain": 39.39393939393939
+    },
+    {
+      "homework": "HW4",
+      "problem_id": 1459,
+      "problem_name": "ZeroMatrix",
+      "problem_order": 3,
+      "n": 33,
+      "first": 63.63636363636363,
+      "best2": 88.48484848484848,
+      "best3": 91.51515151515152,
+      "best": 100.0,
+      "gain": 36.36363636363637
+    },
+    {
+      "homework": "HW4",
+      "problem_id": 1457,
+      "problem_name": "Dominant",
+      "problem_order": 1,
+      "n": 33,
+      "first": 67.87878787878788,
+      "best2": 81.81818181818181,
+      "best3": 90.3030303030303,
+      "best": 100.0,
+      "gain": 32.121212121212125
+    },
+    {
+      "homework": "HW4",
+      "problem_id": 1464,
+      "problem_name": "Browser",
+      "problem_order": 8,
+      "n": 33,
+      "first": 70.3030303030303,
+      "best2": 84.84848484848484,
+      "best3": 91.51515151515152,
+      "best": 100.0,
+      "gain": 29.696969696969703
+    },
+    {
+      "homework": "HW4",
+      "problem_id": 1460,
+      "problem_name": "MinSubarray",
+      "problem_order": 4,
+      "n": 33,
+      "first": 71.51515151515152,
+      "best2": 83.63636363636364,
+      "best3": 91.51515151515152,
+      "best": 100.0,
+      "gain": 28.484848484848484
+    },
+    {
+      "homework": "HW4",
+      "problem_id": 1458,
+      "problem_name": "Collapse",
+      "problem_order": 2,
+      "n": 33,
+      "first": 73.93939393939394,
+      "best2": 90.9090909090909,
+      "best3": 95.75757575757575,
+      "best": 100.0,
+      "gain": 26.060606060606062
+    },
+    {
+      "homework": "HW4",
+      "problem_id": 1461,
+      "problem_name": "ArrayStack",
+      "problem_order": 5,
+      "n": 33,
+      "first": 78.18181818181819,
+      "best2": 90.3030303030303,
+      "best3": 95.75757575757575,
+      "best": 100.0,
+      "gain": 21.818181818181813
     }
   ],
   "attempt_score_series": [
@@ -2088,7 +2883,980 @@
       "submissions": null,
       "contributors": null,
       "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 1,
+      "state": "visible",
+      "submissions": 264,
+      "contributors": 33,
+      "mean_score": 67.42424242424242
+    },
+    {
+      "homework": "HW4",
+      "attempt": 2,
+      "state": "visible",
+      "submissions": 112,
+      "contributors": 30,
+      "mean_score": 58.392857142857146
+    },
+    {
+      "homework": "HW4",
+      "attempt": 3,
+      "state": "visible",
+      "submissions": 70,
+      "contributors": 21,
+      "mean_score": 59.714285714285715
+    },
+    {
+      "homework": "HW4",
+      "attempt": 4,
+      "state": "visible",
+      "submissions": 42,
+      "contributors": 18,
+      "mean_score": 51.904761904761905
+    },
+    {
+      "homework": "HW4",
+      "attempt": 5,
+      "state": "visible",
+      "submissions": 28,
+      "contributors": 13,
+      "mean_score": 37.142857142857146
+    },
+    {
+      "homework": "HW4",
+      "attempt": 6,
+      "state": "visible",
+      "submissions": 25,
+      "contributors": 12,
+      "mean_score": 57.6
+    },
+    {
+      "homework": "HW4",
+      "attempt": 7,
+      "state": "visible",
+      "submissions": 20,
+      "contributors": 8,
+      "mean_score": 49.0
+    },
+    {
+      "homework": "HW4",
+      "attempt": 8,
+      "state": "visible",
+      "submissions": 18,
+      "contributors": 6,
+      "mean_score": 57.77777777777778
+    },
+    {
+      "homework": "HW4",
+      "attempt": 9,
+      "state": "visible",
+      "submissions": 16,
+      "contributors": 5,
+      "mean_score": 70.0
+    },
+    {
+      "homework": "HW4",
+      "attempt": 10,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 11,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 12,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 13,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 14,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 15,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 16,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 17,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 18,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 19,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 20,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 21,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 22,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 23,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 24,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 25,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 26,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 27,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 28,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 29,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 30,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 31,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 32,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 33,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 34,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 35,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 36,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 37,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 38,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 39,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 40,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 41,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW4",
+      "attempt": 42,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
     }
   ],
-  "input_sha256": "5312ca13c3dbdda8c2d7073ec365919dd615d1322f714c5a62085c98090b2ed9"
+  "event_progress": {
+    "policy": {
+      "minimum_distinct_contributors": 5,
+      "eligibility": "A completed in-window retry after a valid baseline with prior best below 100",
+      "new_best": "Normalized score strictly exceeds the prior within-window best; ties do not count",
+      "internal_error": "IE judgements are skipped; compilation errors remain scored attempts",
+      "gap": "Clock time since the previous valid same-student homework-problem submission",
+      "phase": "Five equal-duration intervals from configured opening to deadline; deadline is in the last bin",
+      "secondary_suppression": "A second nonempty cell is hidden if a partition has exactly one primary mask",
+      "weighting": "Equal weight per eligible retry; students can contribute multiple retries"
+    },
+    "eligibility_counts": {
+      "first_scores": 1131,
+      "internal_errors": 13,
+      "after_full_credit": 441
+    },
+    "by_homework": [
+      {
+        "homework": "HW1",
+        "state": "visible",
+        "eligible_retries": 294,
+        "new_bests": 95,
+        "contributors": 29,
+        "improvement_pct": 32.31292517006803
+      },
+      {
+        "homework": "HW2",
+        "state": "visible",
+        "eligible_retries": 278,
+        "new_bests": 125,
+        "contributors": 32,
+        "improvement_pct": 44.96402877697842
+      },
+      {
+        "homework": "HW3",
+        "state": "visible",
+        "eligible_retries": 344,
+        "new_bests": 119,
+        "contributors": 34,
+        "improvement_pct": 34.593023255813954
+      },
+      {
+        "homework": "HW4",
+        "state": "visible",
+        "eligible_retries": 306,
+        "new_bests": 129,
+        "contributors": 29,
+        "improvement_pct": 42.15686274509804
+      }
+    ],
+    "by_gap": [
+      {
+        "gap_bin": 0,
+        "label": "Under 1 min",
+        "state": "visible",
+        "eligible_retries": 567,
+        "new_bests": 179,
+        "contributors": 34,
+        "improvement_pct": 31.569664902998237
+      },
+      {
+        "gap_bin": 1,
+        "label": "1–10 min",
+        "state": "visible",
+        "eligible_retries": 568,
+        "new_bests": 251,
+        "contributors": 36,
+        "improvement_pct": 44.190140845070424
+      },
+      {
+        "gap_bin": 2,
+        "label": "10–60 min",
+        "state": "visible",
+        "eligible_retries": 59,
+        "new_bests": 27,
+        "contributors": 22,
+        "improvement_pct": 45.76271186440678
+      },
+      {
+        "gap_bin": 3,
+        "label": "1–24 hours",
+        "state": "visible",
+        "eligible_retries": 20,
+        "new_bests": 7,
+        "contributors": 10,
+        "improvement_pct": 35.0
+      },
+      {
+        "gap_bin": 4,
+        "label": "24 hours or more",
+        "state": "visible",
+        "eligible_retries": 8,
+        "new_bests": 4,
+        "contributors": 6,
+        "improvement_pct": 50.0
+      }
+    ],
+    "by_problem": [
+      {
+        "homework": "HW1",
+        "problem_id": 11,
+        "problem_name": "HW1-ConsectiveFours",
+        "state": "visible",
+        "eligible_retries": 22,
+        "new_bests": 10,
+        "contributors": 10,
+        "improvement_pct": 45.45454545454545
+      },
+      {
+        "homework": "HW1",
+        "problem_id": 12,
+        "problem_name": "HW1-SentinelValue",
+        "state": "visible",
+        "eligible_retries": 32,
+        "new_bests": 13,
+        "contributors": 11,
+        "improvement_pct": 40.625
+      },
+      {
+        "homework": "HW1",
+        "problem_id": 15,
+        "problem_name": "HW1-ComputeDisplacement",
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
+      },
+      {
+        "homework": "HW1",
+        "problem_id": 16,
+        "problem_name": "HW1-LargeToSmall",
+        "state": "visible",
+        "eligible_retries": 36,
+        "new_bests": 16,
+        "contributors": 14,
+        "improvement_pct": 44.44444444444444
+      },
+      {
+        "homework": "HW1",
+        "problem_id": 366,
+        "problem_name": "Exercise1.2.15 Triangle Sides",
+        "state": "visible",
+        "eligible_retries": 16,
+        "new_bests": 13,
+        "contributors": 9,
+        "improvement_pct": 81.25
+      },
+      {
+        "homework": "HW1",
+        "problem_id": 447,
+        "problem_name": "Exercise1.4.15-InPlaceTranspose",
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
+      },
+      {
+        "homework": "HW1",
+        "problem_id": 851,
+        "problem_name": "Exercise2.5-EggsGrossDozensLeftover",
+        "state": "visible",
+        "eligible_retries": 93,
+        "new_bests": 18,
+        "contributors": 16,
+        "improvement_pct": 19.35483870967742
+      },
+      {
+        "homework": "HW1",
+        "problem_id": 871,
+        "problem_name": "Exercise3.3-SimpleCalculator",
+        "state": "visible",
+        "eligible_retries": 78,
+        "new_bests": 15,
+        "contributors": 13,
+        "improvement_pct": 19.23076923076923
+      },
+      {
+        "homework": "HW2",
+        "problem_id": 1275,
+        "problem_name": "Normalization",
+        "state": "visible",
+        "eligible_retries": 19,
+        "new_bests": 11,
+        "contributors": 9,
+        "improvement_pct": 57.89473684210526
+      },
+      {
+        "homework": "HW2",
+        "problem_id": 1276,
+        "problem_name": "CreditCard",
+        "state": "visible",
+        "eligible_retries": 31,
+        "new_bests": 16,
+        "contributors": 12,
+        "improvement_pct": 51.61290322580645
+      },
+      {
+        "homework": "HW2",
+        "problem_id": 1277,
+        "problem_name": "PairOfDice",
+        "state": "visible",
+        "eligible_retries": 55,
+        "new_bests": 23,
+        "contributors": 19,
+        "improvement_pct": 41.81818181818182
+      },
+      {
+        "homework": "HW2",
+        "problem_id": 1278,
+        "problem_name": "Charge",
+        "state": "visible",
+        "eligible_retries": 45,
+        "new_bests": 9,
+        "contributors": 9,
+        "improvement_pct": 20.0
+      },
+      {
+        "homework": "HW2",
+        "problem_id": 1279,
+        "problem_name": "Complex",
+        "state": "visible",
+        "eligible_retries": 28,
+        "new_bests": 20,
+        "contributors": 15,
+        "improvement_pct": 71.42857142857143
+      },
+      {
+        "homework": "HW2",
+        "problem_id": 1280,
+        "problem_name": "CampusDirectory",
+        "state": "visible",
+        "eligible_retries": 23,
+        "new_bests": 12,
+        "contributors": 13,
+        "improvement_pct": 52.17391304347826
+      },
+      {
+        "homework": "HW2",
+        "problem_id": 1281,
+        "problem_name": "IntQuestion",
+        "state": "visible",
+        "eligible_retries": 35,
+        "new_bests": 19,
+        "contributors": 18,
+        "improvement_pct": 54.285714285714285
+      },
+      {
+        "homework": "HW2",
+        "problem_id": 1282,
+        "problem_name": "ShapeZoo",
+        "state": "visible",
+        "eligible_retries": 42,
+        "new_bests": 15,
+        "contributors": 15,
+        "improvement_pct": 35.714285714285715
+      },
+      {
+        "homework": "HW3",
+        "problem_id": 169,
+        "problem_name": "26s3HW3-EvenOrOdd",
+        "state": "visible",
+        "eligible_retries": 130,
+        "new_bests": 30,
+        "contributors": 25,
+        "improvement_pct": 23.076923076923077
+      },
+      {
+        "homework": "HW3",
+        "problem_id": 171,
+        "problem_name": "26s3HW3-DigitProcessing",
+        "state": "visible",
+        "eligible_retries": 63,
+        "new_bests": 14,
+        "contributors": 14,
+        "improvement_pct": 22.22222222222222
+      },
+      {
+        "homework": "HW3",
+        "problem_id": 1351,
+        "problem_name": "Hanoi",
+        "state": "visible",
+        "eligible_retries": 27,
+        "new_bests": 13,
+        "contributors": 13,
+        "improvement_pct": 48.148148148148145
+      },
+      {
+        "homework": "HW3",
+        "problem_id": 1352,
+        "problem_name": "MeasureBox",
+        "state": "visible",
+        "eligible_retries": 12,
+        "new_bests": 8,
+        "contributors": 8,
+        "improvement_pct": 66.66666666666667
+      },
+      {
+        "homework": "HW3",
+        "problem_id": 1353,
+        "problem_name": "LargeNumber",
+        "state": "visible",
+        "eligible_retries": 20,
+        "new_bests": 9,
+        "contributors": 6,
+        "improvement_pct": 45.0
+      },
+      {
+        "homework": "HW3",
+        "problem_id": 1354,
+        "problem_name": "TicTacToe",
+        "state": "visible",
+        "eligible_retries": 71,
+        "new_bests": 31,
+        "contributors": 25,
+        "improvement_pct": 43.66197183098591
+      },
+      {
+        "homework": "HW3",
+        "problem_id": 1355,
+        "problem_name": "Rectangle",
+        "state": "visible",
+        "eligible_retries": 21,
+        "new_bests": 14,
+        "contributors": 13,
+        "improvement_pct": 66.66666666666667
+      },
+      {
+        "homework": "HW4",
+        "problem_id": 1457,
+        "problem_name": "Dominant",
+        "state": "visible",
+        "eligible_retries": 28,
+        "new_bests": 17,
+        "contributors": 12,
+        "improvement_pct": 60.714285714285715
+      },
+      {
+        "homework": "HW4",
+        "problem_id": 1458,
+        "problem_name": "Collapse",
+        "state": "visible",
+        "eligible_retries": 28,
+        "new_bests": 13,
+        "contributors": 9,
+        "improvement_pct": 46.42857142857143
+      },
+      {
+        "homework": "HW4",
+        "problem_id": 1459,
+        "problem_name": "ZeroMatrix",
+        "state": "visible",
+        "eligible_retries": 39,
+        "new_bests": 15,
+        "contributors": 13,
+        "improvement_pct": 38.46153846153846
+      },
+      {
+        "homework": "HW4",
+        "problem_id": 1460,
+        "problem_name": "MinSubarray",
+        "state": "visible",
+        "eligible_retries": 45,
+        "new_bests": 18,
+        "contributors": 14,
+        "improvement_pct": 40.0
+      },
+      {
+        "homework": "HW4",
+        "problem_id": 1461,
+        "problem_name": "ArrayStack",
+        "state": "visible",
+        "eligible_retries": 20,
+        "new_bests": 10,
+        "contributors": 8,
+        "improvement_pct": 50.0
+      },
+      {
+        "homework": "HW4",
+        "problem_id": 1462,
+        "problem_name": "Parentheses",
+        "state": "visible",
+        "eligible_retries": 53,
+        "new_bests": 19,
+        "contributors": 16,
+        "improvement_pct": 35.84905660377358
+      },
+      {
+        "homework": "HW4",
+        "problem_id": 1463,
+        "problem_name": "Postfix",
+        "state": "visible",
+        "eligible_retries": 33,
+        "new_bests": 17,
+        "contributors": 16,
+        "improvement_pct": 51.515151515151516
+      },
+      {
+        "homework": "HW4",
+        "problem_id": 1464,
+        "problem_name": "Browser",
+        "state": "visible",
+        "eligible_retries": 60,
+        "new_bests": 20,
+        "contributors": 11,
+        "improvement_pct": 33.333333333333336
+      }
+    ],
+    "by_phase": [
+      {
+        "homework": "HW1",
+        "phase": 0,
+        "label": "0–20%",
+        "phase_hours": 30.596666666666664,
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
+      },
+      {
+        "homework": "HW1",
+        "phase": 1,
+        "label": "20–40%",
+        "phase_hours": 30.596666666666664,
+        "state": "visible",
+        "eligible_retries": 76,
+        "new_bests": 21,
+        "contributors": 7,
+        "improvement_pct": 27.63157894736842
+      },
+      {
+        "homework": "HW1",
+        "phase": 2,
+        "label": "40–60%",
+        "phase_hours": 30.596666666666664,
+        "state": "visible",
+        "eligible_retries": 133,
+        "new_bests": 33,
+        "contributors": 12,
+        "improvement_pct": 24.81203007518797
+      },
+      {
+        "homework": "HW1",
+        "phase": 3,
+        "label": "60–80%",
+        "phase_hours": 30.596666666666664,
+        "state": "visible",
+        "eligible_retries": 42,
+        "new_bests": 20,
+        "contributors": 8,
+        "improvement_pct": 47.61904761904762
+      },
+      {
+        "homework": "HW1",
+        "phase": 4,
+        "label": "80–100%",
+        "phase_hours": 30.596666666666664,
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
+      },
+      {
+        "homework": "HW2",
+        "phase": 0,
+        "label": "0–20%",
+        "phase_hours": 26.396666666666665,
+        "state": "visible",
+        "eligible_retries": 40,
+        "new_bests": 21,
+        "contributors": 8,
+        "improvement_pct": 52.5
+      },
+      {
+        "homework": "HW2",
+        "phase": 1,
+        "label": "20–40%",
+        "phase_hours": 26.396666666666665,
+        "state": "visible",
+        "eligible_retries": 116,
+        "new_bests": 42,
+        "contributors": 13,
+        "improvement_pct": 36.206896551724135
+      },
+      {
+        "homework": "HW2",
+        "phase": 2,
+        "label": "40–60%",
+        "phase_hours": 26.396666666666665,
+        "state": "visible",
+        "eligible_retries": 58,
+        "new_bests": 27,
+        "contributors": 7,
+        "improvement_pct": 46.55172413793103
+      },
+      {
+        "homework": "HW2",
+        "phase": 3,
+        "label": "60–80%",
+        "phase_hours": 26.396666666666665,
+        "state": "visible",
+        "eligible_retries": 39,
+        "new_bests": 21,
+        "contributors": 8,
+        "improvement_pct": 53.84615384615385
+      },
+      {
+        "homework": "HW2",
+        "phase": 4,
+        "label": "80–100%",
+        "phase_hours": 26.396666666666665,
+        "state": "visible",
+        "eligible_retries": 25,
+        "new_bests": 14,
+        "contributors": 8,
+        "improvement_pct": 56.0
+      },
+      {
+        "homework": "HW3",
+        "phase": 0,
+        "label": "0–20%",
+        "phase_hours": 21.796666666666667,
+        "state": "visible",
+        "eligible_retries": 155,
+        "new_bests": 39,
+        "contributors": 12,
+        "improvement_pct": 25.161290322580644
+      },
+      {
+        "homework": "HW3",
+        "phase": 1,
+        "label": "20–40%",
+        "phase_hours": 21.796666666666667,
+        "state": "visible",
+        "eligible_retries": 60,
+        "new_bests": 33,
+        "contributors": 13,
+        "improvement_pct": 55.0
+      },
+      {
+        "homework": "HW3",
+        "phase": 2,
+        "label": "40–60%",
+        "phase_hours": 21.796666666666667,
+        "state": "visible",
+        "eligible_retries": 37,
+        "new_bests": 13,
+        "contributors": 7,
+        "improvement_pct": 35.13513513513514
+      },
+      {
+        "homework": "HW3",
+        "phase": 3,
+        "label": "60–80%",
+        "phase_hours": 21.796666666666667,
+        "state": "visible",
+        "eligible_retries": 68,
+        "new_bests": 22,
+        "contributors": 9,
+        "improvement_pct": 32.35294117647059
+      },
+      {
+        "homework": "HW3",
+        "phase": 4,
+        "label": "80–100%",
+        "phase_hours": 21.796666666666667,
+        "state": "visible",
+        "eligible_retries": 24,
+        "new_bests": 12,
+        "contributors": 6,
+        "improvement_pct": 50.0
+      },
+      {
+        "homework": "HW4",
+        "phase": 0,
+        "label": "0–20%",
+        "phase_hours": 26.796666666666663,
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
+      },
+      {
+        "homework": "HW4",
+        "phase": 1,
+        "label": "20–40%",
+        "phase_hours": 26.796666666666663,
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
+      },
+      {
+        "homework": "HW4",
+        "phase": 2,
+        "label": "40–60%",
+        "phase_hours": 26.796666666666663,
+        "state": "visible",
+        "eligible_retries": 143,
+        "new_bests": 32,
+        "contributors": 8,
+        "improvement_pct": 22.377622377622377
+      },
+      {
+        "homework": "HW4",
+        "phase": 3,
+        "label": "60–80%",
+        "phase_hours": 26.796666666666663,
+        "state": "visible",
+        "eligible_retries": 64,
+        "new_bests": 40,
+        "contributors": 10,
+        "improvement_pct": 62.5
+      },
+      {
+        "homework": "HW4",
+        "phase": 4,
+        "label": "80–100%",
+        "phase_hours": 26.796666666666663,
+        "state": "visible",
+        "eligible_retries": 59,
+        "new_bests": 35,
+        "contributors": 14,
+        "improvement_pct": 59.32203389830509
+      }
+    ]
+  },
+  "exclusion_policy": {
+    "basis": "Previously confirmed test account, matched by private HMAC linkage",
+    "excluded_roster_members": 1,
+    "excluded_submission_events": 2
+  },
+  "input_sha256": "cf188bd44a99f59a9b3effb585e9b5d0e551965519f13a5d0cbe9904efc0ee79"
 }

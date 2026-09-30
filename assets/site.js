@@ -44,7 +44,6 @@
   let requestedMotion = true;
   let motion = !reduced.matches;
   let scrollFrame = 0;
-  let presenting = false;
 
   function paintPose(from, to, progress) {
     const p = ease(progress);
@@ -57,7 +56,6 @@
   let visualScroll = scrollY;
   function updateScroll(now = performance.now()) {
     scrollFrame = 0;
-    if (presenting) return;
     // Read all geometry before touching styles. CSS transforms do not affect
     // these outer tracks, so the measurements remain independent of animation.
     const y = scrollY;
@@ -134,11 +132,11 @@
     if ((visualScroll !== y || springPending) && !document.hidden) queueScroll();
   }
   function queueScroll() {
-    if (!presenting && !scrollFrame && !document.hidden) scrollFrame = requestAnimationFrame(updateScroll);
+    if (!scrollFrame && !document.hidden) scrollFrame = requestAnimationFrame(updateScroll);
   }
   addEventListener('scroll', queueScroll, {passive: true});
   addEventListener('wheel', event => {
-    if (presenting || event.ctrlKey || !motion || !sceneViewport.matches || !chapterZone || dialog.open) {
+    if (event.ctrlKey || !motion || !sceneViewport.matches || !chapterZone || dialog.open) {
       landingPause.reset(); return;
     }
     // Only cancel residual wheel momentum after landing; never synthesize scrolling.
@@ -147,7 +145,6 @@
 
   const dialog = $('#focus-dialog');
   function openFocus(button) {
-    globalThis.StoryPresentation?.pause('Figure open');
     const image = button.closest('.story-chapter').querySelector('img');
     const file = button.dataset.figure + (desktop.matches ? '' : '-mobile');
     dialog.dataset.figure = button.dataset.figure;
@@ -215,19 +212,19 @@
     trailFrame = points.length ? requestAnimationFrame(drawTrail) : 0;
   }
   addEventListener('pointermove', event => {
-    if (presenting || !motion || !context || !finePointer.matches || !desktop.matches) return;
+    if (!motion || !context || !finePointer.matches || !desktop.matches) return;
     points.push({x: event.clientX, y: event.clientY, time: performance.now()});
     points = points.slice(-20);
     if (!trailFrame) trailFrame = requestAnimationFrame(drawTrail);
   }, {passive: true});
 
   function syncSceneMode() {
-    const enabled = !presenting && motion && sceneViewport.matches && chapterZone;
+    const enabled = motion && sceneViewport.matches && chapterZone;
     document.documentElement.classList.toggle('scene-snapping', enabled);
   }
   sceneViewport.addEventListener('change', () => { syncSceneMode(); queueScroll(); });
   function updateMotion(preservePosition = false) {
-    const anchor = preservePosition && !presenting ? document.elementFromPoint(innerWidth / 2, innerHeight / 2)?.closest('.chapter-stage,.hero-stage,section') : null;
+    const anchor = preservePosition ? document.elementFromPoint(innerWidth / 2, innerHeight / 2)?.closest('.chapter-stage,.hero-stage,section') : null;
     const before = anchor?.getBoundingClientRect().top;
     motion = requestedMotion && !reduced.matches;
     document.body.classList.toggle('motion-ready', motion);
@@ -237,7 +234,6 @@
     $('#motion-toggle').setAttribute('aria-pressed', String(motion));
     $('#motion-toggle span').textContent = reduced.matches ? 'Reduced motion' : `Motion ${motion ? 'on' : 'off'}`;
     $('#motion-toggle').disabled = reduced.matches;
-    globalThis.StoryPresentation?.motionChanged();
     if (!motion) { cancelHold(); clearTrail(); landingPause.reset(); }
     if (anchor) scrollBy({top: anchor.getBoundingClientRect().top - before, behavior: 'instant'});
     visualScroll = scrollY;
@@ -269,23 +265,6 @@
     if (document.hidden) { cancelHold(); clearTrail(); cancelAnimationFrame(scrollFrame); scrollFrame = 0; }
     else { visualScroll = scrollY; lastFrameTime = 0; chapters.forEach(c => springs.delete(c)); figures.forEach(f => springs.delete(f)); springs.delete(opening); queueScroll(); }
   });
-  globalThis.StoryReader = {
-    get motionEnabled() { return motion; },
-    openFigure: openFocus,
-    setPresenting(enabled) {
-      presenting = enabled;
-      cancelAnimationFrame(scrollFrame); scrollFrame = 0;
-      cancelHold(); clearTrail(); landingPause.reset();
-      lastFrameTime = 0; lastLanding = -1; visualScroll = scrollY;
-      // Presentation owns these variables while active; invalidate cached writes
-      // before reading resumes, including an exit at the same scroll position.
-      [...chapters, ...figures, hero, opening, evidence, material].forEach(node => {
-        springs.delete(node); styleValues.delete(node);
-      });
-      syncSceneMode();
-      if (!enabled) queueScroll();
-    },
-  };
   updateMotion();
   resize();
 })();

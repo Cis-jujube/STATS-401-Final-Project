@@ -1,40 +1,21 @@
-# Visualization contract · five featured figures
+# Visualization contract · completed event-data refresh
 
-The research question is **what recorded submission behavior reveals beyond near-perfect homework scores**. The current homepage and presentation route feature five completed figures, selected for complementary analytical value. The analysis companion retains all ten figures, tables, methods and downloads.
+The question is **what recorded submission behavior reveals beyond near-perfect homework scores**. The two previously pending event analyses are now implemented from the authorized 30 September Beijing snapshot. All six homework-process figures include HW4; exam and Course Pulse figures keep their pre-exam cohorts. The main story retains the existing supporting chapters and adds the two new views: ten featured chapters and twelve downloadable figures. No existing figure or interaction is removed.
 
-## Current five-figure story
-
-| Order | Figure | Why it belongs in the live explanation |
+| Research view | Current evidence and encoding | Interpretation boundary |
 |---|---|---|
-| 1 | Timing, reach and repeat intensity (01) | Separates broad participation from repeated submissions within a visible burst. |
-| 2 | Problem bottlenecks (03) | Shows where the same attempters still have a gap after three attempts. |
-| 3 | Actual nth-attempt scores (04) | Explains changing contributors and actual submission outcomes, complementing the cumulative-best GAP figure. |
-| 4 | Process and midterm robustness (06) | Tests how stable the observed association is under resampling, leave-one-out and cohort changes. |
-| 5 | Combined OJ and platform evidence (10) | Compares sources and closes with uncertainty; platform usage intervals cross zero. |
+| Timing, reach and intensity (01) | 37 visible positive four-hour cells; contributor count versus attempts per contributor, and clock-time bin versus events. Shape identifies HW1–HW4. | 74 positive cells with 979 submissions are masked; the overall four-hour peak and study hours are unknown. |
+| Problem bottlenecks (03) | First, best-through-three and best-observed means; 10 of 31 slots retain a >10 pp mean gap. Publication figures retain 31 rows; the story selects 12 on desktop and 8 on mobile. | Same attempters per row; cumulative best is not an actual third score, a count of improved students or a causal effect. |
+| Productive retries (11) | New bests / eligible retries by homework and elapsed gap; numeric numerator, denominator and distinct contributors. The companion also gives a masked per-problem table. | Strict improvement above historical best, only while prior best <100. First scores, IE and post-full-credit attempts are excluded. Gaps are clock time, not study time. |
+| Progress relative to deadlines (12) | Matrix of five equal-duration phases per homework. Color encodes rate on 0–100%; text gives new bests / eligible retries and contributors. Four cells are hatched and withheld. | Counts are repeated events; phase widths differ in hours across homework. Configured deadlines do not incorporate individual extensions. No deadline effect is estimated. |
+| Process and midterm (06) | Paired-student bootstrap, leave-one-out and two sensitivity-cohort estimates from the existing pre-exam input. | Only 26 of the historical 41 eligible students have supplied grades. HW4 is post-exam and excluded. Associations are exploratory. |
 
-Attempt-count distributions (02), platform coverage (08), and platform score groups (09) are supporting evidence in `analysis.html`. Coverage context remains directly visible in Figure 5's note: 26 students, 11 recorded users, tracking from 8 September; no record does not mean no learning. Midterm distribution (05) and submission groups (07) also remain in the companion. This selection does not change any analytical values or image assets.
+Attempt distributions (02), actual nth-attempt scores (04) and Course Pulse context remain in the main story. Midterm distribution (05) and submission-group comparison (07) remain in the companion. The earlier five-main-figure proposal is a design option, not an instruction to remove supporting features during this refresh.
 
-## Future event-level research roadmap
+## Artifact and verification contract
 
-The earlier five-figure analytical roadmap below includes two analyses that still require student–problem event sequences. They are not implemented substitutes for the current figures and do not block the user's requested five-figure curation. No placeholder or synthetic result represents them.
-
-| Target figure | Analytical question | Current evidence and encoding | Interpretation boundary |
-|---|---|---|---|
-| 01 · Timing, reach and repeat intensity | Is a visible submission burst broad participation or repeated activity by fewer contributors? When in the Beijing day does it occur? | Two panels use the 29 public positive four-hour cells with at least five contributors: distinct contributors versus submissions per active contributor, and clock-time bin versus submissions. Shape identifies homework; marker area reflects submissions. | Another 51 positive cells containing 677 submissions are masked. The overall busiest four-hour cell and students' study hours cannot be inferred. The observed peak **day** uses all in-window submissions. |
-| 02 · Problem bottlenecks | Which problem slots retain the largest mean score gap after three attempts? | Figure 03 ranks best observed minus best through three for the same attempters. The publication and desktop story use an open circle for first, a square for best through three, and a diamond for best observed. The desktop story selects nine rows; the mobile story uses gap bars for six rows (the top two within each homework). All 23 remain in downloadable figures and the analysis table. | Cumulative best is not an actual third score; an average gap does not count students who improved or establish a learning effect. Best through two remains in the table. |
-| 03 · Productive retries (pending) | What share of eligible subsequent submissions establishes a new personal best, and how does it vary by problem and retry gap? | Requires ordered student–homework–problem events with score, verdict and time. Define eligibility, denominator and privacy suppression before rendering. | Elapsed time between submissions is not time spent studying; repeated events are clustered by student. |
-| 04 · Progress relative to deadlines (pending) | When do new best scores occur within each homework window, and does the timing differ by problem? | Requires the same event sequence plus configured opening/deadline, with an explicit treatment of individual extensions if available. Use fixed exposure intervals and show contributor/event denominators. | Submission-time concentration does not identify work-time concentration or a deadline effect. |
-| 05 · Process and midterm | Is the final-day submission-share association stable to sampling and cohort choices? | Figure 06 places the final-24-hour metric first: A = paired-student bootstrap interval; B = leave-one-out range; C = full-problem and discrepancy-excluded subset estimates. | Only 26 of 41 eligible students have supplied grades. These are exploratory associations, not causal effects or validated predictions. |
-
-If authorized event sequences become available and the two new analyses are verified, reconsider the main story's composition on its analytical merits. Keep supporting evidence accessible in the companion.
-
-## Implementation and publication boundary
-
-- `scripts/render_figures.py` and `scripts/render_midterm.py` regenerate publication PNG/PDF/SVG assets; `--web` produces transparent story SVGs. `scripts/build_page.py` assembles the analysis companion and story from published aggregate JSON.
-- The page uses semantic HTML/CSS and local JavaScript for presentation. It has no runtime data API or production-server connection. Motion does not change numeric observations; reduced-motion and motion-off keep ordinary reading flow.
-- Private exports, student identifiers, grades, linkage keys and event-level records stay outside the repository. Public cells with fewer than five contributors are suppressed; suppression reduces disclosure but is not a formal privacy guarantee.
-- Figures must include clear denominators, direct labels, mobile compositions, alt text, accessible tables and downloadable formats. Verify aggregate claims against source JSON, inspect rendered charts, run local tests, and review the final diff before publication.
-
-## Historical design decisions
-
-The initial four-homework-figure milestone used a public calendar heatmap and a first-to-best score chart. The current first-round revision replaces those *published compositions* with the two analyses above. The private hourly heatmap remains an optional local export. Figure 04 still displays actual scores on the kth observed submission, with event counts N, distinct student counts S, a changing cohort and no carry-forward. Earlier sketches and proposal material remain labeled historical.
+- `prepare_data.py` derives only public aggregates from private inputs, applying the previously confirmed account exclusion to a copy. Full definitions and masking rules are in [methods](methods.md) and [event methods](event-methods.md).
+- `render_figures.py` renders the four existing homework views; `render_events.py` renders Figures 11–12. Both produce publication PNG/PDF/SVG and transparent SVG with `--web`. The midterm/platform renderers use separate unchanged aggregate inputs.
+- `build_page.py`, `homework_sections.py` and `render_site.py` derive homework captions, tables and story descriptions from the refreshed JSON. The existing continuous scroll, “Follow the submissions” interlude, motion controls and focus dialog remain.
+- All views require mobile compositions, denominators, alt text, accessible tables and downloads. Private identities, raw events and linkage keys remain outside the repository. Numeric suppressed fields are null; zeros are explicit.
+- Verify calculations, raw-input preservation, public privacy fields, resource/anchor integrity and rendered chart legibility. Browser interaction evidence must be reported separately from static and figure-level checks. Local output does not imply push, deployment or reader-study completion.

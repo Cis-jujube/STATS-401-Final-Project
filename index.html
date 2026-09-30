@@ -2,770 +2,137 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CS201 Learning Process &amp; Midterm Outcomes</title>
-<meta name="description" content="Five featured views of CS201 homework behavior and exploratory midterm associations in a partial 26-student cohort.">
-<link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="assets/cinema.css">
-<link rel="stylesheet" href="assets/presentation.css">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Score Has a Past · CS201 data film</title>
+<meta name="description" content="A playable data film about 2,807 CS201 homework submissions: when students worked, which problems resisted, which retries paid off, and how submission habits relate to the midterm.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/app/app.css?v=20260930o">
 </head>
-<body data-scene="0" data-surface="paper">
-<a class="skip" href="#main">Skip to content</a>
-<div class="world" aria-hidden="true">
-  <div class="material-scene">
-    <svg class="satin" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="satin-wide" gradientUnits="userSpaceOnUse" x1="650" y1="0" x2="1700" y2="550">
-          <stop offset="0" stop-color="#0a0d0f"/>
-<stop offset=".35" stop-color="#101719"/>
-          <stop offset=".48" class="material-shade"/>
-<stop offset=".65" class="material-mid"/>
-          <stop offset=".76" class="material-light"/>
-<stop offset=".86" stop-color="#3d4748"/>
-<stop offset="1" stop-color="#080b0d"/>
-        </linearGradient>
-        <linearGradient id="satin-fold" x1="0" y1="0" x2=".85" y2="1">
-          <stop offset="0" stop-color="#030507"/>
-<stop offset=".42" stop-color="#0b0e10"/>
-          <stop offset=".63" class="material-shade"/>
-<stop offset=".72" class="material-mid"/>
-          <stop offset=".78" class="material-light"/>
-<stop offset=".85" stop-color="#1b2527"/>
-          <stop offset="1" stop-color="#06080b"/>
-        </linearGradient>
-        <linearGradient id="satin-edge" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#899995" stop-opacity="0"/>
-<stop offset=".53" class="material-light" stop-opacity=".6"/>
-<stop offset="1" stop-color="#899995" stop-opacity="0"/>
-        </linearGradient>
-      </defs>
-      <path fill="url(#satin-wide)" d="M930 -220 C540 100 710 420 1200 660 C1470 790 1480 1070 1140 1280 L1990 1300 L1970 -220 Z"/>
-      <path fill="url(#satin-fold)" d="M1320 -250 C670 130 1040 320 1360 540 C1720 790 1630 1040 1330 1260 L1770 1300 C2060 830 1650 550 1360 340 C1010 90 1090 -50 1550 -250 Z"/>
-      <path fill="none" stroke="url(#satin-edge)" stroke-width="1.5" d="M1320 -250 C670 130 1040 320 1360 540 C1720 790 1630 1040 1330 1260"/>
-      <path fill="url(#satin-fold)" opacity=".65" d="M-150 1140 C300 920 710 1190 1160 740 C1300 595 1390 480 1690 370 L1900 940 L1640 1300 L-150 1300 Z"/>
-    </svg>
-  </div>
-  <div class="material-vignette">
-</div>
-</div>
-<canvas id="cursor-light" aria-hidden="true">
-</canvas>
-<div class="reading-progress" aria-hidden="true">
-</div>
-<header class="topbar">
-<a href="#main">CS201 / Process notes</a>
-<nav aria-label="Main navigation">
-<a href="#scene-timing">Explore</a>
-<a href="#scene-midterm-associations">Midterm</a>
-<a href="#scene-platform-associations">Platform</a>
-<a href="analysis.html">Analysis &amp; methods</a>
-<button id="presentation-start" hidden>Start presentation ↗</button>
-<button id="motion-toggle" aria-pressed="true">
-<svg class="bell" viewBox="0 0 24 24" aria-hidden="true">
-<path d="M5 16V10a7 7 0 0 1 14 0v6l2 3H3zM9 22h6"/>
-</svg>
-<span>Motion on</span>
-</button>
-</nav>
-</header>
-<main id="main">
-<section class="hero-track" data-present-id="home" data-present-label="Opening" data-present-duration="0" data-film-duration="0" data-film-hold="2200" data-film-word="THE SCORE" aria-labelledby="hero-title">
-<div class="hero-stage">
-<svg class="score-portal" viewBox="0 0 800 600" aria-hidden="true">
-<ellipse cx="400" cy="300" rx="80" ry="65"/>
-<ellipse cx="400" cy="300" rx="118" ry="92"/>
-<ellipse cx="400" cy="300" rx="156" ry="119"/>
-<ellipse cx="400" cy="300" rx="194" ry="146"/>
-<ellipse cx="400" cy="300" rx="232" ry="173"/>
-<ellipse cx="400" cy="300" rx="270" ry="200"/>
-<ellipse cx="400" cy="300" rx="308" ry="227"/>
-<ellipse cx="400" cy="300" rx="346" ry="254"/>
-<ellipse cx="400" cy="300" rx="384" ry="281"/>
-</svg>
-<div class="hero-heading">
-<div>
-<p class="eyebrow">OJ + Course Pulse + midterm outcomes / STATS 401</p>
-<h1 id="hero-title">
-<span class="title-line">The score</span>
-<span class="title-line">has a past.</span>
-</h1>
-</div>
-<p class="hero-context">2,101 submissions.<br>Three homeworks.<br>26 matched exam scores.<br>Two behavior sources.<br>Five featured views.</p>
-</div>
-<div class="score-composition" aria-label="HW3 TicTacToe: mean first score 37.95, mean best score 100, same 39 attempters">
-<div class="score-start">
-<p>First submission <span>Mean / 100</span>
-</p>
-<strong>37.95</strong>
-</div>
-<svg class="score-arrow" viewBox="0 0 200 80" aria-hidden="true">
-<path d="M2 40H190M157 8L190 40L157 72"/>
-</svg>
-<div class="score-end">
-<p>Best submission <span>Mean / 100</span>
-</p>
-<div class="score-sculpture">
-<span class="score-echo" aria-hidden="true">100</span>
-<span class="score-echo" aria-hidden="true">100</span>
-<strong>100</strong>
-</div>
-</div>
-</div>
-<div class="hero-bottom">
-<p>HW3 TicTacToe · Same 39 attempters<br>
-<span>First and best scores describe submissions, not a causal learning effect.</span>
-</p>
-<div class="hero-play">
-<button id="film-start" hidden>
-<span class="film-play-icon" aria-hidden="true">▶</span>
-<span>Play full story<small>Five figures. One continuous journey.</small>
-</span>
-<span id="film-length" aria-hidden="true">
-</span>
-</button>
-<a class="enter" href="#scene-timing">Explore at your pace <span>↓</span>
-</a>
-</div>
-</div>
-<p class="byline">Zaozao Wang &amp; Zhengxiang Liu · Updated 26 September 2026</p>
-<div class="hero-rule" aria-hidden="true">
-</div>
-</div>
-</section>
-<div id="journey">
-<div class="journey-opening" aria-hidden="true">
-<canvas id="journey-field">
-</canvas>
-<div class="journey-type">
-<span>Follow the</span>
-<span>submissions.</span>
-</div>
-<div class="journey-rule">
-</div>
-</div>
-<section class="story-chapter" id="scene-timing" data-scene="0" data-present-id="timing" data-present-label="Visible submission peaks" data-present-duration="4200" data-film-duration="6000" data-film-hold="6500" data-film-word="TIME" data-layout="atlas" data-direction="down" data-palette="copper" data-cinema="perspective" aria-labelledby="title-timing">
-  <div class="chapter-stage">
-    <div class="scene-wash" aria-hidden="true">
-</div>
-    <div class="scene-orbit" aria-hidden="true">
-<i>
-</i>
-<i>
-</i>
-<i>
-</i>
-</div>
-    <div class="scene-thread" aria-hidden="true">
-</div>
-    <span class="scene-index" aria-hidden="true">01</span>
-    <div class="chapter-layout">
-    <div class="chapter-copy">
-      <p class="eyebrow">Visible submission peaks</p>
-      <h2 id="title-timing">
-<span class="title-mask">
-<span style="--line:0">A busy window.</span>
-</span>
-<br>
-<span class="title-mask">
-<span style="--line:1">How many people?</span>
-</span>
-</h2>
-      <p>On 29 August, 233 submissions came from 14 students. The busiest publicly visible four-hour cell held 153 submissions from 12 contributors; masked cells keep the overall four-hour peak unknown.</p>
-      <p class="reading-note">Visible cells only · submissions are not study time</p>
-      <div class="chapter-actions">
-        <button class="focus-link" data-figure="01-calendar" data-title="Visible submission peaks" data-note="Visible cells only · submissions are not study time">
-<span class="hold-fill" aria-hidden="true">
-</span>View full figure ↗</button>
-        <a href="analysis.html#timing">Data &amp; interpretation ↗</a>
-      </div>
-    </div>
-    <figure class="chapter-figure" data-entrance="scan">
-      <div class="figure-depth" aria-hidden="true">
-<i style="--plane:1">
-</i>
-<i style="--plane:2">
-</i>
-<i style="--plane:3">
-</i>
-</div>
-      <picture>
-<source media="(max-width:700px)" srcset="assets/story/01-calendar-mobile.svg">
-<img src="assets/story/01-calendar.svg" alt="Visible submission peaks. On 29 August, 233 submissions came from 14 students. The busiest publicly visible four-hour cell held 153 submissions from 12 contributors; masked cells keep the overall four-hour peak unknown. Visible cells only · submissions are not study time" decoding="async">
-</picture>
+<body>
+<a class="skip" href="analysis.html">Skip the film: read the analysis, tables and methods</a>
 
-    </figure>
-    </div>
-    <a class="previous-chapter" href="#main" aria-label="Previous chapter">← Previous</a>
-    <a class="next-chapter" href="#scene-scores">Next: Problem bottlenecks <span>↓</span>
-</a>
-  </div>
-</section>
-<section class="story-chapter" id="scene-scores" data-scene="1" data-present-id="scores" data-present-label="Problem bottlenecks" data-present-duration="3000" data-film-duration="4600" data-film-hold="7500" data-film-word="THE GAP" data-layout="offset" data-direction="diagonal" data-palette="olive" data-cinema="slices" aria-labelledby="title-scores">
-  <div class="chapter-stage">
-    <div class="scene-wash" aria-hidden="true">
-</div>
-    <div class="scene-orbit" aria-hidden="true">
-<i>
-</i>
-<i>
-</i>
-<i>
-</i>
-</div>
-    <div class="scene-thread" aria-hidden="true">
-</div>
-    <span class="scene-index" aria-hidden="true">02</span>
-    <div class="chapter-layout">
-    <div class="chapter-copy">
-      <p class="eyebrow">Problem bottlenecks</p>
-      <h2 id="title-scores">
-<span class="title-mask">
-<span style="--line:0">Which problems</span>
-</span>
-<br>
-<span class="title-mask">
-<span style="--line:1">keep a gap?</span>
-</span>
-</h2>
-      <p>Nine of 23 problem slots have more than a 10-point gap between mean best through three attempts and best observed. The story selects nine rows on desktop and six on mobile; the analysis figure shows all 23.</p>
-      <p class="reading-note">Same attempters per problem · means do not count students who improved</p>
-      <div class="chapter-actions">
-        <button class="focus-link" data-figure="03-score-progression" data-title="Problem bottlenecks" data-note="Same attempters per problem · means do not count students who improved">
-<span class="hold-fill" aria-hidden="true">
-</span>Enlarge this figure ↗</button>
-        <a href="analysis.html#scores">All 23 problems &amp; data ↗</a>
-      </div>
-    </div>
-    <figure class="chapter-figure" data-entrance="diagonal">
-      <div class="figure-depth" aria-hidden="true">
-<i style="--plane:1">
-</i>
-<i style="--plane:2">
-</i>
-<i style="--plane:3">
-</i>
-</div>
-      <picture>
-<source media="(max-width:700px)" srcset="assets/story/03-score-progression-mobile.svg">
-<img src="assets/story/03-score-progression.svg" alt="Problem bottlenecks. Nine of 23 problem slots have more than a 10-point gap between mean best through three attempts and best observed. The story selects nine rows on desktop and six on mobile; the analysis figure shows all 23. Same attempters per problem · means do not count students who improved" decoding="async">
-</picture>
-<div class="cinema-strip" style="--strip:0;--cut-top:0.0000%;--cut-bottom:83.3333%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/03-score-progression-mobile.svg">
-<img src="assets/story/03-score-progression.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-<div class="cinema-strip" style="--strip:1;--cut-top:16.6667%;--cut-bottom:66.6667%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/03-score-progression-mobile.svg">
-<img src="assets/story/03-score-progression.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-<div class="cinema-strip" style="--strip:2;--cut-top:33.3333%;--cut-bottom:50.0000%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/03-score-progression-mobile.svg">
-<img src="assets/story/03-score-progression.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-<div class="cinema-strip" style="--strip:3;--cut-top:50.0000%;--cut-bottom:33.3333%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/03-score-progression-mobile.svg">
-<img src="assets/story/03-score-progression.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-<div class="cinema-strip" style="--strip:4;--cut-top:66.6667%;--cut-bottom:16.6667%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/03-score-progression-mobile.svg">
-<img src="assets/story/03-score-progression.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-<div class="cinema-strip" style="--strip:5;--cut-top:83.3333%;--cut-bottom:0.0000%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/03-score-progression-mobile.svg">
-<img src="assets/story/03-score-progression.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-    </figure>
-    </div>
-    <a class="previous-chapter" href="#scene-timing" aria-label="Previous chapter">← Previous</a>
-    <a class="next-chapter" href="#scene-attempt-scores">Next: Actual attempt scores <span>↓</span>
-</a>
-  </div>
-</section>
-<section class="story-chapter" id="scene-attempt-scores" data-scene="2" data-present-id="attempt-scores" data-present-label="Actual attempt scores" data-present-duration="2000" data-film-duration="3400" data-film-hold="7000" data-film-word="AGAIN." data-layout="panorama" data-direction="right" data-palette="ink" data-cinema="slices" aria-labelledby="title-attempt-scores">
-  <div class="chapter-stage">
-    <div class="scene-wash" aria-hidden="true">
-</div>
-    <div class="scene-orbit" aria-hidden="true">
-<i>
-</i>
-<i>
-</i>
-<i>
-</i>
-</div>
-    <div class="scene-thread" aria-hidden="true">
-</div>
-    <span class="scene-index" aria-hidden="true">03</span>
-    <div class="chapter-layout">
-    <div class="chapter-copy">
-      <p class="eyebrow">Actual attempt scores</p>
-      <h2 id="title-attempt-scores">
-<span class="title-mask">
-<span style="--line:0">A new attempt.</span>
-</span>
-<br>
-<span class="title-mask">
-<span style="--line:1">A different cohort.</span>
-</span>
-</h2>
-      <p>Each point averages the actual nth submission to a problem. Pairs that stop submitting leave the later points.</p>
-      <p class="reading-note">N = events · S = students · no carry-forward</p>
-      <div class="chapter-actions">
-        <button class="focus-link" data-figure="04-attempt-scores" data-title="Actual attempt scores" data-note="N = events · S = students · no carry-forward">
-<span class="hold-fill" aria-hidden="true">
-</span>View full figure ↗</button>
-        <a href="analysis.html#attempt-scores">Data &amp; interpretation ↗</a>
-      </div>
-    </div>
-    <figure class="chapter-figure" data-entrance="push">
-      <div class="figure-depth" aria-hidden="true">
-<i style="--plane:1">
-</i>
-<i style="--plane:2">
-</i>
-<i style="--plane:3">
-</i>
-</div>
-      <picture>
-<source media="(max-width:700px)" srcset="assets/story/04-attempt-scores-mobile.svg">
-<img src="assets/story/04-attempt-scores.svg" alt="Actual attempt scores. Each point averages the actual nth submission to a problem. Pairs that stop submitting leave the later points. N = events · S = students · no carry-forward" decoding="async">
-</picture>
-<div class="cinema-strip" style="--strip:0;--cut-top:0.0000%;--cut-bottom:83.3333%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/04-attempt-scores-mobile.svg">
-<img src="assets/story/04-attempt-scores.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-<div class="cinema-strip" style="--strip:1;--cut-top:16.6667%;--cut-bottom:66.6667%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/04-attempt-scores-mobile.svg">
-<img src="assets/story/04-attempt-scores.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-<div class="cinema-strip" style="--strip:2;--cut-top:33.3333%;--cut-bottom:50.0000%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/04-attempt-scores-mobile.svg">
-<img src="assets/story/04-attempt-scores.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-<div class="cinema-strip" style="--strip:3;--cut-top:50.0000%;--cut-bottom:33.3333%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/04-attempt-scores-mobile.svg">
-<img src="assets/story/04-attempt-scores.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-<div class="cinema-strip" style="--strip:4;--cut-top:66.6667%;--cut-bottom:16.6667%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/04-attempt-scores-mobile.svg">
-<img src="assets/story/04-attempt-scores.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-<div class="cinema-strip" style="--strip:5;--cut-top:83.3333%;--cut-bottom:0.0000%" aria-hidden="true">
-<picture>
-<source media="(max-width:700px)" srcset="assets/story/04-attempt-scores-mobile.svg">
-<img src="assets/story/04-attempt-scores.svg" alt="" loading="lazy" decoding="async">
-</picture>
-</div>
-    </figure>
-    </div>
-    <a class="previous-chapter" href="#scene-scores" aria-label="Previous chapter">← Previous</a>
-    <a class="next-chapter" href="#scene-midterm-associations">Next: Process and exam <span>↓</span>
-</a>
-  </div>
-</section>
-<section class="story-chapter" id="scene-midterm-associations" data-scene="3" data-present-id="midterm-associations" data-present-label="Process and exam" data-present-duration="3200" data-film-duration="5200" data-film-hold="9000" data-film-word="THE TEST" data-layout="editorial" data-direction="left" data-palette="teal" data-cinema="focus" aria-labelledby="title-midterm-associations">
-  <div class="chapter-stage">
-    <div class="scene-wash" aria-hidden="true">
-</div>
-    <div class="scene-orbit" aria-hidden="true">
-<i>
-</i>
-<i>
-</i>
-<i>
-</i>
-</div>
-    <div class="scene-thread" aria-hidden="true">
-</div>
-    <span class="scene-index" aria-hidden="true">04</span>
-    <div class="chapter-layout">
-    <div class="chapter-copy">
-      <p class="eyebrow">Process and exam</p>
-      <h2 id="title-midterm-associations">
-<span class="title-mask">
-<span style="--line:0">How stable is</span>
-</span>
-<br>
-<span class="title-mask">
-<span style="--line:1">the association?</span>
-</span>
-</h2>
-      <p>Final-day submission share has a negative rank association with exam scores (ρ = -0.48). Compare its bootstrap interval, leave-one-out range and two sensitivity cohorts before interpreting it.</p>
-      <p class="reading-note">26 available grades · sensitivity checks are not adjusted effects</p>
-      <div class="chapter-actions">
-        <button class="focus-link" data-figure="06-midterm-associations" data-title="Process and exam" data-note="26 available grades · sensitivity checks are not adjusted effects">
-<span class="hold-fill" aria-hidden="true">
-</span>View full figure ↗</button>
-        <a href="analysis.html#midterm-associations">Data &amp; interpretation ↗</a>
-      </div>
-    </div>
-    <figure class="chapter-figure" data-entrance="push">
-      <div class="figure-depth" aria-hidden="true">
-<i style="--plane:1">
-</i>
-<i style="--plane:2">
-</i>
-<i style="--plane:3">
-</i>
-</div>
-      <picture>
-<source media="(max-width:700px)" srcset="assets/story/06-midterm-associations-mobile.svg">
-<img src="assets/story/06-midterm-associations.svg" alt="Process and exam. Final-day submission share has a negative rank association with exam scores (ρ = -0.48). Compare its bootstrap interval, leave-one-out range and two sensitivity cohorts before interpreting it. 26 available grades · sensitivity checks are not adjusted effects" decoding="async">
-</picture>
+<div id="film" class="film" aria-roledescription="data film">
+  <div class="backdrop" aria-hidden="true"><i class="glow-aurora"></i><i class="glow-cursor"></i></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div id="scenes"></div>
 
-    </figure>
-    </div>
-    <a class="previous-chapter" href="#scene-attempt-scores" aria-label="Previous chapter">← Previous</a>
-    <a class="next-chapter" href="#scene-platform-associations">Next: Combined evidence <span>↓</span>
-</a>
-  </div>
-</section>
-<section class="story-chapter" id="scene-platform-associations" data-scene="4" data-present-id="platform-associations" data-present-label="Combined evidence" data-present-duration="2100" data-film-duration="3800" data-film-hold="8500" data-film-word="SIGNALS" data-layout="atlas" data-direction="left" data-palette="midnight" data-cinema="converge" aria-labelledby="title-platform-associations">
-  <div class="chapter-stage">
-    <div class="scene-wash" aria-hidden="true">
-</div>
-    <div class="scene-orbit" aria-hidden="true">
-<i>
-</i>
-<i>
-</i>
-<i>
-</i>
-</div>
-    <div class="scene-thread" aria-hidden="true">
-</div>
-    <span class="scene-index" aria-hidden="true">05</span>
-    <div class="chapter-layout">
-    <div class="chapter-copy">
-      <p class="eyebrow">Combined evidence</p>
-      <h2 id="title-platform-associations">
-<span class="title-mask">
-<span style="--line:0">Timing stands out.</span>
-</span>
-<br>
-<span class="title-mask">
-<span style="--line:1">Usage is less certain.</span>
-</span>
-</h2>
-      <p>Platform time, recorded days and resource opens show positive associations, but all three intervals cross zero. OJ final-day share remains negative.</p>
-      <p class="reading-note">26 students · 11 with recorded usage · tracking begins 8 Sep · no record does not mean no learning · exploratory</p>
-      <div class="chapter-actions">
-        <button class="focus-link" data-figure="10-platform-associations" data-title="Combined evidence" data-note="26 students · 11 with recorded usage · tracking begins 8 Sep · no record does not mean no learning · exploratory">
-<span class="hold-fill" aria-hidden="true">
-</span>View full figure ↗</button>
-        <a href="analysis.html#platform-associations">Data &amp; interpretation ↗</a>
-      </div>
-    </div>
-    <figure class="chapter-figure" data-entrance="push">
-      <div class="figure-depth" aria-hidden="true">
-<i style="--plane:1">
-</i>
-<i style="--plane:2">
-</i>
-<i style="--plane:3">
-</i>
-</div>
-      <picture>
-<source media="(max-width:700px)" srcset="assets/story/10-platform-associations-mobile.svg">
-<img src="assets/story/10-platform-associations.svg" alt="Combined evidence. Platform time, recorded days and resource opens show positive associations, but all three intervals cross zero. OJ final-day share remains negative. 26 students · 11 with recorded usage · tracking begins 8 Sep · no record does not mean no learning · exploratory" decoding="async">
-</picture>
+  <div class="intertitle" aria-hidden="true"><div class="it-line"></div><div class="it-num"></div><div class="it-word"></div></div>
 
-    </figure>
+  <aside id="caption" class="caption" aria-live="polite">
+    <p class="cap-kicker"></p>
+    <h2 class="cap-title"></h2>
+    <p class="cap-body"></p>
+    <p class="cap-credit" hidden></p>
+  </aside>
+
+  <div class="flash" aria-hidden="true"></div>
+  <div class="wipe" aria-hidden="true"></div>
+  <div class="lb lb-top" aria-hidden="true"></div>
+  <div class="lb lb-bot" aria-hidden="true"></div>
+  <div class="vhs" aria-hidden="true"><div class="vhs-band"></div><span class="vhs-rew">◀◀ REWIND</span><span class="vhs-tc">00:00</span></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="osd" aria-hidden="true"></div>
+  <div class="seek-osd" aria-hidden="true"></div>
+
+  <header class="hud-top">
+    <a class="brand" href="#open">The score <b>has a past</b></a>
+    <span class="chapter-label"></span>
+    <span class="spacer"></span>
+    <div class="lens" role="group" aria-label="Homework lens: highlight one homework in every chart">
+      <span class="lens-label">Lens</span>
+      <button type="button" data-hw="">All</button>
+      <button type="button" data-hw="HW1" style="--c: var(--hw1)"><i></i><span><span class="hw-pre">HW</span>1</span></button>
+      <button type="button" data-hw="HW2" style="--c: var(--hw2)"><i></i><span><span class="hw-pre">HW</span>2</span></button>
+      <button type="button" data-hw="HW3" style="--c: var(--hw3)"><i></i><span><span class="hw-pre">HW</span>3</span></button>
+      <button type="button" data-hw="HW4" style="--c: var(--hw4)"><i></i><span><span class="hw-pre">HW</span>4</span></button>
     </div>
-    <a class="previous-chapter" href="#scene-midterm-associations" aria-label="Previous chapter">← Previous</a>
-    <a class="next-chapter" href="#evidence">Methods & evidence <span>↓</span>
-</a>
+    <a class="hud-link" href="analysis.html">Methods &amp; tables ↗</a>
+  </header>
+
+  <div class="poster" hidden>
+    <p class="poster-k">A data film · STATS 401 final project</p>
+    <button class="big-play" type="button" aria-label="Play the film"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+    <p class="poster-t">The score <em>has a past</em></p>
+    <p class="poster-m">Presenter · the full story, holding at every chart · 4½ min</p>
+    <button class="pm-loop" type="button"><span>⟳</span> Loop the 64-second highlight reel</button>
+    <p class="poster-h"><kbd>Space</kbd> play &nbsp;·&nbsp; <kbd>→</kbd> continue &nbsp;·&nbsp; <kbd>L</kbd> loop &nbsp;·&nbsp; scroll to scrub</p>
   </div>
-</section>
-</div>
-<section id="evidence" class="story-ending" data-present-id="evidence" data-present-label="Research archive" data-present-duration="2000" data-film-duration="3200" data-film-hold="3200" data-film-word="LOOK CLOSER.">
-<div class="ending-intro">
-<p class="eyebrow">CONTINUE THE RESEARCH</p>
-<h2>Behind the figures.</h2>
-<p>Read the detailed analysis, data tables and methods on a separate page.</p>
-<a class="enter" href="analysis.html">Analysis &amp; methods ↗</a>
-</div>
-<nav class="evidence-archive" aria-label="Explore the evidence">
-<a href="analysis.html#timing">
-<span>Visible submission peaks</span>
-<span aria-hidden="true">↗</span>
-</a>
-<a href="analysis.html#scores">
-<span>Problem bottlenecks</span>
-<span aria-hidden="true">↗</span>
-</a>
-<a href="analysis.html#attempt-scores">
-<span>Actual attempt scores</span>
-<span aria-hidden="true">↗</span>
-</a>
-<a href="analysis.html#midterm-associations">
-<span>Process and exam</span>
-<span aria-hidden="true">↗</span>
-</a>
-<a href="analysis.html#platform-associations">
-<span>Combined evidence</span>
-<span aria-hidden="true">↗</span>
-</a>
-</nav>
-</section>
-</main>
-<footer>
-<p>CS201 Learning Process &amp; Midterm Outcomes · Zaozao Wang &amp; Zhengxiang Liu</p>
-<p>Five featured chapters; ten downloadable static figures. Partial midterm cohort; analytical filters and reader evaluation are planned.</p>
-<p>
-<a href="analysis.html#evaluation">Evaluation plan</a> · <a href="https://github.com/Cis-jujube/STATS-401-Final-Project">Project source ↗</a> · <a href="docs/site-design.md">Design references</a> · <a href="proposal.md">Original proposal (historical)</a>
-</p>
-</footer>
-<section id="presentation-panel" hidden aria-label="Presentation controls" tabindex="-1">
-  <div class="presentation-track" aria-hidden="true">
-<span>
-</span>
-</div>
-  <div id="film-transport" hidden>
-    <div class="film-time">
-<span>FULL STORY</span>
-<output id="film-time">0:00</output>
-</div>
-    <div class="film-seek-wrap">
-<label class="film-sr-only" for="film-seek">Full story playback position</label>
-<input id="film-seek" type="range" min="0" max="100" step="10" value="0">
-<div id="film-markers" aria-hidden="true">
-</div>
-</div>
-    <button id="film-manual">Hold for explanation</button>
+
+  <button class="continue-chip" type="button" hidden>Continue <kbd>→</kbd></button>
+
+  <div class="pause-card collapsed" role="status">
+    <h3><span>❚❚ Paused · explore</span><button type="button" aria-expanded="false">How to read ▴</button></h3>
+    <p class="pc-how"></p>
+    <p><kbd>Space</kbd> play &nbsp;<kbd>←</kbd><kbd>→</kbd> beats &nbsp;scroll to scrub</p>
   </div>
-  <div class="presentation-status">
-<span class="presentation-kicker" id="presentation-scroll-hint">LIVE STORY / CS201</span>
-<span id="presentation-status" role="status" aria-live="polite" aria-atomic="true">
-</span>
-</div>
-  <div class="presentation-buttons">
-<button id="presentation-previous" aria-label="Previous figure">← <span>Previous</span>
-</button>
-<button id="presentation-next">Continue →</button>
-  <details id="presentation-options">
-<summary>More</summary>
-<div class="presentation-menu">
-    <label for="presentation-jump">Jump to a complete figure</label>
-<select id="presentation-jump">
-<option value="home">Opening · The score has a past</option>
-<option value="timing">01 · Visible submission peaks</option>
-<option value="scores">02 · Problem bottlenecks</option>
-<option value="attempt-scores">03 · Actual attempt scores</option>
-<option value="midterm-associations">04 · Process and exam</option>
-<option value="platform-associations">05 · Combined evidence</option>
-<option value="evidence">Research archive</option>
-</select>
-    <button id="presentation-figure">Open full figure ↗</button>
-<button id="presentation-replay">Replay this entrance</button>
-<button id="presentation-skip">Finish this transition</button>
-    <button id="presentation-fullscreen">Enter fullscreen</button>
-<button id="presentation-motion" aria-pressed="true">Motion on</button>
-    <button id="film-restart">Play full story from the start</button>
-    <p>Space: play / pause · ← →: figures<br>Presentation: each figure waits.<br>Full story: pause or seek at any time.</p>
+
+  <div class="keys-card" hidden>
+    <kbd>Space</kbd><span>Play / pause</span>
+    <kbd>→ ⇟ ⏎</kbd><span>Continue (a presentation clicker works too)</span>
+    <kbd>← ⇞</kbd><span>Back one beat (Loop: one shot)</span>
+    <kbd>P · L</kbd><span>Presenter mode · Loop mode</span>
+    <kbd>A</kbd><span>Auto: play straight through, no holds</span>
+    <kbd>⇧ ← →</kbd><span>Seek 5 seconds</span>
+    <kbd>[ ]</kbd><span>Previous / next scene</span>
+    <kbd>, .</kbd><span>Step one frame</span>
+    <kbd>1–8</kbd><span>Jump to scene</span>
+    <kbd>H</kbd><span>Hide interface</span>
+    <kbd>F</kbd><span>Fullscreen</span>
+    <kbd>Scroll</kbd><span>Scrub the timeline</span>
   </div>
-</details>
-<button id="presentation-exit">Exit</button>
-</div>
-  <p id="presentation-message" role="status" hidden>
-</p>
-</section>
-<div id="presentation-effects" aria-hidden="true" hidden>
-  <div id="presentation-spatial-field">
-<i class="spatial-cover-left">
-</i>
-<i class="spatial-cover-right">
-</i>
-</div>
-  <canvas id="presentation-energy">
-</canvas>
-  <div id="presentation-aperture" class="shot-surface">
-    <svg class="portal-mask" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
-      <path class="portal-field" fill-rule="evenodd" d="M-10000-10000H11000V11000H-10000Z M500 405 C440 405 440 595 500 595 C560 595 560 405 500 405Z"/>
-      <path class="portal-zero" fill-rule="evenodd" d="M500 355 C385 355 385 645 500 645 C615 645 615 355 500 355Z M500 405 C440 405 440 595 500 595 C560 595 560 405 500 405Z"/>
-    </svg>
-    <div class="portal-landing-cover">
-<i>
-</i>
-<i>
-</i>
-</div>
+
+  <div class="music-card" hidden>
+    <h3>Soundtrack <span>for the Loop reel</span></h3>
+    <label class="mc-file"><input type="file" accept="audio/*"><span class="mc-name">Choose a track…</span></label>
+    <div class="mc-row"><span class="mc-k">Tempo</span><input class="mc-bpm" type="number" min="50" max="220" step="0.1" value="120" aria-label="Tempo in beats per minute"><span class="mc-u">BPM</span><button type="button" class="mc-tap">Tap</button></div>
+    <div class="mc-row"><span class="mc-k">First beat</span><input class="mc-off" type="range" min="0" max="4" step="0.01" value="0" aria-label="Time of the first downbeat in the track"><output class="mc-offv">0.00 s</output></div>
+    <p class="mc-note">Tap along with the beat to set the tempo, then slide <b>First beat</b> until the cuts land on the downbeat. The file plays only on this computer; nothing is uploaded or saved.</p>
+    <button type="button" class="mc-clear">Remove track</button>
   </div>
-  <div id="presentation-press" class="shot-surface">
-    <div class="press-slab">
-<div class="press-slab-piece" style="--piece:0;--piece-x:-1.2;--piece-y:-0.4;--piece-turn:-24">
-<strong>THE GAP</strong>
+
+  <footer class="transport">
+    <button class="t-play" type="button" aria-label="Play"></button>
+    <button class="t-prev" type="button" aria-label="Previous beat"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM20 5v14L9.5 12z"/></svg></button>
+    <button class="t-next" type="button" aria-label="Next beat"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM4 5l10.5 7L4 19z"/></svg></button>
+    <span class="t-time">00:00 / 00:00</span>
+    <div class="t-track" role="slider" tabindex="0" aria-label="Film position in seconds">
+      <div class="t-segs"></div>
+      <div class="t-head"></div>
+      <div class="t-hover"></div>
+    </div>
+    <span class="t-sep" aria-hidden="true"></span>
+    <div class="t-modes" role="group" aria-label="Playback mode">
+      <button type="button" data-mode="presenter" title="Presenter: the full story, holding at every chart (P)"><span class="lbl-long">Presenter</span><span class="lbl-short">Talk</span></button>
+      <button type="button" data-mode="loop" title="Loop: a 64-second highlight reel that repeats (L)">⟳ Loop</button>
+    </div>
+    <button class="t-auto" type="button" aria-pressed="false" title="Auto: play straight through without holding (A)">Auto</button>
+    <button class="t-music" type="button" aria-pressed="false" title="Soundtrack: sync the loop to your own music">♪</button>
+    <button class="t-speed" type="button" title="Playback speed">1×</button>
+    <button class="t-keys" type="button" aria-label="Keyboard shortcuts">?</button>
+    <button class="t-full" type="button" aria-label="Fullscreen"><svg viewBox="0 0 24 24"><path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 0h2v6h-6v-2h4z"/></svg></button>
+  </footer>
 </div>
-<div class="press-slab-piece" style="--piece:1;--piece-x:0.3;--piece-y:-1.4;--piece-turn:17">
-<strong>THE GAP</strong>
-</div>
-<div class="press-slab-piece" style="--piece:2;--piece-x:1.2;--piece-y:0.7;--piece-turn:32">
-<strong>THE GAP</strong>
-</div>
-</div>
-    <i class="press-jaw-left">
-</i>
-<i class="press-jaw-right">
-</i>
-    <div class="press-final-cover">
-<i>
-</i>
-<i>
-</i>
-</div>
-  </div>
-  <div id="presentation-folio" class="shot-surface">
-    <div class="folio-cover">
-<span>ONE ASSOCIATION / THREE CHECKS</span>
-<strong>THE<br>TEST</strong>
-<i class="folio-edge">
-</i>
-</div>
-    <div class="folio-exit">
-<span>READ THE EVIDENCE</span>
-</div>
-  </div>
-  <div id="presentation-archive" class="shot-surface">
-    <i class="archive-sheet-left">
-</i>
-<i class="archive-sheet-right">
-</i>
-    <strong class="archive-word">LOOK<br>CLOSER.</strong>
-<i class="archive-rule">
-</i>
-  </div>
-  <div class="film-slate">
-<span id="film-slate-index">
-</span>
-<strong id="film-slate-word">
-</strong>
-<span id="film-slate-caption">
-</span>
-</div>
-  <div class="film-frame">
-<span>CS201 / PROCESS NOTES</span>
-<span id="film-frame-label">
-</span>
-</div>
-</div>
-<div id="presentation-interludes" aria-hidden="true">
-  <div class="presentation-bridge" data-bridge="scores">
-<p class="bridge-kicker">ONE PROBLEM / THREE STAGES</p>
-<h2>HW3-EvenOrOdd</h2>
-<p>Same 39 attempters · cumulative best, not the actual third attempt</p>
-<div class="presentation-cards">
-<div class="presentation-card" style="--card:0">
-<span>01 / First submission</span>
-<strong>40.51</strong>
-<small>Mean score / 100</small>
-</div>
-<div class="presentation-card" style="--card:1">
-<span>02 / Best through 3</span>
-<strong>66.15</strong>
-<small>Mean score / 100</small>
-</div>
-<div class="presentation-card" style="--card:2">
-<span>03 / Best observed</span>
-<strong>100.00</strong>
-<small>Mean score / 100</small>
-</div>
-</div>
-<p class="bridge-foot">Then: compare the selected problem ranking.</p>
-</div>
-  <div class="presentation-bridge" data-bridge="midterm-associations">
-<p class="bridge-kicker">ONE ASSOCIATION / THREE CHECKS</p>
-<h2>How much survives?</h2>
-<p>Final-day submission share × exam score · Spearman ρ</p>
-<div class="presentation-cards">
-<div class="presentation-card" style="--card:0">
-<span>A / Bootstrap interval</span>
-<svg viewBox="0 0 300 100" aria-hidden="true">
-<path class="mini-axis" d="M20 60H280 M150 20V68"/>
-<text x="20" y="88">−1</text>
-<text x="150" y="88">0</text>
-<text x="280" y="88">1</text>
-<path class="mini-range" d="M47.9760 40H141.1080"/>
-<circle cx="87.9380" cy="40" r="5"/>
-</svg>
-<strong>-0.78 to -0.07</strong>
-<small>95% interval · n=26</small>
-</div>
-<div class="presentation-card" style="--card:1">
-<span>B / Leave-one-out range</span>
-<svg viewBox="0 0 300 100" aria-hidden="true">
-<path class="mini-axis" d="M20 60H280 M150 20V68"/>
-<text x="20" y="88">−1</text>
-<text x="150" y="88">0</text>
-<text x="280" y="88">1</text>
-<path class="mini-range" d="M71.4150 40H94.8020"/>
-<circle class="mini-hollow" cx="87.9380" cy="40" r="5"/>
-</svg>
-<strong>-0.60 to -0.42</strong>
-<small>Range, not a CI · 26 re-fits of n=25</small>
-</div>
-<div class="presentation-card" style="--card:2">
-<span>C / Sensitivity cohorts</span>
-<svg viewBox="0 0 300 100" aria-hidden="true">
-<path class="mini-axis" d="M20 60H280 M150 20V68"/>
-<text x="20" y="88">−1</text>
-<text x="150" y="88">0</text>
-<text x="280" y="88">1</text>
-<path d="M94.1130 21l6 6-6 6-6-6Z"/>
-<rect x="83.3670" y="44" width="10" height="10"/>
-</svg>
-<strong>-0.43 / -0.47</strong>
-<small>◆ All slots n=23 · ■ Omit discrepancies n=24</small>
-</div>
-</div>
-<p class="bridge-foot">Same −1 to +1 scale · exploratory, unadjusted associations</p>
-</div>
-</div>
-<dialog id="focus-dialog" aria-labelledby="focus-title">
-<div class="dialog-head">
-<h2 id="focus-title">Figure focus</h2>
-<button id="close-focus" autofocus>Close ×</button>
-</div>
-<img id="focus-image" alt="">
-<p id="focus-note">
-</p>
-</dialog>
-<script src="assets/motion-math.js">
-</script>
-<script src="assets/cinema.js">
-</script>
-<script src="assets/site.js">
-</script>
-<script src="assets/presentation-clock.js">
-</script>
-<script src="assets/film-clock.js">
-</script>
-<script src="assets/presentation-choreography.js">
-</script>
-<script src="assets/presentation-effects.js">
-</script>
-<script src="assets/presentation.js">
-</script>
+<div id="tooltip" role="tooltip" hidden></div>
+
+<noscript><p style="position:fixed;inset:auto 0 0 0;padding:20px;background:#ece7dd;color:#07090d">This data film needs JavaScript. All figures, tables and methods are available on the <a href="analysis.html">analysis page</a>.</p></noscript>
+
+<script src="assets/vendor/d3.v7.min.js?v=20260930o"></script>
+<script src="assets/app/data.js?v=20260930o"></script>
+<script src="assets/app/core.js?v=20260930o"></script>
+<script src="assets/app/particles.js?v=20260930o"></script>
+<script src="assets/app/scenes/open.js?v=20260930o"></script>
+<script src="assets/app/scenes/stacks.js?v=20260930o"></script>
+<script src="assets/app/scenes/clock.js?v=20260930o"></script>
+<script src="assets/app/scenes/problems.js?v=20260930o"></script>
+<script src="assets/app/scenes/attempts.js?v=20260930o"></script>
+<script src="assets/app/scenes/retries.js?v=20260930o"></script>
+<script src="assets/app/scenes/exam.js?v=20260930o"></script>
+<script src="assets/app/scenes/finale.js?v=20260930o"></script>
+<script src="assets/app/reel.js?v=20260930o"></script>
+<script src="assets/app/player.js?v=20260930o"></script>
 </body>
 </html>

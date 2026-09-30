@@ -2,6 +2,7 @@
 from html.parser import HTMLParser
 import json
 from pathlib import Path
+import re
 import unittest
 from urllib.parse import urlparse
 
@@ -56,45 +57,89 @@ class PublicArtifacts(unittest.TestCase):
         withheld = d['window_submissions'] - sum(c['submissions'] or 0 for c in d['calendar'])
         peak = max(visible, key=lambda c: c['submissions'])
         remaining = [r for r in d['score_progression'] if r['best'] - r['best3'] > 10]
-        self.assertEqual((len(visible), withheld), (29, 677))
+        self.assertEqual((len(visible), withheld), (37, 979))
         self.assertEqual((peak['date'], peak['hour'], peak['submissions'], peak['contributors']),
                          ('2026-08-29', 12, 153, 12))
-        self.assertEqual((len(remaining), len(d['score_progression'])), (9, 23))
+        self.assertEqual((len(remaining), len(d['score_progression'])), (10, 31))
         self.assertEqual(max(d['score_progression'], key=lambda r: r['best'] - r['best3'])['problem_name'],
                          '26s3HW3-EvenOrOdd')
         companion = (ROOT/'analysis.html').read_text()
-        self.assertIn('677 submissions but are masked', companion)
-        self.assertIn('Nine of 23 problem slots', companion)
+        self.assertIn(f'{withheld} submissions but are masked', companion)
+        self.assertIn(f'{len(remaining)} of {len(d["score_progression"])} problem slots', companion)
         self.assertIn('Best through three is a cumulative maximum', companion)
     def test_all_local_page_resources_exist(self):
         parser = References()
-        parser.feed((ROOT/'index.html').read_text())
-        parser.feed((ROOT/'analysis.html').read_text())
+        for name in ('index.html', 'analysis.html', 'legacy.html'):
+            parser.feed((ROOT/name).read_text())
         for path in parser.paths:
             self.assertTrue((ROOT/urlparse(path).path).is_file(), path)
     def test_story_and_analysis_links_resolve(self):
         pages = {}
-        for name in ('index.html', 'analysis.html'):
+        for name in ('index.html', 'analysis.html', 'legacy.html'):
             parser = References()
             parser.feed((ROOT/name).read_text())
             pages[name] = parser
-        story = (ROOT/'index.html').read_text()
+        # the film routes #<scene-id> deep links in JavaScript; treat scene ids as anchors
+        pages['index.html'].ids |= set(re.findall(r"id: '([\w-]+)', title:", ''.join(
+            f.read_text() for f in sorted((ROOT/'assets/app/scenes').glob('*.js')))))
+        story = (ROOT/'legacy.html').read_text()
         companion = (ROOT/'analysis.html').read_text()
-        self.assertEqual(story.count('class="story-chapter"'), 5)
-        self.assertEqual(companion.count('class="chart-section"'), 10)
-        for figure in ('03-score-progression', '06-midterm-associations'):
+        self.assertEqual(story.count('class="story-chapter"'), 10)
+        self.assertEqual(companion.count('class="chart-section"'), 12)
+        for figure in ('03-score-progression', '06-midterm-associations','11-retry-productivity','12-deadline-progress'):
             self.assertIn(f'assets/story/{figure}.svg', story)
             self.assertIn(f'assets/figures/{figure}.svg', companion)
-        for figure in ('02-attempts', '05-midterm-distribution', '07-midterm-attempt-groups',
-                       '08-platform-coverage', '09-platform-groups'):
+        for figure in ('05-midterm-distribution', '07-midterm-attempt-groups'):
             self.assertNotIn(f'assets/story/{figure}.svg', story)
             self.assertIn(f'assets/figures/{figure}.svg', companion)
         mobile_score = (ROOT/'assets/story/03-score-progression-mobile.svg').read_text()
-        self.assertIn('Six selected: top two remaining gaps within each homework.', mobile_score)
-        self.assertIn('All 23 problems and exact values are in the analysis page.', mobile_score)
+        self.assertIn('8 selected: top two remaining gaps within each homework.', mobile_score)
+        self.assertIn('All 31 problem slots and values are in the analysis page.', mobile_score)
         for name, parser in pages.items():
             for target, fragment in parser.fragments:
                 self.assertIn(fragment, pages[target or name].ids, f'{name} -> {target}#{fragment}')
+
+    def test_film_bundles_current_public_aggregates(self):
+        bundle = (ROOT/'assets/app/data.js').read_text()
+        payload = json.loads(bundle[bundle.index('=') + 1:].strip().rstrip(';'))
+        for key, name in (('homework', 'summary'), ('midterm', 'midterm-summary'), ('platform', 'platform-summary')):
+            self.assertEqual(payload[key], json.loads((ROOT/f'data/{name}.json').read_text()), f'rerun scripts/build_app_data.py ({name})')
+        film = (ROOT/'index.html').read_text()
+        self.assertIn('assets/vendor/d3.v7.min.js', film)
+        for scene in sorted((ROOT/'assets/app/scenes').glob('*.js')):
+            self.assertIn(f'assets/app/scenes/{scene.name}', film)
+        self.assertNotIn('student_id', bundle)
+
+    def test_refreshed_event_totals_and_masked_partitions(self):
+        d = json.loads((ROOT/'data/summary.json').read_text())
+        self.assertEqual([a['homework'] for a in d['assignments']],['HW1','HW2','HW3','HW4'])
+        self.assertEqual((d['cohort_members'],d['window_submissions'],d['window_submitters']),(42,2807,39))
+        event = d['event_progress']
+        eligible = sum(r['eligible_retries'] for r in event['by_homework'])
+        improvements = sum(r['new_bests'] for r in event['by_homework'])
+        self.assertEqual(eligible+sum(event['eligibility_counts'].values()),d['window_submissions'])
+        self.assertEqual((eligible,improvements),(1222,468))
+        self.assertEqual(eligible,sum(r['eligible_retries'] for r in event['by_gap']))
+        self.assertEqual(improvements,sum(r['new_bests'] for r in event['by_gap']))
+        for name in ('by_homework','by_gap','by_problem','by_phase'):
+            for row in event[name]:
+                if row['state']=='suppressed':
+                    for key in ('eligible_retries','new_bests','contributors','improvement_pct'):
+                        self.assertIsNone(row[key])
+                elif row['eligible_retries']:
+                    self.assertGreaterEqual(row['contributors'],5)
+                    self.assertLessEqual(row['new_bests'],row['eligible_retries'])
+                    self.assertAlmostEqual(row['improvement_pct'],100*row['new_bests']/row['eligible_retries'])
+        for name in ('by_problem','by_phase'):
+            for assignment in d['assignments']:
+                rows = [r for r in event[name] if r['homework']==assignment['homework']]
+                self.assertNotEqual(sum(r['state']=='suppressed' for r in rows),1)
+                if all(r['state']=='visible' for r in rows):
+                    total = next(r for r in event['by_homework'] if r['homework']==assignment['homework'])
+                    self.assertEqual(sum(r['eligible_retries'] for r in rows),total['eligible_retries'])
+                    self.assertEqual(sum(r['new_bests'] for r in rows),total['new_bests'])
+        self.assertNotIn('student_id',json.dumps(event))
+        self.assertNotIn('linkage-key',json.dumps(d))
 
 if __name__ == '__main__':
     unittest.main()
