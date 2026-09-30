@@ -183,8 +183,11 @@ body.idle .continue-chip { opacity: 1; }
 .mc-tap, .mc-clear { padding: 7px 12px; border-radius: 8px; border: 1px solid var(--hair-2); color: var(--ink); font: 500 12px/1 var(--sans); }
 .mc-tap:hover, .mc-clear:hover { background: rgba(255, 255, 255, .07); }
 .mc-tap:active { background: var(--ember); color: var(--bg); }
-.mc-off { flex: 1; accent-color: var(--ember); }
-.mc-offv { width: 54px; text-align: right; font: 500 11px/1 var(--mono); color: var(--ink); }
+.mc-off { width: 92px; padding: 7px 9px; border-radius: 8px; border: 1px solid var(--hair-2); background: rgba(255, 255, 255, .04); color: var(--ink); font: 500 13px/1 var(--mono); }
+.mc-nudge { width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--hair-2); color: var(--ink); }
+.mc-nudge:hover { background: rgba(255, 255, 255, .07); }
+.mc-sync { margin: 0; font: 500 11.5px/1.5 var(--sans); color: var(--ember); }
+.mc-sync:empty { display: none; }
 .mc-note { margin: 0; font-size: 11.5px; color: var(--muted); }
 .mc-clear { justify-self: start; color: var(--ink-2); }
 

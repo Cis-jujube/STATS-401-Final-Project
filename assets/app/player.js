@@ -319,12 +319,12 @@
   });
 
   // ── soundtrack (Loop mode): the viewer's own local file drives the reel clock ──
-  const M = { audio: null, url: null, offset: 0, taps: [] };
+  const M = { audio: null, url: null, offset: 0, taps: [], section: false }; // section: loop exactly one reel length of the track
   function audioPlay() { if (M.audio && isLoop()) { M.audio.playbackRate = S.speed; const p = M.audio.play(); if (p) p.catch(() => {}); } }
   function audioPause() { if (M.audio) M.audio.pause(); }
   function audioSeek(R) {
     if (!M.audio || !isFinite(M.audio.duration)) return;
-    const cyc = Math.max(0, Math.floor((M.audio.currentTime - M.offset) / REEL.len));
+    const cyc = M.section ? 0 : Math.max(0, Math.floor((M.audio.currentTime - M.offset) / REEL.len));
     M.audio.currentTime = F.clamp(cyc * REEL.len + R + M.offset, 0, Math.max(0, M.audio.duration - 0.05));
   }
   function setTempo(bpm) {
@@ -342,6 +342,13 @@
     M.audio = new Audio(M.url); M.audio.loop = true; M.audio.preload = 'auto';
     musicCard.querySelector('.mc-name').textContent = file.name;
     musicBtn.setAttribute('aria-pressed', 'true');
+    // the reel was cut to one song: recognise it and lock to the 32 bars the edit follows
+    const song = REEL.song && REEL.song.match.test(file.name) ? REEL.song : null;
+    M.section = !!song;
+    if (song) { setTempo(song.bpm); setOffset(song.start); }
+    musicCard.querySelector('.mc-sync').textContent = song
+      ? `Synced: ${song.title}, bars 104–135 (${F.time(song.start)}–${F.time(song.start + REEL.len)}), looping with the reel.`
+      : 'Set the tempo and the time of a downbeat to lock the cuts to this track.';
     S.R = 0;
     M.audio.addEventListener('loadedmetadata', () => { M.audio.currentTime = Math.min(M.offset, M.audio.duration || 0); }, { once: true });
     if (S.playing) audioPlay();
@@ -353,11 +360,14 @@
     M.taps.push(now); if (M.taps.length > 9) M.taps.shift();
     if (M.taps.length >= 3) { const d = d3.median(M.taps.slice(1).map((t, i) => t - M.taps[i])); setTempo(60 / d); }
   });
-  const offIn = musicCard.querySelector('.mc-off'), offOut = musicCard.querySelector('.mc-offv');
-  offIn.addEventListener('input', () => { M.offset = +offIn.value; offOut.textContent = M.offset.toFixed(2) + ' s'; });
+  const offIn = musicCard.querySelector('.mc-off');
+  function setOffset(v) { M.offset = Math.max(0, v); offIn.value = M.offset.toFixed(2); if (M.audio && isFinite(M.audio.duration)) audioSeek(S.R); }
+  offIn.addEventListener('change', () => setOffset(parseFloat(offIn.value) || 0));
+  musicCard.querySelectorAll('.mc-nudge').forEach((b) => b.addEventListener('click', () => setOffset(M.offset + parseFloat(b.dataset.d))));
   musicCard.querySelector('.mc-clear').addEventListener('click', () => {
     if (M.audio) { M.audio.pause(); URL.revokeObjectURL(M.url); }
-    M.audio = null; musicBtn.setAttribute('aria-pressed', 'false'); musicCard.querySelector('.mc-name').textContent = 'Choose a track…';
+    M.audio = null; M.section = false; musicBtn.setAttribute('aria-pressed', 'false'); musicCard.querySelector('.mc-name').textContent = 'Choose a track…';
+    musicCard.querySelector('.mc-sync').textContent = '';
   });
 
   // ── captions ─────────────────────────────────────────────────────
@@ -627,7 +637,7 @@
 
     // the beat: a pulse on every beat, stronger on each bar's downbeat
     const bi = Math.floor(S.R / bl + 1e-6), ph = S.R - bi * bl;
-    const pulse = Math.exp(-ph / 0.09) * (bi % 4 === 0 ? 1 : 0.5);
+    const pulse = Math.exp(-ph / 0.09) * (bi % 32 === 0 ? 1.8 : bi % 4 === 0 ? 1 : 0.5); // phrase > bar > beat
     flash.style.opacity = Math.max(fl, 0.09 * pulse);
     setBars(0.55 + 0.25 * pulse * (bi % 4 === 0 ? 1 : 0));
     vhs.style.opacity = 0;
@@ -662,7 +672,11 @@
     F.wallT = now / 1000;
     // clock
     if (isLoop()) {
-      if (M.audio && !M.audio.paused) S.R = wrap(M.audio.currentTime - M.offset); // the music is the clock
+      if (M.audio && !M.audio.paused) {
+        // the music is the clock; in section mode the track loops with the reel, bar for bar
+        if (M.section && M.audio.currentTime >= M.offset + REEL.len) M.audio.currentTime -= REEL.len;
+        S.R = wrap(M.audio.currentTime - M.offset);
+      }
       else if (S.playing) S.R = wrap(S.R + dt * S.speed);
     } else if (S.playing) {
       const prevT = S.T;
