@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/app/app.css?v=20260930o">
+<link rel="stylesheet" href="assets/app/app.css?v=20261001a">
 </head>
 <body>
 <a class="skip" href="analysis.html">Skip the film: read the analysis, tables and methods</a>
@@ -58,7 +58,7 @@
     <button class="big-play" type="button" aria-label="Play the film"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></button>
     <p class="poster-t">The score <em>has a past</em></p>
     <p class="poster-m">Presenter · the full story, holding at every chart · 4½ min</p>
-    <button class="pm-loop" type="button"><span>⟳</span> Loop the 64-second highlight reel</button>
+    <button class="pm-loop" type="button"><span>⟳</span> Loop the 60-second highlight reel</button>
     <p class="poster-h"><kbd>Space</kbd> play &nbsp;·&nbsp; <kbd>→</kbd> continue &nbsp;·&nbsp; <kbd>L</kbd> loop &nbsp;·&nbsp; scroll to scrub</p>
   </div>
 
@@ -88,9 +88,10 @@
   <div class="music-card" hidden>
     <h3>Soundtrack <span>for the Loop reel</span></h3>
     <label class="mc-file"><input type="file" accept="audio/*"><span class="mc-name">Choose a track…</span></label>
-    <div class="mc-row"><span class="mc-k">Tempo</span><input class="mc-bpm" type="number" min="50" max="220" step="0.1" value="120" aria-label="Tempo in beats per minute"><span class="mc-u">BPM</span><button type="button" class="mc-tap">Tap</button></div>
-    <div class="mc-row"><span class="mc-k">First beat</span><input class="mc-off" type="range" min="0" max="4" step="0.01" value="0" aria-label="Time of the first downbeat in the track"><output class="mc-offv">0.00 s</output></div>
-    <p class="mc-note">Tap along with the beat to set the tempo, then slide <b>First beat</b> until the cuts land on the downbeat. The file plays only on this computer; nothing is uploaded or saved.</p>
+    <div class="mc-row"><span class="mc-k">Tempo</span><input class="mc-bpm" type="number" min="50" max="220" step="0.1" value="128" aria-label="Tempo in beats per minute"><span class="mc-u">BPM</span><button type="button" class="mc-tap">Tap</button></div>
+    <div class="mc-row"><span class="mc-k">Start at</span><input class="mc-off" type="number" min="0" max="900" step="0.01" value="0" aria-label="Track time (seconds) where the reel's first bar begins"><span class="mc-u">s</span><button type="button" class="mc-nudge" data-d="-0.05">−</button><button type="button" class="mc-nudge" data-d="0.05">+</button></div>
+    <p class="mc-sync"></p>
+    <p class="mc-note">The reel is cut to Glass Animals, “The Other Side of Paradise” (128 BPM): load your copy and it locks to bars 104–135 automatically. For another track, tap along to set the tempo and nudge <b>Start at</b> onto a downbeat. The file plays only on this computer; nothing is uploaded or saved.</p>
     <button type="button" class="mc-clear">Remove track</button>
   </div>
 
@@ -107,7 +108,7 @@
     <span class="t-sep" aria-hidden="true"></span>
     <div class="t-modes" role="group" aria-label="Playback mode">
       <button type="button" data-mode="presenter" title="Presenter: the full story, holding at every chart (P)"><span class="lbl-long">Presenter</span><span class="lbl-short">Talk</span></button>
-      <button type="button" data-mode="loop" title="Loop: a 64-second highlight reel that repeats (L)">⟳ Loop</button>
+      <button type="button" data-mode="loop" title="Loop: a 60-second highlight reel that repeats (L)">⟳ Loop</button>
     </div>
     <button class="t-auto" type="button" aria-pressed="false" title="Auto: play straight through without holding (A)">Auto</button>
     <button class="t-music" type="button" aria-pressed="false" title="Soundtrack: sync the loop to your own music">♪</button>
@@ -120,19 +121,19 @@
 
 <noscript><p style="position:fixed;inset:auto 0 0 0;padding:20px;background:#ece7dd;color:#07090d">This data film needs JavaScript. All figures, tables and methods are available on the <a href="analysis.html">analysis page</a>.</p></noscript>
 
-<script src="assets/vendor/d3.v7.min.js?v=20260930o"></script>
-<script src="assets/app/data.js?v=20260930o"></script>
-<script src="assets/app/core.js?v=20260930o"></script>
-<script src="assets/app/particles.js?v=20260930o"></script>
-<script src="assets/app/scenes/open.js?v=20260930o"></script>
-<script src="assets/app/scenes/stacks.js?v=20260930o"></script>
-<script src="assets/app/scenes/clock.js?v=20260930o"></script>
-<script src="assets/app/scenes/problems.js?v=20260930o"></script>
-<script src="assets/app/scenes/attempts.js?v=20260930o"></script>
-<script src="assets/app/scenes/retries.js?v=20260930o"></script>
-<script src="assets/app/scenes/exam.js?v=20260930o"></script>
-<script src="assets/app/scenes/finale.js?v=20260930o"></script>
-<script src="assets/app/reel.js?v=20260930o"></script>
-<script src="assets/app/player.js?v=20260930o"></script>
+<script src="assets/vendor/d3.v7.min.js?v=20261001a"></script>
+<script src="assets/app/data.js?v=20261001a"></script>
+<script src="assets/app/core.js?v=20261001a"></script>
+<script src="assets/app/particles.js?v=20261001a"></script>
+<script src="assets/app/scenes/open.js?v=20261001a"></script>
+<script src="assets/app/scenes/stacks.js?v=20261001a"></script>
+<script src="assets/app/scenes/clock.js?v=20261001a"></script>
+<script src="assets/app/scenes/problems.js?v=20261001a"></script>
+<script src="assets/app/scenes/attempts.js?v=20261001a"></script>
+<script src="assets/app/scenes/retries.js?v=20261001a"></script>
+<script src="assets/app/scenes/exam.js?v=20261001a"></script>
+<script src="assets/app/scenes/finale.js?v=20261001a"></script>
+<script src="assets/app/reel.js?v=20261001a"></script>
+<script src="assets/app/player.js?v=20261001a"></script>
 </body>
 </html>
