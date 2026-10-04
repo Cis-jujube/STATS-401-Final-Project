@@ -387,3 +387,10 @@ h3,h4,p,a,button,summary,th,td,figcaption,small { font-size:var(--type-body); }
   72% { opacity:1; transform:translateY(-2px) scale(1.003); }
   100% { opacity:1; transform:translateY(0) scale(1); }
 }
+
+/* Evidence companion: the way back to each figure's reading view in the data film */
+.film-return { display:flex; flex-wrap:wrap; align-items:center; gap:6px 18px; margin:18px 0 6px; padding:12px 16px; border:1px solid rgba(37,33,30,.18); border-radius:12px; }
+.film-return .fr-k { flex-basis:100%; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:#6d6157; }
+.film-return a { min-height:44px; display:inline-flex; align-items:center; }
+.film-return a.primary { font-weight:600; text-decoration-thickness:2px; }
+.film-return .fr-note { font-size:13px; color:#6d6157; }

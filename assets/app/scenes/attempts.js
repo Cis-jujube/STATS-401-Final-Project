@@ -1,7 +1,8 @@
-/* Scene 5 · How many tries does 100 take?
-   View A: submissions per student per homework (box = middle half, whiskers = range, log x).
-   View B: the mean score of the k-th submission to a problem, beside the number of
-   students still submitting at k — the cohort thins, which is why the mean falls. */
+/* Figures 02 and 04 · Submissions per student, and actual k-th attempt scores.
+   Tries: every submission stacked by its try number on the problem (aggregate units).
+   Spread (Figure 02): submissions per student per homework (box = middle half, whiskers = range, log x).
+   Cohort (Figure 04): the mean score of the actual k-th submission to a problem, beside the number
+   of students still submitting at k — a changing cohort, so later means are not the same students. */
 (function () {
   const F = window.Film;
   const hw = F.data.homework;
@@ -60,22 +61,18 @@
   const lerpLog = (a, b, p) => Math.exp(F.lerp(Math.log(a), Math.log(b), p));
 
   F.scene({
-    id: 'attempts', title: '03 · Attempts', duration: 34 + O, enter: 'blinds', tint: 'rgba(25,158,112,.10)',
+    id: 'attempts', title: 'Attempts', duration: 34 + O, enter: 'blinds', tint: 'rgba(25,158,112,.10)',
     particles: [{ at: 0, form: 'tries', dur: 3.4, curl: 1.1, spread: 0.55 }],
-    beats: [
-      { at: 0, kicker: '03 · Attempts', title: `<em>${F.fmt.int(colTotal[1])}</em> first tries. Then it thins out.`,
-        body: `Every submission again, stacked by which try it was on its problem. <span class="num">${colTotal[2]}</span> second tries, <span class="num">${colTotal[3]}</span> third tries, then a long tail; <span class="num">${MASKED_TAIL}</span> later tries sit in masked cells.` },
-      { at: O, kicker: '03 · Attempts', title: 'Similar medians, <em>very different</em> tails.',
-        body: 'Submissions per student, log scale. Medians sit between <span class="num">12.5</span> and <span class="num">15</span>, about two tries per problem. The longest tails reach <span class="num">62–141</span>.' },
-      { at: 9 + O, kicker: '03 · Attempts', title: 'Some keep going after full marks.',
-        body: '<span class="num">441</span> submissions came after a problem was already at 100. Stop counting at each first full score and HW3’s longest tail shrinks from <b>108 to 47</b>.' },
-      { at: 17 + O, kicker: '03 · Attempts', title: 'The average k-th try gets <em>worse.</em>',
-        body: 'Mean score of each student’s 1st, 2nd, 3rd … submission to a problem. In HW1 it falls from <span class="num">76.9</span> at the first try to <span class="num">24.4</span> by the sixth.' },
-      { at: 26 + O, kicker: '03 · Attempts', title: 'Because the cohort changes.',
-        body: 'Students who solve a problem stop submitting. Later tries come only from those still stuck: <b>38</b> students made a first HW1 try, <b>5</b> a thirteenth. It is not one group getting worse.' },
-    ],
-    howto: '<b>Tries</b>: one dot per submission, stacked by try number and coloured by homework; grey = masked later tries. <b>Spread</b>: box = middle half of students, line = median, whiskers = fewest to most submissions (log scale). <b>Cohort</b>: top, mean score of the k-th submission; bottom, students still submitting. Hover the cohort chart for every homework at one try.',
+    howto: (fig) => (fig === '04'
+      ? '<b>Cohort</b>: top, mean score of the actual k-th submission by a student to a problem (no carry-forward); bottom, students still submitting at k. Each point averages a different, shrinking set of student–problem pairs. Withheld points (fewer than five students) are not drawn. <b>Tries</b>: one dot per submission, stacked by try number.'
+      : '<b>Tries</b>: one dot per submission, stacked by try number and coloured by homework; grey = withheld later tries. <b>Spread</b>: box = middle half of students, line = median, whiskers = fewest to most submissions (log scale). <b>Count</b> switches between all submissions and those before each first full score.'),
     onBeat() { st.userView = null; st.userMeasure = null; },
+    /** Each figure offers only its own views: 02 = Tries/Spread (+ Count), 04 = Tries/Cohort. */
+    onChapter(seg) {
+      const allow = seg && seg.fig === '04' ? ['0', '2'] : ['0', '1'];
+      ctrlView.el.querySelectorAll('button').forEach((b) => (b.hidden = !allow.includes(b.dataset.value)));
+      ctrlMeasure.el.hidden = !!(seg && seg.fig === '04');
+    },
     mount(el) {
       svg = d3.select(el).append('svg').attr('class', 'viz');
       gTries = svg.append('g').attr('data-interactive', '');
@@ -142,7 +139,7 @@
       const ticks = [2, 5, 10, 20, 50, 100, 200];
       ax.selectAll('line').data(ticks).join('line').attr('x1', x).attr('x2', x).attr('y1', geo.top - 10).attr('y2', geo.bottom).attr('stroke', 'rgba(236,231,221,.06)');
       ax.selectAll('text').data(ticks).join('text').attr('class', 'mono').attr('x', x).attr('y', geo.bottom + 16).attr('text-anchor', 'middle').style('font-size', '10.5px').attr('fill', F.muted).text((d) => d);
-      ax.append('text').attr('class', 'axis-title').attr('x', geo.x1).attr('y', geo.bottom + 32).attr('text-anchor', 'end').text('Submissions per student in the window (log scale)');
+      ax.append('text').attr('class', 'axis-title').attr('x', geo.x1).attr('y', geo.bottom + 32).attr('text-anchor', 'end').text(L.narrow ? 'Per student (log scale)' : 'Submissions per student in the window (log scale)');
       // cohort geometry
       const split = geo.top + (geo.bottom - geo.top) * 0.62;
       co.x = d3.scaleLinear().domain([1, KMAX]).range([geo.x0 - (L.narrow ? 30 : 60), geo.x1]);
@@ -252,12 +249,12 @@
     cols.append('text').attr('class', 'n mono').attr('x', (g.cols * g.sp) / 2).attr('text-anchor', 'middle').style('font-size', L.narrow ? '9px' : '10.5px').attr('fill', F.ink)
       .attr('y', (k) => g.base - Math.ceil(colTotal[k] / g.cols) * g.sp - 8).text((k) => (L.narrow && k > 6 ? '' : F.fmt.int(colTotal[k])));
     cols.on('pointerenter', (ev, k) => F.tip.show(F.tip.html({ kicker: `Try ${k}`, title: `${F.fmt.int(colTotal[k])} submissions`,
-      rows: F.HW.map((h, i) => [h, perK[k][i] ? F.fmt.int(perK[k][i]) : 'masked']), note: 'k-th submission by the same student to the same problem. Tries reached by fewer than five students are masked.' }), ev))
+      rows: F.HW.map((h, i) => [h, perK[k][i] ? F.fmt.int(perK[k][i]) : 'withheld']), note: 'k-th submission by the same student to the same problem. Tries reached by fewer than five students are withheld, not zero.' }), ev))
       .on('pointermove', (ev) => F.tip.move(ev)).on('pointerleave', () => F.tip.hide());
     gTries.append('text').attr('class', 'axis-title').attr('x', g.x0).attr('y', g.base + 34).text(L.narrow ? 'Try number →' : 'Try number on a problem (same student, same problem) →');
     const cl = gTries.append('g').attr('class', 'cl').attr('transform', `translate(${g.cloud.x},${g.cloud.y + g.cloud.r + 26})`);
     cl.append('text').attr('class', 'big').attr('text-anchor', 'middle').style('font-size', '26px').attr('fill', F.ink).text(MASKED_TAIL);
-    cl.append('text').attr('class', 'note').attr('text-anchor', 'middle').attr('dy', 18).text(L.narrow ? 'masked' : 'later tries, masked');
+    cl.append('text').attr('class', 'note').attr('text-anchor', 'middle').attr('dy', 18).text(L.narrow ? 'withheld' : 'later tries, withheld');
     const lead = gTries.append('g').attr('class', 'lead');
     lead.append('text').attr('class', 'big').style('font-size', L.narrow ? '26px' : '40px').style('font-weight', 300).attr('fill', F.ember).text(F.fmt.int(colTotal[1]));
     lead.append('text').attr('class', 'mono').attr('y', 18).style('font-size', '10.5px').attr('fill', F.ink2).text('FIRST TRIES');

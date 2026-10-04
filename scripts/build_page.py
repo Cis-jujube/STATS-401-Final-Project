@@ -2,6 +2,7 @@
 from html import escape as e
 import json
 from pathlib import Path
+import re
 from render_site import render_page
 from midterm_sections import sections as midterm_sections
 from platform_sections import sections as platform_sections
@@ -11,9 +12,14 @@ ROOT=Path(__file__).resolve().parents[1]
 d=json.loads((ROOT/'data/summary.json').read_text())
 def table(headers,rows,caption):
     return '<div class="table-scroll"><table><caption>'+e(caption)+'</caption><thead><tr>'+''.join('<th scope="col">'+e(str(h))+'</th>' for h in headers)+'</tr></thead><tbody>'+''.join('<tr>'+''.join('<td>'+e(str(v))+'</td>' for v in r)+'</tr>' for r in rows)+'</tbody></table></div>'
+def size(path):
+    """Intrinsic size from an SVG viewBox, so a lazy figure reserves its space and anchors stay put."""
+    w, h = re.search(r'viewBox="[\d.]+ [\d.]+ ([\d.]+) ([\d.]+)"', path.read_text()[:2000]).groups()
+    return f'width="{round(float(w))}" height="{round(float(h))}"'
 def figure(name,alt,caption):
     figure_class = ' class="score-detail"' if name == '03-score-progression' else ''
-    return f'<figure{figure_class}><picture><source media="(max-width: 900px)" srcset="assets/figures/{name}-mobile.svg"><img src="assets/figures/{name}.svg" alt="{e(alt)}" loading="lazy"></picture><figcaption>{caption}</figcaption></figure><div class="downloads"><a href="assets/figures/{name}.png" download>Download PNG ↗</a><a href="assets/figures/{name}.svg" download>Download SVG ↗</a><a href="assets/figures/{name}.pdf" download>Download PDF ↗</a></div>'
+    desktop, mobile = size(ROOT/f'assets/figures/{name}.svg'), size(ROOT/f'assets/figures/{name}-mobile.svg')
+    return f'<figure{figure_class}><picture><source media="(max-width: 900px)" srcset="assets/figures/{name}-mobile.svg" {mobile}><img src="assets/figures/{name}.svg" alt="{e(alt)}" {desktop} loading="lazy"></picture><figcaption>{caption}</figcaption></figure><div class="downloads"><a href="assets/figures/{name}.png" download>Download PNG ↗</a><a href="assets/figures/{name}.svg" download>Download SVG ↗</a><a href="assets/figures/{name}.pdf" download>Download PDF ↗</a></div>'
 
 # All homework captions and tables derive from the refreshed public snapshot.
 html = homework_sections(d, table, figure)

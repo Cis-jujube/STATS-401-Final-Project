@@ -1,18 +1,13 @@
-/* Scene 2 · The raw material: a unit chart of every submission, stacked by homework. */
+/* Sample context (Showcase): a unit chart of every submission, stacked by homework.
+   Not an analytical figure; captions live in routes.js. */
 (function () {
   const F = window.Film, P = F.particles;
   const A = F.data.homework.assignments;
   const fmtDay = d3.timeFormat('%-d %b');
   let svg, cols;
   F.scene({
-    id: 'homeworks', title: '00 · Four homeworks', duration: 16, enter: 'rise',
+    id: 'homeworks', title: 'Sample', duration: 16, enter: 'rise',
     tint: 'rgba(57,135,229,.12)',
-    beats: [
-      { at: 0, kicker: '00 · The raw material', title: 'Four homeworks. <em>2,807</em> submissions.',
-        body: 'The same dots, sorted into their homework windows. <b>39 students</b> submitted to <b>31 problems</b> between 26 Aug and 29 Sep 2026.' },
-      { at: 8, kicker: '00 · The raw material', title: 'Twelve to fifteen tries for eight problems.',
-        body: 'The median student sent <span class="num">12.5–15</span> submissions per homework. The most persistent sent <b>141</b> to HW4’s eight problems.' },
-    ],
     particles: [{ at: 0, form: 'stacks', dur: 3.6, curl: 0.9, spread: 0.5 }],
     howto: 'Column height is the number of in-window submissions (one dot each). Hover a column for its window, students and attempt spread; use the <b>Lens</b> to isolate one homework.',
     mount(el) {
@@ -25,6 +20,9 @@
       cols.append('text').attr('class', 'meta note');
       cols.append('text').attr('class', 'meta2 note');
       cols.append('text').attr('class', 'median mono').style('font-size', '11px').attr('fill', F.ink2);
+      // the refresh: the newest homework window is new in this snapshot
+      cols.filter((d, i) => i === A.length - 1).append('text').attr('class', 'new mono').style('font-size', '10px').style('letter-spacing', '.14em')
+        .attr('fill', (d) => F.color[d.homework]).text('NEW · 30 SEP SNAPSHOT');
       cols
         .on('pointerenter', (ev, d) => F.tip.show(F.tip.html({
           kicker: d.homework, color: F.color[d.homework], title: `${fmtDay(new Date(d.start_local))} – ${fmtDay(new Date(d.end_local))}`,
@@ -50,6 +48,7 @@
         sel.select('.hw').attr('y', g.base + (nar ? 22 : 26));
         sel.select('.meta').attr('x', x).attr('y', g.base + (nar ? 37 : 44)).style('font-size', nar ? '10px' : null).attr('opacity', pIn).text(`${fmtDay(new Date(d.start_local))} – ${fmtDay(new Date(d.end_local))}`);
         sel.select('.meta2').attr('x', x).attr('y', g.base + 60).attr('display', nar ? 'none' : null).attr('opacity', pIn).text(`${d.problems} problems · ${d.all_attempts.n} students`);
+        sel.select('.new').attr('x', x).attr('y', g.base + (nar ? 50 : 78)).attr('opacity', F.seg(t, 3.4, 4.4)).style('font-size', nar ? '8px' : '10px').text(nar ? 'NEW' : 'NEW · 30 SEP SNAPSHOT');
         const pm = F.seg(t, 8.4 + h * 0.2, 9.4 + h * 0.2, F.ease.out);
         sel.select('.median').attr('x', x).attr('y', top - (nar ? 40 : 58)).style('font-size', nar ? '9.5px' : '11px').attr('opacity', pm)
           .text(nar ? `max ${Math.round(d.all_attempts.max * pm)}` : `median ${d.all_attempts.median} · max ${Math.round(d.all_attempts.max * pm)}`);
