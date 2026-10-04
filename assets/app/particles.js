@@ -42,7 +42,8 @@
 
   P.mouseS = { x: 0, y: 0 };
   P.define('star', (o, env) => {
-    const { W, H } = F.layout, T = F.wallT ?? env.T; // wall clock: held frames keep breathing
+    // wall clock: held frames keep breathing (frozen when the viewer prefers reduced motion)
+    const { W, H } = F.layout, T = P.reduced ? 0 : F.wallT ?? env.T;
     const alpha = env.kf.alpha ?? 0.5;
     const px = (P.mouseS.x - W / 2) * -0.035, py = (P.mouseS.y - H / 2) * -0.035;
     for (let i = 0; i < N; i++) {
@@ -91,14 +92,15 @@
     const box = env.kf.box ? env.kf.box(F.layout) : F.layout.chart;
     const key = 'hundred' + [box.x, box.y, box.w, box.h].map(Math.round).join(',');
     const { X, Y, step } = cached(key, () => hundredPoints(box));
-    const alpha = env.kf.alpha ?? 0.95, wt = performance.now() / 1000;
+    const alpha = env.kf.alpha ?? 0.95, wt = P.reduced ? 0 : performance.now() / 1000, em = env.kf.emph;
     for (let i = 0; i < N; i++) {
       o.x[i] = X[i] + Math.sin(wt * 0.9 + K.ph[i]) * 0.6;
       o.y[i] = Y[i] + Math.cos(wt * 0.8 + K.ph[i]) * 0.6;
-      o.a[i] = alpha * (0.72 + 0.28 * K.sz[i]);
-      o.s[i] = Math.min(2.6, step * 0.62) * (0.8 + 0.4 * K.sz[i]);
+      // emph: one homework's submissions stay lit inside the numeral, the rest recede
+      o.a[i] = alpha * (0.72 + 0.28 * K.sz[i]) * (em == null ? 1 : hwIdx[i] === em ? 1.25 : 0.2);
+      o.s[i] = Math.min(2.6, step * 0.62) * (0.8 + 0.4 * K.sz[i]) * (em != null && hwIdx[i] === em ? 1.15 : 1);
     }
-    fillIdentityColor(o); o.glow = env.kf.glow ?? 1; o.glowSet = null; o.repel = true;
+    fillIdentityColor(o); o.glow = env.kf.glow ?? 1; o.glowSet = em == null ? null : [em]; o.repel = true;
   });
 
   // ── four stacks: a unit chart, one dot per submission ────────────
@@ -137,6 +139,8 @@
   }
   const DEFAULT_KF = [{ at: 0, form: 'ambient', dur: 2.2 }];
   function keyframes(scene) { return scene && scene.particles ? scene.particles : DEFAULT_KF; }
+  P.keyframes = keyframes;
+  const activeKf = (kfs, t) => { let j = 0; for (let k = 0; k < kfs.length; k++) if (kfs[k].at <= t) j = k; return kfs[j]; };
 
   /** Blend formation A → B into dst: per-dot stagger and a curling flight path. */
   function blendInto(dst, a, b, tau, spread, curlK) {
@@ -167,7 +171,7 @@
     const tau = kf.dur ? (t - kf.at) / kf.dur : 1;
     if (tau >= 1 || (j === 0 && !prev)) return B;
     if (j > 0) evalForm(A, kfs[j - 1], env);
-    else { const pk = keyframes(prev.scene); evalForm(A, pk[pk.length - 1], { t: prev.t, T, scene: prev.scene }); }
+    else evalForm(A, activeKf(keyframes(prev.scene), prev.t), { t: prev.t, T, scene: prev.scene }); // where the previous chapter left them
     return blendInto(OUT, A, B, tau, kf.spread ?? 0.45, kf.curl ?? 1);
   };
 

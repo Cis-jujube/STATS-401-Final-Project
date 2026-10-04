@@ -9,7 +9,7 @@
 <body class="analysis-page" data-surface="paper">
 <a class="skip" href="#evidence">Skip to analysis</a>
 <header class="topbar">
-<a href="index.html">← Data film</a>
+<a href="index.html?content=core" data-film-back>← Data film</a>
 <nav aria-label="Analysis navigation">
 <a href="#dataset">Dataset</a>
 <a href="#midterm-plan">Methods</a>
@@ -20,7 +20,7 @@
 <section>
 <p class="eyebrow">RESEARCH COMPANION</p>
 <h1>Analysis &amp; methods</h1>
-<p>Ten featured chapters and twelve downloadable figures, including the midterm distribution and submission-group comparison retained here as context.</p>
+<p>All twelve figures with their interpretations, accessible tables, downloads and methods. The data film has two content routes: <a href="index.html?content=core">Core</a> presents 5 essential figures (01, 03, 11, 12, 06); <a href="index.html?content=showcase">Showcase</a> presents all 12. Each figure section links back to its reading view in the film.</p>
 <nav class="analysis-toc" aria-label="Chart analysis">
 <a href="#timing">Visible submission peaks</a>
 <a href="#retries">Retries</a>
@@ -56,8 +56,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p class="reading">The peak day is 2026-08-29: 233 submissions from 14 students. The busiest publicly visible four-hour cell is 2026-08-29, 12:00–16:00 Beijing time: 153 submissions from 12 contributors (12.75 per active contributor).</p>
 <figure>
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/01-calendar-mobile.svg">
-<img src="assets/figures/01-calendar.svg" alt="Reach versus repeat intensity, and submissions by Beijing time. The peak day is 2026-08-29: 233 submissions from 14 students. The busiest publicly visible four-hour cell is 2026-08-29, 12:00–16:00 Beijing time: 153 submissions from 12 contributors (12.75 per active contributor)." loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/01-calendar-mobile.svg" width="518" height="864">
+<img src="assets/figures/01-calendar.svg" alt="Reach versus repeat intensity, and submissions by Beijing time. The peak day is 2026-08-29: 233 submissions from 14 students. The busiest publicly visible four-hour cell is 2026-08-29, 12:00–16:00 Beijing time: 153 submissions from 12 contributors (12.75 per active contributor)." width="1044" height="554" loading="lazy">
 </picture>
 <figcaption>Shape identifies homework; marker area scales with submissions. Only 37 positive cells with at least five contributors appear. The other 74 positive cells contain 979 submissions but are masked. The overall busiest four-hour cell cannot be inferred. Ratios describe active contributors, not study time.</figcaption>
 </figure>
@@ -66,6 +66,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/01-calendar.svg" download>Download SVG ↗</a>
 <a href="assets/figures/01-calendar.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 01 in the data film">
+<span class="fr-k">Figure 01 · Timing, reach and repeat intensity · watch it in the data film</span>
+<a href="index.html?content=core#figure-01" data-content="core">Core · 5 essential figures ↗</a>
+<a href="index.html?content=showcase#figure-01" data-content="showcase">Showcase · All 12 figures ↗</a>
+</nav>
 <details>
 <summary>Accessible data table</summary>
 <div class="table-scroll">
@@ -1567,8 +1572,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p class="reading">HW1: median 12.5, range 8–98; HW2: median 13, range 3–62; HW3: median 14, range 7–108; HW4: median 15, range 8–141. Only window submitters enter each distribution.</p>
 <figure>
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/02-attempts-mobile.svg">
-<img src="assets/figures/02-attempts.svg" alt="Four per-student submission-count distributions. HW1: median 12.5, range 8–98; HW2: median 13, range 3–62; HW3: median 14, range 7–108; HW4: median 15, range 8–141" loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/02-attempts-mobile.svg" width="468" height="468">
+<img src="assets/figures/02-attempts.svg" alt="Four per-student submission-count distributions. HW1: median 12.5, range 8–98; HW2: median 13, range 3–62; HW3: median 14, range 7–108; HW4: median 15, range 8–141" width="720" height="446" loading="lazy">
 </picture>
 <figcaption>Boxes show inclusive quartiles; whiskers are the observed min–max, not 1.5×IQR. No individual points are published. 441 in-window events followed a first AC verdict. Acceptance is distinct from normalized full score. Problem counts and difficulty differ; counts do not measure effort or ability.</figcaption>
 </figure>
@@ -1577,6 +1582,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/02-attempts.svg" download>Download SVG ↗</a>
 <a href="assets/figures/02-attempts.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 02 in the data film">
+<span class="fr-k">Figure 02 · Per-student submission distributions · watch it in the data film</span>
+<a href="index.html?content=showcase#figure-02" data-content="showcase">Showcase · All 12 figures ↗</a>
+<span class="fr-note">Not part of Core</span>
+</nav>
 <details>
 <summary>Accessible data table</summary>
 <div class="table-scroll">
@@ -1656,8 +1666,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p class="reading">10 of 31 problem slots retain a mean gap above 10 percentage points after three attempts. HW3 26s3HW3-EvenOrOdd has the largest gap: 66.15 through three versus 100.00 best observed, a 33.85-point difference among the same 39 attempters. This suggests a question for reviewing feedback; it does not establish why the problem was difficult.</p>
 <figure class="score-detail">
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/03-score-progression-mobile.svg">
-<img src="assets/figures/03-score-progression.svg" alt="All 31 problem slots ranked by the remaining mean gap after three attempts." loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/03-score-progression-mobile.svg" width="562" height="1440">
+<img src="assets/figures/03-score-progression.svg" alt="All 31 problem slots ranked by the remaining mean gap after three attempts." width="828" height="1080" loading="lazy">
 </picture>
 <figcaption>Open circles show first means, squares best through three, and diamonds best observed. The red segment is the remaining gap. Best through three is a cumulative maximum, not the actual third score. One-attempt pairs remain in every stage. Means use the same attempters per problem; they do not count students who improved or establish causal gains.</figcaption>
 </figure>
@@ -1666,6 +1676,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/03-score-progression.svg" download>Download SVG ↗</a>
 <a href="assets/figures/03-score-progression.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 03 in the data film">
+<span class="fr-k">Figure 03 · Remaining problem gaps after three attempts · watch it in the data film</span>
+<a href="index.html?content=core#figure-03" data-content="core">Core · 5 essential figures ↗</a>
+<a href="index.html?content=showcase#figure-03" data-content="showcase">Showcase · All 12 figures ↗</a>
+</nav>
 <details>
 <summary>Accessible data table</summary>
 <div class="table-scroll">
@@ -2042,8 +2057,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p class="reading">HW1's actual mean falls from 76.93 on attempt 1 to 64.53 on attempt 2. Event counts change from 304 to 106; distinct students from 38 to 34. Only pairs reaching a later attempt contribute to that point. A lower mean does not mean the same group got worse. HW1–HW4 have separate panels.</p>
 <figure>
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/04-attempt-scores-mobile.svg">
-<img src="assets/figures/04-attempt-scores.svg" alt="Four panels of actual nth-attempt means, with event counts N and distinct student counts S." loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/04-attempt-scores-mobile.svg" width="576" height="1512">
+<img src="assets/figures/04-attempt-scores.svg" alt="Four panels of actual nth-attempt means, with event counts N and distinct student counts S." width="1080" height="864" loading="lazy">
 </picture>
 <figcaption>Equal weight per observed student–problem event; a student retrying several problems contributes several events. All recorded attempts, including post-AC attempts, remain eligible for this descriptive view. No score carry-forward. Points with fewer than five students are withheld; the line breaks at missing positions. No independent-event error bars.</figcaption>
 </figure>
@@ -2052,6 +2067,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/04-attempt-scores.svg" download>Download SVG ↗</a>
 <a href="assets/figures/04-attempt-scores.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 04 in the data film">
+<span class="fr-k">Figure 04 · Actual k-th attempt scores and changing cohorts · watch it in the data film</span>
+<a href="index.html?content=showcase#figure-04" data-content="showcase">Showcase · All 12 figures ↗</a>
+<span class="fr-note">Not part of Core</span>
+</nav>
 <details>
 <summary>Accessible data table</summary>
 <div class="table-scroll">
@@ -2398,8 +2418,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p class="reading">Among eligible retries: HW1 32.3% (95/294); HW2 45.0% (125/278); HW3 34.6% (119/344); HW4 42.2% (129/306). These are event rates; students can contribute multiple retries.</p>
 <figure>
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/11-retry-productivity-mobile.svg">
-<img src="assets/figures/11-retry-productivity.svg" alt="Rates of setting a new personal best, by homework and elapsed retry gap. HW1 32.3% (95/294); HW2 45.0% (125/278); HW3 34.6% (119/344); HW4 42.2% (129/306)" loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/11-retry-productivity-mobile.svg" width="547" height="893">
+<img src="assets/figures/11-retry-productivity.svg" alt="Rates of setting a new personal best, by homework and elapsed retry gap. HW1 32.3% (95/294); HW2 45.0% (125/278); HW3 34.6% (119/344); HW4 42.2% (129/306)" width="1066" height="569" loading="lazy">
 </picture>
 <figcaption>Eligible retries follow a valid baseline while the prior best is below full credit. A strict increase counts; ties do not. First scores, internal-error judgements and attempts after full credit are excluded. Compilation-error scores remain. Labels show new bests / eligible retries and distinct contributors S. Long gaps have small denominators; elapsed time is not study time. No adjustment for problem mix, prior score or student differences is made, and the gap comparisons are not causal.</figcaption>
 </figure>
@@ -2408,6 +2428,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/11-retry-productivity.svg" download>Download SVG ↗</a>
 <a href="assets/figures/11-retry-productivity.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 11 in the data film">
+<span class="fr-k">Figure 11 · Eligible retries that set a new best · watch it in the data film</span>
+<a href="index.html?content=core#figure-11" data-content="core">Core · 5 essential figures ↗</a>
+<a href="index.html?content=showcase#figure-11" data-content="showcase">Showcase · All 12 figures ↗</a>
+</nav>
 <details>
 <summary>Accessible data table</summary>
 <div class="table-scroll">
@@ -2832,8 +2857,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p class="reading">Each window is split into five equal-duration phases. Color shows the share of eligible retries setting a new best; each cell reports new-best counts, eligible retries and distinct contributors. Different phases can contain different students, problems and prior scores.</p>
 <figure>
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/12-deadline-progress-mobile.svg">
-<img src="assets/figures/12-deadline-progress.svg" alt="New-best retry rates across five equal-duration phases of HW1–HW4. Hatched cells are withheld." loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/12-deadline-progress-mobile.svg" width="619" height="734">
+<img src="assets/figures/12-deadline-progress.svg" alt="New-best retry rates across five equal-duration phases of HW1–HW4. Hatched cells are withheld." width="1066" height="619" loading="lazy">
 </picture>
 <figcaption>Opening is 0%; the exact deadline is in the last phase. Bin durations differ across homeworks; raw counts are not equal hourly rates across rows. Hatched cells mean fewer than five contributors or secondary suppression, not zero. Configured deadlines are used; individual extensions are unavailable. Timing does not identify a deadline effect.</figcaption>
 </figure>
@@ -2842,6 +2867,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/12-deadline-progress.svg" download>Download SVG ↗</a>
 <a href="assets/figures/12-deadline-progress.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 12 in the data film">
+<span class="fr-k">Figure 12 · Retry progress within the homework window · watch it in the data film</span>
+<a href="index.html?content=core#figure-12" data-content="core">Core · 5 essential figures ↗</a>
+<a href="index.html?content=showcase#figure-12" data-content="showcase">Showcase · All 12 figures ↗</a>
+</nav>
 <details>
 <summary>Accessible data table</summary>
 <div class="table-scroll">
@@ -3077,8 +3107,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p class="caution">26 matched students from a 41-member eligible roster; 15 grades were not in the supplied excerpt. This is a partial, non-random cohort, not the class grade distribution.</p>
 <figure>
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/05-midterm-distribution-mobile.svg">
-<img src="assets/figures/05-midterm-distribution.svg" alt="Midterm score categories: 5 below 80, 5 from 80 to below 90, 10 from 90 to below 100, and 6 at 100 or above. 26 available grades." loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/05-midterm-distribution-mobile.svg" width="475" height="490">
+<img src="assets/figures/05-midterm-distribution.svg" alt="Midterm score categories: 5 below 80, 5 from 80 to below 90, 10 from 90 to below 100, and 6 at 100 or above. 26 available grades." width="720" height="446" loading="lazy">
 </picture>
 <figcaption>Each bar counts students, not submissions. Categories have unequal widths and are not a density histogram. Every displayed group contains at least five students.</figcaption>
 </figure>
@@ -3087,6 +3117,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/05-midterm-distribution.svg" download>Download SVG ↗</a>
 <a href="assets/figures/05-midterm-distribution.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 05 in the data film">
+<span class="fr-k">Figure 05 · Midterm score distribution · watch it in the data film</span>
+<a href="index.html?content=showcase#figure-05" data-content="showcase">Showcase · All 12 figures ↗</a>
+<span class="fr-note">Not part of Core</span>
+</nav>
 <details>
 <summary>Accessible data table · midterm distribution</summary>
 <div class="table-scroll">
@@ -3132,8 +3167,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p>All selected homework windows end before the user-confirmed exam start.</p>
 <figure>
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/06-midterm-associations-mobile.svg">
-<img src="assets/figures/06-midterm-associations.svg" alt="Robustness chart for three homework-behavior correlations with midterm score: main 26-student Spearman rho and 95 percent paired bootstrap intervals, leave-one-out ranges, all-23-problem subset, and discrepancy-excluded subset. Final-day share is negative in every check." loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/06-midterm-associations-mobile.svg" width="490" height="850">
+<img src="assets/figures/06-midterm-associations.svg" alt="Robustness chart for three homework-behavior correlations with midterm score: main 26-student Spearman rho and 95 percent paired bootstrap intervals, leave-one-out ranges, all-23-problem subset, and discrepancy-excluded subset. Final-day share is negative in every check." width="778" height="655" loading="lazy">
 </picture>
 <figcaption>One observation per student in each calculation. The 95% percentile intervals come from 5,000 paired-student bootstrap draws with a fixed seed. Leave-one-out ranges are a separate sensitivity diagnostic, not confidence intervals. The 23-person full-coverage and 24-person discrepancy-excluded subsets change cohort composition. No adjusted, predictive or causal model is fitted; non-random grade availability and multiple comparisons remain limitations.</figcaption>
 </figure>
@@ -3142,6 +3177,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/06-midterm-associations.svg" download>Download SVG ↗</a>
 <a href="assets/figures/06-midterm-associations.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 06 in the data film">
+<span class="fr-k">Figure 06 · Pre-exam behavior and midterm associations · watch it in the data film</span>
+<a href="index.html?content=core#figure-06" data-content="core">Core · 5 essential figures ↗</a>
+<a href="index.html?content=showcase#figure-06" data-content="showcase">Showcase · All 12 figures ↗</a>
+</nav>
 <details>
 <summary>Accessible data table · associations and sensitivity</summary>
 <div class="table-scroll">
@@ -3237,8 +3277,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p class="reading">Group means are <strong>81.00, 95.27 and 93.92</strong> for under 35, 35–59 and 60 or more submissions. The middle group has the highest mean, while the highest-count group has the highest median. A single summary cannot establish that additional attempts improve an exam score.</p>
 <figure>
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/07-midterm-attempt-groups-mobile.svg">
-<img src="assets/figures/07-midterm-attempt-groups.svg" alt="Midterm score middle-50-percent bands for submission groups of 9, 11 and 6 students. Interquartile ranges overlap." loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/07-midterm-attempt-groups-mobile.svg" width="475" height="504">
+<img src="assets/figures/07-midterm-attempt-groups.svg" alt="Midterm score middle-50-percent bands for submission groups of 9, 11 and 6 students. Interquartile ranges overlap." width="720" height="461" loading="lazy">
 </picture>
 <figcaption>Bars span Q1–Q3; the line is the median and the diamond the mean. These are score-dispersion bands, not uncertainty intervals. Cutoffs are descriptive choices, not optimized thresholds, ability classifications or study recommendations. No individual points or extrema are published.</figcaption>
 </figure>
@@ -3247,6 +3287,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/07-midterm-attempt-groups.svg" download>Download SVG ↗</a>
 <a href="assets/figures/07-midterm-attempt-groups.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 07 in the data film">
+<span class="fr-k">Figure 07 · Midterm scores by submission group · watch it in the data film</span>
+<a href="index.html?content=showcase#figure-07" data-content="showcase">Showcase · All 12 figures ↗</a>
+<span class="fr-note">Not part of Core</span>
+</nav>
 <details>
 <summary>Accessible data table · grouped scores</summary>
 <div class="table-scroll">
@@ -3304,8 +3349,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p>Personal tracking began on 8 September at 13:49 Beijing time. Main analysis ends on 16 September at 08:00, four hours before the exam, because metrics are aggregated by UTC day. OJ metrics span all three configured homework windows, so the sources cover different periods.</p>
 <figure>
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/08-platform-coverage-mobile.svg">
-<img src="assets/figures/08-platform-coverage.svg" alt="Nested coverage: 41 eligible roster members, 26 matched exam scores, 11 with platform records and nine with resource opens." loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/08-platform-coverage-mobile.svg" width="475" height="547">
+<img src="assets/figures/08-platform-coverage.svg" alt="Nested coverage: 41 eligible roster members, 26 matched exam scores, 11 with platform records and nine with resource opens." width="720" height="475" loading="lazy">
 </picture>
 <figcaption>Personal observation begins late in the course. Grade availability is partial and non-random; these are coverage counts, not an adoption funnel over time.</figcaption>
 </figure>
@@ -3314,6 +3359,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/08-platform-coverage.svg" download>Download SVG ↗</a>
 <a href="assets/figures/08-platform-coverage.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 08 in the data film">
+<span class="fr-k">Figure 08 · Course Pulse observation coverage · watch it in the data film</span>
+<a href="index.html?content=showcase#figure-08" data-content="showcase">Showcase · All 12 figures ↗</a>
+<span class="fr-note">Not part of Core</span>
+</nav>
 <details>
 <summary>Accessible data table · coverage</summary>
 <div class="table-scroll">
@@ -3359,8 +3409,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p>Any positive recorded metric qualifies, including a brief visit. Students can download materials and study offline, use other tools, or differ in prior knowledge and motivation. These factors are not controlled here.</p>
 <figure>
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/09-platform-groups-mobile.svg">
-<img src="assets/figures/09-platform-groups.svg" alt="Recorded-usage group: n=11, mean 95.27, median 94.5. No-record group: n=15, mean 86.17, median 87.5." loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/09-platform-groups-mobile.svg" width="475" height="533">
+<img src="assets/figures/09-platform-groups.svg" alt="Recorded-usage group: n=11, mean 95.27, median 94.5. No-record group: n=15, mean 86.17, median 87.5." width="720" height="468" loading="lazy">
 </picture>
 <figcaption>Bands show Q1–Q3, lines mark medians, and diamonds show means. No individual marks or extrema are published. Overlap and within-group dispersion matter alongside the means.</figcaption>
 </figure>
@@ -3369,6 +3419,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/09-platform-groups.svg" download>Download SVG ↗</a>
 <a href="assets/figures/09-platform-groups.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 09 in the data film">
+<span class="fr-k">Figure 09 · Midterm scores by recorded platform use · watch it in the data film</span>
+<a href="index.html?content=showcase#figure-09" data-content="showcase">Showcase · All 12 figures ↗</a>
+<span class="fr-note">Not part of Core</span>
+</nav>
 <details>
 <summary>Accessible data table · platform groups</summary>
 <div class="table-scroll">
@@ -3418,8 +3473,8 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <p>Active time estimates foreground interaction, with an idle limit; it does not measure attention or total study time. Missing platform events are represented as zero recorded events only within the instrumented window. No claim is made about activity before tracking began.</p>
 <figure>
 <picture>
-<source media="(max-width: 900px)" srcset="assets/figures/10-platform-associations-mobile.svg">
-<img src="assets/figures/10-platform-associations.svg" alt="Five correlations in the same 26-person cohort. OJ final-day share is negative; all three platform bootstrap intervals include zero." loading="lazy">
+<source media="(max-width: 900px)" srcset="assets/figures/10-platform-associations-mobile.svg" width="475" height="648">
+<img src="assets/figures/10-platform-associations.svg" alt="Five correlations in the same 26-person cohort. OJ final-day share is negative; all three platform bootstrap intervals include zero." width="720" height="562" loading="lazy">
 </picture>
 <figcaption>5,000 paired-student bootstrap draws with a fixed seed. Intervals reflect resampling variability conditional on this sample, not selection bias. Metrics are correlated with one another and multiple comparisons are not adjusted. No predictive model or causal estimate is fitted.</figcaption>
 </figure>
@@ -3428,6 +3483,11 @@ including 305 partial-credit submissions. It covers 4 homeworks and 31 problem s
 <a href="assets/figures/10-platform-associations.svg" download>Download SVG ↗</a>
 <a href="assets/figures/10-platform-associations.pdf" download>Download PDF ↗</a>
 </div>
+<nav class="film-return" aria-label="Figure 10 in the data film">
+<span class="fr-k">Figure 10 · Combined OJ and platform exam associations · watch it in the data film</span>
+<a href="index.html?content=showcase#figure-10" data-content="showcase">Showcase · All 12 figures ↗</a>
+<span class="fr-note">Not part of Core</span>
+</nav>
 <details>
 <summary>Accessible tables · correlations and cutoff sensitivity</summary>
 <div class="table-scroll">
@@ -3705,7 +3765,14 @@ study-time estimates or causal learning claims are made. Analytical filters and 
 </section>
 </main>
 <footer>
-<a href="index.html#exam">Return to the data film ↗</a>
+<p>
+<a href="index.html?content=core" data-film-back>Return to the data film ↗</a> · <a href="index.html?content=core">Core route</a> · <a href="index.html?content=showcase">Showcase route</a>
+</p>
+<p>
+<a href="data/summary.json">Homework aggregate JSON</a> · <a href="data/midterm-summary.json">Midterm aggregate JSON</a> · <a href="data/platform-summary.json">Platform aggregate JSON</a>
+</p>
 </footer>
+<script src="assets/analysis-return.js" defer>
+</script>
 </body>
 </html>

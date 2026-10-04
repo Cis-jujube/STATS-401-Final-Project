@@ -79,9 +79,12 @@ class PublicArtifacts(unittest.TestCase):
             parser = References()
             parser.feed((ROOT/name).read_text())
             pages[name] = parser
-        # the film routes #<scene-id> deep links in JavaScript; treat scene ids as anchors
+        # the film routes #<scene-id> (legacy), #figure-NN and #<chapter> links in JavaScript; treat them as anchors
         pages['index.html'].ids |= set(re.findall(r"id: '([\w-]+)', title:", ''.join(
             f.read_text() for f in sorted((ROOT/'assets/app/scenes').glob('*.js')))))
+        manifest = json.loads((ROOT/'assets/app/figures.json').read_text())
+        pages['index.html'].ids |= {f'figure-{fid}' for fid in manifest['figures']}
+        pages['index.html'].ids |= set(re.findall(r"key: '([\w-]+)', scene:", (ROOT/'assets/app/routes.js').read_text()))
         story = (ROOT/'legacy.html').read_text()
         companion = (ROOT/'analysis.html').read_text()
         self.assertEqual(story.count('class="story-chapter"'), 10)

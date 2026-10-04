@@ -81,19 +81,25 @@
     F.state[key] = value;
     (listeners[key] || []).forEach((fn) => fn(value));
   };
-  /** Alpha multiplier for an element that belongs to homework h under the current lens. */
-  F.lensAlpha = (h) => (!F.state.lens || F.state.lens === h ? 1 : 0.14);
+  /** Alpha multiplier for an element that belongs to homework h under the current lens.
+      The lens only applies to homework-process chapters (F.lensOn); exam and platform
+      figures use a different, pre-exam sample, so a homework lens must never dim them. */
+  F.lensOn = true;
+  F.lensAlpha = (h) => (!F.state.lens || !F.lensOn || F.state.lens === h ? 1 : 0.14);
+  F.reduced = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
 
   // ── layout: shared by CSS placement, particles and every scene ─────
   F.layout = {};
   F.computeLayout = () => {
     const W = window.innerWidth || 1280, H = window.innerHeight || 800; // a hidden frame can report 0×0
     const narrow = W < 820 || W / H < 1;
-    const L = { W, H, narrow, top: narrow ? 64 : 78, bottom: narrow ? 74 : 86 };
+    // narrow: two HUD rows (brand + content route; chapter evidence + lens)
+    const L = { W, H, narrow, top: narrow ? 98 : 78, bottom: narrow ? 74 : 86 };
     if (!narrow) {
       const pad = Math.max(18, Math.min(56, W * 0.034));
       const capW = Math.min(440, Math.max(300, W * 0.29));
-      L.caption = { x: pad, y: L.top + 20, w: capW, h: H - L.top - L.bottom - 20 };
+      L.dockH = H < 680 ? 66 : 96; // the evidence dock sits under the caption column
+      L.caption = { x: pad, y: L.top + 20, w: capW, h: H - L.top - L.bottom - 20 - L.dockH };
       const cx = pad + capW + Math.max(36, W * 0.035);
       L.chart = { x: cx, y: L.top + 26, w: W - cx - pad, h: H - L.top - L.bottom - 40 };
     } else {

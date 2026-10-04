@@ -4,18 +4,56 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>The Score Has a Past · CS201 data film</title>
-<meta name="description" content="A playable data film about 2,807 CS201 homework submissions: when students worked, which problems resisted, which retries paid off, and how submission habits relate to the midterm.">
+<meta name="description" content="A playable data film about 2,807 CS201 homework submissions through HW4. Core presents five essential figures; Showcase presents all twelve, with every figure linked to its evidence, methods and downloads.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/app/app.css?v=20261001a">
+<link rel="stylesheet" href="assets/app/app.css?v=20261004b">
 </head>
 <body>
 <a class="skip" href="analysis.html">Skip the film: read the analysis, tables and methods</a>
 
 <div id="film" class="film" aria-roledescription="data film">
   <div class="backdrop" aria-hidden="true"><i class="glow-aurora"></i><i class="glow-cursor"></i></div>
+  <!-- route, chapter and evidence controls first in reading/focus order; z-index keeps them above the stage -->
+  <header class="hud-top">
+    <a class="brand" href="index.html?content=core">The score <b>has a past</b></a>
+    <div class="content-switch" role="group" aria-label="Content: which figures the film presents">
+      <button type="button" data-content="core" aria-pressed="true"><b>Core</b><span class="cs-d"> · 5 essential figures</span></button>
+      <button type="button" data-content="showcase" aria-pressed="false"><b>Showcase</b><span class="cs-d"> · All 12 figures</span></button>
+    </div>
+    <span class="chapter-label"></span>
+    <span class="spacer"></span>
+    <div class="lens" role="group" aria-label="Homework lens: highlight one homework in every chart">
+      <span class="lens-label">Lens</span>
+      <button type="button" data-hw="">All</button>
+      <button type="button" data-hw="HW1" style="--c: var(--hw1)"><i></i><span><span class="hw-pre">HW</span>1</span></button>
+      <button type="button" data-hw="HW2" style="--c: var(--hw2)"><i></i><span><span class="hw-pre">HW</span>2</span></button>
+      <button type="button" data-hw="HW3" style="--c: var(--hw3)"><i></i><span><span class="hw-pre">HW</span>3</span></button>
+      <button type="button" data-hw="HW4" style="--c: var(--hw4)"><i></i><span><span class="hw-pre">HW</span>4</span></button>
+    </div>
+    <button class="chapters-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="chapters-menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg><span>Chapters</span></button>
+    <a class="hud-link" href="analysis.html">Methods &amp; tables ↗</a>
+  </header>
+
+  <nav id="chapters-menu" class="chapters-menu" aria-label="Chapters in this route" tabindex="-1" hidden>
+    <p class="cm-head"></p>
+    <ol></ol>
+    <p class="cm-foot">Each figure opens paused on its complete reading view.</p>
+  </nav>
+
+  <aside class="dock" aria-label="Evidence for this chapter">
+    <button class="dock-toggle" type="button" aria-expanded="false">Evidence</button>
+    <div class="dock-body">
+      <p class="dock-fig"></p>
+      <p class="dock-cohort"></p>
+      <p class="dock-links"></p>
+    </div>
+  </aside>
+
+  <div class="toast" role="status" aria-live="polite"></div>
+
   <canvas id="particles" aria-hidden="true"></canvas>
   <div class="vignette" aria-hidden="true"></div>
   <div id="scenes"></div>
@@ -23,7 +61,7 @@
   <div class="intertitle" aria-hidden="true"><div class="it-line"></div><div class="it-num"></div><div class="it-word"></div></div>
 
   <aside id="caption" class="caption" aria-live="polite">
-    <p class="cap-kicker"></p>
+    <p class="cap-kicker"><span class="sr-only ck-sr"></span><span class="ck-vis" aria-hidden="true"></span></p>
     <h2 class="cap-title"></h2>
     <p class="cap-body"></p>
     <p class="cap-credit" hidden></p>
@@ -38,31 +76,19 @@
   <div class="osd" aria-hidden="true"></div>
   <div class="seek-osd" aria-hidden="true"></div>
 
-  <header class="hud-top">
-    <a class="brand" href="#open">The score <b>has a past</b></a>
-    <span class="chapter-label"></span>
-    <span class="spacer"></span>
-    <div class="lens" role="group" aria-label="Homework lens: highlight one homework in every chart">
-      <span class="lens-label">Lens</span>
-      <button type="button" data-hw="">All</button>
-      <button type="button" data-hw="HW1" style="--c: var(--hw1)"><i></i><span><span class="hw-pre">HW</span>1</span></button>
-      <button type="button" data-hw="HW2" style="--c: var(--hw2)"><i></i><span><span class="hw-pre">HW</span>2</span></button>
-      <button type="button" data-hw="HW3" style="--c: var(--hw3)"><i></i><span><span class="hw-pre">HW</span>3</span></button>
-      <button type="button" data-hw="HW4" style="--c: var(--hw4)"><i></i><span><span class="hw-pre">HW</span>4</span></button>
-    </div>
-    <a class="hud-link" href="analysis.html">Methods &amp; tables ↗</a>
-  </header>
 
   <div class="poster" hidden>
     <p class="poster-k">A data film · STATS 401 final project</p>
-    <button class="big-play" type="button" aria-label="Play the film"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></button>
     <p class="poster-t">The score <em>has a past</em></p>
-    <p class="poster-m">Presenter · the full story, holding at every chart · 4½ min</p>
-    <button class="pm-loop" type="button"><span>⟳</span> Loop the 60-second highlight reel</button>
-    <p class="poster-h"><kbd>Space</kbd> play &nbsp;·&nbsp; <kbd>→</kbd> continue &nbsp;·&nbsp; <kbd>L</kbd> loop &nbsp;·&nbsp; scroll to scrub</p>
+    <div class="poster-routes" role="group" aria-label="Choose what the film presents">
+      <button type="button" data-content="core" aria-pressed="true"><b>Core</b><span>5 essential figures</span><small>01 · 03 · 11 · 12 · 06</small></button>
+      <button type="button" data-content="showcase" aria-pressed="false"><b>Showcase</b><span>All 12 figures</span><small>01–12 · the cinematic cut</small></button>
+    </div>
+    <button class="big-play" type="button" aria-label="Play the film"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+    <p class="poster-m"></p>
+    <button class="pm-loop" type="button"><span>⟳</span> <i class="pm-loop-l">Loop the 60-second highlight reel</i></button>
+    <p class="poster-h"><kbd>Space</kbd> play &nbsp;·&nbsp; <kbd>→</kbd> continue &nbsp;·&nbsp; <kbd>C</kbd> Core / Showcase &nbsp;·&nbsp; <kbd>L</kbd> loop &nbsp;·&nbsp; scroll to scrub</p>
   </div>
-
-  <button class="continue-chip" type="button" hidden>Continue <kbd>→</kbd></button>
 
   <div class="pause-card collapsed" role="status">
     <h3><span>❚❚ Paused · explore</span><button type="button" aria-expanded="false">How to read ▴</button></h3>
@@ -74,12 +100,13 @@
     <kbd>Space</kbd><span>Play / pause</span>
     <kbd>→ ⇟ ⏎</kbd><span>Continue (a presentation clicker works too)</span>
     <kbd>← ⇞</kbd><span>Back one beat (Loop: one shot)</span>
+    <kbd>C</kbd><span>Switch content: Core · Showcase (pauses)</span>
     <kbd>P · L</kbd><span>Presenter mode · Loop mode</span>
     <kbd>A</kbd><span>Auto: play straight through, no holds</span>
     <kbd>⇧ ← →</kbd><span>Seek 5 seconds</span>
-    <kbd>[ ]</kbd><span>Previous / next scene</span>
+    <kbd>[ ]</kbd><span>Previous / next chapter</span>
     <kbd>, .</kbd><span>Step one frame</span>
-    <kbd>1–8</kbd><span>Jump to scene</span>
+    <kbd class="keys-route-k">1–5</kbd><span class="keys-route">Jump to a figure’s reading view</span>
     <kbd>H</kbd><span>Hide interface</span>
     <kbd>F</kbd><span>Fullscreen</span>
     <kbd>Scroll</kbd><span>Scrub the timeline</span>
@@ -99,6 +126,7 @@
     <button class="t-play" type="button" aria-label="Play"></button>
     <button class="t-prev" type="button" aria-label="Previous beat"><svg viewBox="0 0 24 24"><path d="M6 5h2.5v14H6zM20 5v14L9.5 12z"/></svg></button>
     <button class="t-next" type="button" aria-label="Next beat"><svg viewBox="0 0 24 24"><path d="M15.5 5H18v14h-2.5zM4 5l10.5 7L4 19z"/></svg></button>
+    <button class="continue-chip" type="button" hidden>Continue <kbd>→</kbd></button>
     <span class="t-time">00:00 / 00:00</span>
     <div class="t-track" role="slider" tabindex="0" aria-label="Film position in seconds">
       <div class="t-segs"></div>
@@ -119,21 +147,26 @@
 </div>
 <div id="tooltip" role="tooltip" hidden></div>
 
-<noscript><p style="position:fixed;inset:auto 0 0 0;padding:20px;background:#ece7dd;color:#07090d">This data film needs JavaScript. All figures, tables and methods are available on the <a href="analysis.html">analysis page</a>.</p></noscript>
+<noscript><div class="noscript">
+  <p>This data film needs JavaScript. All twelve figures, accessible tables, downloads and methods are on the <a href="analysis.html">analysis page</a>.</p>
+  <p>Core figures: <a href="analysis.html#timing">01 Timing</a> · <a href="analysis.html#scores">03 Problem gaps</a> · <a href="analysis.html#retry-productivity">11 New-best retries</a> · <a href="analysis.html#deadline-progress">12 Window phases</a> · <a href="analysis.html#midterm-associations">06 Exam associations</a></p>
+</div></noscript>
 
 <script src="assets/vendor/d3.v7.min.js?v=20261001a"></script>
-<script src="assets/app/data.js?v=20261001a"></script>
-<script src="assets/app/core.js?v=20261001a"></script>
-<script src="assets/app/particles.js?v=20261001a"></script>
-<script src="assets/app/scenes/open.js?v=20261001a"></script>
-<script src="assets/app/scenes/stacks.js?v=20261001a"></script>
-<script src="assets/app/scenes/clock.js?v=20261001a"></script>
-<script src="assets/app/scenes/problems.js?v=20261001a"></script>
-<script src="assets/app/scenes/attempts.js?v=20261001a"></script>
-<script src="assets/app/scenes/retries.js?v=20261001a"></script>
-<script src="assets/app/scenes/exam.js?v=20261001a"></script>
-<script src="assets/app/scenes/finale.js?v=20261001a"></script>
-<script src="assets/app/reel.js?v=20261001a"></script>
-<script src="assets/app/player.js?v=20261001a"></script>
+<script src="assets/app/data.js?v=20261004b"></script>
+<script src="assets/app/figures.js?v=20261004b"></script>
+<script src="assets/app/core.js?v=20261004b"></script>
+<script src="assets/app/routes.js?v=20261004b"></script>
+<script src="assets/app/particles.js?v=20261004b"></script>
+<script src="assets/app/scenes/open.js?v=20261004b"></script>
+<script src="assets/app/scenes/stacks.js?v=20261004b"></script>
+<script src="assets/app/scenes/clock.js?v=20261004b"></script>
+<script src="assets/app/scenes/problems.js?v=20261004b"></script>
+<script src="assets/app/scenes/attempts.js?v=20261004b"></script>
+<script src="assets/app/scenes/retries.js?v=20261004b"></script>
+<script src="assets/app/scenes/exam.js?v=20261004b"></script>
+<script src="assets/app/scenes/finale.js?v=20261004b"></script>
+<script src="assets/app/reel.js?v=20261004b"></script>
+<script src="assets/app/player.js?v=20261004b"></script>
 </body>
 </html>

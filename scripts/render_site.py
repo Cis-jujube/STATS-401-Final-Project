@@ -1,10 +1,36 @@
 """Render a continuous, fullscreen visual narrative from the public evidence."""
 from html import escape
+import json
 from pathlib import Path
 import re
 from story_cinema import archive, figure_scenery, portal, strips, title_lines
 
 ROOT = Path(__file__).resolve().parents[1]
+# Shared figure-to-route mapping, also bundled into the film (assets/app/figures.js).
+FIGURES = json.loads((ROOT / 'assets/app/figures.json').read_text())
+
+
+def film_return(section_id):
+    """Return links from an evidence section to the same figure in the data film.
+
+    Fixed, valid links in both routes (Core only when the figure belongs to Core), so the
+    companion works without JavaScript; assets/analysis-return.js highlights the route the
+    reader arrived from (analysis.html?content=core|showcase)."""
+    fid = next((k for k, f in FIGURES['figures'].items() if f['anchor'] == section_id), None)
+    if fid is None:
+        return ''
+    title = escape(FIGURES['figures'][fid]['title'])
+    links = []
+    for route in ('core', 'showcase'):
+        meta = FIGURES['routes'][route]
+        if fid in meta['figures']:
+            links.append(f'<a href="index.html?content={route}#figure-{fid}" data-content="{route}">'
+                         f'{meta["label"]} · {escape(meta["detail"])} ↗</a>')
+    note = '' if fid in FIGURES['routes']['core']['figures'] else '<span class="fr-note">Not part of Core</span>'
+    return (f'<nav class="film-return" aria-label="Figure {fid} in the data film"><span class="fr-k">Figure {fid} · {title} · '
+            f'watch it in the data film</span>{"".join(links)}{note}</nav>')
+
+
 def homework_scenes(data):
     assignments = data['assignments']
     visible = [c for c in data['calendar'] if c['state']=='visible' and c['submissions'] > 0]
@@ -60,7 +86,11 @@ def render_page(source: str, midterm: dict, homework: dict) -> str:
 
     def evidence(section_id):
         section = next(s for s in sections if f'id="{section_id}"' in s)
-        return section.replace('<br>', ' ')
+        section = section.replace('<br>', ' ')
+        back = film_return(section_id)
+        if back:  # after the figure's downloads: figure, data, then the way back to its reading view
+            section = re.sub(r'(<div class="downloads">.*?</div>)', lambda m: m.group(1) + back, section, count=1, flags=re.S)
+        return section
 
     # User-requested iteration: each chapter has a distinct composition and motion.
     art = {
@@ -135,7 +165,14 @@ def render_page(source: str, midterm: dict, homework: dict) -> str:
     detail = evidence('research-question') + ''.join(evidence(sid) for sid, _ in analysis_sections)
     detail += evidence('dataset') + evaluation + evidence('retry-intervals') + evidence('midterm-plan')
     toc = ''.join(f'<a href="#{sid}">{escape(topic)}</a>' for sid, topic in analysis_sections)
-    analysis = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Analysis &amp; Methods · CS201</title><link rel="stylesheet" href="styles.css"></head><body class="analysis-page" data-surface="paper"><a class="skip" href="#evidence">Skip to analysis</a><header class="topbar"><a href="index.html">← Data film</a><nav aria-label="Analysis navigation"><a href="#dataset">Dataset</a><a href="#midterm-plan">Methods</a><a href="#evaluation">Evaluation</a></nav></header><main id="evidence" class="evidence-detail"><section><p class="eyebrow">RESEARCH COMPANION</p><h1>Analysis &amp; methods</h1><p>Ten featured chapters and twelve downloadable figures, including the midterm distribution and submission-group comparison retained here as context.</p><nav class="analysis-toc" aria-label="Chart analysis">{toc}</nav></section>{detail}</main><footer><a href="index.html#exam">Return to the data film ↗</a></footer></body></html>'''
+    core, show = FIGURES['routes']['core'], FIGURES['routes']['showcase']
+    routes_intro = (f'All twelve figures with their interpretations, accessible tables, downloads and methods. The data film has two content routes: '
+                    f'<a href="index.html?content=core">{core["label"]}</a> presents {len(core["figures"])} essential figures '
+                    f'({", ".join(core["figures"])}); <a href="index.html?content=showcase">{show["label"]}</a> presents all {len(show["figures"])}. '
+                    'Each figure section links back to its reading view in the film.')
+    data_links = ('<a href="data/summary.json">Homework aggregate JSON</a> · <a href="data/midterm-summary.json">Midterm aggregate JSON</a> · '
+                  '<a href="data/platform-summary.json">Platform aggregate JSON</a>')
+    analysis = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Analysis &amp; Methods · CS201</title><link rel="stylesheet" href="styles.css"></head><body class="analysis-page" data-surface="paper"><a class="skip" href="#evidence">Skip to analysis</a><header class="topbar"><a href="index.html?content=core" data-film-back>← Data film</a><nav aria-label="Analysis navigation"><a href="#dataset">Dataset</a><a href="#midterm-plan">Methods</a><a href="#evaluation">Evaluation</a></nav></header><main id="evidence" class="evidence-detail"><section><p class="eyebrow">RESEARCH COMPANION</p><h1>Analysis &amp; methods</h1><p>{routes_intro}</p><nav class="analysis-toc" aria-label="Chart analysis">{toc}</nav></section>{detail}</main><footer><p><a href="index.html?content=core" data-film-back>Return to the data film ↗</a> · <a href="index.html?content=core">Core route</a> · <a href="index.html?content=showcase">Showcase route</a></p><p>{data_links}</p></footer><script src="assets/analysis-return.js" defer></script></body></html>'''
     (ROOT/'analysis.html').write_text(analysis.replace('><', '>\n<')+'\n')
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
