@@ -1,5 +1,5 @@
 /* Opening: scattered submissions converge into the score everyone sees; then the newest
-   homework lights up inside the numeral — the HW4 refresh in this snapshot. Captions live in
+   homework lights up inside the numeral — the newest observation in this snapshot. Captions live in
    routes.js (each content route has its own opening line). */
 (function () {
   const F = window.Film;
@@ -30,17 +30,17 @@
       });
       line.append('tspan').attr('fill', F.ink).text(F.fmt.int(F.data.homework.window_submissions));
       sum.append('text').attr('class', 'mono sub').attr('text-anchor', 'middle').attr('y', 24).style('font-size', '10.5px').style('letter-spacing', '.12em')
-        .attr('fill', F.color[last.homework]).text(`${last.homework.toUpperCase()} · NEW IN THIS SNAPSHOT · ${last.problems} PROBLEM SLOTS`);
+        .attr('fill', F.color[last.homework]).text(`${last.homework.toUpperCase()} · ${F.ongoing(last.homework) ? 'ONGOING' : 'OBSERVED'} · ${last.problems} PROBLEM SLOTS`);
     },
     resize(L) {
       const c = L.chart;
       legend.attr('transform', `translate(${c.x + c.w / 2},${c.y + c.h - (L.narrow ? 30 : 8)})`);
       legend.select('.lead').attr('display', L.narrow ? 'none' : null);
-      const lead = legend.select('.lead'), w = 70;
-      lead.attr('x', -(4 * w) / 2 - 12).attr('text-anchor', 'end');
-      legend.selectAll('g').attr('transform', (d, i) => `translate(${-(4 * w) / 2 + i * w + 8},0)`);
+      const lead = legend.select('.lead'), w = Math.min(70, c.w / F.HW.length);
+      lead.attr('x', -(F.HW.length * w) / 2 - 12).attr('text-anchor', 'end');
+      legend.selectAll('g').attr('transform', (d, i) => `translate(${-(F.HW.length * w) / 2 + i * w + 8},0)`);
       sum.attr('transform', `translate(${c.x + c.w / 2},${c.y + c.h - (L.narrow ? 40 : 30)})`);
-      sum.select('.eq').style('font-size', L.narrow ? '19px' : '30px');
+      sum.select('.eq').style('font-size', `${Math.min(L.narrow ? 19 : 30, c.w / (A.length * 5.4 + 9))}px`);
       sum.select('.sub').style('font-size', L.narrow ? '9px' : '10.5px');
     },
     render(t) {

@@ -405,7 +405,7 @@
   // click empty stage = play/pause, like a video (with a ripple where you clicked)
   film.addEventListener('click', (e) => {
     const t = e.target;
-    if (t.closest('button, a, input, label, .hit, [data-interactive], .ctrls, .pause-card, .keys-card, .music-card, .transport, .hud-top, .poster, .dock, .chapters-menu, .toast')) return;
+    if (t.closest('button, a, input, label, .hit, [data-interactive], .ctrls, .caption, .problem-pager, .pause-card, .keys-card, .music-card, .transport, .hud-top, .poster, .dock, .chapters-menu, .toast')) return;
     if (t.matches('svg.viz, canvas, .scene, .html-layer, .backdrop, #scenes, #film, .caption, .caption *, .intertitle, .intertitle *')) {
       if (!REDUCED) {
         const r = document.createElement('i'); r.className = 'ripple';
@@ -416,7 +416,7 @@
     }
   });
   // wheel / trackpad scrubs the film, like a scroll-driven story (never inside menus or cards)
-  const NO_SCRUB = '.music-card, .keys-card, .chapters-menu, .dock, .poster';
+  const NO_SCRUB = '.music-card, .keys-card, .chapters-menu, .dock, .poster, .caption, .problem-pager';
   film.addEventListener('wheel', (e) => {
     if (e.ctrlKey || e.target.closest(NO_SCRUB)) return;
     e.preventDefault();
@@ -432,6 +432,7 @@
   window.addEventListener('keydown', (e) => {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     const tgt = e.target;
+    if (tgt && tgt.closest && tgt.closest('.caption') && ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(e.key)) return;
     if (tgt && tgt.matches && tgt.matches('input, select, textarea')) return; // typing a tempo, dragging a slider
     const k = e.key;
     if (k === 'Escape') { keysCard.hidden = true; musicCard.hidden = true; closeMenu(true); dock.classList.remove('open'); F.set('selected', null); return; }
@@ -533,6 +534,8 @@
   function placeCaption() {
     const c = F.layout.caption;
     cap.style.left = c.x + 'px'; cap.style.width = c.w + 'px';
+    const chart = F.layout.chart, available = F.layout.H - (F.layout.H - c.y - c.h) - chart.y - chart.h - 16;
+    cap.style.maxHeight = (F.layout.narrow ? Math.max(64, Math.min(c.h, available)) : c.h) + 'px';
     document.documentElement.style.setProperty('--cap-w', c.w + 'px');
     document.documentElement.style.setProperty('--dock-h', (F.layout.dockH || 0) + 'px');
     if (F.layout.narrow) { cap.style.top = 'auto'; cap.style.bottom = (F.layout.H - c.y - c.h) + 'px'; }
@@ -566,6 +569,10 @@
     capT.innerHTML = splitWords(title || '');
     capB.innerHTML = body || '';
     capC.innerHTML = credit || ''; capC.hidden = !credit;
+    cap.scrollTop = 0;
+    // Fragment navigation and layout anchoring can restore an old offset after this
+    // synchronous content swap. Reset once after layout, guarded by the new caption key.
+    requestAnimationFrame(() => { if (lastCapKey === key) cap.scrollTop = 0; });
     words = [...capT.querySelectorAll('.w')];
     if (!F.layout.narrow) {
       const c = F.layout.caption, h = cap.offsetHeight;

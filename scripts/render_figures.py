@@ -5,7 +5,7 @@ Inputs are public aggregates. The optional private hourly export stays external.
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -20,8 +20,9 @@ import numpy as np
 
 PALETTE = {'primary': '#BD3D24', 'primary_light': '#CE7158', 'gold': '#C6AB75',
            'stone': '#66584D', 'gray': '#685C52', 'ink': '#25211E', 'neutral': '#D2C8BB'}
-HW_COLORS = [PALETTE['primary'], '#967222', PALETTE['stone'], '#377E79']
-WEB_COLORS = ['#ed977b', '#d9bc7d', '#c5b6a7', '#8bc4bf']
+HW_COLORS = [PALETTE['primary'], '#967222', PALETTE['stone'], '#377E79', '#8f87ef']
+WEB_COLORS = ['#ed977b', '#d9bc7d', '#c5b6a7', '#8bc4bf', '#8f87ef']
+HW_MARKERS = ('o', 's', 'D', '^', 'v')
 
 
 def snapshot_label(data):
@@ -30,7 +31,18 @@ def snapshot_label(data):
         snapshot = snapshot.replace(tzinfo=timezone.utc)
     local = snapshot.astimezone(ZoneInfo('Asia/Shanghai'))
     homeworks = data['assignments']
-    return f"{homeworks[0]['homework']}–{homeworks[-1]['homework']} · {local:%d %b %Y} Beijing snapshot"
+    ongoing = [a['homework'] for a in homeworks if a.get('observation_status') == 'ongoing']
+    status = f" · {', '.join(ongoing)} ongoing" if ongoing else ''
+    return (f"{homeworks[0]['homework']}–{homeworks[-1]['homework']} · "
+            f"{local:%d %b %Y %H:%M} Beijing snapshot{status}")
+
+
+def observation_note(data):
+    """Explain why the last homework cannot be compared as a completed window."""
+    ongoing = [a for a in data['assignments'] if a.get('observation_status') == 'ongoing']
+    return '; '.join(f"{a['homework']} unfinished; configured deadline "
+                     f"{datetime.fromisoformat(a['end_local']):%d %b %H:%M} Beijing"
+                     for a in ongoing)
 
 
 def apply_publication_style(web=False):
@@ -102,7 +114,7 @@ def private_calendar(data, out, mobile=False, private=None, web=False):
                 cell = lookup[day, hour]
                 if cell['state'] != 'visible':
                     ax.add_patch(Rectangle((ix-.5,iy-.5),1,1,facecolor='#e7e7e7' if cell['state']=='inactive' else '#fff',
-                                           edgecolor='#b5b5b5', hatch='////' if cell['state']=='suppressed' else None, linewidth=0))
+                                           edgecolor='#b5b5b5', hatch='////' if cell['state']=='suppressed' else '..' if cell['state']=='not_observed' else None, linewidth=0))
                 elif hours > 1 and cell[field] > 0:
                     rgb = cmap(norm(cell[field]))[:3]
                     linear = [c / 12.92 if c <= .04045 else ((c + .055) / 1.055) ** 2.4 for c in rgb]
@@ -125,17 +137,22 @@ def private_calendar(data, out, mobile=False, private=None, web=False):
         cb.outline.set_linewidth(.6)
         for a in data['assignments']:
             for key, marker in [('start_local','o'),('end_local','D')]:
-                dt=datetime.fromisoformat(a[key]); y=dates.index(dt.date().isoformat())
+                dt=datetime.fromisoformat(a[key])
+                if dt.date().isoformat() not in dates:
+                    continue
+                y=dates.index(dt.date().isoformat())
                 ax.plot((dt.hour+dt.minute/60)/hours-.5,y,marker=marker,markersize=5,
                         markeredgecolor='#755e25',markerfacecolor='white' if marker=='o' else '#755e25',clip_on=False)
     handles=[Patch(facecolor='white',hatch='////',edgecolor='#b5b5b5',label='<5 contributors: masked'),
              Patch(facecolor='#e7e7e7',label='No homework window'),
+             Patch(facecolor='white',hatch='..',edgecolor='#b5b5b5',label='Not yet observed'),
              Line2D([],[],marker='o',ls='',mfc='white',mec='#755e25',label='Opens'),
              Line2D([],[],marker='D',ls='',color='#755e25',label='Configured deadline')]
     fig.legend(handles=handles[1:] if private else handles,loc='lower left',bbox_to_anchor=(.03,.065),
                ncol=2 if mobile else 4,fontsize=10)
     footnote(fig,[snapshot_label(data),
-                  'PRIVATE hourly view. Do not publish.' if private else 'White/light cells = zero; hatched cells are withheld, not zero. Public cells span four hours.'],web=web)
+                  'PRIVATE hourly view. Do not publish.' if private else 'White/light observed cells = zero; slashes = withheld; dots = not yet observed.',
+                  observation_note(data)],web=web)
     fig.tight_layout(pad=2,rect=(0,.15 if not mobile else .13,1,.96),h_pad=4)
     name='01-calendar-private-hourly' if private else '01-calendar'+('-mobile' if mobile else '')
     finalize_figure(fig,out/name,'Submission timing and distinct contributors',web=web)
@@ -149,20 +166,23 @@ def calendar(data, out, mobile=False, web=False):
         raise ValueError('No publishable positive calendar cells')
     homeworks = [a['homework'] for a in data['assignments']]
     colors = dict(zip(homeworks, WEB_COLORS if web else HW_COLORS))
-    markers = dict(zip(homeworks, ('o', 's', 'D', '^')))
+    markers = dict(zip(homeworks, HW_MARKERS))
     plotted = []
     for cell in visible:
         start = datetime.fromisoformat(f"{cell['date']}T{cell['hour']:02d}:00:00+08:00")
-        homework = next((a['homework'] for a in data['assignments']
-                         if datetime.fromisoformat(a['start_local']) <= start
-                         <= datetime.fromisoformat(a['end_local'])), None)
-        # A boundary cell can start before a homework opens; its events still
-        # belong to that sole configured window on the date.
-        if homework is None:
-            homework = next(a['homework'] for a in data['assignments']
-                            if a['start_local'][:10] <= cell['date'] <= a['end_local'][:10])
+        end = start + timedelta(hours=cell['hours'])
+        # Public calendar counts are pooled. Overlapping windows identify a
+        # mixed cell, never the homework of an individual event inside it.
+        windows = cell.get('homeworks', [a['homework'] for a in data['assignments']
+                                        if datetime.fromisoformat(a['start_local']) < end
+                                        and datetime.fromisoformat(a['end_local']) >= start])
+        homework = windows[0] if len(windows) == 1 else 'Overlapping windows'
         plotted.append({**cell, 'plot_homework': homework})
     visible = plotted
+    if any(cell['plot_homework'] == 'Overlapping windows' for cell in visible):
+        homeworks += ['Overlapping windows']
+        colors['Overlapping windows'] = '#c4b7aa' if web else '#66584D'
+        markers['Overlapping windows'] = 'X'
 
     fig, axes = plt.subplots(2 if mobile else 1, 1 if mobile else 2,
                              figsize=(7.2, 12) if mobile else (14.5, 7.7),
@@ -214,15 +234,17 @@ def calendar(data, out, mobile=False, web=False):
              fontsize=11, color='#c4b7aa' if web else PALETTE['gray'])
     footnote(fig, [f'{masked} submissions fall in masked cells; an overall four-hour peak cannot be inferred from this public view.',
                    'Marker area scales with submissions. Ratios describe active contributors, not study time.',
+                   'Overlapping-window cells pool events; snapshot-day cells may be partially observed.',
+                   observation_note(data),
                    snapshot_label(data)],
              y=.025, web=web)
-    fig.tight_layout(rect=(0, .11 if mobile else .12, 1, .88), w_pad=2.8, h_pad=3)
+    fig.tight_layout(rect=(0, .14 if mobile else .17, 1, .88), w_pad=2.8, h_pad=3)
     finalize_figure(fig, out/('01-calendar'+('-mobile' if mobile else '')),
                     'Visible submission peaks and distinct contributors', web=web)
 
 
 def attempts(data,out,mobile=False,web=False):
-    fig,ax=plt.subplots(figsize=(6.5,6.5) if mobile else (10,6.2))
+    fig,ax=plt.subplots(figsize=(7.5,7.2) if mobile else (11,6.8))
     stats=[{'label':a['homework'],'med':a['all_attempts']['median'],'q1':a['all_attempts']['q1'],
             'q3':a['all_attempts']['q3'],'whislo':a['all_attempts']['min'],'whishi':a['all_attempts']['max']}
            for a in data['assignments']]
@@ -234,14 +256,16 @@ def attempts(data,out,mobile=False,web=False):
         q=a['all_attempts']
         ax.text(i+.26,q['median'],f"{q['median']:g}",fontsize=13,weight='bold',va='center')
         ax.text(i,q['max']+4,f"{q['min']}–{q['max']}",ha='center',fontsize=11)
-    ax.set_xticks(range(1,len(stats)+1),[f"{a['homework']}\nn = {a['all_attempts']['n']}\n{a['problems']} problems" for a in data['assignments']],fontsize=10 if mobile else 12)
+    ax.set_xticks(range(1,len(stats)+1),[f"{a['homework']}" + ('*' if a.get('observation_status') == 'ongoing' else '') +
+                  f"\nn = {a['all_attempts']['n']}\n{a['problems']} problems" for a in data['assignments']],fontsize=10 if mobile else 12)
     ymax = int(np.ceil((max(a['all_attempts']['max'] for a in data['assignments'])+12)/20)*20)
     ax.set_ylim(0,ymax);ax.set_yticks(range(0,ymax+1,20));ax.set_ylabel('Submissions per student')
     ax.set_title('Attempt-count distributions',loc='left',pad=18)
     ax.grid(axis='y',alpha=.18,linewidth=.8);ax.set_axisbelow(True)
     fig.tight_layout(pad=2,rect=(0,.20,1,1))
     footnote(fig,['Boxes: middle 50% · bold line: median · whiskers: min–max.',
-                  'Window submitters only; counts do not measure effort or ability.', snapshot_label(data)],web=web)
+                  'Window submitters only; counts do not measure effort or ability.',
+                  ('* ' + observation_note(data)) if observation_note(data) else '', snapshot_label(data)],web=web)
     finalize_figure(fig,out/('02-attempts'+('-mobile' if mobile else '')),'Per-student homework attempt counts',web=web)
 
 
@@ -260,7 +284,7 @@ def score_story_mobile(data, out):
         rows.extend(hw_rows[:2])
     rows.sort(key=lambda row: (-(row['best'] - row['best3']),
                                row['homework'], row['problem_order']))
-    fig, ax = plt.subplots(figsize=(6.4, 10))
+    fig, ax = plt.subplots(figsize=(6.4, max(10, len(rows)*1.15)))
     fig.subplots_adjust(left=.09, right=.91, top=.77, bottom=.18)
     ink, muted, accent = '#f4f2e9', '#c4b7aa', '#ed977b'
     for y, row in enumerate(rows):
@@ -291,6 +315,7 @@ def score_story_mobile(data, out):
     footnote(fig, [f'{len(rows)} selected: top two remaining gaps within each homework.',
                    f'All {len(ranked)} problem slots and values are in the analysis page.',
                    'Gap = best observed minus cumulative best through three.',
+                   observation_note(data),
                    snapshot_label(data) + ' · No causal claim.'],
              y=.025, web=True, fontsize=10)
     finalize_figure(fig, out/'03-score-progression-mobile',
@@ -322,8 +347,8 @@ def scores(data,out,mobile=False,web=False):
     else:
         rows = all_rows
 
-    fig, ax = plt.subplots(figsize=(7.8, 20) if mobile else
-                           (9.2, 10.5) if web else (11.5, 15.0))
+    height = max(20, len(rows)*.58) if mobile else max(10.5, len(rows)*.75) if web else max(15, len(rows)*.45)
+    fig, ax = plt.subplots(figsize=(7.8 if mobile else 9.2 if web else 11.5, height))
     fig.subplots_adjust(left=.40 if mobile else .37 if web else .35,
                         right=.76 if mobile else .77 if web else .79,
                         top=.81 if mobile else .79 if web else .84,
@@ -379,15 +404,18 @@ def scores(data,out,mobile=False,web=False):
             if web else f'Rows sorted by remaining gap; all {len(all_rows)} problem slots shown.')
     footnote(fig, [note,
                    'Same attempters per row. Red = best observed minus best through three.',
-                   'Cumulative best is not the actual third score or a causal gain.', snapshot_label(data)],
+                   'Cumulative best is not the actual third score or a causal gain.',
+                   observation_note(data), snapshot_label(data)],
              y=.018, web=web)
     finalize_figure(fig,out/('03-score-progression'+('-mobile' if mobile else '')),
                     'Remaining problem score gaps after three attempts',web=web)
 
 
 def attempt_scores(data,out,mobile=False,web=False):
-    size = (8, 21) if mobile else (15, 12)
-    fig,axes=plt.subplots(4 if mobile else 2,1 if mobile else 2,figsize=size,squeeze=False)
+    count = len(data['assignments'])
+    panel_rows, panel_columns = (count, 1) if mobile else ((count+1)//2, 2)
+    size = (8, max(21, 5.25*panel_rows)) if mobile else (15, 5.5*panel_rows + 1)
+    fig,axes=plt.subplots(panel_rows,panel_columns,figsize=size,squeeze=False)
     visible=[r for r in data['attempt_score_series'] if r['state']=='visible']
     xmax=max(r['attempt'] for r in visible)
     for i,(ax,a,color) in enumerate(zip(axes.flat,data['assignments'],WEB_COLORS if web else HW_COLORS)):
@@ -396,7 +424,7 @@ def attempt_scores(data,out,mobile=False,web=False):
         # NaNs break the line at suppressed internal positions as well as tails.
         plotted = {r['attempt']: r['mean_score'] for r in rows}
         ax.plot(range(1,xmax+1),[plotted.get(k,np.nan) for k in range(1,xmax+1)],
-                marker=['o','s','D','^'][i],color=color,lw=2.5,ms=6)
+                marker=HW_MARKERS[i],color=color,lw=2.5,ms=6)
         for r in (rows[0],rows[-1]):
             ax.annotate(f"{r['mean_score']:.1f}",(r['attempt'],r['mean_score']),xytext=(0,12),textcoords='offset points',ha='center',fontsize=11,color=color)
         if x[-1]<xmax:
@@ -404,7 +432,8 @@ def attempt_scores(data,out,mobile=False,web=False):
         ax.set_xlim(.5,xmax+.5);ax.set_ylim(0,105);ax.set_yticks([0,25,50,75,100])
         ax.set_xticks(range(1,xmax+1));ax.tick_params(axis='x',labelsize=10)
         ax.set_ylabel('Mean score at this attempt (%)')
-        ax.set_title(f"({chr(97+i)})  {a['homework']}",loc='left',pad=18)
+        status = ' · ongoing' if a.get('observation_status') == 'ongoing' else ''
+        ax.set_title(f"({chr(97+i)})  {a['homework']}{status}",loc='left',pad=18)
         ax.grid(axis='y',alpha=.18);ax.set_axisbelow(True)
         ax.set_xlabel('')
         ax.annotate('Attempt number within the same problem', (.5, 0), xycoords='axes fraction',
@@ -418,10 +447,13 @@ def attempt_scores(data,out,mobile=False,web=False):
                 value = str(lookup[k][key]) if k in lookup else '—'
                 ax.annotate(value, (k, 0), xycoords=ax.get_xaxis_transform(), xytext=(0, offset),
                             textcoords='offset points', ha='center', va='top', fontsize=9)
-    fig.tight_layout(pad=2,rect=(.01,.08 if mobile else .14,1,.99),h_pad=4)
+    for ax in list(axes.flat)[count:]:
+        ax.set_visible(False)
+    fig.tight_layout(pad=2,rect=(.01,.08 if mobile else .12,1,.99),h_pad=4)
     footnote(fig,['N = submitted student–problem events; S = distinct students. Equal weight per event.',
                   'Different cohorts at each attempt; no score carry-forward. Later means do not track a fixed group.',
                   'Points with fewer than five students are withheld. No independent-event error bars.',
+                  observation_note(data),
                   snapshot_label(data)],web=web)
     finalize_figure(fig,out/('04-attempt-scores'+('-mobile' if mobile else '')),'Mean actual score by within-problem attempt number',web=web)
 

@@ -1,6 +1,6 @@
 # Evaluation plan
 
-Status: planned, not conducted. This plan evaluates the visualization and page, not students' learning or academic performance. Test the current locally built layout after publication is verified; keep task wording and timing consistent across participants.
+Status: planned, not conducted. This plan evaluates the visualization and page, not students' learning or academic performance. The homework answer key uses the 13 October 2026 snapshot; exam and Course Pulse tasks use their separate historical evidence. Test a validated local build, or verify the published version before using it; keep task wording and timing consistent across participants.
 
 ## Questions
 
@@ -20,13 +20,13 @@ Allow 15–20 minutes per session: consent and orientation (2 min), four informa
 | Task prompt | Answer key from the current aggregate snapshot | Scoring (0–2) |
 |---|---|---|
 | T1. In Figure 01's visible-cell scatterplots, find the plotted four-hour cell with the most submissions. Report its date, time, submissions and distinct contributors. | 29 August, 12:00–16:00 Beijing time; 153 submissions; 12 people. This is the largest *visible* cell; masked cells prevent an overall four-hour peak claim. | 2: all four elements correct. 1: cell located correctly but one metric omitted/misread. 0: wrong cell or people/events confused. |
-| T2. Which homework has the highest median submission count? Which has the widest observed min–max range? | HW4 for both. Median 15; range 8–141 (width 133). Compare HW1 8–98, HW2 3–62 and HW3 7–108. | 2: both choices and supporting values correct. 1: correct choices without values or only one correct comparison. 0: neither correct. |
+| T2. At this snapshot in Figure 02, which homeworks share the highest median submission count? Which has the widest observed min–max range, and is it complete? | HW3 and HW5 tie at median 14. HW5 has the widest observed range, 1–209 (width 208), but remains ongoing. Among completed homeworks HW4 has the widest range, 8–141 (width 133); its median is now 12. The snapshot is not a final HW5 comparison. | 2: both tied medians and HW5's range identified, with ongoing status. 1: one correct comparison or misses the ongoing limitation. 0: neither comparison correct. |
 | T3. In Figure 03, which problem has the largest mean gap remaining after three attempts? Read the best-through-three and best-observed means. Is best-through-three the actual third submission score? | HW3 EvenOrOdd: 66.15 → 100, a 33.85 percentage-point remaining mean gap across the same 39 attempters. Best-through-three is a cumulative maximum, not the actual third score. | 2: correct problem, values and cumulative-best interpretation. 1: correct problem but misses a value or its meaning. 0: wrong problem or calls cumulative best an actual attempt score. |
 | T4. Compare HW1's first and second actual-attempt means. Does the lower second mean show that the same group got worse? Use the N/S rows. | 76.93 → 64.53; N 304 → 106 and S 38 → 34. No: only pairs reaching attempt 2 remain; this is a changing cohort. | 2: correct direction plus explicit changing-cohort explanation supported by N or S. 1: correct direction but insufficient explanation. 0: incorrect direction or individual-decline claim. |
 
 Two additional interpretation probes (record explanations, not an aggregate score):
 
-- Do unplotted four-hour cells mean no submissions? Expected: no; 74 positive cells with fewer than five contributors are masked, so the figure includes only publishable positive cells.
+- Do unplotted four-hour cells mean no submissions? Expected: no; 118 positive cells are masked, so the figure includes only publishable positive cells. A future interval labeled not yet observed is also not an observed zero. Overlapping homework windows pool events rather than supplying a per-homework split.
 - Do longer submission gaps prove more studying, or more attempts prove learning improvement? Expected: neither; gaps are elapsed time and these descriptive comparisons do not identify causation.
 
 Navigation task: find the method defining normalized score and open/download Figure 04 as PDF. Record success, time, route, keyboard/touch difficulties and errors. On mobile also check table access and chart zoom/download discoverability. Do not require a download to a particular private directory.
@@ -67,9 +67,9 @@ Use the existing 0–2 scoring scheme. The seven information tasks may require e
 
 These are planned reader tasks, not completed evaluation results.
 
-## Event-progress tasks · 30 September (planned)
+## Event-progress tasks · 13 October (planned)
 
-11. Read the HW4 productive-retry rate: 129 new bests out of 306 eligible retries, 42.2%, from 29 distinct eligible contributors. Explain why this is a percentage of retries, not students. First scores establish baselines; equal scores do not count; attempts after full credit are excluded.
-12. Read the HW4 60–80% window phase: 40 new bests out of 64 eligible retries, 62.5%, S=10. Each phase is 26.8 hours for HW4. A hatched cell is withheld, not zero; timing does not identify a deadline effect.
+11. Read the revised HW4 productive-retry rate: 136 new bests out of 315 eligible retries, 43.2%, from 34 distinct eligible contributors. Explain why this is a percentage of retries, not students. First scores establish baselines; equal scores do not count; attempts after full credit are excluded. HW5's 72/114 (63.2%) is provisional at this snapshot, so it must not be presented as a completed success-rate ranking.
+12. Read the revised HW4 60–80% window phase: 21 new bests out of 36 eligible retries, 58.3%, S=12. Each scheduled phase is now 41.2 hours after the deadline moved to 2 October 23:59. Explain HW5's separate states: its 60–80% phase is partial (18/31, 58.1%, S=7) and its 80–100% phase is not yet observed. A hatched cell is withheld, not zero; an unobserved cell has no measured count or rate. Timing does not identify a deadline effect.
 
 Use the same 0–2 rubric and pilot the expanded twelve-task protocol before fixing session duration. These additions do not imply that reader evaluation has occurred.

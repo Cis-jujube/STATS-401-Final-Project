@@ -1,15 +1,19 @@
 {
-  "snapshot_utc": "2026-09-29 16:27:16.665506",
+  "snapshot_utc": "2026-10-13 06:13:19.647089",
   "timezone": "Asia/Shanghai (UTC+08:00)",
+  "observation_cutoff_local": "2026-10-13T14:13:19.647089+08:00",
+  "ongoing_homeworks": [
+    "HW5"
+  ],
   "cohort_members": 42,
-  "all_course_submissions": 3070,
-  "all_homework_submissions": 2900,
-  "window_submissions": 2807,
+  "all_course_submissions": 3622,
+  "all_homework_submissions": 3452,
+  "window_submissions": 3359,
   "window_submitters": 39,
   "outside_window": 93,
-  "partial_scores_all_homework": 321,
-  "partial_scores_in_window": 305,
-  "submissions_after_first_ac": 441,
+  "partial_scores_all_homework": 416,
+  "partial_scores_in_window": 400,
+  "submissions_after_first_ac": 645,
   "peak_day": {
     "date": "2026-08-29",
     "submissions": 233,
@@ -18,8 +22,9 @@
   "calendar_policy": {
     "hours_per_bin": 4,
     "minimum_distinct_contributors": 5,
-    "suppressed_positive_cells": 74,
-    "visible_positive_cells": 37
+    "overlapping_windows": "Pooled homework events; no per-homework subcounts are released for overlapping bins",
+    "suppressed_positive_cells": 118,
+    "visible_positive_cells": 38
   },
   "assignments": [
     {
@@ -27,6 +32,8 @@
       "assignment_id": 95,
       "start_local": "2026-08-26T15:00:00+08:00",
       "end_local": "2026-09-01T23:59:00+08:00",
+      "observation_status": "complete",
+      "observed_until_local": "2026-09-01T23:59:00+08:00",
       "problems": 8,
       "submissions": 673,
       "outside_window": 14,
@@ -54,6 +61,8 @@
       "assignment_id": 120,
       "start_local": "2026-09-03T12:00:00+08:00",
       "end_local": "2026-09-08T23:59:00+08:00",
+      "observation_status": "complete",
+      "observed_until_local": "2026-09-08T23:59:00+08:00",
       "problems": 8,
       "submissions": 664,
       "outside_window": 35,
@@ -81,6 +90,8 @@
       "assignment_id": 145,
       "start_local": "2026-09-11T11:00:00+08:00",
       "end_local": "2026-09-15T23:59:00+08:00",
+      "observation_status": "complete",
+      "observed_until_local": "2026-09-15T23:59:00+08:00",
       "problems": 7,
       "submissions": 764,
       "outside_window": 44,
@@ -107,28 +118,59 @@
       "homework": "HW4",
       "assignment_id": 178,
       "start_local": "2026-09-24T10:00:00+08:00",
-      "end_local": "2026-09-29T23:59:00+08:00",
+      "end_local": "2026-10-02T23:59:00+08:00",
+      "observation_status": "complete",
+      "observed_until_local": "2026-10-02T23:59:00+08:00",
       "problems": 8,
-      "submissions": 706,
+      "submissions": 756,
       "outside_window": 0,
       "all_attempts": {
-        "n": 33,
+        "n": 38,
         "min": 8,
         "q1": 9.0,
-        "median": 15.0,
-        "q3": 21.0,
+        "median": 12.0,
+        "q3": 20.0,
         "max": 141
       },
       "through_first_ac": {
-        "n": 33,
+        "n": 38,
         "min": 8,
         "q1": 9.0,
         "median": 12.0,
         "q3": 18.0,
         "max": 130
       },
-      "mode0_records": 35,
-      "mode0_full_score_records": 33
+      "mode0_records": 38,
+      "mode0_full_score_records": 38
+    },
+    {
+      "homework": "HW5",
+      "assignment_id": 189,
+      "start_local": "2026-09-30T15:45:00+08:00",
+      "end_local": "2026-10-18T23:59:00+08:00",
+      "observation_status": "ongoing",
+      "observed_until_local": "2026-10-13T14:13:19.647089+08:00",
+      "problems": 12,
+      "submissions": 502,
+      "outside_window": 0,
+      "all_attempts": {
+        "n": 23,
+        "min": 1,
+        "q1": 7.0,
+        "median": 14.0,
+        "q3": 19.0,
+        "max": 209
+      },
+      "through_first_ac": {
+        "n": 23,
+        "min": 1,
+        "q1": 7.0,
+        "median": 13.0,
+        "q3": 19.0,
+        "max": 32
+      },
+      "mode0_records": 27,
+      "mode0_full_score_records": 11
     }
   ],
   "calendar": [
@@ -137,6 +179,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -145,6 +190,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -153,6 +201,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -161,6 +212,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -169,6 +225,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -177,6 +238,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -185,6 +251,11 @@
       "hour": 0,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -193,6 +264,11 @@
       "hour": 4,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -201,6 +277,11 @@
       "hour": 8,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -209,6 +290,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -217,6 +303,11 @@
       "hour": 16,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -225,6 +316,11 @@
       "hour": 20,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -233,6 +329,11 @@
       "hour": 0,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -241,6 +342,11 @@
       "hour": 4,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -249,6 +355,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -257,6 +368,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 57,
       "contributors": 9
     },
@@ -265,6 +381,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 25,
       "contributors": 6
     },
@@ -273,6 +394,11 @@
       "hour": 20,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -281,6 +407,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -289,6 +420,11 @@
       "hour": 4,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -297,6 +433,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -305,6 +446,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 153,
       "contributors": 12
     },
@@ -313,6 +459,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 57,
       "contributors": 8
     },
@@ -321,6 +472,11 @@
       "hour": 20,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -329,6 +485,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -337,6 +498,11 @@
       "hour": 4,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -345,6 +511,11 @@
       "hour": 8,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -353,6 +524,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -361,6 +537,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 46,
       "contributors": 7
     },
@@ -369,6 +550,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 17,
       "contributors": 6
     },
@@ -377,6 +563,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -385,6 +576,11 @@
       "hour": 4,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -393,6 +589,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -401,6 +602,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -409,6 +615,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -417,6 +628,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 30,
       "contributors": 5
     },
@@ -425,6 +641,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -433,6 +654,11 @@
       "hour": 4,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -441,6 +667,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -449,6 +680,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -457,6 +693,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 31,
       "contributors": 7
     },
@@ -465,6 +706,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW1"
+      ],
+      "homework": "HW1",
+      "observation_status": "complete",
       "submissions": 46,
       "contributors": 7
     },
@@ -473,6 +719,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -481,6 +730,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -489,6 +741,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -497,6 +752,9 @@
       "hour": 12,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -505,6 +763,9 @@
       "hour": 16,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -513,6 +774,9 @@
       "hour": 20,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -521,6 +785,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -529,6 +796,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -537,6 +807,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -545,6 +818,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 17,
       "contributors": 5
     },
@@ -553,6 +831,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 27,
       "contributors": 6
     },
@@ -561,6 +844,11 @@
       "hour": 20,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -569,6 +857,11 @@
       "hour": 0,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -577,6 +870,11 @@
       "hour": 4,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -585,6 +883,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -593,6 +896,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 37,
       "contributors": 8
     },
@@ -601,6 +909,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 62,
       "contributors": 11
     },
@@ -609,6 +922,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 32,
       "contributors": 6
     },
@@ -617,6 +935,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -625,6 +948,11 @@
       "hour": 4,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -633,6 +961,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -641,6 +974,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -649,6 +987,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 74,
       "contributors": 6
     },
@@ -657,6 +1000,11 @@
       "hour": 20,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -665,6 +1013,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -673,6 +1026,11 @@
       "hour": 4,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -681,6 +1039,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -689,6 +1052,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -697,6 +1065,11 @@
       "hour": 16,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -705,6 +1078,11 @@
       "hour": 20,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -713,6 +1091,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -721,6 +1104,11 @@
       "hour": 4,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -729,6 +1117,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -737,6 +1130,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 43,
       "contributors": 6
     },
@@ -745,6 +1143,11 @@
       "hour": 16,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -753,6 +1156,11 @@
       "hour": 20,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -761,6 +1169,11 @@
       "hour": 0,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -769,6 +1182,11 @@
       "hour": 4,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -777,6 +1195,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -785,6 +1208,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -793,6 +1221,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 40,
       "contributors": 5
     },
@@ -801,6 +1234,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW2"
+      ],
+      "homework": "HW2",
+      "observation_status": "complete",
       "submissions": 59,
       "contributors": 6
     },
@@ -809,6 +1247,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -817,6 +1258,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -825,6 +1269,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -833,6 +1280,9 @@
       "hour": 12,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -841,6 +1291,9 @@
       "hour": 16,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -849,6 +1302,9 @@
       "hour": 20,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -857,6 +1313,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -865,6 +1324,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -873,6 +1335,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -881,6 +1346,9 @@
       "hour": 12,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -889,6 +1357,9 @@
       "hour": 16,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -897,6 +1368,9 @@
       "hour": 20,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -905,6 +1379,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -913,6 +1390,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -921,6 +1401,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -929,6 +1414,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 86,
       "contributors": 6
     },
@@ -937,6 +1427,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 82,
       "contributors": 8
     },
@@ -945,6 +1440,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 35,
       "contributors": 5
     },
@@ -953,6 +1453,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -961,6 +1466,11 @@
       "hour": 4,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -969,6 +1479,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -977,6 +1492,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 41,
       "contributors": 7
     },
@@ -985,6 +1505,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 38,
       "contributors": 10
     },
@@ -993,6 +1518,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 36,
       "contributors": 7
     },
@@ -1001,6 +1531,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1009,6 +1544,11 @@
       "hour": 4,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1017,6 +1557,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1025,6 +1570,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1033,6 +1583,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 62,
       "contributors": 8
     },
@@ -1041,6 +1596,11 @@
       "hour": 20,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1049,6 +1609,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1057,6 +1622,11 @@
       "hour": 4,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1065,6 +1635,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1073,6 +1648,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 31,
       "contributors": 5
     },
@@ -1081,6 +1661,11 @@
       "hour": 16,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1089,6 +1674,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 62,
       "contributors": 10
     },
@@ -1097,6 +1687,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1105,6 +1700,11 @@
       "hour": 4,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -1113,6 +1713,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1121,6 +1726,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1129,6 +1739,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 44,
       "contributors": 9
     },
@@ -1137,6 +1752,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW3"
+      ],
+      "homework": "HW3",
+      "observation_status": "complete",
       "submissions": 54,
       "contributors": 9
     },
@@ -1145,6 +1765,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1153,6 +1776,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1161,6 +1787,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1169,6 +1798,9 @@
       "hour": 12,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1177,6 +1809,9 @@
       "hour": 16,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1185,6 +1820,9 @@
       "hour": 20,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1193,6 +1831,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1201,6 +1842,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1209,6 +1853,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1217,6 +1864,9 @@
       "hour": 12,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1225,6 +1875,9 @@
       "hour": 16,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1233,6 +1886,9 @@
       "hour": 20,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1241,6 +1897,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1249,6 +1908,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1257,6 +1919,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1265,6 +1930,9 @@
       "hour": 12,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1273,6 +1941,9 @@
       "hour": 16,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1281,6 +1952,9 @@
       "hour": 20,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1289,6 +1963,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1297,6 +1974,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1305,6 +1985,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1313,6 +1996,9 @@
       "hour": 12,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1321,6 +2007,9 @@
       "hour": 16,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1329,6 +2018,9 @@
       "hour": 20,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1337,6 +2029,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1345,6 +2040,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1353,6 +2051,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1361,6 +2062,9 @@
       "hour": 12,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1369,6 +2073,9 @@
       "hour": 16,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1377,6 +2084,9 @@
       "hour": 20,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1385,6 +2095,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1393,6 +2106,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1401,6 +2117,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1409,6 +2128,9 @@
       "hour": 12,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1417,6 +2139,9 @@
       "hour": 16,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1425,6 +2150,9 @@
       "hour": 20,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1433,6 +2161,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1441,6 +2172,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1449,6 +2183,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1457,6 +2194,9 @@
       "hour": 12,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1465,6 +2205,9 @@
       "hour": 16,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1473,6 +2216,9 @@
       "hour": 20,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1481,6 +2227,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1489,6 +2238,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1497,6 +2249,9 @@
       "hour": 8,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1505,6 +2260,9 @@
       "hour": 12,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1513,6 +2271,9 @@
       "hour": 16,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1521,6 +2282,9 @@
       "hour": 20,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1529,6 +2293,9 @@
       "hour": 0,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1537,6 +2304,9 @@
       "hour": 4,
       "hours": 4,
       "state": "inactive",
+      "homeworks": [],
+      "homework": null,
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1545,6 +2315,11 @@
       "hour": 8,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -1553,6 +2328,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1561,6 +2341,11 @@
       "hour": 16,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1569,6 +2354,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -1577,6 +2367,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1585,6 +2380,11 @@
       "hour": 4,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1593,6 +2393,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1601,6 +2406,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1609,6 +2419,11 @@
       "hour": 16,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1617,6 +2432,11 @@
       "hour": 20,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1625,6 +2445,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1633,6 +2458,11 @@
       "hour": 4,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1641,6 +2471,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1649,6 +2484,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": 32,
       "contributors": 6
     },
@@ -1657,6 +2497,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": 62,
       "contributors": 6
     },
@@ -1665,6 +2510,11 @@
       "hour": 20,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1673,6 +2523,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1681,6 +2536,11 @@
       "hour": 4,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1689,6 +2549,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1697,6 +2562,11 @@
       "hour": 12,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1705,6 +2575,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": 60,
       "contributors": 5
     },
@@ -1713,6 +2588,11 @@
       "hour": 20,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1721,6 +2601,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1729,6 +2614,11 @@
       "hour": 4,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1737,6 +2627,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1745,6 +2640,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": 53,
       "contributors": 9
     },
@@ -1753,6 +2653,11 @@
       "hour": 16,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": 28,
       "contributors": 5
     },
@@ -1761,6 +2666,11 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": 35,
       "contributors": 9
     },
@@ -1769,6 +2679,11 @@
       "hour": 0,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1777,6 +2692,11 @@
       "hour": 4,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": 0,
       "contributors": 0
     },
@@ -1785,6 +2705,11 @@
       "hour": 8,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1793,6 +2718,11 @@
       "hour": 12,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": 52,
       "contributors": 7
     },
@@ -1801,6 +2731,11 @@
       "hour": 16,
       "hours": 4,
       "state": "suppressed",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": null,
       "contributors": null
     },
@@ -1809,8 +2744,1120 @@
       "hour": 20,
       "hours": 4,
       "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
       "submissions": 82,
       "contributors": 9
+    },
+    {
+      "date": "2026-09-30",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-30",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-30",
+      "hour": 8,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW4"
+      ],
+      "homework": "HW4",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-30",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-09-30",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-09-30",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-01",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-01",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-01",
+      "hour": 8,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-01",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-01",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-01",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-02",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-02",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-02",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-02",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-02",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-02",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW4",
+        "HW5"
+      ],
+      "homework": null,
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-03",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-03",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-03",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-03",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-03",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-03",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-04",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-04",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-04",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-04",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-04",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-04",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-05",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-05",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-05",
+      "hour": 8,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-05",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-05",
+      "hour": 16,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-05",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-06",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-06",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-06",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-06",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-06",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-06",
+      "hour": 20,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-07",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-07",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-07",
+      "hour": 8,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-07",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-07",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-07",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-08",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-08",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-08",
+      "hour": 8,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-08",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-08",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-08",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-09",
+      "hour": 0,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-09",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-09",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-09",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-09",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-09",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-10",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-10",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-10",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-10",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-10",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-10",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-11",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-11",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-11",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-11",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-11",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-11",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-12",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-12",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-12",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-12",
+      "hour": 12,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 46,
+      "contributors": 5
+    },
+    {
+      "date": "2026-10-12",
+      "hour": 16,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-12",
+      "hour": 20,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-13",
+      "hour": 0,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-13",
+      "hour": 4,
+      "hours": 4,
+      "state": "visible",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": 0,
+      "contributors": 0
+    },
+    {
+      "date": "2026-10-13",
+      "hour": 8,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "complete",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-13",
+      "hour": 12,
+      "hours": 4,
+      "state": "suppressed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "partial",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-13",
+      "hour": 16,
+      "hours": 4,
+      "state": "not_observed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "not_observed",
+      "submissions": null,
+      "contributors": null
+    },
+    {
+      "date": "2026-10-13",
+      "hour": 20,
+      "hours": 4,
+      "state": "not_observed",
+      "homeworks": [
+        "HW5"
+      ],
+      "homework": "HW5",
+      "observation_status": "not_observed",
+      "submissions": null,
+      "contributors": null
     }
   ],
   "score_progression": [
@@ -2095,96 +4142,240 @@
       "problem_id": 1463,
       "problem_name": "Postfix",
       "problem_order": 7,
-      "n": 33,
-      "first": 53.333333333333336,
-      "best2": 75.15151515151516,
-      "best3": 87.87878787878788,
+      "n": 38,
+      "first": 56.8421052631579,
+      "best2": 78.42105263157895,
+      "best3": 89.47368421052632,
       "best": 100.0,
-      "gain": 46.666666666666664
+      "gain": 43.1578947368421
     },
     {
       "homework": "HW4",
       "problem_id": 1462,
       "problem_name": "Parentheses",
       "problem_order": 6,
-      "n": 33,
-      "first": 60.60606060606061,
-      "best2": 81.81818181818181,
-      "best3": 92.72727272727273,
+      "n": 38,
+      "first": 62.10526315789474,
+      "best2": 81.57894736842105,
+      "best3": 91.05263157894737,
       "best": 100.0,
-      "gain": 39.39393939393939
+      "gain": 37.89473684210526
     },
     {
       "homework": "HW4",
       "problem_id": 1459,
       "problem_name": "ZeroMatrix",
       "problem_order": 3,
-      "n": 33,
-      "first": 63.63636363636363,
-      "best2": 88.48484848484848,
-      "best3": 91.51515151515152,
+      "n": 38,
+      "first": 65.78947368421052,
+      "best2": 90.0,
+      "best3": 92.63157894736842,
       "best": 100.0,
-      "gain": 36.36363636363637
+      "gain": 34.21052631578948
     },
     {
       "homework": "HW4",
       "problem_id": 1457,
       "problem_name": "Dominant",
       "problem_order": 1,
-      "n": 33,
-      "first": 67.87878787878788,
-      "best2": 81.81818181818181,
-      "best3": 90.3030303030303,
+      "n": 38,
+      "first": 68.94736842105263,
+      "best2": 84.21052631578948,
+      "best3": 91.57894736842105,
       "best": 100.0,
-      "gain": 32.121212121212125
-    },
-    {
-      "homework": "HW4",
-      "problem_id": 1464,
-      "problem_name": "Browser",
-      "problem_order": 8,
-      "n": 33,
-      "first": 70.3030303030303,
-      "best2": 84.84848484848484,
-      "best3": 91.51515151515152,
-      "best": 100.0,
-      "gain": 29.696969696969703
+      "gain": 31.05263157894737
     },
     {
       "homework": "HW4",
       "problem_id": 1460,
       "problem_name": "MinSubarray",
       "problem_order": 4,
-      "n": 33,
-      "first": 71.51515151515152,
-      "best2": 83.63636363636364,
-      "best3": 91.51515151515152,
+      "n": 38,
+      "first": 72.63157894736842,
+      "best2": 85.78947368421052,
+      "best3": 92.63157894736842,
       "best": 100.0,
-      "gain": 28.484848484848484
+      "gain": 27.368421052631575
+    },
+    {
+      "homework": "HW4",
+      "problem_id": 1464,
+      "problem_name": "Browser",
+      "problem_order": 8,
+      "n": 38,
+      "first": 74.21052631578948,
+      "best2": 86.84210526315789,
+      "best3": 92.63157894736842,
+      "best": 100.0,
+      "gain": 25.78947368421052
     },
     {
       "homework": "HW4",
       "problem_id": 1458,
       "problem_name": "Collapse",
       "problem_order": 2,
-      "n": 33,
-      "first": 73.93939393939394,
-      "best2": 90.9090909090909,
-      "best3": 95.75757575757575,
+      "n": 38,
+      "first": 77.36842105263158,
+      "best2": 92.10526315789474,
+      "best3": 96.3157894736842,
       "best": 100.0,
-      "gain": 26.060606060606062
+      "gain": 22.631578947368425
     },
     {
       "homework": "HW4",
       "problem_id": 1461,
       "problem_name": "ArrayStack",
       "problem_order": 5,
-      "n": 33,
-      "first": 78.18181818181819,
-      "best2": 90.3030303030303,
-      "best3": 95.75757575757575,
+      "n": 38,
+      "first": 81.05263157894737,
+      "best2": 91.57894736842105,
+      "best3": 96.3157894736842,
       "best": 100.0,
-      "gain": 21.818181818181813
+      "gain": 18.94736842105263
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1494,
+      "problem_name": "Counting Out",
+      "problem_order": 4,
+      "n": 16,
+      "first": 58.75,
+      "best2": 87.5,
+      "best3": 87.5,
+      "best": 100.0,
+      "gain": 41.25
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1500,
+      "problem_name": "Halfway",
+      "problem_order": 2,
+      "n": 21,
+      "first": 64.76190476190476,
+      "best2": 76.19047619047619,
+      "best3": 88.57142857142857,
+      "best": 100.0,
+      "gain": 35.23809523809524
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1502,
+      "problem_name": "RowByRow",
+      "problem_order": 6,
+      "n": 15,
+      "first": 68.0,
+      "best2": 80.0,
+      "best3": 90.66666666666667,
+      "best": 100.0,
+      "gain": 32.0
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1493,
+      "problem_name": "Waiting Line",
+      "problem_order": 3,
+      "n": 20,
+      "first": 65.0,
+      "best2": 76.0,
+      "best3": 90.0,
+      "best": 95.0,
+      "gain": 30.0
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1501,
+      "problem_name": "SandwichLine",
+      "problem_order": 5,
+      "n": 16,
+      "first": 71.25,
+      "best2": 86.25,
+      "best3": 88.75,
+      "best": 100.0,
+      "gain": 28.75
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1497,
+      "problem_name": "HeapArray",
+      "problem_order": 10,
+      "n": 12,
+      "first": 75.0,
+      "best2": 88.33333333333333,
+      "best3": 98.33333333333333,
+      "best": 100.0,
+      "gain": 25.0
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1498,
+      "problem_name": "Kth Largest",
+      "problem_order": 11,
+      "n": 12,
+      "first": 75.0,
+      "best2": 100.0,
+      "best3": 100.0,
+      "best": 100.0,
+      "gain": 25.0
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1504,
+      "problem_name": "Phone Book",
+      "problem_order": 12,
+      "n": 12,
+      "first": 76.66666666666667,
+      "best2": 96.66666666666667,
+      "best3": 96.66666666666667,
+      "best": 100.0,
+      "gain": 23.33333333333333
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1499,
+      "problem_name": "Rewind",
+      "problem_order": 1,
+      "n": 22,
+      "first": 77.27272727272727,
+      "best2": 87.27272727272727,
+      "best3": 94.54545454545455,
+      "best": 100.0,
+      "gain": 22.727272727272734
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1503,
+      "problem_name": "LeftPacked",
+      "problem_order": 7,
+      "n": 15,
+      "first": 80.0,
+      "best2": 93.33333333333333,
+      "best3": 93.33333333333333,
+      "best": 100.0,
+      "gain": 20.0
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1495,
+      "problem_name": "Rebuild",
+      "problem_order": 8,
+      "n": 12,
+      "first": 91.66666666666667,
+      "best2": 100.0,
+      "best3": 100.0,
+      "best": 100.0,
+      "gain": 8.333333333333329
+    },
+    {
+      "homework": "HW5",
+      "problem_id": 1496,
+      "problem_name": "SearchTree",
+      "problem_order": 9,
+      "n": 12,
+      "first": 91.66666666666667,
+      "best2": 91.66666666666667,
+      "best3": 100.0,
+      "best": 100.0,
+      "gain": 8.333333333333329
     }
   ],
   "attempt_score_series": [
@@ -2888,33 +5079,33 @@
       "homework": "HW4",
       "attempt": 1,
       "state": "visible",
-      "submissions": 264,
-      "contributors": 33,
-      "mean_score": 67.42424242424242
+      "submissions": 304,
+      "contributors": 38,
+      "mean_score": 69.86842105263158
     },
     {
       "homework": "HW4",
       "attempt": 2,
       "state": "visible",
-      "submissions": 112,
-      "contributors": 30,
-      "mean_score": 58.392857142857146
+      "submissions": 120,
+      "contributors": 35,
+      "mean_score": 60.333333333333336
     },
     {
       "homework": "HW4",
       "attempt": 3,
       "state": "visible",
-      "submissions": 70,
-      "contributors": 21,
-      "mean_score": 59.714285714285715
+      "submissions": 71,
+      "contributors": 22,
+      "mean_score": 58.87323943661972
     },
     {
       "homework": "HW4",
       "attempt": 4,
       "state": "visible",
-      "submissions": 42,
-      "contributors": 18,
-      "mean_score": 51.904761904761905
+      "submissions": 43,
+      "contributors": 19,
+      "mean_score": 53.02325581395349
     },
     {
       "homework": "HW4",
@@ -3219,6 +5410,302 @@
       "submissions": null,
       "contributors": null,
       "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 1,
+      "state": "visible",
+      "submissions": 185,
+      "contributors": 23,
+      "mean_score": 73.4054054054054
+    },
+    {
+      "homework": "HW5",
+      "attempt": 2,
+      "state": "visible",
+      "submissions": 70,
+      "contributors": 18,
+      "mean_score": 62.857142857142854
+    },
+    {
+      "homework": "HW5",
+      "attempt": 3,
+      "state": "visible",
+      "submissions": 41,
+      "contributors": 13,
+      "mean_score": 54.63414634146341
+    },
+    {
+      "homework": "HW5",
+      "attempt": 4,
+      "state": "visible",
+      "submissions": 30,
+      "contributors": 9,
+      "mean_score": 72.66666666666667
+    },
+    {
+      "homework": "HW5",
+      "attempt": 5,
+      "state": "visible",
+      "submissions": 19,
+      "contributors": 5,
+      "mean_score": 69.47368421052632
+    },
+    {
+      "homework": "HW5",
+      "attempt": 6,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 7,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 8,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 9,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 10,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 11,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 12,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 13,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 14,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 15,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 16,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 17,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 18,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 19,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 20,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 21,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 22,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 23,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 24,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 25,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 26,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 27,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 28,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 29,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 30,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 31,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 32,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 33,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 34,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 35,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 36,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
+    },
+    {
+      "homework": "HW5",
+      "attempt": 37,
+      "state": "suppressed",
+      "submissions": null,
+      "contributors": null,
+      "mean_score": null
     }
   ],
   "event_progress": {
@@ -3229,13 +5716,14 @@
       "internal_error": "IE judgements are skipped; compilation errors remain scored attempts",
       "gap": "Clock time since the previous valid same-student homework-problem submission",
       "phase": "Five equal-duration intervals from configured opening to deadline; deadline is in the last bin",
+      "observation": "Ongoing windows are truncated at the snapshot; partial phases are labelled and future phases have null values",
       "secondary_suppression": "A second nonempty cell is hidden if a partition has exactly one primary mask",
       "weighting": "Equal weight per eligible retry; students can contribute multiple retries"
     },
     "eligibility_counts": {
-      "first_scores": 1131,
+      "first_scores": 1356,
       "internal_errors": 13,
-      "after_full_credit": 441
+      "after_full_credit": 645
     },
     "by_homework": [
       {
@@ -3265,10 +5753,18 @@
       {
         "homework": "HW4",
         "state": "visible",
-        "eligible_retries": 306,
-        "new_bests": 129,
-        "contributors": 29,
-        "improvement_pct": 42.15686274509804
+        "eligible_retries": 315,
+        "new_bests": 136,
+        "contributors": 34,
+        "improvement_pct": 43.17460317460318
+      },
+      {
+        "homework": "HW5",
+        "state": "visible",
+        "eligible_retries": 114,
+        "new_bests": 72,
+        "contributors": 18,
+        "improvement_pct": 63.1578947368421
       }
     ],
     "by_gap": [
@@ -3276,37 +5772,37 @@
         "gap_bin": 0,
         "label": "Under 1 min",
         "state": "visible",
-        "eligible_retries": 567,
-        "new_bests": 179,
-        "contributors": 34,
-        "improvement_pct": 31.569664902998237
+        "eligible_retries": 634,
+        "new_bests": 215,
+        "contributors": 35,
+        "improvement_pct": 33.91167192429022
       },
       {
         "gap_bin": 1,
         "label": "1–10 min",
         "state": "visible",
-        "eligible_retries": 568,
-        "new_bests": 251,
-        "contributors": 36,
-        "improvement_pct": 44.190140845070424
+        "eligible_retries": 618,
+        "new_bests": 291,
+        "contributors": 37,
+        "improvement_pct": 47.0873786407767
       },
       {
         "gap_bin": 2,
         "label": "10–60 min",
         "state": "visible",
-        "eligible_retries": 59,
-        "new_bests": 27,
-        "contributors": 22,
-        "improvement_pct": 45.76271186440678
+        "eligible_retries": 64,
+        "new_bests": 29,
+        "contributors": 24,
+        "improvement_pct": 45.3125
       },
       {
         "gap_bin": 3,
         "label": "1–24 hours",
         "state": "visible",
-        "eligible_retries": 20,
-        "new_bests": 7,
-        "contributors": 10,
-        "improvement_pct": 35.0
+        "eligible_retries": 21,
+        "new_bests": 8,
+        "contributors": 11,
+        "improvement_pct": 38.095238095238095
       },
       {
         "gap_bin": 4,
@@ -3554,10 +6050,10 @@
         "problem_id": 1457,
         "problem_name": "Dominant",
         "state": "visible",
-        "eligible_retries": 28,
-        "new_bests": 17,
-        "contributors": 12,
-        "improvement_pct": 60.714285714285715
+        "eligible_retries": 30,
+        "new_bests": 19,
+        "contributors": 14,
+        "improvement_pct": 63.333333333333336
       },
       {
         "homework": "HW4",
@@ -3574,20 +6070,20 @@
         "problem_id": 1459,
         "problem_name": "ZeroMatrix",
         "state": "visible",
-        "eligible_retries": 39,
-        "new_bests": 15,
-        "contributors": 13,
-        "improvement_pct": 38.46153846153846
+        "eligible_retries": 40,
+        "new_bests": 16,
+        "contributors": 14,
+        "improvement_pct": 40.0
       },
       {
         "homework": "HW4",
         "problem_id": 1460,
         "problem_name": "MinSubarray",
         "state": "visible",
-        "eligible_retries": 45,
-        "new_bests": 18,
-        "contributors": 14,
-        "improvement_pct": 40.0
+        "eligible_retries": 46,
+        "new_bests": 19,
+        "contributors": 15,
+        "improvement_pct": 41.30434782608695
       },
       {
         "homework": "HW4",
@@ -3604,20 +6100,20 @@
         "problem_id": 1462,
         "problem_name": "Parentheses",
         "state": "visible",
-        "eligible_retries": 53,
-        "new_bests": 19,
-        "contributors": 16,
-        "improvement_pct": 35.84905660377358
+        "eligible_retries": 57,
+        "new_bests": 21,
+        "contributors": 18,
+        "improvement_pct": 36.8421052631579
       },
       {
         "homework": "HW4",
         "problem_id": 1463,
         "problem_name": "Postfix",
         "state": "visible",
-        "eligible_retries": 33,
-        "new_bests": 17,
-        "contributors": 16,
-        "improvement_pct": 51.515151515151516
+        "eligible_retries": 34,
+        "new_bests": 18,
+        "contributors": 17,
+        "improvement_pct": 52.94117647058823
       },
       {
         "homework": "HW4",
@@ -3628,6 +6124,126 @@
         "new_bests": 20,
         "contributors": 11,
         "improvement_pct": 33.333333333333336
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1493,
+        "problem_name": "Waiting Line",
+        "state": "visible",
+        "eligible_retries": 13,
+        "new_bests": 8,
+        "contributors": 7,
+        "improvement_pct": 61.53846153846154
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1494,
+        "problem_name": "Counting Out",
+        "state": "visible",
+        "eligible_retries": 13,
+        "new_bests": 7,
+        "contributors": 7,
+        "improvement_pct": 53.84615384615385
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1495,
+        "problem_name": "Rebuild",
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1496,
+        "problem_name": "SearchTree",
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1497,
+        "problem_name": "HeapArray",
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1498,
+        "problem_name": "Kth Largest",
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1499,
+        "problem_name": "Rewind",
+        "state": "visible",
+        "eligible_retries": 14,
+        "new_bests": 10,
+        "contributors": 6,
+        "improvement_pct": 71.42857142857143
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1500,
+        "problem_name": "Halfway",
+        "state": "visible",
+        "eligible_retries": 19,
+        "new_bests": 12,
+        "contributors": 9,
+        "improvement_pct": 63.1578947368421
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1501,
+        "problem_name": "SandwichLine",
+        "state": "visible",
+        "eligible_retries": 19,
+        "new_bests": 8,
+        "contributors": 7,
+        "improvement_pct": 42.10526315789474
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1502,
+        "problem_name": "RowByRow",
+        "state": "visible",
+        "eligible_retries": 11,
+        "new_bests": 8,
+        "contributors": 6,
+        "improvement_pct": 72.72727272727273
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1503,
+        "problem_name": "LeftPacked",
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
+      },
+      {
+        "homework": "HW5",
+        "problem_id": 1504,
+        "problem_name": "Phone Book",
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null
       }
     ],
     "by_phase": [
@@ -3640,7 +6256,11 @@
         "eligible_retries": null,
         "new_bests": null,
         "contributors": null,
-        "improvement_pct": null
+        "improvement_pct": null,
+        "phase_start_local": "2026-08-26T15:00:00+08:00",
+        "phase_end_local": "2026-08-27T21:35:48+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-08-27T21:35:48+08:00"
       },
       {
         "homework": "HW1",
@@ -3651,7 +6271,11 @@
         "eligible_retries": 76,
         "new_bests": 21,
         "contributors": 7,
-        "improvement_pct": 27.63157894736842
+        "improvement_pct": 27.63157894736842,
+        "phase_start_local": "2026-08-27T21:35:48+08:00",
+        "phase_end_local": "2026-08-29T04:11:36+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-08-29T04:11:36+08:00"
       },
       {
         "homework": "HW1",
@@ -3662,7 +6286,11 @@
         "eligible_retries": 133,
         "new_bests": 33,
         "contributors": 12,
-        "improvement_pct": 24.81203007518797
+        "improvement_pct": 24.81203007518797,
+        "phase_start_local": "2026-08-29T04:11:36+08:00",
+        "phase_end_local": "2026-08-30T10:47:24+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-08-30T10:47:24+08:00"
       },
       {
         "homework": "HW1",
@@ -3673,7 +6301,11 @@
         "eligible_retries": 42,
         "new_bests": 20,
         "contributors": 8,
-        "improvement_pct": 47.61904761904762
+        "improvement_pct": 47.61904761904762,
+        "phase_start_local": "2026-08-30T10:47:24+08:00",
+        "phase_end_local": "2026-08-31T17:23:12+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-08-31T17:23:12+08:00"
       },
       {
         "homework": "HW1",
@@ -3684,7 +6316,11 @@
         "eligible_retries": null,
         "new_bests": null,
         "contributors": null,
-        "improvement_pct": null
+        "improvement_pct": null,
+        "phase_start_local": "2026-08-31T17:23:12+08:00",
+        "phase_end_local": "2026-09-01T23:59:00+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-01T23:59:00+08:00"
       },
       {
         "homework": "HW2",
@@ -3695,7 +6331,11 @@
         "eligible_retries": 40,
         "new_bests": 21,
         "contributors": 8,
-        "improvement_pct": 52.5
+        "improvement_pct": 52.5,
+        "phase_start_local": "2026-09-03T12:00:00+08:00",
+        "phase_end_local": "2026-09-04T14:23:48+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-04T14:23:48+08:00"
       },
       {
         "homework": "HW2",
@@ -3706,7 +6346,11 @@
         "eligible_retries": 116,
         "new_bests": 42,
         "contributors": 13,
-        "improvement_pct": 36.206896551724135
+        "improvement_pct": 36.206896551724135,
+        "phase_start_local": "2026-09-04T14:23:48+08:00",
+        "phase_end_local": "2026-09-05T16:47:36+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-05T16:47:36+08:00"
       },
       {
         "homework": "HW2",
@@ -3717,7 +6361,11 @@
         "eligible_retries": 58,
         "new_bests": 27,
         "contributors": 7,
-        "improvement_pct": 46.55172413793103
+        "improvement_pct": 46.55172413793103,
+        "phase_start_local": "2026-09-05T16:47:36+08:00",
+        "phase_end_local": "2026-09-06T19:11:24+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-06T19:11:24+08:00"
       },
       {
         "homework": "HW2",
@@ -3728,7 +6376,11 @@
         "eligible_retries": 39,
         "new_bests": 21,
         "contributors": 8,
-        "improvement_pct": 53.84615384615385
+        "improvement_pct": 53.84615384615385,
+        "phase_start_local": "2026-09-06T19:11:24+08:00",
+        "phase_end_local": "2026-09-07T21:35:12+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-07T21:35:12+08:00"
       },
       {
         "homework": "HW2",
@@ -3739,7 +6391,11 @@
         "eligible_retries": 25,
         "new_bests": 14,
         "contributors": 8,
-        "improvement_pct": 56.0
+        "improvement_pct": 56.0,
+        "phase_start_local": "2026-09-07T21:35:12+08:00",
+        "phase_end_local": "2026-09-08T23:59:00+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-08T23:59:00+08:00"
       },
       {
         "homework": "HW3",
@@ -3750,7 +6406,11 @@
         "eligible_retries": 155,
         "new_bests": 39,
         "contributors": 12,
-        "improvement_pct": 25.161290322580644
+        "improvement_pct": 25.161290322580644,
+        "phase_start_local": "2026-09-11T11:00:00+08:00",
+        "phase_end_local": "2026-09-12T08:47:48+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-12T08:47:48+08:00"
       },
       {
         "homework": "HW3",
@@ -3761,7 +6421,11 @@
         "eligible_retries": 60,
         "new_bests": 33,
         "contributors": 13,
-        "improvement_pct": 55.0
+        "improvement_pct": 55.0,
+        "phase_start_local": "2026-09-12T08:47:48+08:00",
+        "phase_end_local": "2026-09-13T06:35:36+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-13T06:35:36+08:00"
       },
       {
         "homework": "HW3",
@@ -3772,7 +6436,11 @@
         "eligible_retries": 37,
         "new_bests": 13,
         "contributors": 7,
-        "improvement_pct": 35.13513513513514
+        "improvement_pct": 35.13513513513514,
+        "phase_start_local": "2026-09-13T06:35:36+08:00",
+        "phase_end_local": "2026-09-14T04:23:24+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-14T04:23:24+08:00"
       },
       {
         "homework": "HW3",
@@ -3783,7 +6451,11 @@
         "eligible_retries": 68,
         "new_bests": 22,
         "contributors": 9,
-        "improvement_pct": 32.35294117647059
+        "improvement_pct": 32.35294117647059,
+        "phase_start_local": "2026-09-14T04:23:24+08:00",
+        "phase_end_local": "2026-09-15T02:11:12+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-15T02:11:12+08:00"
       },
       {
         "homework": "HW3",
@@ -3794,62 +6466,161 @@
         "eligible_retries": 24,
         "new_bests": 12,
         "contributors": 6,
-        "improvement_pct": 50.0
+        "improvement_pct": 50.0,
+        "phase_start_local": "2026-09-15T02:11:12+08:00",
+        "phase_end_local": "2026-09-15T23:59:00+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-15T23:59:00+08:00"
       },
       {
         "homework": "HW4",
         "phase": 0,
         "label": "0–20%",
-        "phase_hours": 26.796666666666663,
+        "phase_hours": 41.196666666666665,
         "state": "suppressed",
         "eligible_retries": null,
         "new_bests": null,
         "contributors": null,
-        "improvement_pct": null
+        "improvement_pct": null,
+        "phase_start_local": "2026-09-24T10:00:00+08:00",
+        "phase_end_local": "2026-09-26T03:11:48+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-26T03:11:48+08:00"
       },
       {
         "homework": "HW4",
         "phase": 1,
         "label": "20–40%",
-        "phase_hours": 26.796666666666663,
-        "state": "suppressed",
-        "eligible_retries": null,
-        "new_bests": null,
-        "contributors": null,
-        "improvement_pct": null
+        "phase_hours": 41.196666666666665,
+        "state": "visible",
+        "eligible_retries": 159,
+        "new_bests": 41,
+        "contributors": 10,
+        "improvement_pct": 25.78616352201258,
+        "phase_start_local": "2026-09-26T03:11:48+08:00",
+        "phase_end_local": "2026-09-27T20:23:36+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-27T20:23:36+08:00"
       },
       {
         "homework": "HW4",
         "phase": 2,
         "label": "40–60%",
-        "phase_hours": 26.796666666666663,
+        "phase_hours": 41.196666666666665,
         "state": "visible",
-        "eligible_retries": 143,
-        "new_bests": 32,
-        "contributors": 8,
-        "improvement_pct": 22.377622377622377
+        "eligible_retries": 87,
+        "new_bests": 56,
+        "contributors": 15,
+        "improvement_pct": 64.36781609195403,
+        "phase_start_local": "2026-09-27T20:23:36+08:00",
+        "phase_end_local": "2026-09-29T13:35:24+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-09-29T13:35:24+08:00"
       },
       {
         "homework": "HW4",
         "phase": 3,
         "label": "60–80%",
-        "phase_hours": 26.796666666666663,
+        "phase_hours": 41.196666666666665,
         "state": "visible",
-        "eligible_retries": 64,
-        "new_bests": 40,
-        "contributors": 10,
-        "improvement_pct": 62.5
+        "eligible_retries": 36,
+        "new_bests": 21,
+        "contributors": 12,
+        "improvement_pct": 58.333333333333336,
+        "phase_start_local": "2026-09-29T13:35:24+08:00",
+        "phase_end_local": "2026-10-01T06:47:12+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-10-01T06:47:12+08:00"
       },
       {
         "homework": "HW4",
         "phase": 4,
         "label": "80–100%",
-        "phase_hours": 26.796666666666663,
+        "phase_hours": 41.196666666666665,
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null,
+        "phase_start_local": "2026-10-01T06:47:12+08:00",
+        "phase_end_local": "2026-10-02T23:59:00+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-10-02T23:59:00+08:00"
+      },
+      {
+        "homework": "HW5",
+        "phase": 0,
+        "label": "0–20%",
+        "phase_hours": 88.04666666666667,
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null,
+        "phase_start_local": "2026-09-30T15:45:00+08:00",
+        "phase_end_local": "2026-10-04T07:47:48+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-10-04T07:47:48+08:00"
+      },
+      {
+        "homework": "HW5",
+        "phase": 1,
+        "label": "20–40%",
+        "phase_hours": 88.04666666666667,
+        "state": "suppressed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null,
+        "phase_start_local": "2026-10-04T07:47:48+08:00",
+        "phase_end_local": "2026-10-07T23:50:36+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-10-07T23:50:36+08:00"
+      },
+      {
+        "homework": "HW5",
+        "phase": 2,
+        "label": "40–60%",
+        "phase_hours": 88.04666666666667,
         "state": "visible",
-        "eligible_retries": 59,
-        "new_bests": 35,
-        "contributors": 14,
-        "improvement_pct": 59.32203389830509
+        "eligible_retries": 29,
+        "new_bests": 24,
+        "contributors": 6,
+        "improvement_pct": 82.75862068965517,
+        "phase_start_local": "2026-10-07T23:50:36+08:00",
+        "phase_end_local": "2026-10-11T15:53:24+08:00",
+        "observation_status": "complete",
+        "observed_until_local": "2026-10-11T15:53:24+08:00"
+      },
+      {
+        "homework": "HW5",
+        "phase": 3,
+        "label": "60–80%",
+        "phase_hours": 88.04666666666667,
+        "state": "visible",
+        "eligible_retries": 31,
+        "new_bests": 18,
+        "contributors": 7,
+        "improvement_pct": 58.064516129032256,
+        "phase_start_local": "2026-10-11T15:53:24+08:00",
+        "phase_end_local": "2026-10-15T07:56:12+08:00",
+        "observation_status": "partial",
+        "observed_until_local": "2026-10-13T14:13:19.647089+08:00"
+      },
+      {
+        "homework": "HW5",
+        "phase": 4,
+        "label": "80–100%",
+        "phase_hours": 88.04666666666667,
+        "state": "not_observed",
+        "eligible_retries": null,
+        "new_bests": null,
+        "contributors": null,
+        "improvement_pct": null,
+        "phase_start_local": "2026-10-15T07:56:12+08:00",
+        "phase_end_local": "2026-10-18T23:59:00+08:00",
+        "observation_status": "not_observed",
+        "observed_until_local": null
       }
     ]
   },
@@ -3858,5 +6629,5 @@
     "excluded_roster_members": 1,
     "excluded_submission_events": 2
   },
-  "input_sha256": "cf188bd44a99f59a9b3effb585e9b5d0e551965519f13a5d0cbe9904efc0ee79"
+  "input_sha256": "3374b5b43147c944bd7b3aadd62b05af7db53fcbabaa2f25a0c6260b8da3731c"
 }

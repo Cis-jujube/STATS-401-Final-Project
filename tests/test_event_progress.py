@@ -53,6 +53,26 @@ class EventRules(unittest.TestCase):
         with self.assertRaises(ValueError):
             p.progress_events([self.row(0,20,status='P')],self.assignments)
 
+    def test_ongoing_phases_keep_partial_rates_and_future_nulls(self):
+        assignments = {aid:{'start_time':'2026-09-01 00:00:00', 'end_time':'2026-09-10 00:00:00'}
+                       for aid in p.HOMEWORKS}
+        assignments[189] = {'start_time':'2026-09-30 07:45:00', 'end_time':'2026-10-18 15:59:00'}
+        rows = []
+        for i in range(5):
+            rows.extend([
+                {**self.row(i*2,0,'2026-09-30 08:00:00',student=str(i)), 'assignment_id':189},
+                {**self.row(i*2+1,50,'2026-10-12 04:00:00',student=str(i)), 'assignment_id':189},
+            ])
+        event = p.event_progress(rows,assignments,{1:{'problem_name':'Synthetic'}},
+                                cutoff=p.timestamp('2026-10-13 06:13:19.647089'))
+        phases = [r for r in event['by_phase'] if r['homework']=='HW5']
+        self.assertEqual(phases[3]['observation_status'],'partial')
+        self.assertEqual((phases[3]['eligible_retries'],phases[3]['new_bests']),(5,5))
+        self.assertEqual(phases[4]['state'],'not_observed')
+        self.assertIsNone(phases[4]['observed_until_local'])
+        for field in ('eligible_retries','new_bests','contributors','improvement_pct'):
+            self.assertIsNone(phases[4][field])
+
     def test_gap_edges_go_to_next_left_inclusive_bin(self):
         rows = [self.row(0,0,'2026-08-26 00:00:00'),self.row(1,0,'2026-08-26 00:01:00'),
                 self.row(2,0,'2026-08-26 00:11:00'),self.row(3,0,'2026-08-26 01:11:00'),

@@ -2,6 +2,8 @@
 
 The 21 September 2026 local Course Pulse export is read only. No production database connection or modification is needed. The public page contains aggregates only. Names, account IDs, individual grades, message contents, code and linkage tables remain outside this repository.
 
+The 13 October homework refresh is separate from this extension. It updates homework Figures 01–04, 11 and 12, including the revised HW4 deadline and ongoing HW5, while preserving the Course Pulse aggregate input and its historical pre-exam comparison. HW4 and HW5 are excluded from the OJ metrics used here.
+
 ## Cohort and identity
 
 The 26 available Canvas grades previously joined to OJ are matched to unique Course Pulse student display names after case folding and removal of non-alphanumeric characters. Ambiguous or unmatched names fail closed. This is a name-based link, not institutional-ID verification. All 26 are enabled student accounts in the course scope; staff and demo usage are excluded. Fifteen eligible OJ roster members lack supplied grades. Results are conditional on this partial, non-random sample.

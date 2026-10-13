@@ -22,7 +22,8 @@
    reel locks to it (song below). Without music the reel still runs on the same grid.
    tests/test_routes.cjs checks that every shot stays inside its route's chapters. */
 (function () {
-  const F = window.Film;
+  const F = window.Film, N = F.routes.N;
+  const int = (n) => n.toLocaleString('en-US');
   const song = { match: /other\s*side\s*of\s*paradise/i, title: 'The Other Side of Paradise', bpm: 128, start: 1.1975 + 104 * 1.875 };
   F.reels = {
     core: {
@@ -30,30 +31,30 @@
       shots: [
         // ── A · build: out of the stars, the score everyone sees, and what is new ──
         { scene: 'open', from: 0.2, to: 1.0, beats: 6, cut: 'morph', blend: 5 },
-        { scene: 'open', from: 1.0, to: 4.9, beats: 6, warp: 'out', say: '2,807 submissions.' },
+        { scene: 'open', from: 1.0, to: 4.9, beats: 6, warp: 'out', say: `${int(N.submissions)} submissions.` },
         { scene: 'open', from: 4.9, to: 6.8, beats: 8, say: 'The score has a <em>past.</em>' },
-        { scene: 'open', from: 13.0, to: 15.4, beats: 6, warp: 'out', say: 'Now through <em>HW4.</em>' },
+        { scene: 'open', from: 13.0, to: 15.4, beats: 6, warp: 'out', say: `${N.latest} is <em>ongoing.</em>` },
         { scene: 'time', from: 0.2, to: 3.9, beats: 6, warp: 'out', cut: 'morph', blend: 3, say: 'When?' },
         // ── B · drive: Figure 01 ──
-        { scene: 'time', from: 8.5, to: 10.2, beats: 4, warp: 'out', cut: 'cut', say: '153 in four hours.' },
-        { scene: 'time', from: 16.2, to: 17.6, beats: 4, cut: 'cut', say: '979 <em>withheld.</em>' },
+        { scene: 'time', from: 8.5, to: 10.2, beats: 4, warp: 'out', cut: 'cut', say: `${int(N.peak.submissions)} in a visible four-hour cell.` },
+        { scene: 'time', from: 16.2, to: 17.6, beats: 4, cut: 'cut', say: `${int(N.withheld)} <em>withheld.</em>` },
         { scene: 'time', from: 23.6, to: 27.8, beats: 12, warp: 'inOut', cut: 'whip', say: 'Wind it into a <em>clock.</em>' },
         { scene: 'time', from: 31.4, to: 34.4, beats: 4, warp: 'out', say: 'Deadline nights.' },
         { scene: 'time', from: 40.4, to: 44.6, beats: 8, warp: 'out', say: 'Many people, or <em>many times?</em>' },
         // ── C · rising: Figures 03 and 11, one cut per bar ──
-        { scene: 'problems', from: 0.4, to: 3.0, beats: 4, warp: 'out', cut: 'cut', say: '31 problems. All near 100.' },
+        { scene: 'problems', from: 0.4, to: 3.0, beats: 4, warp: 'out', cut: 'cut', say: `${N.problems} problem slots. Best <em>observed.</em>` },
         { scene: 'problems', from: 7.6, to: 10.6, beats: 4, say: 'First tries: <em>far below.</em>' },
         { scene: 'problems', from: 14.6, to: 20.0, beats: 4, warp: 'inOut', say: 'Try. Again. Again.' },
-        { scene: 'problems', from: 30.4, to: 34.0, beats: 4, warp: 'out', cut: 'cut', say: '10 of 31 still <em>short.</em>' },
-        { scene: 'retries', from: 0.2, to: 4.8, beats: 4, warp: 'out', cut: 'morph', blend: 2, say: '1,222 retries.' },
+        { scene: 'problems', from: 30.4, to: 34.0, beats: 4, warp: 'out', cut: 'cut', say: `${N.gapCount} of ${N.problems} still <em>short.</em>` },
+        { scene: 'retries', from: 0.2, to: 4.8, beats: 4, warp: 'out', cut: 'morph', blend: 2, say: `${int(N.retries)} eligible retries.` },
         { scene: 'retries', from: 7.2, to: 10.2, beats: 4, warp: 'inOut' },
-        { scene: 'retries', from: 10.2, to: 14.2, beats: 8, cut: 'cut', say: '468 new <em>bests.</em>' },
+        { scene: 'retries', from: 10.2, to: 14.2, beats: 8, cut: 'cut', say: `${int(N.bests)} new <em>bests.</em>` },
         // ── D · peak: Figures 11, 12 and 06, then the numeral ──
-        { scene: 'retries', from: 16.0, to: 19.4, beats: 4, warp: 'out', say: 'Instant resubmits: <em>31.6%.</em>' },
+        { scene: 'retries', from: 16.0, to: 19.4, beats: 4, warp: 'out', say: `Under 1 min: <em>${N.instantRate.toFixed(1)}%.</em>` },
         { scene: 'retries', from: 24.4, to: 28.4, beats: 4, warp: 'out', cut: 'cut', say: 'Rates by homework and gap.' },
         { scene: 'retries', from: 52.2, to: 55.8, beats: 4, warp: 'out', cut: 'whip', say: 'Phase by phase.' },
         { scene: 'retries', from: 61.2, to: 65.2, beats: 4, warp: 'out', say: 'One scale, <em>0–100%.</em>' },
-        { scene: 'exam', from: 0.4, to: 5.0, beats: 2, warp: 'out', cut: 'whip', say: 'HW4 excluded.' },
+        { scene: 'exam', from: 0.4, to: 5.0, beats: 2, warp: 'out', cut: 'whip', say: `${N.postExam} excluded.` },
         { scene: 'exam', from: 18.2, to: 21.4, beats: 2, warp: 'out', cut: 'cut', say: 'ρ = −0.48.' },
         { scene: 'exam', from: 33.0, to: 36.4, beats: 2, warp: 'out', cut: 'cut', say: 'Checked three ways.' },
         { scene: 'exam', from: 36.4, to: 39.0, beats: 2, warp: 'out', say: 'Associations, <em>not effects.</em>' },
@@ -66,28 +67,28 @@
       shots: [
         // ── A · build ──
         { scene: 'open', from: 0.2, to: 1.0, beats: 6, cut: 'morph', blend: 5 },
-        { scene: 'open', from: 1.0, to: 4.9, beats: 6, warp: 'out', say: '2,807 submissions.' },
+        { scene: 'open', from: 1.0, to: 4.9, beats: 6, warp: 'out', say: `${int(N.submissions)} submissions.` },
         { scene: 'open', from: 4.9, to: 6.8, beats: 4, say: 'The score has a <em>past.</em>' },
-        { scene: 'open', from: 13.0, to: 15.0, beats: 4, warp: 'out', say: 'Now through <em>HW4.</em>' },
+        { scene: 'open', from: 13.0, to: 15.0, beats: 4, warp: 'out', say: `${N.latest} is <em>ongoing.</em>` },
         { scene: 'homeworks', from: 0.0, to: 3.8, beats: 6, warp: 'out', cut: 'morph', blend: 3, say: 'One dot, one submission.' },
-        { scene: 'homeworks', from: 8.6, to: 10.4, beats: 6, say: 'Four homeworks.' },
+        { scene: 'homeworks', from: 8.6, to: 10.4, beats: 6, say: `${N.homeworkCount} homeworks. ${N.latest} ongoing.` },
         // ── B · drive: when does the work happen ──
         { scene: 'time', from: 0.2, to: 3.9, beats: 4, warp: 'out', cut: 'morph', blend: 3, say: 'When?' },
-        { scene: 'time', from: 8.5, to: 10.2, beats: 4, warp: 'out', cut: 'cut', say: '153 in four hours.' },
-        { scene: 'time', from: 16.2, to: 17.6, beats: 4, cut: 'cut', say: '979 <em>withheld.</em>' },
+        { scene: 'time', from: 8.5, to: 10.2, beats: 4, warp: 'out', cut: 'cut', say: `${int(N.peak.submissions)} in a visible four-hour cell.` },
+        { scene: 'time', from: 16.2, to: 17.6, beats: 4, cut: 'cut', say: `${int(N.withheld)} <em>withheld.</em>` },
         { scene: 'time', from: 23.6, to: 27.8, beats: 12, warp: 'inOut', cut: 'whip', say: 'Wind it into a <em>clock.</em>' },
         { scene: 'time', from: 40.4, to: 44.6, beats: 8, warp: 'out', say: 'Many people, or <em>many times?</em>' },
         // ── C · rising: one cut per bar ──
-        { scene: 'problems', from: 0.4, to: 3.0, beats: 4, warp: 'out', cut: 'cut', say: '31 problems. All near 100.' },
+        { scene: 'problems', from: 0.4, to: 3.0, beats: 4, warp: 'out', cut: 'cut', say: `${N.problems} problem slots. Best <em>observed.</em>` },
         { scene: 'problems', from: 7.6, to: 10.6, beats: 4, say: 'First tries: <em>far below.</em>' },
         { scene: 'problems', from: 14.6, to: 20.0, beats: 4, warp: 'inOut', say: 'Try. Again. Again.' },
-        { scene: 'problems', from: 40.4, to: 43.4, beats: 4, warp: 'out', cut: 'cut', say: '37.9 → <em>100.</em>' },
-        { scene: 'attempts', from: 0.0, to: 3.8, beats: 4, warp: 'out', cut: 'morph', blend: 2, say: '1,131 first tries.' },
+        { scene: 'problems', from: 40.4, to: 43.4, beats: 4, warp: 'out', cut: 'cut', say: `${N.lowestFirst.first.toFixed(1)} → <em>${N.lowestFirst.best.toFixed(1)}.</em>` },
+        { scene: 'attempts', from: 0.0, to: 3.8, beats: 4, warp: 'out', cut: 'morph', blend: 2, say: `${int(N.firstTries)} first scored tries.` },
         { scene: 'attempts', from: 26.8, to: 32.4, beats: 4, warp: 'inOut', cut: 'whip', say: 'The cohort thins.' },
-        { scene: 'retries', from: 0.2, to: 4.8, beats: 4, warp: 'out', cut: 'morph', blend: 2, say: '1,222 retries.' },
+        { scene: 'retries', from: 0.2, to: 4.8, beats: 4, warp: 'out', cut: 'morph', blend: 2, say: `${int(N.retries)} eligible retries.` },
         { scene: 'retries', from: 7.2, to: 10.2, beats: 4, warp: 'inOut' },
         // ── D · peak ──
-        { scene: 'retries', from: 10.2, to: 14.2, beats: 6, cut: 'cut', say: '468 new <em>bests.</em>' },
+        { scene: 'retries', from: 10.2, to: 14.2, beats: 6, cut: 'cut', say: `${int(N.bests)} new <em>bests.</em>` },
         { scene: 'retries', from: 35.2, to: 40.0, beats: 4, warp: 'out', cut: 'cut', say: 'Some problems become <em>loops.</em>' },
         { scene: 'retries', from: 61.2, to: 65.2, beats: 4, warp: 'out', cut: 'whip', say: 'Progress, phase by phase.' },
         { scene: 'exam', from: 10.2, to: 13.2, beats: 2, warp: 'out', cut: 'whip', say: '26 exam scores.' },

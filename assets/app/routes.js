@@ -26,7 +26,7 @@
 
   // ── public aggregates behind the persistent captions ────────────────
   const hw = D.homework, ev = hw.event_progress, mid = D.midterm, pl = D.platform;
-  const A = hw.assignments, HW4 = A[A.length - 1];
+  const A = hw.assignments, HW4 = A.find((a) => a.homework === 'HW4'), latest = A[A.length - 1];
   const snap = bj(hw.snapshot_utc.replace(' ', 'T') + 'Z');
   const SNAP = `${snap.getUTCDate()} ${MON[snap.getUTCMonth()]} ${snap.getUTCFullYear()}`;
   const RETRIES = ev.by_homework.reduce((s, r) => s + r.eligible_retries, 0);
@@ -36,18 +36,43 @@
   const postExam = A.filter((a) => Date.parse(a.end_local) >= examAt).map((a) => a.homework);
   const range = (list) => (list.length > 1 ? `${list[0]}–${list[list.length - 1]}` : list[0]);
   const PROBLEMS = A.reduce((s, a) => s + a.problems, 0);
+  const ongoing = A.filter((a) => a.observation_status === 'ongoing').map((a) => a.homework);
+  const ongoingNote = ongoing.length ? ` · ${ongoing.join(', ')} ongoing` : '';
+  const progress = hw.score_progression;
+  const gapCount = progress.filter((r) => r.best - r.best3 > 10).length;
+  const largestGap = progress.slice().sort((a, b) => (b.best - b.best3) - (a.best - a.best3))[0];
+  const lowestFirst = progress.slice().sort((a, b) => a.first - b.first)[0];
+  const firstMin = Math.min(...progress.map((r) => r.first)), firstMax = Math.max(...progress.map((r) => r.first));
+  const visibleCells = hw.calendar.filter((c) => c.state === 'visible' && c.submissions > 0);
+  const peak = visibleCells.slice().sort((a, b) => b.submissions - a.submissions)[0];
+  const repeatPeak = visibleCells.slice().sort((a, b) => b.submissions / b.contributors - a.submissions / a.contributors)[0];
+  const withheld = hw.window_submissions - visibleCells.reduce((s, c) => s + c.submissions, 0);
+  const medians = A.map((a) => a.all_attempts.median), tails = A.map((a) => a.all_attempts.max);
+  const maxTail = A.slice().sort((a, b) => b.all_attempts.max - a.all_attempts.max)[0];
+  const eligibility = ev.eligibility_counts;
+  const hw4Retry = ev.by_homework.find((r) => r.homework === 'HW4');
+  const phaseHours = ev.by_phase.map((r) => r.phase_hours);
+  const phaseRange = `${p1(Math.min(...phaseHours))}–${p1(Math.max(...phaseHours))}`;
+  const sampleStart = bj(A.reduce((a, b) => Date.parse(a.start_local) < Date.parse(b.start_local) ? a : b).start_local);
+  const sampleEnd = bj(hw.observation_cutoff_local || new Date(snap.getTime() - BJ).toISOString());
+  const problemName = (r) => r.problem_name.replace(/^\d+s\d+HW\d-/, '').replace(/^HW\d-/, '').replace(/^Exercise[\d.]+[- ]/, '').replace(/([a-z])([A-Z])/g, '$1 $2');
+  const gapCopy = (r) => `${r.label}: <b>${p1(r.improvement_pct)}%</b> (${int(r.new_bests)} of ${int(r.eligible_retries)})`;
+  const observedCopy = ongoing.length ? `${ongoing.join(', ')} is ongoing: its totals and best scores are observations so far.` : 'All configured windows have closed.';
   const track0 = bj(pl.tracking_started_at), cut = bj(pl.cutoff_utc);
   const N = {
     snap: SNAP, hwRange: range(A.map((a) => a.homework)), submissions: hw.window_submissions, submitters: hw.window_submitters,
-    problems: PROBLEMS, hw4: HW4.submissions, hw4Problems: HW4.problems, hw4Name: HW4.homework,
+    problems: PROBLEMS, hw4: HW4?.submissions, hw4Problems: HW4?.problems, hw4Name: HW4?.homework,
+    latest: latest.homework, latestSubmissions: latest.submissions, latestProblems: latest.problems,
+    homeworkCount: A.length, ongoing, withheld, firstTries: eligibility.first_scores, gapCount,
+    peak, lowestFirst, instantRate: ev.by_gap[0].improvement_pct,
     retries: RETRIES, bests: BESTS, rate: (100 * BESTS) / RETRIES,
     preExam: range(preExam), postExam: postExam.join(', '), grades: mid.matched, eligible: mid.eligible_roster,
     recorded: pl.recorded_users, resource: pl.resource_users,
     track: track0.getUTCMonth() === cut.getUTCMonth() ? `${track0.getUTCDate()}–${dayMon(cut)}` : `${dayMon(track0)}–${dayMon(cut)}`,
   };
   const COHORT = {
-    homework: `${N.hwRange} · ${N.snap} snapshot · ${N.submitters} submitters`,
-    retry: `Eligible retry events · ${int(N.bests)} / ${int(N.retries)} set a new best`,
+    homework: `${N.hwRange} · ${N.snap} snapshot · ${N.submitters} submitters${ongoingNote}`,
+    retry: `Eligible retry events · ${int(N.bests)} / ${int(N.retries)} set a new best${ongoingNote}`,
     exam: `Pre-exam ${N.preExam} · ${N.grades} matched grades · ${N.postExam} excluded`,
     platform: `Course Pulse ${N.track} · ${N.grades} matched grades · ${N.recorded} with recorded use`,
   };
@@ -68,55 +93,55 @@
     opening: (route) => [
       { at: 0, kicker: '', title: '', noStop: true },
       { at: 3.6, kicker: 'CS201 · STATS 401 final project', title: 'The score <em>has a past.</em>',
-        body: `Almost every CS201 homework problem ends with a mean best score near <b>100</b>. We followed <span class="num">${int(N.submissions)}</span> submissions to see what that number hides.`,
+        body: `We followed <span class="num">${int(N.submissions)}</span> in-window CS201 submissions to see what a problem’s best observed score hides. ${observedCopy}`,
         credit: `Zaozao Wang &amp; Zhengxiang Liu<br>Homework snapshot · ${N.snap} · Beijing time` },
-      { at: 13, kicker: 'New in this snapshot', title: `Now through <em>${N.hw4Name}.</em>`,
-        body: `Expanded to ${N.hw4Name}: <span class="num">${int(N.hw4)}</span> submissions and <b>${word(N.hw4Problems)} additional problem slots</b>. The updated snapshot also supports two new views of retry progress (Figures 11 and 12).`,
+      { at: 13, kicker: 'New in this snapshot', title: `Now through <em>${N.latest}.</em>`,
+        body: `${N.latest} adds <span class="num">${int(N.latestSubmissions)}</span> submissions across <b>${word(N.latestProblems)} problem slots</b>, observed so far. HW4 now uses its revised <b>${dayMon(bj(HW4.end_local))} deadline</b>: ${int(N.hw4)} submissions. ${observedCopy}`,
         credit: route === 'core' ? 'Core route · five essential figures: 01 · 03 · 11 · 12 · 06' : 'Showcase route · all twelve figures, 01–12' },
     ],
     sample: [
-      { at: 0, title: `Four homeworks. <em>${int(N.submissions)}</em> submissions.`,
-        body: `The same dots, sorted into their homework windows. <b>${N.submitters} students</b> submitted to <b>${N.problems} problem slots</b> between 26 Aug and 29 Sep 2026. ${N.hw4Name}, new in this snapshot, adds <span class="num">${int(N.hw4)}</span>.` },
-      { at: 8, title: 'Twelve to fifteen submissions per homework.',
-        body: 'The median student sent <span class="num">12.5–15</span> submissions per homework. The most persistent sent <b>141</b> to HW4’s eight problems. Counts are submissions, not effort.' },
+      { at: 0, title: `${word(N.homeworkCount)[0].toUpperCase() + word(N.homeworkCount).slice(1)} homeworks. <em>${int(N.submissions)}</em> submissions.`,
+        body: `Dots represent the homework-window totals. <b>${N.submitters} students</b> submitted to <b>${N.problems} problem slots</b> from ${dayMon(sampleStart)} through ${dayMon(sampleEnd)} ${sampleEnd.getUTCFullYear()}. ${observedCopy}` },
+      { at: 8, title: 'Submissions per homework vary.',
+        body: `Medians range from <span class="num">${p1(Math.min(...medians))} to ${p1(Math.max(...medians))}</span> submissions per student. The longest tail is <b>${maxTail.all_attempts.max}</b> in ${maxTail.homework}. Counts are submissions, not effort. ${observedCopy}` },
     ],
     f01: [
       { at: 0, title: 'When does the work <em>happen?</em>',
         body: 'Every submission, dropped into the four-hour window when it arrived. Each column is one day; time of day runs downward.' },
-      { at: 8, title: 'A Saturday afternoon, and deadline nights.',
-        body: 'The busiest visible window: <b>Sat 29 Aug, 12:00–16:00</b>, <span class="num">153</span> submissions from just <b>12 students</b>. Every deadline night (20:00–24:00) drew another <span class="num">46–82</span>.' },
-      { at: 16, title: '<em>979</em> submissions sit in withheld cells.',
-        body: 'Cells with fewer than five students are withheld for privacy. Their dots drift aside: counted, never placed. So the overall four-hour peak is unknown.' },
+      { at: 8, title: 'A visible burst of <em>repeated submissions.</em>',
+        body: `The busiest visible window: <b>${dayMon(new Date(peak.date + 'T00:00:00Z'))}, ${peak.hour}:00–${peak.hour + 4}:00</b>, <span class="num">${int(peak.submissions)}</span> submissions from <b>${peak.contributors} students</b>. This is the largest published cell; suppressed cells may conceal another peak.` },
+      { at: 16, title: `<em>${int(withheld)}</em> submissions sit in withheld cells.`,
+        body: 'Cells with fewer than five students are withheld for privacy. Their dots drift aside: counted, never placed. Overlapping HW4 / HW5 windows are pooled, with neutral marks; the Lens cannot divide their counts.' },
       { at: 23, title: 'Wind the calendar into a <em>clock.</em>',
-        body: 'Each ring is one day, spiralling out from 26 Aug. The angle is the time of day, so every 23:59 deadline lands at the top.' },
+        body: `Each ring is one observed day, spiralling out from ${dayMon(sampleStart)}. The angle is the time of day. The chart stops at the snapshot; ongoing homework deadlines can lie beyond it.` },
       { at: 31, title: 'Read it as heat.',
-        body: 'Colour shows submissions per window. Hatched cells are withheld, not zero. Pause to hover any window, or switch the measure to students or submissions per student.' },
+        body: 'Colour shows submissions per window. Hatched cells are withheld; dotted outlines are not yet observed. Neither means zero. Pause to hover a window or change the measure. HW5’s last observed day is partial.' },
       { at: 40, title: 'Many students, or a few <em>many times?</em>',
-        body: 'Each bubble is one visible four-hour cell: across, how many students submitted; up, submissions per active student; area, submissions. The Saturday peak is <b>12 students × 12.75</b>. An HW3 cell reached <b>14.3</b> each from only six. Withheld cells cannot be placed, and none of this is study time.' },
+        body: `Each bubble is a visible four-hour cell: across, students; up, submissions per active student; area, submissions. The highest repeat intensity is <b>${p1(repeatPeak.submissions / repeatPeak.contributors)}</b> per student. Neutral marks pool overlapping homework windows. Withheld cells cannot be placed; clock time is not study time.` },
     ],
     f02: [
-      { at: 0, title: '<em>1,131</em> first tries. Then it thins out.',
-        body: 'Every submission again, stacked by which try it was on its problem: <span class="num">1,131</span> first tries, then fewer second and third tries and a long tail. Later tries reached by fewer than five students sit in withheld cells.' },
+      { at: 0, title: `<em>${int(N.firstTries)}</em> first tries. Then it thins out.`,
+        body: `Submissions stacked by their attempt number on the problem: <span class="num">${int(N.firstTries)}</span> first scored tries, then later attempts. Later tries reached by fewer than five students are withheld. ${observedCopy}` },
       { at: 9, title: 'Similar medians, <em>very different</em> tails.',
-        body: 'Submissions per student in each homework window, log scale. Medians sit between <span class="num">12.5</span> and <span class="num">15</span>, about two tries per problem. The longest tails reach <span class="num">62–141</span>. Counts are submissions, not effort.' },
+        body: `Submissions per student in each homework window, log scale. Medians range from <span class="num">${p1(Math.min(...medians))}</span> to <span class="num">${p1(Math.max(...medians))}</span>; maxima range from ${Math.min(...tails)} to ${Math.max(...tails)}. Counts are submissions, not effort. ${observedCopy}` },
       { at: 18, title: 'Some keep going after full marks.',
-        body: '<span class="num">441</span> submissions came after a problem was already at 100. Stop counting at each first full score and HW3’s longest tail shrinks from <b>108 to 47</b>.' },
+        body: `<span class="num">${int(eligibility.after_full_credit)}</span> submissions came after a problem was already at 100. Stop counting at each first full score to compare the shorter distributions. ${observedCopy}` },
     ],
     f03: [
-      { at: 0, title: 'Every problem ends near <em>100.</em>',
-        body: `Mean best score for each of the <b>${N.problems} problem slots</b>, averaged over the students who attempted it. This is what the gradebook sees.` },
+      { at: 0, title: 'What does the <em>best observed</em> score hide?',
+        body: `Mean best score observed for each of the <b>${N.problems} problem slots</b>, averaged over its attempters. ${observedCopy}` },
       { at: 7, title: 'First tries start far below.',
-        body: 'The same students’ mean <b>first</b> submission ranged from <span class="num">37.9</span> to <span class="num">90.0</span>. The thin line marks where each problem ends.' },
+        body: `The same attempters’ mean <b>first</b> submission ranges from <span class="num">${p1(firstMin)}</span> to <span class="num">${p1(firstMax)}</span>. The thin line marks each problem’s best observed mean.` },
       { at: 14, title: 'A second and third try close most of the gap…',
         body: 'Best through two, then through three: the highest score each student had reached so far, averaged. A cumulative best can only rise; it is not the score of the actual second or third try.' },
-      { at: 22, title: '…but <em>10 of 31</em> still trail by more than 10 points.',
+      { at: 22, title: `…but <em>${gapCount} of ${N.problems}</em> still trail by more than 10 points.`,
         body: 'After three tries these problem slots remain more than 10 points short of their mean best observed. The orange stretch is the distance still to climb.' },
       { at: 30, title: 'The gap that the <em>100</em> conceals.',
-        body: 'All 31 problem slots, sorted by the gap left after three tries: ○ first try, ● best through three, ▮ best observed, for the same attempters in each row. EvenOrOdd still trails by <b>33.8 points</b>. A cumulative best is not the actual third score, nor a causal learning gain.' },
+        body: `All ${N.problems} slots, sorted by gap after three tries: ○ first, ● best through three, ▮ best observed, for the same attempters. ${problemName(largestGap)} trails by <b>${p1(largestGap.best - largestGap.best3)} points</b>. Cumulative best is not the actual third score or a causal gain. ${observedCopy}` },
     ],
     f03more: [
-      { at: 40, title: 'TicTacToe: <em>37.9 → 100.</em>',
-        body: 'HW3’s TicTacToe had the lowest mean first try of all 31 problem slots, yet every one of its 39 attempters eventually reached full marks.' },
+      { at: 40, title: `${problemName(lowestFirst)}: <em>${p1(lowestFirst.first)} → ${p1(lowestFirst.best)}.</em>`,
+        body: `${lowestFirst.homework}’s ${problemName(lowestFirst)} has the lowest mean first try among ${N.problems} slots. Its ${lowestFirst.n} attempters’ best observed mean is ${p1(lowestFirst.best)}. Best observed need not be the final outcome for ongoing homework.` },
       { at: 47, title: 'Sort, filter, follow one.',
         body: 'Now sorted by total gain. Pause to change the stage or sort, use the Lens for one homework, or <b>click a problem</b> to follow it into Figure 11’s problem view.' },
     ],
@@ -128,29 +153,29 @@
     ],
     f11: [
       { at: 0, title: `Of ${int(N.submissions)} submissions, <em>${int(N.retries)}</em> were eligible retries.`,
-        body: 'First tries set each baseline (<span class="num">1,131</span>). <span class="num">441</span> came after full marks and <span class="num">13</span> hit an internal judge error. The rest were retries made while the best was still below 100.' },
+        body: `First scored tries set baselines (<span class="num">${int(eligibility.first_scores)}</span>). <span class="num">${int(eligibility.after_full_credit)}</span> came after full marks; <span class="num">${int(eligibility.internal_errors)}</span> hit a judge error. The rest are eligible retries made below 100. ${observedCopy}` },
       { at: 7, title: `<em>${int(N.bests)}</em> of them set a new best.`,
         body: `A new best strictly beats every earlier score on that problem. Each lit square is one such retry event: <span class="num">${p1(N.rate)}%</span> of eligible retries. Events, not students: one student can contribute many.` },
-      { at: 15.5, title: 'Instant resubmits set new bests less often.',
-        body: 'Retries sent within a minute of the previous try: <b>31.6%</b> (179 of 567). After 1–10 minutes: <b>44.2%</b> (251 of 568). Gaps are clock time, not study time, and longer gaps are rare.' },
+      { at: 15.5, title: 'Read retry rates with <em>elapsed gaps.</em>',
+        body: `${gapCopy(ev.by_gap[0])}. ${gapCopy(ev.by_gap[1])}. Gaps are clock time, not study time. These groups describe observed events; they do not estimate an effect of waiting.` },
       { at: 24, title: 'Rates differ by homework and by gap.',
-        body: 'New bests ÷ eligible retries, with S distinct students. HW4 adds <b>129 of 306</b> (42.2%). The long-gap groups have small denominators (8 retries at 24 h or more), so read the counts with the rates. Observed differences, not effects of waiting.' },
+        body: `New bests ÷ eligible retries, with S distinct students. HW4: <b>${hw4Retry.new_bests}/${hw4Retry.eligible_retries}</b> (${p1(hw4Retry.improvement_pct)}%). ${observedCopy} Read every denominator; observed differences do not estimate effects of waiting.` },
     ],
     f11more: [
       { at: 34, title: 'Some problems become <em>loops.</em>',
-        body: 'Each circle is a problem: further right, more eligible retries; higher, more of them set a new best. EvenOrOdd drew <b>130</b> retries at 23%. Triangle Sides had 16, and 81% set a new best.' },
+        body: 'Each visible circle is a problem: further right, more eligible retries; higher, more of them set a new best. Area shows distinct contributors. A high rate with few retries carries a different amount of evidence from a dense group.' },
       { at: 43, title: 'Pick a problem to follow.',
         body: 'Hover any circle for its counts; click to select it. A problem picked in Figure 03 stays ringed. Retries are repeated events from the same students, not independent trials.' },
     ],
     f12: (from) => [
       { at: from, title: 'Where in the window does progress <em>happen?</em>',
-        body: 'Each homework window cut into five equal-duration phases. Bars count eligible retries; the lit part set a new best. In HW4 the middle phase held the most retries (<span class="num">143</span>), but 22% of them set a new best.' },
+        body: `Each configured window has five equal-duration phases. Bars count eligible retries; the lit part set a new best. HW4 uses its revised ${dayMon(bj(HW4.end_local))} deadline. ${observedCopy} Partial phases stop at the snapshot; future phases are not observed.` },
       { at: 61, title: 'Rates by window phase, on <em>one scale.</em>',
-        body: 'Each cell: new bests ÷ eligible retries, with S students; colour runs 0–100%. HW4’s last two phases reached <b>62.5%</b> (40/64) and <b>59.3%</b> (35/59). Hatched cells are withheld, not zero. A phase lasts 22–31 hours depending on the homework; no deadline effect is estimated.' },
+        body: `Each cell: new bests ÷ eligible retries, with S students, on 0–100%. Phases last ${phaseRange} hours across homeworks. Hatched = withheld; dashed = not yet observed; * = partially observed at snapshot. None means zero. ${observedCopy} No deadline effect is estimated.` },
     ],
     bridge: [
       { at: 0, kicker: 'Sample switch', title: 'A different sample for the <em>exam</em> question.',
-        body: `These homework views describe submission events through ${N.hw4Name}. For the exam question, we switch to <b>${N.grades} supplied grades</b> and pre-exam <b>${N.preExam}</b>; ${N.postExam} is excluded. The retry figures are not linked to grades.` },
+        body: `Homework views describe events through ${N.latest} at this snapshot. For the exam question, we switch to <b>${N.grades} supplied grades</b> and pre-exam <b>${N.preExam}</b>; ${N.postExam} are excluded. The retry figures are not linked to grades.` },
     ],
     f05: [
       { at: 9, title: `${N.grades} supplied grades, <em>one exam.</em>`,
@@ -184,8 +209,8 @@
       { at: 0, kicker: '', title: '', noStop: true },
       { at: 3.6, kicker: 'What we found', title: 'What the <em>100</em> was hiding.',
         body: route === 'core'
-          ? `Five figures: ${int(N.submissions)} submissions through ${N.hw4Name}, and ${N.grades} pre-exam exam grades.`
-          : `Twelve figures: ${int(N.submissions)} submissions through ${N.hw4Name}, ${N.grades} supplied exam grades and a partial Course Pulse window.` },
+          ? `Five figures: ${int(N.submissions)} submissions through ${N.latest}, observed at ${N.snap}, and ${N.grades} historical exam grades. ${observedCopy}`
+          : `Twelve figures: ${int(N.submissions)} submissions through ${N.latest}, ${N.grades} historical exam grades and a partial Course Pulse window. ${observedCopy}` },
       { at: 15.6, kicker: 'The score has a past', title: 'Now you have <em>seen it.</em>',
         body: 'Replay any figure, or open its evidence: methods, tables, downloads and the aggregate data behind every frame.',
         credit: `Zaozao Wang · data acquisition, cleaning, analysis<br>Zhengxiang Liu · visualization design, D3 implementation<br>STATS 401 · CS201 OJ snapshot ${N.snap} · aggregates only` },
@@ -196,7 +221,7 @@
   const CARDS = {
     core: [
       { figs: ['01', '03'], h: 'One score, many roads.',
-        b: 'A visible burst can be 12 students sending 153 submissions. After three tries, 10 of 31 problem slots still trailed their best observed mean by more than 10 points.' },
+        b: `The largest visible cell contains ${int(peak.submissions)} submissions from ${peak.contributors} students. After three tries, ${gapCount} of ${N.problems} problem slots trail their best observed mean by more than 10 points. ${observedCopy}` },
       { figs: ['11', '12'], h: 'Retries progress unevenly.',
         b: `${int(N.bests)} of ${int(N.retries)} eligible retries set a new best (${p1(N.rate)}%). Rates differ by homework, elapsed gap and window phase; these are events, not students.` },
       { figs: ['06'], h: 'Timing travels with the exam.',
@@ -204,7 +229,7 @@
     ],
     showcase: [
       { figs: ['01', '02', '03', '04'], h: 'Bursts, tails and gaps.',
-        b: 'A visible burst of 153 submissions from 12 students; medians of 12.5–15 submissions with tails to 141; 10 of 31 problem slots still trailing after three tries; later-try means from a changing cohort.' },
+        b: `The largest visible cell: ${int(peak.submissions)} submissions from ${peak.contributors} students. ${gapCount} of ${N.problems} slots still trail after three tries; actual later-try means use changing cohorts. ${observedCopy}` },
       { figs: ['11', '12'], h: 'Retries progress unevenly.',
         b: `${int(N.bests)} of ${int(N.retries)} eligible retries set a new best (${p1(N.rate)}%), differing by homework, gap and window phase. Events, not students.` },
       { figs: ['05', '06', '07'], h: 'A partial exam cohort.',

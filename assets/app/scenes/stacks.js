@@ -20,15 +20,15 @@
       cols.append('text').attr('class', 'meta note');
       cols.append('text').attr('class', 'meta2 note');
       cols.append('text').attr('class', 'median mono').style('font-size', '11px').attr('fill', F.ink2);
-      // the refresh: the newest homework window is new in this snapshot
+      // The newest homework is explicitly provisional while its window is still open.
       cols.filter((d, i) => i === A.length - 1).append('text').attr('class', 'new mono').style('font-size', '10px').style('letter-spacing', '.14em')
-        .attr('fill', (d) => F.color[d.homework]).text('NEW · 30 SEP SNAPSHOT');
+        .attr('fill', (d) => F.color[d.homework]);
       cols
         .on('pointerenter', (ev, d) => F.tip.show(F.tip.html({
           kicker: d.homework, color: F.color[d.homework], title: `${fmtDay(new Date(d.start_local))} – ${fmtDay(new Date(d.end_local))}`,
           rows: [['In-window submissions', F.fmt.int(d.submissions)], ['Outside the window', d.outside_window], ['Students submitting', d.all_attempts.n], ['Problems', d.problems],
             ['Median per student', d.all_attempts.median], ['Middle half', `${d.all_attempts.q1}–${d.all_attempts.q3}`], ['Range', `${d.all_attempts.min}–${d.all_attempts.max}`]],
-          note: 'Counts are submissions, not study time or effort.' }), ev))
+          note: `${F.ongoing(d.homework) ? 'Ongoing at snapshot: these are observations so far. ' : ''}Counts are submissions, not study time or effort.` }), ev))
         .on('pointermove', (ev) => F.tip.move(ev))
         .on('pointerleave', () => F.tip.hide())
         .on('click', (ev, d) => F.set('lens', F.state.lens === d.homework ? null : d.homework));
@@ -46,9 +46,9 @@
         const nar = F.layout.narrow;
         sel.select('.count').attr('x', x).attr('y', top - (nar ? 10 : 16)).style('font-size', nar ? '24px' : '34px').attr('opacity', F.seg(t, 2.2, 3)).text(F.fmt.int(Math.round(d.submissions * F.seg(t, 1.2 + h * 0.15, 4.2 + h * 0.15, F.ease.out))));
         sel.select('.hw').attr('y', g.base + (nar ? 22 : 26));
-        sel.select('.meta').attr('x', x).attr('y', g.base + (nar ? 37 : 44)).style('font-size', nar ? '10px' : null).attr('opacity', pIn).text(`${fmtDay(new Date(d.start_local))} – ${fmtDay(new Date(d.end_local))}`);
+        sel.select('.meta').attr('x', x).attr('y', g.base + (nar ? 37 : 44)).style('font-size', nar ? '8px' : '10px').attr('opacity', pIn).text(nar ? `${fmtDay(new Date(d.end_local))} due` : `${fmtDay(new Date(d.start_local))} – ${fmtDay(new Date(d.end_local))}`);
         sel.select('.meta2').attr('x', x).attr('y', g.base + 60).attr('display', nar ? 'none' : null).attr('opacity', pIn).text(`${d.problems} problems · ${d.all_attempts.n} students`);
-        sel.select('.new').attr('x', x).attr('y', g.base + (nar ? 50 : 78)).attr('opacity', F.seg(t, 3.4, 4.4)).style('font-size', nar ? '8px' : '10px').text(nar ? 'NEW' : 'NEW · 30 SEP SNAPSHOT');
+        sel.select('.new').attr('x', x).attr('y', g.base + (nar ? 50 : 78)).attr('opacity', F.seg(t, 3.4, 4.4)).style('font-size', nar ? '8px' : '10px').text(F.ongoing(d.homework) ? 'ONGOING' : 'OBSERVED');
         const pm = F.seg(t, 8.4 + h * 0.2, 9.4 + h * 0.2, F.ease.out);
         sel.select('.median').attr('x', x).attr('y', top - (nar ? 40 : 58)).style('font-size', nar ? '9.5px' : '11px').attr('opacity', pm)
           .text(nar ? `max ${Math.round(d.all_attempts.max * pm)}` : `median ${d.all_attempts.median} · max ${Math.round(d.all_attempts.max * pm)}`);

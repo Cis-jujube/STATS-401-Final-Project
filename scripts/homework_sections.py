@@ -1,11 +1,26 @@
 """Data-driven homework captions and accessible tables for the analysis page."""
 from html import escape
 
-from render_figures import snapshot_label
+from render_figures import snapshot_label, observation_note
+
+
+def status_label(value):
+    """Translate public processing labels into readable table descriptions."""
+    return {'complete': 'Complete', 'partial': 'Partially observed',
+            'not_observed': 'Not yet observed', 'ongoing': 'Ongoing',
+            'not_open': 'Not yet open', 'visible': 'Visible',
+            'suppressed': 'Withheld', 'inactive': 'No configured window',
+            'through snapshot': 'Observed through snapshot'}.get(value, value)
 
 
 def sections(data, table, figure):
     assignments = data['assignments']
+    scope = f"{assignments[0]['homework']}–{assignments[-1]['homework']}"
+    incomplete = observation_note(data)
+    hw4 = next(a for a in assignments if a['homework'] == 'HW4')
+    deadline_refresh = (f"HW4 is recalculated using the current configured deadline "
+                        f"{hw4['end_local'][:16].replace('T', ' ')} Beijing: "
+                        f"{hw4['submissions']} in-window submissions from {hw4['all_attempts']['n']} submitters.")
     scores = sorted(data['score_progression'], key=lambda r: -(r['best']-r['best3']))
     visible = [r for r in data['calendar'] if r['state'] == 'visible' and r['submissions'] > 0]
     peak = max(visible, key=lambda r: r['submissions'])
@@ -16,9 +31,11 @@ def sections(data, table, figure):
 The official grading interpretation of this field still needs confirmation. These records motivate a process-focused analysis.</p>
 <p>The current homework snapshot retains <strong>{data['window_submissions']:,} submissions from {data['window_submitters']} students</strong>,
 including {data['partial_scores_in_window']} partial-credit submissions. It covers {len(assignments)} homeworks and {len(scores)} problem slots.</p>
-<p>{snapshot_label(data)}. Midterm and Course Pulse figures retain their separate, pre-exam cohorts. HW4 occurred after the exam and is excluded from those associations.</p></section>'''
+<p>{snapshot_label(data)}. {incomplete}. {deadline_refresh}</p>
+<p>Midterm and Course Pulse figures retain their separate, pre-exam cohorts. HW4 and HW5 occurred after the exam and are excluded from those associations.</p></section>'''
 
     def chart(section_id, number, topic, title, reading, filename, alt, caption, headers, rows, table_caption):
+        caption += f" {snapshot_label(data)}. {incomplete}."
         return f'''<section class="chart-section" id="{section_id}"><div class="section-heading"><span class="number">{number}</span>
 <div><p class="eyebrow">{topic}</p><h2>{title}</h2></div></div><p class="reading">{reading}</p>''' + figure(filename, alt, caption) + \
             '<details><summary>Accessible data table</summary>' + table(headers, rows, table_caption) + '</details></section>'
@@ -29,22 +46,24 @@ including {data['partial_scores_in_window']} partial-credit submissions. It cove
                  f"{peak['submissions']} submissions from {peak['contributors']} contributors ({peak['submissions']/peak['contributors']:.2f} per active contributor).")
     html += chart('timing', '01', 'TIMING / VISIBLE CELLS', 'When does a burst reflect<br>broad participation?', peak_text,
                   '01-calendar', 'Reach versus repeat intensity, and submissions by Beijing time. '+peak_text,
-                  f"Shape identifies homework; marker area scales with submissions. Only {len(visible)} positive cells with at least five contributors appear. "
+                  f"Shape identifies a sole configured window; X marks pooled overlapping windows. Marker area scales with submissions. Only {len(visible)} positive cells with at least five contributors appear. "
                   f"The other {data['calendar_policy']['suppressed_positive_cells']} positive cells contain {withheld} submissions but are masked. "
                   'The overall busiest four-hour cell cannot be inferred. Ratios describe active contributors, not study time.',
-                  ['Date','Hours (Beijing)','Status','Submissions','Distinct contributors'],
-                  [[r['date'],f"{r['hour']:02d}:00–{r['hour']+4:02d}:00",r['state'],r['submissions'] if r['submissions'] is not None else '—',
+                  ['Date','Hours (Beijing)','Configured window(s)','Status','Observation','Submissions','Distinct contributors'],
+                  [[r['date'],f"{r['hour']:02d}:00–{r['hour']+4:02d}:00",' + '.join(r.get('homeworks', [])) or '—',
+                    status_label(r['state']),status_label(r.get('observation_status','complete')),r['submissions'] if r['submissions'] is not None else '—',
                     r['contributors'] if r['contributors'] is not None else '—'] for r in data['calendar']],
-                  'Four-hour cells: suppressed means 1–4 contributors; inactive means no configured homework window.')
+                  'Four-hour pooled cells: suppressed means 1–4 contributors; inactive means no configured window. '
+                  'Overlapping HW4/HW5 windows are pooled, not assigned to one homework. Partially observed cells stop at the snapshot; future cells have no available totals.')
 
     distribution_text = '; '.join(f"{a['homework']}: median {a['all_attempts']['median']:g}, range {a['all_attempts']['min']}–{a['all_attempts']['max']}" for a in assignments)
     html += chart('retries','02','RETRIES','A typical count hides a wide range.', distribution_text+'. Only window submitters enter each distribution.',
-                  '02-attempts', 'Four per-student submission-count distributions. '+distribution_text,
+                  '02-attempts', f'{len(assignments)} per-student submission-count distributions. '+distribution_text,
                   f"Boxes show inclusive quartiles; whiskers are the observed min–max, not 1.5×IQR. No individual points are published. "
                   f"{data['submissions_after_first_ac']} in-window events followed a first AC verdict. Acceptance is distinct from normalized full score. "
                   'Problem counts and difficulty differ; counts do not measure effort or ability.',
-                  ['Homework','Problems','Submitters','Events','Min','Q1','Median','Q3','Max'],
-                  [[a['homework'],a['problems'],a['all_attempts']['n'],a['submissions'],
+                  ['Homework','Observation','Problems','Submitters','Events','Min','Q1','Median','Q3','Max'],
+                  [[a['homework'],status_label(a.get('observation_status','complete')),a['problems'],a['all_attempts']['n'],a['submissions'],
                     *[f"{a['all_attempts'][k]:g}" for k in ('min','q1','median','q3','max')]] for a in assignments],
                   'One observation per student–homework with at least one in-window event.')
 
@@ -67,11 +86,11 @@ including {data['partial_scores_in_window']} partial-credit submissions. It cove
 
     attempt_rows = [r for r in data['attempt_score_series'] if r['state']=='visible']
     first, second = [next(r for r in attempt_rows if r['homework']=='HW1' and r['attempt']==i) for i in (1,2)]
-    attempt_reading = (f"HW1's actual mean falls from {first['mean_score']:.2f} on attempt 1 to {second['mean_score']:.2f} on attempt 2. "
+    attempt_reading = (f"HW1's actual mean changes from {first['mean_score']:.2f} on attempt 1 to {second['mean_score']:.2f} on attempt 2. "
                        f"Event counts change from {first['submissions']} to {second['submissions']}; distinct students from {first['contributors']} to {second['contributors']}. "
-                       'Only pairs reaching a later attempt contribute to that point. A lower mean does not mean the same group got worse. HW1–HW4 have separate panels.')
+                       f'Only pairs reaching a later attempt contribute to that point. A lower mean does not mean the same group got worse. {scope} have separate panels.')
     html += chart('attempt-scores','04','MEAN SCORE BY ATTEMPT','What does each successive<br>submission actually score?',attempt_reading,
-                  '04-attempt-scores','Four panels of actual nth-attempt means, with event counts N and distinct student counts S.',
+                  '04-attempt-scores',f'{len(assignments)} panels of actual nth-attempt means, with event counts N and distinct student counts S.',
                   'Equal weight per observed student–problem event; a student retrying several problems contributes several events. '
                   'All recorded attempts, including post-AC attempts, remain eligible for this descriptive view. '
                   'No score carry-forward. Points with fewer than five students are withheld; the line breaks at missing positions. No independent-event error bars.',
@@ -80,11 +99,13 @@ including {data['partial_scores_in_window']} partial-credit submissions. It cove
                   'Actual event scores; each attempt has a changing cohort. Suppressed points do not publish numeric values.')
 
     events = data['event_progress']
+    assignment_status = {a['homework']: a.get('observation_status','complete') for a in assignments}
     def event_rows(rows, labels):
-        return [[*[r[key] for key in labels],r['state'],
-                 *(['—']*4 if r['state']=='suppressed' else [r['new_bests'],r['eligible_retries'],r['contributors'],
+        return [[*[r[key] for key in labels],status_label(r['state']),
+                 status_label(r.get('observation_status',assignment_status.get(r.get('homework'),'through snapshot'))),
+                 *(['—']*4 if r['state'] in ('suppressed','not_observed') else [r['new_bests'],r['eligible_retries'],r['contributors'],
                     f"{r['improvement_pct']:.2f}" if r['improvement_pct'] is not None else '—'])] for r in rows]
-    event_headers = ['Status','New bests','Eligible retries','Students (S)','Rate (%)']
+    event_headers = ['Status','Observation','New bests','Eligible retries','Students (S)','Rate (%)']
     hw_rates = '; '.join(f"{r['homework']} {r['improvement_pct']:.1f}% ({r['new_bests']}/{r['eligible_retries']})"
                          if r['state']=='visible' and r['eligible_retries'] else f"{r['homework']}: withheld or empty"
                          for r in events['by_homework'])
@@ -108,23 +129,27 @@ including {data['partial_scores_in_window']} partial-credit submissions. It cove
     html += chart('deadline-progress','12','PROGRESS / DEADLINE PHASE','When does a retry<br>make progress?',
                   'Each window is split into five equal-duration phases. Color shows the share of eligible retries setting a new best; '
                   'each cell reports new-best counts, eligible retries and distinct contributors. Different phases can contain different students, problems and prior scores.',
-                  '12-deadline-progress','New-best retry rates across five equal-duration phases of HW1–HW4. Hatched cells are withheld.',
+                  '12-deadline-progress',f'New-best retry rates across five equal-duration phases of {scope}. Hatched cells are withheld; dotted cells are not yet observed.',
                   'Opening is 0%; the exact deadline is in the last phase. Bin durations differ across homeworks; raw counts are not equal hourly rates across rows. '
                   'Hatched cells mean fewer than five contributors or secondary suppression, not zero. '
+                  'An ongoing phase contains only events observed through the snapshot; future phases are not yet observed, not zero or withheld. '
                   'Configured deadlines are used; individual extensions are unavailable. Timing does not identify a deadline effect.',
                   ['Homework','Window elapsed','Hours per phase',*event_headers],phase_rows,
                   'Disjoint, equal-duration phases within each homework. Numerators count strict improvements among eligible retries.')
 
-    windows = table(['Homework','Opens (Beijing)','Configured deadline (Beijing)','Excluded outside window'],
-                    [[a['homework'],a['start_local'][:16].replace('T',' '),a['end_local'][:16].replace('T',' '),a['outside_window']] for a in assignments],
-                    'Inclusive configured assignment windows. Individual extensions are not incorporated.')
+    windows = table(['Homework','Opens (Beijing)','Configured deadline (Beijing)','Observed through (Beijing)','Observation','Excluded outside window'],
+                    [[a['homework'],a['start_local'][:16].replace('T',' '),a['end_local'][:16].replace('T',' '),
+                      a.get('observed_until_local', a['end_local'])[:16].replace('T',' '),
+                      status_label(a.get('observation_status','complete')),a['outside_window']] for a in assignments],
+                    'Inclusive configured assignment windows, truncated at the snapshot when ongoing. Individual extensions are not incorporated.')
     counts = events['eligibility_counts']
     html += f'''<section id="dataset" class="methods"><p class="eyebrow">DATASET &amp; PROCESSING</p><h2>From private logs<br>to reproducible summaries.</h2>
 <p>{snapshot_label(data)}. The read-only export contains nine source tables. A previously confirmed test account was matched privately and excluded locally;
 the analysis contains {data['cohort_members']} roster members and {data['all_course_submissions']:,} course events.
 The original export remains unchanged. This is a snapshot, and the website has no production connection.</p>
-<p>The four homeworks contain {data['all_homework_submissions']:,} events; their configured windows retain {data['window_submissions']:,}
+<p>The {len(assignments)} homeworks contain {data['all_homework_submissions']:,} events; their configured windows retain {data['window_submissions']:,}
 from {data['window_submitters']} students and exclude {data['outside_window']} outside-window events. Zero-submitters remain in the roster count.</p>
+<p>{deadline_refresh} {incomplete}. HW5 distributions, cumulative bests and retry rates can change before its deadline. Calendar cells pool overlapping configured windows; they do not identify separate HW4 and HW5 contributions.</p>
 <p>Unique keys, roster membership, assignment–problem links, finite scores and positive maxima are validated before aggregation.
 UTC is converted to Asia/Shanghai. Normalized score is <code>100 × assignment_submission_score / problem_max_points</code>.
 Events are ordered by timestamp then submission ID. Raw scores on different point scales are never pooled.</p>
@@ -134,7 +159,7 @@ The four descriptive homework figures retain all recorded in-window attempts, in
 <p>The <a href="data/summary.json">public aggregate JSON</a> contains no student identifiers or event-level records.
 Positive bins require at least five distinct contributors; event partitions use secondary masking when needed to avoid a lone recoverable small cell.
 Raw logs, private pseudonyms, scores and linkage keys stay outside this repository. Suppression reduces disclosure; it is not a formal anonymity guarantee.</p>
-<p>HW4 is after the 16 September exam. The midterm and Course Pulse inputs retain their pre-exam HW1–HW3 evidence and 26 supplied grades from 41 eligible members.
+<p>HW4 and HW5 are after the 16 September exam. The midterm and Course Pulse inputs retain their pre-exam HW1–HW3 evidence and 26 supplied grades from 41 eligible members.
 The current 42-member homework cohort is a later roster snapshot, not a relabeling of that exam cohort.</p>
 <p><a href="docs/methods.md">Methods and reproduction</a> · <a href="docs/event-methods.md">Event eligibility and masking</a></p></section>
 <section class="next" id="retry-intervals"><p class="eyebrow">INTERPRETATION / NEXT STEPS</p><h2>A recorded gain is not a causal effect.</h2>

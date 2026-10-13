@@ -17,7 +17,7 @@ from pathlib import Path
 import statistics
 from zoneinfo import ZoneInfo
 
-HOMEWORKS = {95: "HW1", 120: "HW2", 145: "HW3", 178: "HW4"}
+HOMEWORKS = {95: "HW1", 120: "HW2", 145: "HW3", 178: "HW4", 189: "HW5"}
 LOCAL_TZ = ZoneInfo("Asia/Shanghai")
 MIN_GROUP = 5
 
@@ -114,7 +114,8 @@ def progress_cells(groups: list[tuple[dict, list[dict]]], secondary: bool = Fals
     return output
 
 
-def event_progress(rows: list[dict], assignments: dict, problems: dict) -> dict:
+def event_progress(rows: list[dict], assignments: dict, problems: dict,
+                  cutoff: datetime | None = None) -> dict:
     events, counts = progress_events(rows, assignments)
     by_hw = progress_cells([({"homework": name}, [r for r in events if r["assignment_id"] == aid])
                             for aid, name in HOMEWORKS.items()], secondary=True)
@@ -129,9 +130,22 @@ def event_progress(rows: list[dict], assignments: dict, problems: dict) -> dict:
              [r for r in hw if r["problem_id"] == pid]) for pid in pids], secondary=True))
         start, end = (timestamp(assignments[aid][key]) for key in ("start_time", "end_time"))
         phase_hours = (end - start).total_seconds() / 3600 / 5
-        by_phase.extend(progress_cells([
+        phases = progress_cells([
             ({"homework": name, "phase": i, "label": f"{i*20}–{(i+1)*20}%", "phase_hours": phase_hours},
-             [r for r in hw if r["phase"] == i]) for i in range(5)], secondary=True))
+             [r for r in hw if r["phase"] == i]) for i in range(5)], secondary=True)
+        for row in phases:
+            left = start + (end - start) * row['phase'] / 5
+            right = start + (end - start) * (row['phase'] + 1) / 5
+            status = observation_status(left, right, cutoff)
+            row.update({'phase_start_local': left.isoformat(), 'phase_end_local': right.isoformat(),
+                        'observation_status': status,
+                        'observed_until_local': (min(right, cutoff).isoformat() if cutoff and status != 'not_observed'
+                                                 else right.isoformat() if not cutoff else None)})
+            if status == 'not_observed':
+                row['state'] = 'not_observed'
+                for field in ('eligible_retries', 'new_bests', 'contributors', 'improvement_pct'):
+                    row[field] = None
+        by_phase.extend(phases)
     # Counts here describe eligibility classes, never the contents of a masked bin.
     return {"policy": {"minimum_distinct_contributors": MIN_GROUP,
                        "eligibility": "A completed in-window retry after a valid baseline with prior best below 100",
@@ -139,6 +153,7 @@ def event_progress(rows: list[dict], assignments: dict, problems: dict) -> dict:
                        "internal_error": "IE judgements are skipped; compilation errors remain scored attempts",
                        "gap": "Clock time since the previous valid same-student homework-problem submission",
                        "phase": "Five equal-duration intervals from configured opening to deadline; deadline is in the last bin",
+                       "observation": "Ongoing windows are truncated at the snapshot; partial phases are labelled and future phases have null values",
                        "secondary_suppression": "A second nonempty cell is hidden if a partition has exactly one primary mask",
                        "weighting": "Equal weight per eligible retry; students can contribute multiple retries"},
             "eligibility_counts": counts, "by_homework": by_hw, "by_gap": by_gap,
@@ -150,6 +165,13 @@ def timestamp(value: str) -> datetime:
     if dt.tzinfo is None:
         dt = dt.replace(tzinfo=timezone.utc)
     return dt.astimezone(LOCAL_TZ)
+
+
+def observation_status(start: datetime, end: datetime, cutoff: datetime | None) -> str:
+    """Describe observed clock time without substituting zeros for future activity."""
+    if cutoff is None or cutoff >= end:
+        return 'complete'
+    return 'not_observed' if cutoff < start else 'partial'
 
 
 def index(rows: list[dict], field: str) -> dict:
@@ -203,23 +225,35 @@ def attempt_score_series(groups: dict) -> list[dict]:
     return output
 
 
-def calendar(rows: list[dict], assignments: list[dict], hours: int, minimum: int) -> list[dict]:
+def calendar(rows: list[dict], assignments: list[dict], hours: int, minimum: int,
+             cutoff: datetime | None = None) -> list[dict]:
     cells = defaultdict(list)
     for row in rows:
         cells[row["when"].date().isoformat(), row["when"].hour // hours * hours].append(row)
     start = min(timestamp(a["start_time"]).date() for a in assignments)
     end = max(timestamp(a["end_time"]).date() for a in assignments)
+    if cutoff:
+        end = min(end, cutoff.date())
     output = []
     while start <= end:
         for hour in range(0, 24, hours):
             left = datetime.combine(start, datetime.min.time(), LOCAL_TZ) + timedelta(hours=hour)
             right = left + timedelta(hours=hours)
-            active = any(timestamp(a["start_time"]) < right and timestamp(a["end_time"]) >= left for a in assignments)
+            active_assignments = [a for a in assignments if timestamp(a["start_time"]) < right
+                                  and timestamp(a["end_time"]) >= left]
+            active = bool(active_assignments)
+            homeworks = [HOMEWORKS[a['assignment_id']] for a in active_assignments
+                         if a.get('assignment_id') in HOMEWORKS]
             records = cells[start.isoformat(), hour]
             distinct = len({r["student_id"] for r in records})
             state = "inactive" if not active else "suppressed" if 0 < distinct < minimum else "visible"
+            status = observation_status(left, right, cutoff)
+            if active and status == 'not_observed':
+                state = 'not_observed'
             output.append({"date": start.isoformat(), "hour": hour, "hours": hours,
                            "state": state,
+                           "homeworks": homeworks, "homework": homeworks[0] if len(homeworks) == 1 else None,
+                           "observation_status": status,
                            "submissions": len(records) if state == "visible" else None,
                            "contributors": distinct if state == "visible" else None})
         start += timedelta(days=1)
@@ -232,6 +266,7 @@ def prepare(bundle: dict) -> tuple[dict, dict]:
         raise ValueError("Expected class 13 with confirmed account exclusions")
     roster = index(t["roster"], "student_id")
     assignments = index(t["assignments"], "assignment_id")
+    cutoff = timestamp(t['metadata'][0]['extracted_at_utc'])
     links = index(t["submission_links"], "submission_id")
     aps = index(t["assignment_problems"], "assignment_problem_id")
     problems = index(t["problems"], "problem_id")
@@ -253,6 +288,8 @@ def prepare(bundle: dict) -> tuple[dict, dict]:
             raise ValueError("Inconsistent submission linkage")
         row = {**s, "when": timestamp(s["submitted_at"]),
                "normalized_score": normalized_score(link["assignment_submission_score"], ap["max_points"])}
+        if row['when'] > cutoff:
+            raise ValueError('Submission timestamp is later than the source snapshot')
         all_hw.append(row)
         assignment = assignments[s["assignment_id"]]
         if timestamp(assignment["start_time"]) <= row["when"] <= timestamp(assignment["end_time"]):
@@ -282,9 +319,12 @@ def prepare(bundle: dict) -> tuple[dict, dict]:
             raise ValueError("Insufficient contributors for distribution")
         parts0 = [p for p in parts.values() if p["assignment_id"] == aid and p["participation_mode"] == 0]
         assigned = [p for p in aps.values() if p["assignment_id"] == aid]
+        start, end = (timestamp(assignments[aid][key]) for key in ('start_time', 'end_time'))
+        status = observation_status(start, end, cutoff)
         summaries.append({"homework": name, "assignment_id": aid,
-                          "start_local": timestamp(assignments[aid]["start_time"]).isoformat(),
-                          "end_local": timestamp(assignments[aid]["end_time"]).isoformat(),
+                          "start_local": start.isoformat(), "end_local": end.isoformat(),
+                          "observation_status": 'ongoing' if status == 'partial' else 'not_open' if status == 'not_observed' else 'complete',
+                          "observed_until_local": min(end, cutoff).isoformat() if cutoff >= start else None,
                           "problems": len(assigned), "submissions": sum(values),
                           "outside_window": sum(r["assignment_id"] == aid for r in all_hw) - sum(values),
                           "all_attempts": distribution(values),
@@ -308,13 +348,15 @@ def prepare(bundle: dict) -> tuple[dict, dict]:
                             "n": len(rows), **means, "gain": means["best"] - means["first"]})
     progression.sort(key=lambda r: (r["homework"], -r["gain"], r["problem_id"]))
     chosen_assignments = [assignments[aid] for aid in HOMEWORKS]
-    cal = calendar(selected, chosen_assignments, 4, MIN_GROUP)
-    private_cal = calendar(selected, chosen_assignments, 1, 1)
+    cal = calendar(selected, chosen_assignments, 4, MIN_GROUP, cutoff=cutoff)
+    private_cal = calendar(selected, chosen_assignments, 1, 1, cutoff=cutoff)
     day_counts = Counter(r["when"].date().isoformat() for r in selected)
     peak_day, peak_count = day_counts.most_common(1)[0]
     peak_people = len({r["student_id"] for r in selected if r["when"].date().isoformat() == peak_day})
     result = {
         "snapshot_utc": t["metadata"][0]["extracted_at_utc"], "timezone": "Asia/Shanghai (UTC+08:00)",
+        "observation_cutoff_local": cutoff.isoformat(),
+        "ongoing_homeworks": [a['homework'] for a in summaries if a['observation_status'] == 'ongoing'],
         "cohort_members": len(roster), "all_course_submissions": len(t["submissions"]),
         "all_homework_submissions": len(all_hw), "window_submissions": len(selected),
         "window_submitters": len({r["student_id"] for r in selected}),
@@ -324,11 +366,12 @@ def prepare(bundle: dict) -> tuple[dict, dict]:
         "submissions_after_first_ac": after_ac,
         "peak_day": {"date": peak_day, "submissions": peak_count, "contributors": peak_people},
         "calendar_policy": {"hours_per_bin": 4, "minimum_distinct_contributors": MIN_GROUP,
+                            "overlapping_windows": "Pooled homework events; no per-homework subcounts are released for overlapping bins",
                             "suppressed_positive_cells": sum(c["state"] == "suppressed" for c in cal),
                             "visible_positive_cells": sum(c["state"] == "visible" and c["submissions"] > 0 for c in cal)},
         "assignments": summaries, "calendar": cal, "score_progression": progression,
         "attempt_score_series": attempt_score_series(groups),
-        "event_progress": event_progress(selected, assignments, problems),
+        "event_progress": event_progress(selected, assignments, problems, cutoff=cutoff),
         "exclusion_policy": bundle.get("exclusion_policy", {"basis": "Confirmed in input bundle"}),
     }
     if sum(a["submissions"] for a in summaries) != len(selected):
