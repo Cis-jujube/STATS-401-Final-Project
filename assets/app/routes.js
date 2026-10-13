@@ -213,7 +213,7 @@
           : `Twelve figures: ${int(N.submissions)} submissions through ${N.latest}, ${N.grades} historical exam grades and a partial Course Pulse window. ${observedCopy}` },
       { at: 15.6, kicker: 'The score has a past', title: 'Now you have <em>seen it.</em>',
         body: 'Replay any figure, or open its evidence: methods, tables, downloads and the aggregate data behind every frame.',
-        credit: `Zaozao Wang · data acquisition, cleaning, analysis<br>Zhengxiang Liu · visualization design, D3 implementation<br>STATS 401 · CS201 OJ snapshot ${N.snap} · aggregates only` },
+        credit: `Zaozao Wang · data acquisition, cleaning, analysis<br>Zhengxiang Liu · visualization design, D3 implementation<br>STATS 401 · CS201 OJ snapshot ${N.snap} · aggregates only<br><a href="poster.html">Research poster · the five Core figures for print ↗</a>` },
     ],
   };
 

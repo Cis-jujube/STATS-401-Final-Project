@@ -24,7 +24,7 @@ def figure(name,alt,caption):
 # All homework captions and tables derive from the refreshed public snapshot.
 html = homework_sections(d, table, figure)
 midterm = json.loads((ROOT/'data/midterm-summary.json').read_text())
-html += midterm_sections(midterm, table, figure)
+html += midterm_sections(midterm, table, figure, d)
 platform = json.loads((ROOT/'data/platform-summary.json').read_text())
 html += platform_sections(platform, table, figure)
 (ROOT/'legacy.html').write_text(render_page(html, midterm, d).replace('><', '>\n<')+'\n')
