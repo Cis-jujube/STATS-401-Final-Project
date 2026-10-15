@@ -17,7 +17,7 @@ const same = (a, b, msg) => assert.equal(JSON.stringify(a), JSON.stringify(b), m
 same(figs(core), ['01', '03', '11', '12', '06'], 'Core: exactly five figure stops, in order');
 same(figs(show), ['01', '02', '03', '04', '11', '12', '05', '06', '07', '08', '09', '10'], 'Showcase: all twelve, documented order');
 same(core.segs.filter((s) => !s.fig).map((s) => s.key), ['opening', 'bridge', 'conclusion'], 'Core context is opening, sample switch and conclusion only');
-assert.ok(!core.segs.some((s) => s.scene === 'homeworks'), 'the four-homeworks unit chart is not a Core stop');
+assert.ok(!core.segs.some((s) => s.scene === 'homeworks'), 'the homework unit chart is not a Core stop');
 assert.ok(show.segs.findIndex((s) => s.key === 'bridge') < show.segs.findIndex((s) => s.fig === '05'), 'Showcase introduces the sample switch before exam results');
 for (const r of [core, show]) {
   r.segs.forEach((s, i) => {
@@ -39,9 +39,40 @@ assert.ok(core.cards.every((c) => c.figs.every((f) => core.figures.includes(f)))
 assert.ok(show.cards.flatMap((c) => c.figs).sort().join() === show.figures.slice().sort().join(), 'Showcase conclusion covers all twelve');
 
 // ── persistent captions derived from the public aggregates ────────
-assert.equal(R.COHORT.homework, 'HW1–HW4 · 30 Sep 2026 snapshot · 39 submitters');
-assert.equal(R.COHORT.retry, 'Eligible retry events · 468 / 1,222 set a new best');
-assert.equal(R.COHORT.exam, 'Pre-exam HW1–HW3 · 26 matched grades · HW4 excluded');
+assert.equal(R.COHORT.homework, 'HW1–HW5 · 13 Oct 2026 snapshot · 39 submitters · HW5 ongoing');
+assert.equal(R.COHORT.retry, 'Eligible retry events · 547 / 1,345 set a new best · HW5 ongoing');
+assert.equal(R.COHORT.exam, 'Pre-exam HW1–HW3 · 26 matched grades · HW4, HW5 excluded');
+assert.equal(R.N.hw4, 756, 'HW4 retains its identity when HW5 becomes the latest homework');
+assert.equal(R.N.latest, 'HW5');
+assert.equal(R.N.problems, 43);
+const phaseText = core.segs.find((s) => s.fig === '12').beats.map((b) => b.body).join(' ');
+assert.match(phaseText, /2 Oct deadline/, 'window phases use the revised HW4 deadline');
+assert.match(phaseText, /not yet observed/, 'future phases are not described as zero or withheld');
+assert.match(phaseText, /partially observed/, 'partial HW5 phases are identified');
+assert.match(core.segs.find((s) => s.fig === '01').beats.map((b) => b.body).join(' '), /pooled.*Lens cannot divide/s, 'timing captions preserve pooled cells at overlapping windows');
+
+// The fifth homework must have its own colour. Dynamic status indices follow all homework
+// colours; otherwise the old hard-coded index 4 would turn HW5 into withheld particles.
+const draw = { window: null, CS201: ctx.CS201, matchMedia: () => ({ matches: false }) };
+draw.window = draw;
+for (const f of ['assets/vendor/d3.v7.min.js', 'assets/app/core.js', 'assets/app/particles.js']) runInNewContext(readFileSync(f, 'utf8'), draw);
+const P = draw.Film.particles;
+same(draw.Film.HW, ['HW1', 'HW2', 'HW3', 'HW4', 'HW5']);
+assert.equal(P.N, 3359);
+assert.equal(P.C.WITHHELD, 5);
+assert.ok(Object.values(P.C).every((i) => i > draw.Film.HW.indexOf('HW5')));
+assert.equal(new Set(Object.values(draw.Film.color)).size, draw.Film.HW.length);
+assert.equal(draw.Film.contrastInk('#ffd38f'), draw.Film.bg, 'light phase tile uses dark text');
+assert.equal(draw.Film.contrastInk('#141a23'), draw.Film.ink, 'dark phase tile uses light text');
+assert.equal(draw.Film.contrastInk('rgba(255,255,255,0.03)'), draw.Film.ink, 'transparent fills include the stage background');
+for (const dims of [[1440, 900], [390, 844], [320, 740]]) {
+  [draw.innerWidth, draw.innerHeight] = dims;
+  const layout = draw.Film.computeLayout(), stacks = P.stackGeom(layout);
+  assert.equal(stacks.xs.length, 5);
+  assert.ok(stacks.sp > 0, `five stacks fit ${dims.join('×')}`);
+  assert.ok(stacks.xs[0] >= layout.chart.x - 1e-6);
+  assert.ok(stacks.xs[4] + stacks.colW <= layout.chart.x + layout.chart.w + 1e-6);
+}
 
 // ── deep links ────────────────────────────────────────────────────
 const E = (s, h) => R.resolveEntry(s, h);

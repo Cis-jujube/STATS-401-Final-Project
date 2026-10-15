@@ -1,10 +1,10 @@
 /* The exam question: a different, partial, pre-exam sample.
-   26 supplied grades (of 41 eligible). OJ metrics come from pre-exam HW1–HW3 only; HW4 came
-   after the exam and is excluded. Spearman associations with paired-student bootstrap 95%
+   26 supplied grades (of 41 eligible). OJ metrics come from pre-exam HW1–HW3 only; HW4 and
+   HW5 came after the exam and are excluded. Spearman associations with paired-student bootstrap 95%
    intervals; leave-one-out ranges and two subset checks are sensitivity diagnostics, a
    different kind of object. Exploratory: not causal effects, not validated predictions.
    Scene timeline (local seconds):
-     0–9    bridge: the sample switch (HW4's submissions leave; 26 of 41 grades)
+     0–9    bridge: the sample switch (post-exam submissions leave; 26 of 41 grades)
      9–17   Figure 05 · midterm score distribution
      17–40  Figure 06 · OJ behaviour–exam associations: A bootstrap, B leave-one-out, C subsets
      40–49  Figure 07 · midterm by submission-count group
@@ -40,7 +40,7 @@
     for (let i = 0; i < P.N; i++) {
       const h = P.hwIdx[i], j = P.rank[i];
       let x = g.xs[h] + (j % g.cols) * g.sp + g.sp / 2, y = g.base - Math.floor(j / g.cols) * g.sp - g.sp / 2, a = 0.95, c = h;
-      if (postIdx.has(h)) { x += drop * (18 + K.u[i] * 16); y += drop * (26 + K.d[i] * 40); a = F.lerp(0.95, 0.14, drop); if (drop > 0.5) c = 4; }
+      if (postIdx.has(h)) { x += drop * (18 + K.u[i] * 16); y += drop * (26 + K.d[i] * 40); a = F.lerp(0.95, 0.14, drop); if (drop > 0.5) c = P.C.NEUTRAL; }
       o.x[i] = x; o.y[i] = y; o.a[i] = a; o.s[i] = g.sp * 0.62; o.c[i] = c;
     }
     o.glow = 0.2; o.glowSet = null; o.repel = false;
@@ -56,7 +56,7 @@
       '08': 'Each dot is one student in a nested subset: eligible roster, supplied grades matched to Course Pulse, recorded pre-exam use, resource opens. Below: the observation windows of the two sources differ.',
       '09': 'Box = middle half of midterm scores; line = median; dot = mean, for students with and without recorded Course Pulse use before the cutoff.',
       '10': 'Dot = Spearman ρ with the midterm for the same 26 students; line = paired-student bootstrap 95% interval. OJ rows (circles) cover HW1–HW3; platform rows (squares) cover 8–16 Sep.',
-    }[fig] || 'The exam analysis uses 26 supplied grades and pre-exam HW1–HW3; HW4 is excluded.'),
+    }[fig] || `The exam analysis uses 26 supplied grades and pre-exam HW1–HW3; ${post.map((a) => a.homework).join(', ')} are excluded.`),
     onBeat() {},
     snap() { st.snap = true; },
     mount(el) {

@@ -29,7 +29,7 @@
   function triesGeom(L) {
     const c = L.chart, top = c.y + (L.narrow ? 90 : 118), base = c.y + c.h - 46, cloudW = L.narrow ? 70 : 170;
     const slotW = (c.w - 30 - cloudW) / KMAX;
-    // largest dot spacing whose tallest column (the 1,131 first tries) still fits the box
+    // Largest dot spacing whose tallest attempt column still fits the box.
     let best = null;
     for (let sp = 0.9; sp <= 7; sp += 0.05) {
       const cols = Math.floor((slotW - 4) / sp); if (cols < 2) break;
@@ -49,7 +49,7 @@
         const pos = triesPos[i], col = pos % g.cols, row = Math.floor(pos / g.cols);
         tx = g.x0 + (k - 1) * g.slotW + 2 + col * g.sp + g.sp / 2; ty = g.base - row * g.sp - g.sp / 2; ta = 0.95 * la;
       } else {
-        tx = g.cloud.x + F.clamp(K.gx[i], -2.3, 2.3) * g.cloud.r * 0.45; ty = g.cloud.y + F.clamp(K.gy[i], -2.3, 2.3) * g.cloud.r * 0.45; ta = 0.5 * la; tc = 4;
+        tx = g.cloud.x + F.clamp(K.gx[i], -2.3, 2.3) * g.cloud.r * 0.45; ty = g.cloud.y + F.clamp(K.gy[i], -2.3, 2.3) * g.cloud.r * 0.45; ta = 0.5 * la; tc = P.C.WITHHELD;
       }
       const p = F.ease.inOut(F.clamp(vis * 1.5 - K.d[i] * 0.5));
       o.x[i] = F.lerp(AMB.x[i], tx, p); o.y[i] = F.lerp(AMB.y[i], ty, p);
@@ -98,11 +98,11 @@
         return g;
       });
       boxRows.select('.box').attr('fill', (d) => F.color[d.homework]).attr('fill-opacity', 0.28).attr('stroke', (d) => F.color[d.homework]);
-      boxRows.select('.hwl').attr('fill', (d) => F.color[d.homework]).text((d) => d.homework);
+      boxRows.select('.hwl').attr('fill', (d) => F.color[d.homework]).text((d) => d.homework + (F.ongoing(d.homework) ? ' *' : ''));
       boxRows.select('.sub').text((d) => `${d.problems} problems · ${d.all_attempts.n} students`);
       boxRows.on('pointerenter', (ev, d) => F.tip.show(boxTip(d), ev)).on('pointermove', (ev) => F.tip.move(ev)).on('pointerleave', () => F.tip.hide());
       mBox = gBox.append('g').attr('class', 'floorlab');
-      mBox.append('text').attr('class', 'mono').style('font-size', '10px').attr('fill', F.signal).text('▲ one try per problem');
+      mBox.append('text').attr('class', 'mono').style('font-size', '10px').attr('fill', F.signal).text('▲ one per assigned slot');
 
       // cohort view
       co = {};
@@ -134,9 +134,10 @@
       TG = triesGeom(L); buildTries(L);
       geo = { c, top: c.y + 70, bottom: c.y + c.h - 40, x0: c.x + (L.narrow ? 70 : 130), x1: c.x + c.w - (L.narrow ? 40 : 80) };
       Object.assign(ctrlBox.style, { left: c.x + 'px', top: c.y - 6 + 'px', maxWidth: c.w + 'px' });
-      x = d3.scaleLog().domain([2, 200]).range([geo.x0, geo.x1]);
+      const xmax = Math.ceil(d3.max(A, (a) => a.all_attempts.max) * 1.1 / 50) * 50;
+      x = d3.scaleLog().domain([1, xmax]).range([geo.x0, geo.x1]);
       const ax = gBox.select('.axis'); ax.selectAll('*').remove();
-      const ticks = [2, 5, 10, 20, 50, 100, 200];
+      const ticks = [...new Set([1, 2, 5, 10, 20, 50, 100, 200, xmax])].filter((n) => n <= xmax).sort((a, b) => a - b);
       ax.selectAll('line').data(ticks).join('line').attr('x1', x).attr('x2', x).attr('y1', geo.top - 10).attr('y2', geo.bottom).attr('stroke', 'rgba(236,231,221,.06)');
       ax.selectAll('text').data(ticks).join('text').attr('class', 'mono').attr('x', x).attr('y', geo.bottom + 16).attr('text-anchor', 'middle').style('font-size', '10.5px').attr('fill', F.muted).text((d) => d);
       ax.append('text').attr('class', 'axis-title').attr('x', geo.x1).attr('y', geo.bottom + 32).attr('text-anchor', 'end').text(L.narrow ? 'Per student (log scale)' : 'Submissions per student in the window (log scale)');
@@ -144,14 +145,15 @@
       const split = geo.top + (geo.bottom - geo.top) * 0.62;
       co.x = d3.scaleLinear().domain([1, KMAX]).range([geo.x0 - (L.narrow ? 30 : 60), geo.x1]);
       co.y = d3.scaleLinear().domain([0, 100]).range([split - 18, geo.top]);
-      co.y2 = d3.scaleLinear().domain([0, 40]).range([geo.bottom, split + 26]);
-      co.r = d3.scaleSqrt().domain([0, 304]).range([0, 8]);
+      const maxStudents = Math.ceil(d3.max(series, (s) => d3.max(s.pts, (p) => p.contributors)) / 10) * 10;
+      co.y2 = d3.scaleLinear().domain([0, maxStudents]).range([geo.bottom, split + 26]);
+      co.r = d3.scaleSqrt().domain([0, d3.max(series, (s) => d3.max(s.pts, (p) => p.submissions))]).range([0, 8]);
       co.axes.selectAll('*').remove();
       const gx = co.axes;
       gx.selectAll('line.gy').data([0, 25, 50, 75, 100]).join('line').attr('class', 'gy').attr('x1', co.x.range()[0]).attr('x2', co.x.range()[1]).attr('y1', co.y).attr('y2', co.y).attr('stroke', 'rgba(236,231,221,.06)');
       gx.selectAll('text.ty').data([0, 25, 50, 75, 100]).join('text').attr('class', 'ty mono').attr('x', co.x.range()[0] - 10).attr('y', co.y).attr('dy', '0.35em').attr('text-anchor', 'end').style('font-size', '10.5px').attr('fill', F.muted).text((d) => d);
-      gx.selectAll('line.gy2').data([0, 20, 40]).join('line').attr('class', 'gy2').attr('x1', co.x.range()[0]).attr('x2', co.x.range()[1]).attr('y1', co.y2).attr('y2', co.y2).attr('stroke', 'rgba(236,231,221,.06)');
-      gx.selectAll('text.ty2').data([0, 20, 40]).join('text').attr('class', 'ty2 mono').attr('x', co.x.range()[0] - 10).attr('y', co.y2).attr('dy', '0.35em').attr('text-anchor', 'end').style('font-size', '10.5px').attr('fill', F.muted).text((d) => d);
+      gx.selectAll('line.gy2').data(co.y2.ticks(2)).join('line').attr('class', 'gy2').attr('x1', co.x.range()[0]).attr('x2', co.x.range()[1]).attr('y1', co.y2).attr('y2', co.y2).attr('stroke', 'rgba(236,231,221,.06)');
+      gx.selectAll('text.ty2').data(co.y2.ticks(2)).join('text').attr('class', 'ty2 mono').attr('x', co.x.range()[0] - 10).attr('y', co.y2).attr('dy', '0.35em').attr('text-anchor', 'end').style('font-size', '10.5px').attr('fill', F.muted).text((d) => d);
       gx.selectAll('text.tx').data(d3.range(1, KMAX + 1)).join('text').attr('class', 'tx mono').attr('x', co.x).attr('y', geo.bottom + 16).attr('text-anchor', 'middle').style('font-size', '10.5px').attr('fill', F.muted).text((d) => d);
       gx.append('text').attr('class', 'axis-title').attr('x', co.x.range()[0]).attr('y', geo.top - 14).text('Mean score of the k-th submission');
       gx.append('text').attr('class', 'axis-title').attr('x', co.x.range()[0]).attr('y', split + 12).text('Students still submitting at try k');
@@ -209,8 +211,8 @@
       g.select('.ghostb').attr('x', x(a0.q1)).attr('width', x(a0.q3) - x(a0.q1)).attr('y', y - bh / 2).attr('height', bh).attr('opacity', m);
       g.select('.floor').attr('x1', x(d.problems)).attr('x2', x(d.problems)).attr('y1', y + bh / 2 + 4).attr('y2', y + bh / 2 + 12).attr('opacity', F.seg(t, 4, 5));
     });
-    const y4 = geo.top + ((geo.bottom - geo.top) / A.length) * 3.5 + Math.min(26, ((geo.bottom - geo.top) / A.length) * 0.34) / 2 + 26;
-    mBox.attr('transform', `translate(${x(8) - 4},${y4})`).attr('opacity', F.seg(t, 4.4, 5.4));
+    const last = A[A.length - 1], yLast = geo.top + ((geo.bottom - geo.top) / A.length) * (A.length - 0.5) + Math.min(26, ((geo.bottom - geo.top) / A.length) * 0.34) / 2 + 26;
+    mBox.attr('transform', `translate(${x(last.problems) - 4},${yLast})`).attr('opacity', F.seg(t, 4.4, 5.4));
   }
 
   function renderCohort(t) {
@@ -235,7 +237,7 @@
     const aB = F.seg(t, 27.4, 28.2);
     const pt = aB > 0 ? [co.x(pB.attempt), co.y2(pB.contributors)] : [co.x(pA.attempt), co.y(pA.mean_score)];
     co.anno.attr('opacity', Math.max(aA, aB)).attr('transform', `translate(${pt[0]},${pt[1]})`);
-    co.anno.select('text').attr('x', aB > 0 ? -18 : 16).attr('y', aB > 0 ? -18 : 22).attr('text-anchor', aB > 0 ? 'end' : 'start').text(aB > 0 ? `HW1, try 13: 5 students (from 38)` : 'HW1, try 6: mean 24.4');
+    co.anno.select('text').attr('x', aB > 0 ? -18 : 16).attr('y', aB > 0 ? -18 : 22).attr('text-anchor', aB > 0 ? 'end' : 'start').text(aB > 0 ? `HW1, try ${pB.attempt}: ${pB.contributors} students (from ${s1.pts[0].contributors})` : `HW1, try ${pA.attempt}: mean ${F.fmt.p1(pA.mean_score)}`);
     co.hover.attr('opacity', st.hoverK ? 1 : 0).attr('x1', co.x(st.hoverK || 1)).attr('x2', co.x(st.hoverK || 1)).attr('y1', geo.top).attr('y2', geo.bottom);
   }
 

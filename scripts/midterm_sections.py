@@ -1,7 +1,24 @@
 """Accessible explanations and aggregate tables for the midterm extension."""
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 
-def sections(d, table, figure):
+def homework_snapshot_note(d, homework):
+    """Name the separate, later homework snapshot and the post-exam homeworks it adds."""
+    if not homework:
+        return "The six homework-process figures use a separate, later snapshot and roster."
+    snapshot = datetime.fromisoformat(homework['snapshot_utc'])
+    if snapshot.tzinfo is None:
+        snapshot = snapshot.replace(tzinfo=timezone.utc)
+    local = snapshot.astimezone(ZoneInfo('Asia/Shanghai'))
+    exam = datetime.fromisoformat(d['exam_started_at'])
+    later = [a['homework'] for a in homework['assignments'] if datetime.fromisoformat(a['end_local']) >= exam]
+    post = f", including post-exam {' and '.join(later)}" if later else ''
+    return (f"The six homework-process figures now use the separate {local.day} {local:%B %Y} snapshot{post} "
+            f"and a later {homework['cohort_members']}-member roster after test-account exclusion.")
+
+
+def sections(d, table, figure, homework=None):
     coverage = (f"{d['matched']} matched students from a {d['eligible_roster']}-member eligible roster; "
                 f"{d['grades_not_in_excerpt']} grades were not in the supplied excerpt. "
                 "This is a partial, non-random cohort, not the class grade distribution.")
@@ -38,5 +55,5 @@ def sections(d, table, figure):
     html += figure("07-midterm-attempt-groups", "Midterm score middle-50-percent bands for submission groups of 9, 11 and 6 students. Interquartile ranges overlap.",
                    "Bars span Q1–Q3; the line is the median and the diamond the mean. These are score-dispersion bands, not uncertainty intervals. Cutoffs are descriptive choices, not optimized thresholds, ability classifications or study recommendations. No individual points or extrema are published.")
     html += '<details><summary>Accessible data table · grouped scores</summary>'+grouped+'</details></section>'
-    html += f'''<section class="next" id="midterm-plan"><p class="eyebrow">MIDTERM / SOURCES &amp; LIMITS</p><h2>Linked privately.<br>Reported in aggregate.</h2><p>{coverage} The available grades were transcribed from the user-provided Canvas excerpt and joined to unique same-name OJ course members, with homework scores cross-checked. Two homework discrepancies remain flagged; neither Canvas nor OJ values were altered. Excluding these two records leaves 24 students, as shown in the sensitivity table.</p><p>The OJ behavior extract was queried read-only on 21 September 2026. A named test account is excluded from this extension, leaving 41 eligible roster members. The six homework-process figures now use the separate 30 September snapshot, including post-exam HW4 and a later 42-member roster after test-account exclusion. The midterm figures keep their pre-exam HW1–HW3 metrics: 2,101 in-window submissions from 39 submitters; the 26 matched students contribute 1,507 of them.</p><p>{temporal} The user confirmed the exam began on 16 September 2026 at 12:00 Beijing time.</p><p>Individual grades, names, OJ identifiers and source linkage files stay outside the repository. The downloadable <a href="data/midterm-summary.json">midterm aggregate JSON</a> contains only cohort summaries. Groups have at least five students; this is disclosure reduction, not a formal anonymity guarantee. The remaining grades are needed before a complete cohort analysis; a prediction study would additionally need independent validation.</p><p><a href="docs/midterm-methods.md">Midterm methods and reproduction ↗</a></p></section>'''
+    html += f'''<section class="next" id="midterm-plan"><p class="eyebrow">MIDTERM / SOURCES &amp; LIMITS</p><h2>Linked privately.<br>Reported in aggregate.</h2><p>{coverage} The available grades were transcribed from the user-provided Canvas excerpt and joined to unique same-name OJ course members, with homework scores cross-checked. Two homework discrepancies remain flagged; neither Canvas nor OJ values were altered. Excluding these two records leaves 24 students, as shown in the sensitivity table.</p><p>The OJ behavior extract was queried read-only on 21 September 2026. A named test account is excluded from this extension, leaving 41 eligible roster members. {homework_snapshot_note(d, homework)} The midterm figures keep their pre-exam HW1–HW3 metrics: 2,101 in-window submissions from 39 submitters; the 26 matched students contribute 1,507 of them.</p><p>{temporal} The user confirmed the exam began on 16 September 2026 at 12:00 Beijing time.</p><p>Individual grades, names, OJ identifiers and source linkage files stay outside the repository. The downloadable <a href="data/midterm-summary.json">midterm aggregate JSON</a> contains only cohort summaries. Groups have at least five students; this is disclosure reduction, not a formal anonymity guarantee. The remaining grades are needed before a complete cohort analysis; a prediction study would additionally need independent validation.</p><p><a href="docs/midterm-methods.md">Midterm methods and reproduction ↗</a></p></section>'''
     return html

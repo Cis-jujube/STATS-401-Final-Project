@@ -10,11 +10,12 @@ from matplotlib.colors import LinearSegmentedColormap, Normalize
 from matplotlib.patches import Rectangle
 
 from render_figures import (HW_COLORS, WEB_COLORS, PALETTE, apply_publication_style,
-                            finalize_figure, footnote, snapshot_label)
+                            finalize_figure, footnote, snapshot_label, observation_note)
 
 
 def retry_productivity(data, out, mobile=False, web=False):
     event = data['event_progress']
+    ongoing = {a['homework'] for a in data['assignments'] if a.get('observation_status') == 'ongoing'}
     colors = WEB_COLORS if web else HW_COLORS
     fig, axes = plt.subplots(2 if mobile else 1, 1 if mobile else 2,
                              figsize=(7.6, 12.4) if mobile else (14.8, 7.9), squeeze=False)
@@ -37,6 +38,8 @@ def retry_productivity(data, out, mobile=False, web=False):
         labels = []
         for row in rows:
             label = row.get('homework', row.get('label'))
+            if row.get('homework') in ongoing:
+                label += '*'
             if row['state'] == 'visible':
                 label += f"\n{row['new_bests']}/{row['eligible_retries']} · S={row['contributors']}"
             labels.append(label)
@@ -55,12 +58,13 @@ def retry_productivity(data, out, mobile=False, web=False):
     notes = ['Eligible: a scored retry while the prior within-window best is below 100.',
              'Strict improvement only; first scores, internal errors and retries after full credit are excluded.',
              'Gap bins are clock time, not study time. Events repeat within students; no causal comparison.',
-             'Long-gap percentages have small denominators. Read counts alongside rates.', snapshot_label(data)]
+             'Long-gap percentages have small denominators. Read counts alongside rates.',
+             ('* ' + observation_note(data)) if observation_note(data) else '', snapshot_label(data)]
     if mobile:
         notes[1:2] = ['First scores, internal errors and retries after full credit are excluded.',
                       'Equal scores do not count as new bests.']
     footnote(fig, notes, y=.02, fontsize=9, web=web)
-    fig.tight_layout(rect=(.015, .17 if mobile else .23, .99, .87), h_pad=3.5, w_pad=3)
+    fig.tight_layout(rect=(.015, .19 if mobile else .26, .99, .87), h_pad=3.5, w_pad=3)
     finalize_figure(fig, out/('11-retry-productivity'+('-mobile' if mobile else '')),
                     'Eligible retries setting new personal best scores', web=web)
 
@@ -69,7 +73,7 @@ def deadline_progress(data, out, mobile=False, web=False):
     rows = data['event_progress']['by_phase']
     homeworks = [a['homework'] for a in data['assignments']]
     lookup = {(r['homework'], r['phase']): r for r in rows}
-    fig, ax = plt.subplots(figsize=(8.6, 10.2) if mobile else (14.8, 8.6))
+    fig, ax = plt.subplots(figsize=(10.5, 11.8) if mobile else (14.8, 9.4))
     ink = '#f4f2e9' if web else PALETTE['ink']
     muted = '#c4b7aa' if web else PALETTE['gray']
     # All tiles have a light fill, including on the dark story, so use dark text.
@@ -79,29 +83,38 @@ def deadline_progress(data, out, mobile=False, web=False):
         for phase in range(5):
             row = lookup[homework, phase]
             x, y = (h, phase) if mobile else (phase, h)
-            if row['state'] == 'suppressed':
+            if row['state'] == 'not_observed':
+                ax.add_patch(Rectangle((x-.47, y-.46), .94, .92, facecolor='#eeece7',
+                                       edgecolor='#c3b6a6', hatch='..', lw=.8))
+                ax.text(x, y, 'Not yet\nobserved', ha='center', va='center', fontsize=10,
+                        color='#463c33', bbox={'facecolor':'#eeece7', 'edgecolor':'none', 'pad':2})
+            elif row['state'] == 'suppressed':
                 ax.add_patch(Rectangle((x-.47, y-.46), .94, .92, facecolor='#e4dfd6',
                                        edgecolor='#c3b6a6', hatch='////', lw=.8))
-                ax.text(x, y, 'Withheld', ha='center', va='center', fontsize=11, color='#463c33',
+                partial = '*' if row.get('observation_status') == 'partial' else ''
+                ax.text(x, y, 'Withheld'+partial, ha='center', va='center', fontsize=11, color='#463c33',
                         bbox={'facecolor':'#e4dfd6', 'edgecolor':'none', 'pad':2})
             elif row['eligible_retries'] == 0:
                 ax.add_patch(Rectangle((x-.47,y-.46),.94,.92,facecolor='#f7f3e9',edgecolor='#c3b6a6'))
-                ax.text(x,y,'No eligible\nretries',ha='center',va='center',fontsize=10,color='#25211e')
+                partial = '*' if row.get('observation_status') == 'partial' else ''
+                ax.text(x,y,'No eligible\nretries'+partial,ha='center',va='center',fontsize=10,color='#25211e')
             else:
                 ax.add_patch(Rectangle((x-.47, y-.46), .94, .92,
                                        facecolor=cmap(norm(row['improvement_pct'])), edgecolor='none'))
-                ax.text(x, y-.18, f"{row['improvement_pct']:.1f}%", ha='center', va='center',
+                partial = '*' if row.get('observation_status') == 'partial' else ''
+                ax.text(x, y-.18, f"{row['improvement_pct']:.1f}%{partial}", ha='center', va='center',
                         fontsize=17 if not mobile else 14, weight='bold', color='#172c28')
                 ax.text(x, y+.11, f"{row['new_bests']}/{row['eligible_retries']}", ha='center',
                         va='center', fontsize=12, color='#172c28')
                 ax.text(x, y+.32, f"S={row['contributors']}", ha='center', va='center',
                         fontsize=10, color='#172c28')
     phase_labels = [f'{i*20}–{(i+1)*20}%' for i in range(5)]
-    hw_labels = [f"{hw}\n{lookup[hw,0]['phase_hours']:.1f} h / bin" for hw in homeworks]
-    ax.set_xticks(range(4 if mobile else 5), hw_labels if mobile else phase_labels, fontsize=11)
-    ax.set_yticks(range(5 if mobile else 4), phase_labels if mobile else hw_labels, fontsize=11)
-    ax.set_xlim(-.5, 3.5 if mobile else 4.5)
-    ax.set_ylim(4.5 if mobile else 3.5, -.5)
+    hw_labels = [f"{a['homework']}" + ('*' if a.get('observation_status') == 'ongoing' else '') +
+                 f"\n{lookup[a['homework'],0]['phase_hours']:.1f} h / bin" for a in data['assignments']]
+    ax.set_xticks(range(len(homeworks) if mobile else 5), hw_labels if mobile else phase_labels, fontsize=11)
+    ax.set_yticks(range(5 if mobile else len(homeworks)), phase_labels if mobile else hw_labels, fontsize=11)
+    ax.set_xlim(-.5, len(homeworks)-.5 if mobile else 4.5)
+    ax.set_ylim(4.5 if mobile else len(homeworks)-.5, -.5)
     ax.tick_params(length=0, pad=12)
     for spine in ax.spines.values():
         spine.set_visible(False)
@@ -109,24 +122,26 @@ def deadline_progress(data, out, mobile=False, web=False):
     if mobile:
         ax.set_ylabel('Window elapsed · opening → deadline', labelpad=12)
     else:
-        ax.set_xlabel(label, labelpad=16)
+        ax.set_xlabel(label, labelpad=4)
     fig.text(.04, .97, 'When do retries make progress?' if not mobile else
              'New bests across\nthe homework window', fontsize=21, weight='bold', va='top', color=ink)
     fig.text(.04, .91 if not mobile else .875,
              'Rate = new bests / eligible retries · S = distinct contributors',
              fontsize=11, va='top', color=muted)
     fig.subplots_adjust(left=.17 if mobile else .13, right=.96,
-                        top=.78 if mobile else .83, bottom=.25 if mobile else .28)
-    cax = fig.add_axes([.60 if not mobile else .55, .165, .34, .012])
+                        top=.78 if mobile else .83, bottom=.29 if mobile else .31)
+    cax = fig.add_axes([.60 if not mobile else .55, .22, .34, .012])
     bar = fig.colorbar(plt.cm.ScalarMappable(norm=norm,cmap=cmap), cax=cax, orientation='horizontal')
     bar.set_ticks((0,50,100), labels=('0%', '50%', '100%'))
     bar.ax.tick_params(labelsize=9, length=0)
     bar.outline.set_visible(False)
-    fig.text(.04, .17, 'Color: share of retries setting a new best', fontsize=10, color=muted)
+    fig.text(.04, .225, 'Color: share of retries setting a new best', fontsize=10, color=muted)
     footnote(fig, ['Five equal-duration bins within each homework; bin duration differs between homeworks.',
                    'Strict new bests only, after a baseline and before full credit. Counts are repeated events.',
                    'Hatched cells are withheld, not zero (<5 students or secondary suppression).',
+                   'Dotted cells are not yet observed. * marks the ongoing homework / a partially observed phase.',
                    'Configured deadlines; individual extensions unavailable. Timing is not a deadline effect.',
+                   observation_note(data),
                    snapshot_label(data)], y=.025, fontsize=9, web=web)
     finalize_figure(fig, out/('12-deadline-progress'+('-mobile' if mobile else '')),
                     'New personal best retries within equal-duration homework phases', web=web)

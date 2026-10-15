@@ -49,10 +49,21 @@
   F.gauss = (r) => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
 
   // ── palette ──────────────────────────────────────────────────────
-  F.HW = ['HW1', 'HW2', 'HW3', 'HW4'];
-  F.color = { HW1: '#3987e5', HW2: '#199e70', HW3: '#d4a017', HW4: '#e07bb0' };
+  F.HW = D.homework.assignments.map((a) => a.homework);
+  F.color = { HW1: '#3987e5', HW2: '#199e70', HW3: '#d4a017', HW4: '#e07bb0', HW5: '#8f87ef' };
   F.ink = '#ece7dd'; F.ink2 = '#b3b8c3'; F.muted = '#767d8c'; F.signal = '#ff6a3d'; F.ember = '#ffb547'; F.withheld = '#5b6273'; F.bg = '#07090d';
   F.ember_ramp = d3.scaleSequential(d3.piecewise(d3.interpolateRgb.gamma(1.6), ['#2a1a14', '#7a2d14', '#d4561c', '#ff9f3a', '#ffe2a6']));
+  /** Choose legible tile text from the actual fill, including transparency over the stage. */
+  F.contrastInk = (fill) => {
+    const c = d3.color(fill).rgb(), bg = d3.color(F.bg).rgb();
+    const luminance = (rgb) => rgb.reduce((s, v, i) => {
+      v /= 255;
+      return s + (v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4)) * [0.2126, 0.7152, 0.0722][i];
+    }, 0);
+    const lum = luminance(['r', 'g', 'b'].map((k) => c[k] * c.opacity + bg[k] * (1 - c.opacity)));
+    const contrast = (ink) => { const rgb = d3.color(ink).rgb(), l = luminance([rgb.r, rgb.g, rgb.b]); return (Math.max(lum, l) + 0.05) / (Math.min(lum, l) + 0.05); };
+    return contrast(F.bg) > contrast(F.ink) ? F.bg : F.ink;
+  };
 
   // ── formatting ───────────────────────────────────────────────────
   F.fmt = { int: d3.format(','), p1: d3.format('.1f'), pct: (v) => d3.format('.1f')(v) + '%', rho: (v) => (v < 0 ? '−' : '+') + d3.format('.2f')(Math.abs(v)) };
@@ -68,6 +79,7 @@
   F.data = D;
   const hw = D.homework;
   F.assign = Object.fromEntries(hw.assignments.map((a) => [a.homework, a]));
+  F.ongoing = (h) => F.assign[h]?.observation_status === 'ongoing';
   F.windowOf = (ms) => hw.assignments.find((a) => ms >= Date.parse(a.start_local) && ms <= Date.parse(a.end_local));
   F.byProblem = Object.fromEntries(hw.event_progress.by_problem.map((r) => [r.problem_id, r]));
   F.progress = Object.fromEntries(hw.score_progression.map((r) => [r.problem_id, r]));

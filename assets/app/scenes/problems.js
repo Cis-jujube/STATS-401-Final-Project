@@ -1,8 +1,8 @@
 /* Figure 03 · Remaining problem gaps after three attempts.
-   31 problem slots. Each dot starts at the problem's mean best score (the gradebook view),
+   Published problem slots. Each dot starts at the problem's mean best observed score,
    falls to the mean first-submission score, then climbs through best-through-2,
    best-through-3 and the best observed. The same attempters are averaged at every stage;
-   a cumulative best is not the actual k-th score. The reading view (t ≥ 30) sorts all 31
+   a cumulative best is not the actual k-th score. The reading view (t ≥ 30) sorts all
    slots by the gap left after three tries and marks first ○, best through three ●, best ▮. */
 (function () {
   const F = window.Film;
@@ -18,27 +18,36 @@
     gain: { label: 'Total gain', cmp: (a, b) => b.best - b.first - (a.best - a.first) },
     gap3: { label: 'Gap after 3', cmp: (a, b) => b.gap3 - a.gap3 },
   };
-  const STAGES = ['First try', 'Best of 2', 'Best of 3', 'Final best'];
+  const STAGES = ['First try', 'Best of 2', 'Best of 3', 'Best observed'];
   const GAP_ROWS = rows.filter((r) => r.gap3 > 10).length;
-  const SPOT = 1354; // HW3 TicTacToe
+  const SPOT = rows.slice().sort((a, b) => a.first - b.first)[0].problem_id;
 
-  const st = { s: 3, userStage: null, userSort: null, sort: 'course', hover: null, init: false };
-  let svg, gRows, rowSel, gHead, gAxis, gKey, x, geo, spot, ctrlStage, ctrlSort, ctrlBox, glowUrl;
+  const st = { s: 3, userStage: null, userSort: null, sort: 'course', hover: null, init: false, page: 0, pageSort: null };
+  let svg, gRows, rowSel, gHead, gAxis, gKey, x, geo, spot, ctrlStage, ctrlSort, ctrlBox, glowUrl, pager, pageLabel, pagePrev, pageNext;
 
   function layoutRows(sortKey) {
-    const order = rows.slice().sort(SORTS[sortKey].cmp);
-    const grouped = sortKey === 'course';
+    const all = rows.slice().sort(SORTS[sortKey].cmp);
+    if (sortKey !== st.pageSort) { st.page = 0; st.pageSort = sortKey; st.init = false; }
+    const pages = geo.paged ? Math.ceil(all.length / geo.pageSize) : 1;
+    st.page = Math.min(st.page, pages - 1);
+    const start = geo.paged ? st.page * geo.pageSize : 0;
+    const order = geo.paged ? all.slice(start, start + geo.pageSize) : all;
+    pager.hidden = !geo.paged;
+    const label = `All ${rows.length} · ${start + 1}–${start + order.length} · Page ${st.page + 1}/${pages}`;
+    if (pageLabel.textContent !== label) pageLabel.textContent = label;
+    pagePrev.disabled = st.page === 0; pageNext.disabled = st.page === pages - 1;
+    const grouped = sortKey === 'course' && !geo.paged;
     let y = 0; const pos = new Map(); const heads = [];
     order.forEach((r, i) => {
       if (grouped && (i === 0 || order[i - 1].homework !== r.homework)) { if (i) y += 0.6; heads.push({ hw: r.homework, y }); y += 1; }
       pos.set(r, y); y += 1;
     });
-    return { pos, heads, total: y, order };
+    return { pos, heads, total: y, order, all };
   }
 
   F.scene({
     id: 'problems', title: 'Problems', duration: 54, enter: 'iris', flash: true, tint: 'rgba(57,135,229,.12)',
-    howto: 'Each row is a problem slot, averaged over the same attempters. Ring ○ = mean first try; dot ● = mean best at the chosen stage; tick ▮ = mean best observed; orange = gap left after three tries when it exceeds 10 points. A cumulative best is not the actual k-th score. Hover for exact values and retry statistics; click to select a problem for Figure 11’s problem view.',
+    howto: 'Each row is a problem slot, averaged over the same attempters. Ring ○ = first try; dot ● = best at the chosen stage; tick ▮ = best observed; orange = gap after three tries >10 points. On smaller screens, use the previous/next row-page buttons to read every slot; sorting restarts at page one. Pagination and the Lens change presentation, not statistics. Cumulative best is not an actual k-th score. Hover for values; click to follow a problem into Figure 11.',
     onBeat() { st.userStage = null; st.userSort = null; },
     snap() { st.init = false; }, // a hard cut in the Loop reel lands rows exactly, no slide
     mount(el) {
@@ -73,7 +82,8 @@
       // reading-view key: the three stages and the gap, with the selection stated
       gKey = svg.append('g').attr('class', 'pkey').attr('pointer-events', 'none');
       spot = svg.append('g').attr('class', 'spot').attr('pointer-events', 'none');
-      spot.append('text').attr('class', 'k mono').style('font-size', '10.5px').attr('fill', F.color.HW3).text('HW3 · TICTACTOE · 39 ATTEMPTERS');
+      const spotlight = rows.find((r) => r.problem_id === SPOT);
+      spot.append('text').attr('class', 'k mono').style('font-size', '10.5px').attr('fill', F.color[spotlight.homework]).text(`${spotlight.homework} · ${spotlight.name.toUpperCase()} · ${spotlight.n} ATTEMPTERS`);
       spot.append('text').attr('class', 'big a').style('font-size', '54px').style('font-weight', 300);
       spot.append('text').attr('class', 'big arrow').style('font-size', '40px').style('font-weight', 300).attr('fill', F.muted).text('→');
       spot.append('text').attr('class', 'big b').style('font-size', '54px').style('font-weight', 400).attr('fill', F.ember).text('100');
@@ -82,6 +92,15 @@
       ctrlBox = html.append('div').attr('class', 'ctrls').node();
       ctrlStage = F.stageSlider(ctrlBox, ['First', 'Best by 2', 'Best by 3', 'Best'], (v, drag) => { st.userStage = v; st.dragging = drag; });
       ctrlSort = F.segmented(ctrlBox, 'Sort', Object.entries(SORTS).map(([k, s]) => [k, s.label]), (v) => (st.userSort = v));
+      pager = html.append('div').attr('class', 'problem-pager').attr('role', 'group').attr('aria-label', 'Problem rows: read all slots in pages').node();
+      const pageButton = (label, aria, delta) => {
+        const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.setAttribute('aria-label', aria);
+        b.addEventListener('click', (e) => { e.stopPropagation(); st.page += delta; st.init = false; F.tip.hide(); F.userTookWheel && F.userTookWheel(); });
+        pager.appendChild(b); return b;
+      };
+      pagePrev = pageButton('←', 'Previous page of problem rows', -1);
+      pageLabel = document.createElement('span'); pageLabel.setAttribute('role', 'status'); pageLabel.setAttribute('aria-live', 'polite'); pager.appendChild(pageLabel);
+      pageNext = pageButton('→', 'Next page of problem rows', 1);
     },
     resize(L) {
       const c = L.chart, labelW = Math.min(L.narrow ? 120 : 200, c.w * 0.3);
@@ -91,10 +110,18 @@
       ctrlStage.el.querySelectorAll('.ss-ticks button').forEach((b, i) => (b.textContent = (L.narrow ? short : long)[i]));
       const ctrlH = ctrlBox.offsetHeight || 44; // controls may wrap onto two rows on mid-size screens
       geo = { c, labelW, x0: c.x + labelW + 18, x1: c.x + c.w - (L.narrow ? 40 : 70), top: c.y - 6 + ctrlH + (L.narrow ? 40 : 44), bottom: c.y + c.h - 34 };
-      x = d3.scaleLinear().domain([30, 100]).range([geo.x0, geo.x1]);
+      geo.paged = (geo.bottom - geo.top) / rows.length < 13;
+      if (geo.paged) {
+        Object.assign(pager.style, { left: c.x + 'px', top: geo.top - 20 + 'px', width: c.w + 'px' });
+        geo.top += 30;
+      }
+      geo.pageSize = Math.max(1, Math.min(12, Math.floor((geo.bottom - geo.top) / 22)));
+      st.page = 0;
+      const low = Math.max(0, Math.floor(d3.min(rows, (r) => r.first) / 10) * 10);
+      x = d3.scaleLinear().domain([low, 100]).range([geo.x0, geo.x1]);
       Object.assign(ctrlBox.style, { left: c.x + 'px', top: c.y - 6 + 'px', maxWidth: c.w + 'px' });
       gAxis.selectAll('*').remove();
-      const ticks = d3.range(40, 101, 10);
+      const ticks = d3.range(low, 101, 10);
       gAxis.selectAll('line').data(ticks).join('line').attr('x1', x).attr('x2', x).attr('y1', geo.top - 6).attr('y2', geo.bottom)
         .attr('stroke', (d) => (d === 100 ? 'rgba(255,181,71,.35)' : 'rgba(236,231,221,.06)'));
       gAxis.selectAll('text.tk').data(ticks).join('text').attr('class', 'tk mono').attr('x', x).attr('y', geo.bottom + 16).attr('text-anchor', 'middle').style('font-size', '10.5px').attr('fill', F.muted).text((d) => d);
@@ -109,7 +136,7 @@
       const lay = layoutRows(st.sort);
       const rowH = Math.min(22, (geo.bottom - geo.top) / lay.total);
       const yOf = (r) => geo.top + lay.pos.get(r) * rowH + rowH / 2;
-      rows.forEach((r) => { const ty = yOf(r); r.y = st.init ? F.approach(r.y, ty, dt, 7) : ty; });
+      lay.order.forEach((r) => { const ty = yOf(r); r.y = st.init ? F.approach(r.y, ty, dt, 7) : ty; });
       st.init = true;
       // stage
       const tlStage = (i) => {
@@ -126,7 +153,7 @@
 
       const roadA = Math.max(F.seg(t, 9.4, 10.8), st.userStage != null ? 1 : 0);
       const gapPhase = F.seg(t, 22.3, 23.3) * (1 - F.seg(t, 39.6, 40.4));
-      const rd = F.seg(t, 30.4, 31.6); // reading view: all 31 sorted by gap, three stages marked
+      const rd = F.seg(t, 30.4, 31.6); // reading view: all slots sorted by gap, three stages marked
       const spotPhase = F.seg(t, 40.2, 41) * (1 - F.seg(t, 46.6, 47.4));
       const enter = F.seg(t, 0.3, 2.2);
       gKey.attr('opacity', rd * (1 - spotPhase * 0.7));
@@ -134,7 +161,9 @@
       rowSel.each(function (r, i) {
         const g = d3.select(this);
         const oi = lay.order.indexOf(r);
-        let s = st.userStage != null ? st.s : tlStage(oi);
+        if (oi === -1) { g.attr('display', 'none'); return; }
+        g.attr('display', null);
+        let s = st.userStage != null ? st.s : tlStage(lay.all.indexOf(r));
         const s0 = Math.max(0, Math.min(2, Math.floor(s))), f = s - s0;
         const val = r.v[s0] + (r.v[Math.min(3, s0 + 1)] - r.v[s0]) * f;
         const isGap = r.gap3 > 10, isSpot = r.problem_id === SPOT, isSel = F.state.selected === r.problem_id, isHover = st.hover === r;
@@ -144,9 +173,10 @@
         const rowIn = F.stagger(t, 0.2, 2.4, oi, rows.length, 0.6, F.ease.out);
         g.attr('transform', `translate(0,${r.y})`).attr('opacity', a * rowIn);
         g.select('.hit').attr('x', geo.c.x).attr('y', -rowH / 2).attr('width', geo.x1 - geo.c.x + 50).attr('height', rowH);
-        const named = !F.layout.narrow || isSel || isHover || isSpot * spotPhase > 0.5 || (isGap && gapPhase > 0.5);
+        const named = geo.paged || !F.layout.narrow || isSel || isHover || isSpot * spotPhase > 0.5 || (isGap && gapPhase > 0.5);
+        const name = geo.paged ? `${r.homework} ${r.name}` : r.name;
         g.select('.name').attr('x', geo.c.x + geo.labelW).style('font-size', `${Math.min(11.5, Math.max(9, rowH * 0.9))}px`).attr('opacity', named ? 1 : 0)
-          .text(F.layout.narrow && r.name.length > 15 ? r.name.slice(0, 14) + '…' : r.name).attr('fill', isSel || isHover || isSpot * spotPhase > 0.5 ? F.ink : F.ink2).style('font-weight', isSel ? 600 : 400);
+          .text(F.layout.narrow && name.length > 18 ? name.slice(0, 17) + '…' : name).attr('fill', isSel || isHover || isSpot * spotPhase > 0.5 ? F.ink : F.ink2).style('font-weight', isSel ? 600 : 400);
         g.select('.track').attr('x1', x(r.first)).attr('x2', x(r.best)).attr('opacity', roadA);
         g.select('.road').attr('x1', x(r.first)).attr('x2', x(Math.max(r.first, val))).attr('opacity', roadA);
         g.select('.best').attr('x1', x(r.best)).attr('x2', x(r.best)).attr('y1', -rowH * 0.3).attr('y2', rowH * 0.3).attr('opacity', roadA * 0.7);
@@ -169,15 +199,15 @@
         .text((d) => `${d.hw} · ${F.assign[d.hw].problems} PROBLEMS`);
       gAxis.attr('opacity', enter);
 
-      // TicTacToe spotlight counter
+      // Spotlight for the lowest mean first score in the current public aggregate.
       const r = rows.find((d) => d.problem_id === SPOT);
       const cur = r.v[2] + (r.v[3] - r.v[2]) * F.seg(t, 40.6, 43.2);
       const sx = geo.x0 + 10, sy = geo.top + (geo.bottom - geo.top) * 0.18;
       spot.attr('opacity', spotPhase).attr('transform', `translate(${sx},${sy})`);
       spot.select('.k').attr('y', -52);
-      spot.select('.a').attr('y', 0).attr('fill', F.ink).text('37.9');
+      spot.select('.a').attr('y', 0).attr('fill', F.ink).text(F.fmt.p1(r.first));
       spot.select('.arrow').attr('x', 118).attr('y', -6);
-      spot.select('.b').attr('x', 168).attr('y', 0).text(F.fmt.p1(Math.max(cur, 73.8)).replace('.0', ''));
+      spot.select('.b').attr('x', 168).attr('y', 0).text(F.fmt.p1(cur).replace('.0', ''));
     },
   });
 
@@ -185,14 +215,15 @@
     gKey.selectAll('*').remove();
     const y = geo.top - (L.narrow ? 16 : 20), nar = L.narrow;
     const items = [['first', 'First try'], ['dot', 'Best through 3'], ['best', 'Best observed'], ['gap', `Gap > 10 pp (${GAP_ROWS} of ${rows.length})`]];
-    let xx = geo.x0;
+    let xx = nar ? geo.c.x : geo.x0;
     items.forEach(([k, label]) => {
       const g = gKey.append('g').attr('transform', `translate(${xx},${y})`);
       if (k === 'first') g.append('circle').attr('r', 3.4).attr('fill', F.bg).attr('stroke', F.ink2).attr('stroke-width', 1.3);
       if (k === 'dot') g.append('circle').attr('r', 4).attr('fill', F.ink);
       if (k === 'best') g.append('line').attr('y1', -5).attr('y2', 5).attr('stroke', F.ink).attr('stroke-width', 1.4);
       if (k === 'gap') g.append('line').attr('x1', -7).attr('x2', 7).attr('stroke', F.signal).attr('stroke-width', 2.4).attr('stroke-linecap', 'round');
-      const tx = g.append('text').attr('class', 'mono').attr('x', 10).attr('dy', '0.35em').style('font-size', nar ? '9px' : '10.5px').attr('fill', F.ink2).text(nar ? label.replace('Best through 3', 'Best by 3').replace('Best observed', 'Best').replace(/ \(.*\)/, '') : label);
+      const short = { first: '1st', dot: 'By 3', best: 'Best', gap: 'Gap >10 pp' };
+      const tx = g.append('text').attr('class', 'mono').attr('x', 10).attr('dy', '0.35em').style('font-size', nar ? '9px' : '10.5px').attr('fill', F.ink2).text(nar ? short[k] : label);
       xx += (tx.node().getComputedTextLength ? tx.node().getComputedTextLength() : label.length * 6) + (nar ? 24 : 34);
     });
     gKey.append('text').attr('class', 'note sel').attr('x', geo.c.x).attr('y', y).attr('dy', '0.35em').style('font-size', nar ? '9.5px' : '11px')
@@ -201,9 +232,9 @@
 
   function tipHtml(d) {
     const e = d.ev;
-    const rows = [['Attempters', d.n], ['First try', F.fmt.p1(d.first)], ['Best of 2', F.fmt.p1(d.best2)], ['Best of 3', F.fmt.p1(d.best3)], ['Final best', F.fmt.p1(d.best)], ['Gap after 3', F.fmt.p1(d.gap3)]];
+    const rows = [['Attempters', d.n], ['First try', F.fmt.p1(d.first)], ['Best of 2', F.fmt.p1(d.best2)], ['Best of 3', F.fmt.p1(d.best3)], ['Best observed', F.fmt.p1(d.best)], ['Gap after 3', F.fmt.p1(d.gap3)]];
     if (e && e.state === 'visible') rows.push(['Retries → new best', `${e.new_bests} / ${e.eligible_retries} (${F.fmt.pct(e.improvement_pct)})`]);
     return F.tip.html({ kicker: `${d.homework} · problem ${d.problem_order}`, color: F.color[d.homework], title: d.name, rows,
-      note: e && e.state !== 'visible' ? 'Retry statistics withheld (fewer than five students).' : 'Means over the same attempters. Click to follow this problem.' });
+      note: `${F.ongoing(d.homework) ? 'Ongoing: best observed is not a final score. ' : ''}${e && e.state !== 'visible' ? 'Retry statistics withheld (fewer than five students).' : 'Means over the same attempters. Click to follow this problem.'}` });
   }
 })();

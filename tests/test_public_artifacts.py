@@ -57,10 +57,10 @@ class PublicArtifacts(unittest.TestCase):
         withheld = d['window_submissions'] - sum(c['submissions'] or 0 for c in d['calendar'])
         peak = max(visible, key=lambda c: c['submissions'])
         remaining = [r for r in d['score_progression'] if r['best'] - r['best3'] > 10]
-        self.assertEqual((len(visible), withheld), (37, 979))
+        self.assertEqual((len(visible), withheld), (38, 1485))
         self.assertEqual((peak['date'], peak['hour'], peak['submissions'], peak['contributors']),
                          ('2026-08-29', 12, 153, 12))
-        self.assertEqual((len(remaining), len(d['score_progression'])), (10, 31))
+        self.assertEqual((len(remaining), len(d['score_progression'])), (13, 43))
         self.assertEqual(max(d['score_progression'], key=lambda r: r['best'] - r['best3'])['problem_name'],
                          '26s3HW3-EvenOrOdd')
         companion = (ROOT/'analysis.html').read_text()
@@ -96,8 +96,8 @@ class PublicArtifacts(unittest.TestCase):
             self.assertNotIn(f'assets/story/{figure}.svg', story)
             self.assertIn(f'assets/figures/{figure}.svg', companion)
         mobile_score = (ROOT/'assets/story/03-score-progression-mobile.svg').read_text()
-        self.assertIn('8 selected: top two remaining gaps within each homework.', mobile_score)
-        self.assertIn('All 31 problem slots and values are in the analysis page.', mobile_score)
+        self.assertIn('10 selected: top two remaining gaps within each homework.', mobile_score)
+        self.assertIn('All 43 problem slots and values are in the analysis page.', mobile_score)
         for name, parser in pages.items():
             for target, fragment in parser.fragments:
                 self.assertIn(fragment, pages[target or name].ids, f'{name} -> {target}#{fragment}')
@@ -115,13 +115,21 @@ class PublicArtifacts(unittest.TestCase):
 
     def test_refreshed_event_totals_and_masked_partitions(self):
         d = json.loads((ROOT/'data/summary.json').read_text())
-        self.assertEqual([a['homework'] for a in d['assignments']],['HW1','HW2','HW3','HW4'])
-        self.assertEqual((d['cohort_members'],d['window_submissions'],d['window_submitters']),(42,2807,39))
+        self.assertEqual([a['homework'] for a in d['assignments']],['HW1','HW2','HW3','HW4','HW5'])
+        self.assertEqual((d['cohort_members'],d['window_submissions'],d['window_submitters']),(42,3359,39))
+        self.assertEqual(d['snapshot_utc'],'2026-10-13 06:13:19.647089')
+        self.assertEqual(d['assignments'][3]['end_local'],'2026-10-02T23:59:00+08:00')
+        self.assertEqual(d['ongoing_homeworks'],['HW5'])
+        self.assertEqual(d['assignments'][4]['observed_until_local'],d['observation_cutoff_local'])
+        future = next(r for r in d['event_progress']['by_phase'] if r['homework']=='HW5' and r['phase']==4)
+        self.assertEqual(future['state'],'not_observed')
+        self.assertIsNone(future['eligible_retries'])
+        self.assertIsNone(future['improvement_pct'])
         event = d['event_progress']
         eligible = sum(r['eligible_retries'] for r in event['by_homework'])
         improvements = sum(r['new_bests'] for r in event['by_homework'])
         self.assertEqual(eligible+sum(event['eligibility_counts'].values()),d['window_submissions'])
-        self.assertEqual((eligible,improvements),(1222,468))
+        self.assertEqual((eligible,improvements),(1345,547))
         self.assertEqual(eligible,sum(r['eligible_retries'] for r in event['by_gap']))
         self.assertEqual(improvements,sum(r['new_bests'] for r in event['by_gap']))
         for name in ('by_homework','by_gap','by_problem','by_phase'):

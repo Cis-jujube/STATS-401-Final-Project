@@ -1,4 +1,4 @@
-/* Submission particles: one dot per in-window homework submission (2,807).
+/* Submission particles: one dot per published in-window homework submission.
    Scenes declare formations as keyframes on their local timeline; the engine
    blends from the previous formation with per-dot stagger and a curling path.
    Positions are pure functions of time + layout, so scrubbing is exact. */
@@ -17,7 +17,7 @@
   P.hwIdx = hwIdx; P.rank = rank;
 
   // seeded per-dot constants
-  const r = F.rng(2807);
+  const r = F.rng(N);
   const K = {}; ['sx', 'sy', 'u', 'v', 'd', 'ph', 'curl', 'sz', 'spd', 'gx', 'gy'].forEach((k) => (K[k] = new Float32Array(N)));
   for (let i = 0; i < N; i++) {
     K.sx[i] = r(); K.sy[i] = r(); K.u[i] = r(); K.v[i] = r(); K.d[i] = r(); K.ph[i] = r() * Math.PI * 2;
@@ -25,9 +25,9 @@
   }
   P.K = K;
 
-  // 0–3 homework, 4 withheld, 5 pooled/neutral, 6 new best (ember), 7 ignition flash
+  // Reserve homework colours first; aggregate status colours follow the last homework.
   const COLORS = [...F.HW.map((h) => F.color[h]), F.withheld, '#a3abbb', F.ember, '#fff4dc'];
-  P.C = { WITHHELD: 4, NEUTRAL: 5, EMBER: 6, FLASH: 7 };
+  P.C = { WITHHELD: F.HW.length, NEUTRAL: F.HW.length + 1, EMBER: F.HW.length + 2, FLASH: F.HW.length + 3 };
   const buf = () => ({ x: new Float32Array(N), y: new Float32Array(N), a: new Float32Array(N), s: new Float32Array(N), c: new Uint8Array(N), glow: 0, glowSet: null, repel: false });
   const A = buf(), B = buf(), OUT = buf();
 
@@ -103,17 +103,17 @@
     fillIdentityColor(o); o.glow = env.kf.glow ?? 1; o.glowSet = em == null ? null : [em]; o.repel = true;
   });
 
-  // ── four stacks: a unit chart, one dot per submission ────────────
+  // ── homework stacks: a unit chart, one dot per submission ──────────
   P.stackGeom = (L = F.layout) => {
     const box = L.chart, gutterR = L.narrow ? 0.34 : 0.5;
     const top = L.narrow ? 64 : 118, bottom = L.narrow ? 46 : 92, maxN = Math.max(...counts);
     // pick the dots-per-row that gives the largest dot for this box (wide boxes → tall stacks)
     let cols = 22, sp = 0;
     for (let c = 10; c <= 40; c++) {
-      const s = Math.min(7.2, (box.h - top - bottom) / Math.ceil(maxN / c), box.w / (4 * c + 3 * c * gutterR));
+      const s = Math.min(7.2, (box.h - top - bottom) / Math.ceil(maxN / c), box.w / (F.HW.length * c + (F.HW.length - 1) * c * gutterR));
       if (s > sp + 0.05 || (!L.narrow && c === 22 && s >= sp - 0.05)) { sp = s; cols = c; }
     }
-    const colW = cols * sp, gutter = colW * gutterR, total = 4 * colW + 3 * gutter;
+    const colW = cols * sp, gutter = colW * gutterR, total = F.HW.length * colW + (F.HW.length - 1) * gutter;
     const x0 = box.x + (box.w - total) / 2, base = box.y + box.h - bottom;
     return { cols, sp, colW, gutter, x0, base, xs: F.HW.map((_, h) => x0 + h * (colW + gutter)), heights: counts.map((c) => Math.ceil(c / cols) * sp) };
   };

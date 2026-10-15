@@ -3,8 +3,8 @@
    prior best was below 100. New best = strictly beats every earlier score. Units are retry
    events, not students; particles are aggregate units assigned from the published counts.
    Scene timeline (local seconds):
-     0–7    split: first tries / eligible retries / after full marks (2,807 → 1,131 + 1,222 + 454)
-     7–24   wait-time waffle: 1,222 squares grouped by elapsed gap; 468 ignite
+     0–7    split: first tries / eligible retries / after full marks and judge errors
+     7–24   wait-time waffle: eligible retries grouped by elapsed gap; new bests ignite
      24–34  Figure 11 reading view: new-best rates by homework and by gap, as 100% unit strips
      34–51  problems: one circle per visible problem (Showcase)
      51–61  Figure 12 counts: retries and new bests in five equal-duration window phases
@@ -24,7 +24,7 @@
   // squares: fixed random layout order + sorted order (new bests first)
   const squares = [];
   {
-    const r = F.rng(1222);
+    const r = F.rng(TOTAL);
     gaps.forEach((g, gi) => {
       const n = g.eligible_retries, perm = d3.shuffle(d3.range(n), r);
       const bestSet = new Set(perm.slice(0, g.new_bests));
@@ -41,13 +41,14 @@
   const SCHED = [[24, 25.2], [34, 35.2], [51, 52.2], [61, 62.2]];
   const tlViewAt = (t) => { let v = 0; SCHED.forEach(([a, b], k) => { if (t >= a) v = k + F.seg(t, a, b, F.ease.linear); }); return v; };
 
-  const st = { view: 0, userView: null, hover: null, chapterFig: null, route: 'showcase' };
+  const st = { view: 0, userView: null, hover: null, chapterFig: null, route: 'showcase', phasePage: 0 };
   const O = 7; // the split intro comes first; the waffle and later views keep their timings shifted by O
   let svg, geo, gSplit, gWait, gRates, gPhase, gProb, waitLabels, phaseCells, probDots, ctrlView, ctrlBox, px, py, pr, hatchUrl, RG = null;
+  let phasePager, phasePageLabel, phasePrev, phaseNext;
 
   // ── particles: every submission is a first try, a retry, or came after full marks ──
   // Per homework: first tries = attempt-1 events, retries = eligible retries; the rest came
-  // after full credit (441) or hit a judge error (13). Totals reconcile to 2,807 exactly.
+  // after full credit or hit a judge error. Totals reconcile to all published submissions.
   const P = F.particles, N = P.N, hwData = F.data.homework;
   const firstH = F.HW.map((h) => hwData.attempt_score_series.find((r) => r.homework === h && r.attempt === 1).submissions);
   const retryH = F.HW.map((h) => byHw.find((r) => r.homework === h).eligible_retries);
@@ -162,7 +163,7 @@
     id: 'retries', title: 'Retries', duration: 71, enter: 'wipe', tint: 'rgba(255,181,71,.10)',
     particles: [{ at: 0, form: 'retries', dur: 3.0, curl: 1.0, spread: 0.5 }],
     howto: (fig) => (fig === '12'
-      ? '<b>Counts</b>: bar height = eligible retries in that fifth of the window; the lit part set a new best. <b>Phase rates</b>: each cell is new bests ÷ eligible retries on one 0–100% colour scale, with S distinct students. Hatched = withheld (fewer than five students, or a secondary mask), not zero. Phases are equal fractions of each window, so their clock length differs by homework.'
+      ? '<b>Counts</b>: height = eligible retries in that fifth of the configured window; the lit part set a new best. <b>Phase rates</b>: new bests ÷ eligible retries on 0–100%, with S students. Short screens offer homework row pages; use both arrows to read all five. Hatched = withheld; dashed empty = not yet observed; * = partially observed at snapshot. None means zero. HW5 is ongoing. Equal window fractions have different clock lengths; no deadline effect is estimated.'
       : '<b>By gap</b>: one square per eligible retry, grouped by clock time since the previous try; lit squares set a new best. <b>Rates</b>: each strip holds one group’s retries; the lit share of its length is the new-best rate, its density the denominator. S = distinct students; events repeat within students. <b>Problems</b> (Showcase): x = retries (log), y = share of new bests, size = students.'),
     onBeat() { st.userView = null; },
     /** Each figure offers only its own views: 11 = gap/rates (+ problems in Showcase), 12 = counts/rates. */
@@ -170,6 +171,7 @@
       st.chapterFig = seg ? seg.fig : null; st.route = seg ? seg.route : 'showcase';
       const allow = st.chapterFig === '12' ? ['3', '4'] : st.route === 'core' ? ['0', '1'] : ['0', '1', '2'];
       ctrlView.el.querySelectorAll('button').forEach((b) => (b.hidden = !allow.includes(b.dataset.value)));
+      if (st.chapterFig === '12' && phaseGeo?.paged && F.state.lens) { st.phasePage = Math.floor(F.HW.indexOf(F.state.lens) / phaseGeo.pageSize); buildPhase(F.layout); }
     },
     mount(el) {
       svg = d3.select(el).append('svg').attr('class', 'viz');
@@ -199,6 +201,16 @@
       const html = d3.select(el).append('div').attr('class', 'html-layer');
       ctrlBox = html.append('div').attr('class', 'ctrls').node();
       ctrlView = F.segmented(ctrlBox, 'View', VIEWS, (v) => (st.userView = +v));
+      phasePager = html.append('div').attr('class', 'problem-pager phase-pager').attr('role', 'group').attr('aria-label', 'Homework phase rows: read all five homeworks').node();
+      phasePager.hidden = true;
+      const pageButton = (text, aria, delta) => {
+        const b = document.createElement('button'); b.type = 'button'; b.textContent = text; b.setAttribute('aria-label', aria);
+        b.addEventListener('click', (e) => { e.stopPropagation(); st.phasePage += delta; F.tip.hide(); buildPhase(F.layout); F.userTookWheel && F.userTookWheel(); });
+        phasePager.appendChild(b); return b;
+      };
+      phasePrev = pageButton('←', 'Previous homework phase page', -1);
+      phasePageLabel = document.createElement('span'); phasePageLabel.setAttribute('role', 'status'); phasePageLabel.setAttribute('aria-live', 'polite'); phasePager.appendChild(phasePageLabel);
+      phaseNext = pageButton('→', 'Next homework phase page', 1);
     },
     resize(L) {
       const c = L.chart;
@@ -222,6 +234,7 @@
       gRates.attr('opacity', aR).style('pointer-events', aR > 0.5 ? null : 'none');
       gProb.attr('opacity', aPr).attr('transform', `translate(0,${(1 - aPr) * 30})`).style('pointer-events', aPr > 0.5 ? null : 'none');
       gPhase.attr('opacity', aPh).attr('transform', `translate(0,${(1 - aPh) * 30})`).style('pointer-events', aPh > 0.5 ? null : 'none');
+      phasePager.hidden = !phaseGeo.paged || st.chapterFig !== '12' || aPh < 0.5;
       renderWaitLabels(t, aW);
       // a viewer who jumps ahead sees each view fully drawn
       if (aR > 0.001) renderRates(st.userView != null ? Math.max(t0, 29) : t0);
@@ -246,7 +259,7 @@
     b.append('text').attr('class', 'big').attr('x', ax).attr('text-anchor', anchor).attr('y', -22).style('font-size', L.narrow ? '22px' : '34px').style('font-weight', 330).attr('fill', (i) => (i === 1 ? F.ember : F.ink)).text((i) => F.fmt.int(CAT_TOTAL[i]));
     b.append('text').attr('class', 'mono').attr('x', ax).attr('text-anchor', anchor).attr('y', -4).style('font-size', L.narrow ? '9px' : '10.5px').style('letter-spacing', '.08em').attr('fill', F.ink2).text((i) => (L.narrow ? labels[i].split(' · ')[0].replace('Eligible ', '') : labels[i]).toUpperCase());
     b.on('pointerenter', (e, i) => F.tip.show(F.tip.html({ kicker: labels[i], title: `${F.fmt.int(CAT_TOTAL[i])} submissions`, rows: F.HW.map((h, k) => [h, F.fmt.int(CAT[i][k])]),
-      note: i === 1 ? 'Eligible retries: after a valid baseline, while the best was still below 100.' : i === 2 ? '441 after full credit and 13 internal judge errors (split by homework not published).' : 'The first scored submission on each problem sets the baseline.' }), e))
+      note: i === 1 ? 'Eligible retries: after a valid baseline, while the best was still below 100.' : i === 2 ? `${hwData.event_progress.eligibility_counts.after_full_credit} after full credit and ${hwData.event_progress.eligibility_counts.internal_errors} internal judge errors (split by homework not published).` : 'The first scored submission on each problem sets the baseline.' }), e))
       .on('pointermove', (e) => F.tip.move(e)).on('pointerleave', () => F.tip.hide());
   }
 
@@ -297,7 +310,7 @@
         r.append('line').attr('class', 'tick').attr('x1', xr).attr('x2', xr).attr('y1', S.yc - S.hb / 2 - 7).attr('y2', S.yc + S.hb / 2 + 3).attr('stroke', F.ink).attr('stroke-width', 1.3);
         r.append('path').attr('class', 'dia').attr('d', d3.symbol(d3.symbolDiamond, nar ? 34 : 54)()).attr('transform', `translate(${xr},${S.yc - S.hb / 2 - 8})`)
           .attr('fill', kind === 'hw' ? F.color[d.homework] : F.ember).attr('stroke', F.bg).attr('stroke-width', 1.2);
-        const name = kind === 'hw' ? d.homework : nar ? shortGap(d.label) : d.label;
+        const name = kind === 'hw' ? d.homework + (F.ongoing(d.homework) ? ' *' : '') : nar ? shortGap(d.label) : d.label;
         r.append('text').attr('class', 'nm').attr('x', S.x0 - 10).attr('y', S.yc - (nar ? 2 : 4)).attr('text-anchor', 'end').style('font-size', nar ? '10.5px' : '12.5px').style('font-weight', 500)
           .attr('fill', kind === 'hw' ? F.color[d.homework] : F.ink).text(name);
         r.append('text').attr('class', 'den mono').attr('x', S.x0 - 10).attr('y', S.yc + (nar ? 9 : 11)).attr('text-anchor', 'end').style('font-size', nar ? '8.5px' : '10px').attr('fill', F.ink2)
@@ -306,14 +319,14 @@
           .text(F.fmt.pct(d.improvement_pct));
       });
       rows.on('pointerenter', (e, d) => F.tip.show(kind === 'hw'
-        ? F.tip.html({ kicker: 'Eligible retries · homework', color: F.color[d.homework], title: `${d.homework}: ${F.fmt.pct(d.improvement_pct)} set a new best`, rows: [['New bests', d.new_bests], ['Eligible retries', d.eligible_retries], ['Students (S)', d.contributors]], note: 'Event rate: students can contribute many retries.' })
+        ? F.tip.html({ kicker: 'Eligible retries · homework', color: F.color[d.homework], title: `${d.homework}: ${F.fmt.pct(d.improvement_pct)} set a new best`, rows: [['New bests', d.new_bests], ['Eligible retries', d.eligible_retries], ['Students (S)', d.contributors]], note: `${F.ongoing(d.homework) ? 'Ongoing at snapshot: this rate is provisional. ' : ''}Event rate: students can contribute many retries.` })
         : gapTip(d), e)).on('pointermove', (e) => F.tip.move(e)).on('pointerleave', () => F.tip.hide());
       return g;
     };
     panel(RG.A, nar ? '(a) Within each homework' : '(a) Within each homework', byHw, RG.hw, 'hw');
     panel(RG.B, nar ? '(b) By gap since the previous try' : '(b) By gap since the previous valid try', gaps, RG.gap, 'gap');
     gRates.append('text').attr('class', 'note foot').attr('x', L.chart.x).attr('y', L.chart.y + L.chart.h - (nar ? 4 : 14))
-      .text(nar ? '1 square = 1 eligible retry · lit = new best' : 'One square = one eligible retry · lit = new best · strip length = 100% of the group, so sparse strips have small denominators');
+      .text(nar ? '1 square = 1 retry · lit = new best · HW5* ongoing' : 'One square = one eligible retry · lit = new best · HW5* ongoing · sparse strips have small denominators');
   }
   function renderRates(t) {
     const p = F.seg(t, 25.4, 27.2, F.ease.outExpo), lab = F.seg(t, 26.2, 27.6);
@@ -326,19 +339,30 @@
 
   // ── deadline phases: counts (bars), then rates (matrix) ──────────
   let phaseGeo;
+  F.on('lens', (h) => {
+    if (!h || !phaseGeo?.paged || st.chapterFig !== '12') return;
+    st.phasePage = Math.floor(F.HW.indexOf(h) / phaseGeo.pageSize); buildPhase(F.layout);
+  });
   const rateColor = d3.scaleSequential(d3.interpolateRgbBasis(['#141a23', '#2f2a26', '#7a4d1d', '#d98a2b', '#ffd38f'])).domain([0, 100]);
   function buildPhase(L) {
     gPhase.selectAll('*').remove();
-    const c = L.chart, nar = L.narrow, top = c.y + 84, bottom = c.y + c.h - (nar ? 46 : 54), left = c.x + (nar ? 44 : 110), right = c.x + c.w - 10;
-    const rowH = (bottom - top) / 4, colW = (right - left) / 5;
-    phaseGeo = { top, bottom, left, right, rowH, colW, ch: rowH * 0.74, cw: colW - (nar ? 4 : 8), nar };
+    const c = L.chart, nar = L.narrow, paged = (c.h - 84 - (nar ? 46 : 54)) / F.HW.length < 46;
+    const top = c.y + (paged ? 86 : 84), bottom = c.y + c.h - (nar ? 46 : 54), left = c.x + (nar ? 44 : 110), right = c.x + c.w - 10;
+    const pageSize = paged ? Math.max(1, Math.floor((bottom - top) / 50)) : F.HW.length;
+    const pages = Math.ceil(F.HW.length / pageSize); st.phasePage = F.clamp(st.phasePage, 0, pages - 1);
+    const shown = F.HW.slice(st.phasePage * pageSize, st.phasePage * pageSize + pageSize);
+    const rowH = (bottom - top) / shown.length, colW = (right - left) / 5;
+    phaseGeo = { top, bottom, left, right, rowH, colW, ch: rowH * 0.74, cw: colW - (nar ? 4 : 8), nar, paged, pageSize };
+    Object.assign(phasePager.style, { left: c.x + 'px', top: c.y + 32 + 'px', width: c.w + 'px' });
+    phasePageLabel.textContent = `${shown.join(' / ')} · All ${F.HW.length} · Page ${st.phasePage + 1}/${pages}`;
+    phasePrev.disabled = st.phasePage === 0; phaseNext.disabled = st.phasePage === pages - 1;
     const y = d3.scaleLinear().domain([0, d3.max(phases, (p) => p.eligible_retries || 0)]).range([0, rowH * 0.66]);
     phaseGeo.y = y;
     gPhase.selectAll('text.col').data(['0–20%', '20–40%', '40–60%', '60–80%', '80–100%']).join('text').attr('class', 'col mono')
-      .attr('x', (d, i) => left + colW * (i + 0.5)).attr('y', top - 22).attr('text-anchor', 'middle').style('font-size', nar ? '9px' : '10.5px').attr('fill', F.muted).text((d, i) => (i === 4 && !nar ? d + ' · due' : d));
-    gPhase.append('text').attr('class', 'axis-title').attr('x', left).attr('y', top - 44).text(nar ? 'Window elapsed →' : 'Share of the homework window elapsed · opening → deadline →');
-    const rows = gPhase.selectAll('g.prow').data(F.HW).join('g').attr('class', 'prow').attr('transform', (d, i) => `translate(0,${top + rowH * i})`);
-    rows.append('text').attr('class', 'mono').attr('x', c.x).attr('y', rowH * 0.42).style('font-size', '12px').style('font-weight', 500).attr('fill', (d) => F.color[d]).text((d) => d);
+      .attr('x', (d, i) => left + colW * (i + 0.5)).attr('y', top - (paged ? 12 : 22)).attr('text-anchor', 'middle').style('font-size', nar ? '9px' : '10.5px').attr('fill', F.muted).text((d, i) => (i === 4 && !nar ? d + ' · due' : d));
+    if (!paged) gPhase.append('text').attr('class', 'axis-title').attr('x', left).attr('y', top - 44).text(nar ? 'Window elapsed →' : 'Share of the homework window elapsed · opening → deadline →');
+    const rows = gPhase.selectAll('g.prow').data(F.HW).join('g').attr('class', 'prow').attr('display', (d) => shown.includes(d) ? null : 'none').attr('transform', (d) => `translate(0,${top + rowH * Math.max(0, shown.indexOf(d))})`);
+    rows.append('text').attr('class', 'mono').attr('x', c.x).attr('y', rowH * 0.42).style('font-size', nar ? '10.5px' : '12px').style('font-weight', 500).attr('fill', (d) => F.color[d]).text((d) => d);
     rows.append('text').attr('class', 'note').attr('x', c.x).attr('y', rowH * 0.42 + 15).style('font-size', '10px')
       .text((d) => `${nar ? '' : 'phase ≈ '}${Math.round(phases.find((p) => p.homework === d).phase_hours)} h`);
     rows.append('line').attr('class', 'base').attr('x1', left).attr('x2', right).attr('y1', rowH * 0.78).attr('y2', rowH * 0.78).attr('stroke', 'rgba(236,231,221,.1)');
@@ -354,10 +378,10 @@
       g.append('text').attr('class', 'ms mono').attr('text-anchor', 'middle');
       return g;
     });
-    phaseCells.attr('transform', (d) => `translate(${left + colW * (d.phase + 0.5)},${top + rowH * F.HW.indexOf(d.homework) + rowH * 0.78})`)
-      .on('pointerenter', (e, d) => F.tip.show(F.tip.html({ kicker: `${d.homework} · ${d.label} of window`, color: F.color[d.homework], title: d.state === 'visible' ? `${F.fmt.pct(d.improvement_pct)} set a new best` : 'Withheld',
+    phaseCells.attr('display', (d) => shown.includes(d.homework) ? null : 'none').attr('transform', (d) => `translate(${left + colW * (d.phase + 0.5)},${top + rowH * Math.max(0, shown.indexOf(d.homework)) + rowH * 0.78})`)
+      .on('pointerenter', (e, d) => F.tip.show(F.tip.html({ kicker: `${d.homework} · ${d.label} of window`, color: F.color[d.homework], title: d.state === 'not_observed' ? 'Not yet observed' : d.state === 'visible' ? `${F.fmt.pct(d.improvement_pct)} set a new best${d.observation_status === 'partial' ? ' (partial phase)' : ''}` : 'Withheld',
         rows: d.state === 'visible' ? [['Eligible retries', d.eligible_retries], ['New bests', d.new_bests], ['Students (S)', d.contributors], ['Phase length', `${F.fmt.p1(d.phase_hours)} h`]] : [['Phase length', `${F.fmt.p1(d.phase_hours)} h`]],
-        note: d.state === 'visible' ? 'Equal-duration phases from opening to the configured deadline. Descriptive; no deadline effect is estimated.' : 'Fewer than five students (or a complementary mask), so values are hidden. Withheld is not zero.' }), e))
+        note: d.state === 'not_observed' ? 'This phase starts after the snapshot. No observed counts or rates exist; this is not zero or privacy suppression.' : `${d.observation_status === 'partial' ? 'Only observed through the snapshot, partway through this phase. ' : ''}${d.state === 'visible' ? 'Equal-duration phases use the configured deadline; no deadline effect is estimated.' : 'Counts hidden for privacy, including complementary masks. Withheld is not zero.'}` }), e))
       .on('pointermove', (e) => F.tip.move(e)).on('pointerleave', () => F.tip.hide());
     // colour key for the rate matrix
     const key = gPhase.append('g').attr('class', 'mkey').attr('transform', `translate(${nar ? left : right - 300},${bottom + (nar ? 22 : 26)})`);
@@ -367,6 +391,7 @@
     key.append('text').attr('class', 'mono').attr('y', -6).style('font-size', '9.5px').attr('fill', F.ink2).text(nar ? 'New-best rate' : 'New bests ÷ eligible retries');
     key.append('rect').attr('x', nar ? 136 : 196).attr('width', 16).attr('height', 8).attr('fill', hatchUrl).attr('stroke', 'rgba(236,231,221,.25)');
     key.append('text').attr('class', 'note').attr('x', nar ? 136 : 196).attr('y', 21).style('font-size', '9.5px').text('withheld, not zero');
+    gPhase.append('text').attr('class', 'note').attr('x', c.x).attr('y', bottom + (nar ? 5 : 6)).style('font-size', nar ? '8.5px' : '10px').text(paged ? 'HW5 ongoing · * partial · dashed = future' : 'HW5 ongoing · * partial phase · dashed empty = not yet observed');
   }
   /** tp: the old phase-view clock (bars rise from 17.3); mt: bars → rate matrix (0..1); txt: matrix labels. */
   function renderPhase(tp, mt, txt) {
@@ -379,30 +404,31 @@
       const sel = d3.select(this), i = F.HW.indexOf(d.homework);
       const p = Math.max(F.seg(tp, 17.3 + i * 0.35 + d.phase * 0.08, 18.6 + i * 0.35 + d.phase * 0.08, F.ease.outExpo), norm);
       const pl = Math.max(F.seg(tp, 18.8 + i * 0.35, 20 + i * 0.35), norm);
-      const hl = d.homework === 'HW4' ? 1 : F.lerp(1, 0.35, focus);
+      const hl = F.ongoing(d.homework) ? 1 : F.lerp(1, 0.35, focus);
       sel.attr('opacity', F.la(d.homework) * (F.state.lens ? 1 : hl));
       sel.select('.hit').attr('x', -g.colW / 2).attr('y', -g.rowH * 0.74).attr('width', g.colW).attr('height', g.rowH * 0.9);
-      const w = F.lerp(bw, g.cw, widen), big = g.nar ? 14 : Math.min(26, g.ch * 0.26);
+      const w = F.lerp(bw, g.cw, widen), compact = g.ch < 60, big = compact ? Math.min(14, g.ch * 0.36) : Math.min(26, g.ch * 0.26);
       if (d.state !== 'visible') {
+        const future = d.state === 'not_observed', label = future ? 'Not yet' : 'Withheld';
         const h = F.lerp(g.rowH * 0.4 * p, g.ch, norm);
-        sel.select('.all').attr('x', -w / 2).attr('width', w).attr('y', -h).attr('height', h).attr('fill', hatchUrl).attr('stroke', 'rgba(236,231,221,.16)');
+        sel.select('.all').attr('x', -w / 2).attr('width', w).attr('y', -h).attr('height', h).attr('fill', future ? 'none' : hatchUrl).attr('stroke', 'rgba(236,231,221,.3)').attr('stroke-dasharray', future ? '4,3' : null);
         sel.select('.lit').attr('height', 0);
-        sel.select('.rt').attr('y', -h - 8).attr('fill', F.muted).attr('opacity', p * (1 - norm)).text('withheld');
+        sel.select('.rt').attr('y', -h - 8).attr('fill', F.muted).attr('opacity', p * (1 - norm)).text(future ? 'future' : 'withheld');
         sel.select('.nn').text('');
-        sel.select('.mrt').attr('y', -g.ch / 2).attr('dy', '0.35em').style('font-size', `${g.nar ? 10 : 12}px`).attr('fill', F.ink2).attr('opacity', txt).text('Withheld');
-        sel.select('.mnn').text(''); sel.select('.ms').text('');
+        sel.select('.mrt').attr('y', -g.ch / 2 - (future ? 4 : 0)).attr('dy', '0.35em').style('font-size', `${g.nar ? 9 : 12}px`).attr('fill', F.ink2).attr('opacity', txt).text(label + (d.observation_status === 'partial' ? '*' : ''));
+        sel.select('.mnn').attr('y', -g.ch / 2 + 12).style('font-size', `${g.nar ? 8 : 10}px`).attr('fill', F.ink2).attr('opacity', txt).text(future ? 'observed' : ''); sel.select('.ms').text('');
         return;
       }
       const r = d.improvement_pct / 100, h = F.lerp(g.y(d.eligible_retries) * p, g.ch, norm), hl2 = F.lerp(g.y(d.new_bests) * p * pl, g.ch * r, norm);
       const col = d3.interpolateRgb('rgba(160,168,184,0.2)', rateColor(d.improvement_pct))(fill);
-      sel.select('.all').attr('x', -w / 2).attr('width', w).attr('y', -h).attr('height', h).attr('fill', col).attr('stroke', fill > 0.5 ? 'rgba(236,231,221,.08)' : 'none');
+      sel.select('.all').attr('x', -w / 2).attr('width', w).attr('y', -h).attr('height', h).attr('fill', col).attr('stroke', d.observation_status === 'partial' ? F.ink2 : fill > 0.5 ? 'rgba(236,231,221,.08)' : 'none').attr('stroke-dasharray', d.observation_status === 'partial' ? '3,2' : null);
       sel.select('.lit').attr('x', -w / 2).attr('width', w).attr('y', -hl2).attr('height', hl2).attr('fill', F.ember).attr('opacity', 1 - fill);
-      sel.select('.rt').attr('y', -h - 8).attr('fill', F.ink).attr('opacity', pl * (1 - norm)).text(F.fmt.pct(d.improvement_pct).replace('.0', ''));
+      sel.select('.rt').attr('y', -h - 8).attr('fill', F.ink).attr('opacity', pl * (1 - norm)).text(F.fmt.pct(d.improvement_pct).replace('.0', '') + (d.observation_status === 'partial' ? '*' : ''));
       sel.select('.nn').attr('y', 14).attr('opacity', p * (1 - norm)).text(`${d.new_bests}/${d.eligible_retries}`);
-      const dark = d.improvement_pct > 52, tc = dark ? F.bg : F.ink, cy = -g.ch / 2;
-      sel.select('.mrt').attr('y', cy - (g.nar ? 3 : big * 0.35)).style('font-size', `${big}px`).attr('fill', tc).attr('opacity', txt).text(F.fmt.pct(d.improvement_pct));
-      sel.select('.mnn').attr('y', cy + (g.nar ? 10 : big * 0.62)).style('font-size', `${g.nar ? 8.5 : 11}px`).attr('fill', tc).attr('fill-opacity', 1).attr('opacity', txt).text(`${d.new_bests}/${d.eligible_retries}`);
-      sel.select('.ms').attr('y', cy + (g.nar ? 20 : big * 0.62 + 15)).style('font-size', `${g.nar ? 8 : 10}px`).attr('fill', tc).attr('fill-opacity', 0.85).attr('opacity', txt * (g.nar && g.ch < 54 ? 0 : 1)).text(`S=${d.contributors}`);
+      const tc = F.contrastInk(col), cy = -g.ch / 2;
+      sel.select('.mrt').attr('y', cy - (compact ? 7 : big * 0.35)).style('font-size', `${big}px`).style('fill', tc).attr('opacity', txt).text(F.fmt.pct(d.improvement_pct) + (d.observation_status === 'partial' ? '*' : ''));
+      sel.select('.mnn').attr('y', cy + (compact ? 4 : big * 0.62)).style('font-size', `${compact ? g.nar ? 8 : 9.5 : 11}px`).style('fill', tc).attr('fill-opacity', 1).attr('opacity', txt).text(`${d.new_bests}/${d.eligible_retries}`);
+      sel.select('.ms').attr('y', cy + (compact ? 14 : big * 0.62 + 15)).style('font-size', `${compact ? g.nar ? 8 : 9 : 10}px`).style('fill', tc).attr('fill-opacity', 1).attr('opacity', txt).text(`S=${d.contributors}`);
     });
   }
 

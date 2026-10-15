@@ -1,5 +1,5 @@
 /* Figure 01 · Timing, reach and repeat intensity.
-   A non-linear temporal view. 35 days × six four-hour windows appear first as a
+   A non-linear temporal view. Observed days × six four-hour windows appear first as a
    calendar, then wind into a spiral clock: one ring per day, angle = time of day,
    so every 23:59 deadline lands at the top. Dots are aggregate units, one per published
    submission, placed in their public window (random position inside the cell); submissions
@@ -11,10 +11,11 @@
   const F = window.Film, P = F.particles;
   const hw = F.data.homework;
   const DAY = 86400000;
-  const T0 = Date.parse('2026-08-26T00:00:00+08:00');
   const dates = [...new Set(hw.calendar.map((c) => c.date))].sort();
-  const ND = dates.length; // 35
+  const T0 = Date.parse(dates[0] + 'T00:00:00+08:00');
+  const ND = dates.length;
   const sOf = (iso) => (Date.parse(iso) - T0) / DAY;
+  const observedS = hw.observation_cutoff_local ? sOf(hw.observation_cutoff_local) : ND;
   const WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const dayLabel = (d) => { const dt = new Date(dates[d] + 'T00:00:00Z'); return `${WD[dt.getUTCDay()]} ${dt.getUTCDate()} ${dt.toLocaleString('en', { month: 'short', timeZone: 'UTC' })}`; };
   const windows = hw.assignments.map((a, h) => ({ ...a, h, s0: sOf(a.start_local), s1: sOf(a.end_local) }));
@@ -23,22 +24,23 @@
   const cells = hw.calendar.map((c, i) => {
     const d = dates.indexOf(c.date), b = c.hour / 4;
     const s0 = d + b / 6, s1 = s0 + 1 / 6;
-    const win = windows.find((w) => s1 > w.s0 && s0 < w.s1);
-    return { ...c, i, d, b, s0, s1, win, hwName: win ? win.homework : null };
+    const active = c.homeworks || windows.filter((w) => s1 > w.s0 && s0 < w.s1).map((w) => w.homework);
+    const hwName = active.length === 1 ? active[0] : null;
+    const win = windows.find((w) => w.homework === hwName);
+    return { ...c, i, d, b, s0, s1, win, hwName, homeworks: active };
   });
-  const visibleByHw = F.HW.map((h) => d3.sum(cells.filter((c) => c.hwName === h && c.state === 'visible'), (c) => c.submissions));
-  const maskedByHw = P.counts.map((n, h) => n - visibleByHw[h]);
-  const MASKED = d3.sum(maskedByHw);
+  const MASKED = P.N - d3.sum(cells.filter((c) => c.state === 'visible'), (c) => c.submissions);
   const peak = cells.reduce((a, c) => (c.state === 'visible' && c.submissions > (a ? a.submissions : -1) ? c : a), null);
 
-  // particle → cell assignment (deterministic): each homework fills its visible cells in time order
+  // Published cells are pooled across overlapping homework windows. Assign aggregate units
+  // directly from the cell totals; the particle's earlier homework colour is not an identity.
+  // In particular, never infer withheld per-homework counts by subtracting visible cells.
   const cellOf = new Int16Array(P.N).fill(-1), inCell = new Uint16Array(P.N);
   {
-    const byHw = F.HW.map((h) => cells.filter((c) => c.hwName === h && c.state === 'visible' && c.submissions > 0));
-    for (let i = 0; i < P.N; i++) {
-      const h = P.hwIdx[i]; let j = P.rank[i];
-      for (const c of byHw[h]) { if (j < c.submissions) { cellOf[i] = c.i; inCell[i] = j; break; } j -= c.submissions; }
-    }
+    let i = 0;
+    cells.filter((c) => c.state === 'visible' && c.submissions > 0).forEach((c) => {
+      for (let j = 0; j < c.submissions; j++, i++) { cellOf[i] = c.i; inCell[i] = j; }
+    });
   }
   const VIS = cells.filter((c) => c.state === 'visible' && c.submissions > 0);
   VIS.forEach((c) => (c.ratio = c.submissions / c.contributors));
@@ -84,16 +86,17 @@
       b = { x0: c.x + 30, x1: c.x + c.w - 8, y0: mid + 34, y1: bottom };
       cloudR = { x: c.x + c.w - 34, y: top + 30, r: 16 };
     }
-    const xa = d3.scaleLinear().domain([4.5, 12.5]).range([a.x0, a.x1]);
+    const xa = d3.scaleLinear().domain([4.5, d3.max(VIS, (v) => v.contributors) + 0.5]).range([a.x0, a.x1]);
     const ya = d3.scaleLinear().domain([0, Math.ceil(RMAX + 2)]).range([a.y1, a.y0]);
     const xb = d3.scaleBand().domain(d3.range(6)).range([b.x0, b.x1]).paddingInner(0.18);
-    const yb = d3.scaleLinear().domain([0, 180]).range([b.y1, b.y0]);
+    const yb = d3.scaleLinear().domain([0, Math.ceil(VMAX * 1.15 / 20) * 20]).range([b.y1, b.y0]);
     const rMax = Math.max(9, Math.min(L.narrow ? 15 : 30, (a.y1 - a.y0) * 0.085));
     const sp = rMax / (0.62 * Math.sqrt(VMAX)); // phyllotaxis spacing: the biggest cell gets rMax
     const rOf = (n) => 0.62 * sp * Math.sqrt(n) + sp * 0.5;
     VIS.forEach((v) => {
       v.ax = xa(v.contributors); v.ay = ya(v.ratio); v.rr = rOf(v.submissions);
-      v.bx = xb(v.b) + xb.bandwidth() * (0.5 + (F.HW.indexOf(v.hwName) - 1.5) * 0.2); v.by = yb(v.submissions);
+      const offset = v.hwName ? (F.HW.indexOf(v.hwName) - (F.HW.length - 1) / 2) * 0.8 / F.HW.length : 0;
+      v.bx = xb(v.b) + xb.bandwidth() * (0.5 + offset); v.by = yb(v.submissions);
     });
     return { ra: a, rb: b, cloudR, xa, ya, xb, yb, sp, rOf };
   }
@@ -130,9 +133,9 @@
     const cloudEmph = F.seg(t, 16.2, 17.2) * (1 - F.seg(t, 22.6, 23.4));
     const sz = G.narrow ? 1.5 : 1.9;
     for (let i = 0; i < P.N; i++) {
-      const ci = cellOf[i], hName = F.HW[P.hwIdx[i]], la = F.la(hName);
+      const ci = cellOf[i];
       if (ci >= 0) {
-        const c = cells[ci], m = cellMorph(c);
+        const c = cells[ci], m = cellMorph(c), la = c.hwName ? F.la(c.hwName) : 1;
         const s = c.s0 + (0.08 + 0.84 * K2.u[i]) * (c.s1 - c.s0);
         const p = mixPt(s, 0.12 + 0.76 * K2.v[i], m);
         let ha = 1;
@@ -144,13 +147,13 @@
           x = F.lerp(x, c.ax + Math.cos(ang) * rad, q); y = F.lerp(y, c.ay + Math.sin(ang) * rad, q);
           a = F.lerp(a, 0.9 * la * (RH && RH !== c ? 0.25 : 1), q); z = F.lerp(z, G.sp * 0.8, q);
         }
-        o.x[i] = x; o.y[i] = y; o.a[i] = a; o.s[i] = z; o.c[i] = P.hwIdx[i];
+        o.x[i] = x; o.y[i] = y; o.a[i] = a; o.s[i] = z; o.c[i] = c.hwName ? F.HW.indexOf(c.hwName) : P.C.NEUTRAL;
       } else {
         const wt = performance.now() / 1000;
         const rr = cloud.r * (1 + 0.12 * cloudEmph);
         o.x[i] = cloud.x + F.clamp(K2.gx[i], -2.4, 2.4) * rr * 0.5 + Math.sin(wt * 0.4 + K2.ph[i]) * 2;
         o.y[i] = cloud.y + F.clamp(K2.gy[i], -2.4, 2.4) * rr * 0.5 + Math.cos(wt * 0.35 + K2.ph[i]) * 2;
-        o.a[i] = (0.32 + 0.5 * cloudEmph) * la * F.lerp(1, 0.5, st.heat) * F.lerp(1, 0.75, R); o.s[i] = sz * F.lerp(0.9, 0.7, R); o.c[i] = 4;
+        o.a[i] = (0.32 + 0.5 * cloudEmph) * F.lerp(1, 0.5, st.heat) * F.lerp(1, 0.75, R); o.s[i] = sz * F.lerp(0.9, 0.7, R); o.c[i] = P.C.WITHHELD;
       }
     }
     o.glow = 0.35 * (1 - st.heat) * (1 - 0.5 * R); o.glowSet = null; o.repel = false;
@@ -158,12 +161,12 @@
 
   // ── SVG ──────────────────────────────────────────────────────────
   let svg, gCells, cellSel, gRails, railSel, gMarks, gLabels, gAnno, legend, ctrlView, ctrlShow, ctrlMeasure, ctrlBox, hatchUrl, cloudLabel, gReach, lastKey = '';
-  const railSamples = (w) => { const n = Math.ceil((w.s1 - w.s0) * 72); return d3.range(0, n + 1).map((k) => w.s0 + (k / n) * (w.s1 - w.s0)); };
+  const railSamples = (w) => { const end = Math.min(w.s1, observedS), n = Math.max(1, Math.ceil((end - w.s0) * 72)); return d3.range(0, n + 1).map((k) => w.s0 + (k / n) * (end - w.s0)); };
 
   F.scene({
     id: 'time', title: 'Timing', duration: 52, enter: 'wipe', tint: 'rgba(255,159,58,.10)',
     particles: [{ at: 0, form: 'clock', dur: 3.8, curl: 1.1, spread: 0.55 }],
-    howto: 'Dots: one per published submission, placed at random inside its four-hour window. <b>Calendar/Clock</b> rewinds the layout; <b>Heat</b> colours each window by the chosen measure; hatched = withheld, not zero. <b>Reach</b>: one bubble per visible cell (area = submissions), across = students submitting, up = submissions per active student. Grey dots sit in withheld cells and are never placed.',
+    howto: 'Dots are aggregate submission units, placed at random inside their published four-hour cell. <b>Calendar/Clock</b> rewinds the layout; <b>Heat</b> changes the measure; hatched = withheld, dashed = not yet observed, neither = zero. <b>Reach</b>: area = submissions, across = students, up = submissions per student. Neutral marks pool overlapping HW4 / HW5 windows; the Lens cannot split them. Grey withheld dots are counted but never placed or attributed to a homework.',
     onBeat() { st.userMorph = st.userHeat = st.userMeasure = st.userReach = null; },
     focus: () => (G && st.reach > 0.5 ? [(G.ra.x0 + G.ra.x1) / 2, (G.ra.y0 + G.ra.y1) / 2] : G && st.morph > 0.5 ? [G.cx, G.cy] : null),
     mount(el) {
@@ -246,12 +249,13 @@
         cellSel.attr('d', (c) => cellPath(c, cellMorph(c)))
           .attr('fill', (c) => {
             if (c.state === 'suppressed') return hatchUrl;
-            if (c.state === 'inactive') return 'transparent';
+            if (c.state === 'inactive' || c.state === 'not_observed') return 'transparent';
             const v = M.get(c);
             return v ? F.ember_ramp(Math.sqrt(v / M.max)) : '#10141b';
           })
           .attr('fill-opacity', (c) => (c.state === 'suppressed' ? 0.25 + 0.75 * st.heat : c.state === 'visible' ? st.heat : 0) * (c.hwName ? F.la(c.hwName) : 1)
             * (H && !(c.d === H.d || c.b === H.b) ? F.lerp(1, 0.3, st.hmix) : 1))
+          .attr('stroke-dasharray', (c) => c.state === 'not_observed' ? '2,2' : null)
           // polar crosshair: the hovered window, plus its whole day (ring) and its time of day (spoke)
           .attr('stroke', (c) => (H === c ? F.ink : H && (c.d === H.d || c.b === H.b) ? `rgba(255,181,71,${0.55 * st.hmix})` : c.state === 'inactive' ? 'rgba(236,231,221,.035)' : 'rgba(236,231,221,.09)'))
           .attr('stroke-width', (c) => (H === c ? 1.8 : H && (c.d === H.d || c.b === H.b) ? 1.1 : 0.8));
@@ -296,7 +300,7 @@
     const ax = gReach.append('g').attr('class', 'rx');
     ax.append('text').attr('class', 'axis-title ptitle').attr('x', a.x0 - (nar ? 26 : 40)).attr('y', a.y0 - (nar ? 10 : 16)).text(nar ? '(a) Reach × repeat intensity' : '(a) Reach versus repeat intensity');
     ax.append('text').attr('class', 'axis-title ptitle').attr('x', b.x0 - (nar ? 26 : 40)).attr('y', b.y0 - (nar ? 8 : 16)).text('(b) When visible bursts occurred');
-    d3.range(5, 13).forEach((v) => {
+    xa.ticks(nar ? 4 : 7).filter((v) => Number.isInteger(v) && v >= 5).forEach((v) => {
       ax.append('line').attr('x1', xa(v)).attr('x2', xa(v)).attr('y1', a.y0).attr('y2', a.y1).attr('stroke', 'rgba(236,231,221,.06)');
       ax.append('text').attr('class', 'mono').attr('x', xa(v)).attr('y', a.y1 + 14).attr('text-anchor', 'middle').style('font-size', '10px').attr('fill', F.muted).text(v);
     });
@@ -319,10 +323,10 @@
     const hit = (sel) => sel.on('pointerenter', (ev, c) => { st.rhover = c; F.tip.show(tipHtml(c), ev); }).on('pointermove', (ev) => F.tip.move(ev)).on('pointerleave', () => { st.rhover = null; F.tip.hide(); });
     gReach.append('g').attr('class', 'ra').attr('data-interactive', '').selectAll('circle').data(VIS).join('circle')
       .attr('cx', (c) => c.ax).attr('cy', (c) => c.ay).attr('r', (c) => c.rr + 1.5).attr('fill', 'transparent')
-      .attr('stroke', (c) => F.color[c.hwName]).attr('stroke-width', 1).call(hit);
+      .attr('stroke', (c) => c.hwName ? F.color[c.hwName] : '#a3abbb').attr('stroke-width', 1).call(hit);
     gReach.append('g').attr('class', 'rb').attr('data-interactive', '').selectAll('circle').data(VIS.slice().sort((p, q) => q.submissions - p.submissions)).join('circle')
-      .attr('cx', (c) => c.bx).attr('cy', (c) => c.by).attr('r', (c) => c.rr * (nar ? 0.7 : 0.8)).attr('fill', (c) => F.color[c.hwName]).attr('fill-opacity', 0.55)
-      .attr('stroke', (c) => F.color[c.hwName]).attr('stroke-width', 1).call(hit);
+      .attr('cx', (c) => c.bx).attr('cy', (c) => c.by).attr('r', (c) => c.rr * (nar ? 0.7 : 0.8)).attr('fill', (c) => c.hwName ? F.color[c.hwName] : '#a3abbb').attr('fill-opacity', 0.55)
+      .attr('stroke', (c) => c.hwName ? F.color[c.hwName] : '#a3abbb').attr('stroke-width', 1).call(hit);
     // callouts: the busiest visible cell, and the most repeated
     const pk = VIS.reduce((p, c) => (c.submissions > p.submissions ? c : p)), rp = VIS.reduce((p, c) => (c.ratio > p.ratio ? c : p));
     const call = gReach.append('g').attr('class', 'call').attr('pointer-events', 'none');
@@ -330,15 +334,15 @@
       const g = call.append('g').attr('transform', `translate(${x},${y})`);
       lines.forEach((l, i) => g.append('text').attr('class', i ? 'mono' : 'mono k').attr('y', i * 13).attr('text-anchor', anchor).style('font-size', i ? '10px' : '10.5px').attr('fill', i ? F.ink2 : F.ember).text(l));
     };
-    label(pk, pk.ax + pk.rr * 0.4, pk.ay + pk.rr + (nar ? 12 : 18), 'end', nar ? ['153 / 12'] : ['SAT 29 AUG · 12–16H', '153 submissions · 12 students']);
-    label(rp, rp.ax + rp.rr + 8, rp.ay - 2, 'start', nar ? ['14.3 each'] : [`${dayLabel(rp.d).toUpperCase()} · ${rp.hour}–${rp.hour + 4}H`, `${rp.submissions} from ${rp.contributors} · ${F.fmt.p1(rp.ratio)} each`]);
-    if (!nar) label(pk, pk.bx + pk.rr * 0.8 + 8, pk.by + 4, 'start', ['153 / 12']);
-    if (!nar) gReach.append('text').attr('class', 'note rnote').attr('x', a.x0 - 40).attr('y', a.y1 + 50).text(`${VIS.length} visible cells (≥5 students) · bubble area = submissions · withheld cells are not placed`);
+    label(pk, pk.ax + pk.rr * 0.4, pk.ay + pk.rr + (nar ? 12 : 18), 'end', nar ? [`${pk.submissions} / ${pk.contributors}`] : [`${dayLabel(pk.d).toUpperCase()} · ${pk.hour}–${pk.hour + 4}H`, `${pk.submissions} submissions · ${pk.contributors} students`]);
+    label(rp, rp.ax + rp.rr + 8, rp.ay - 2, 'start', nar ? [`${F.fmt.p1(rp.ratio)} each`] : [`${dayLabel(rp.d).toUpperCase()} · ${rp.hour}–${rp.hour + 4}H`, `${rp.submissions} from ${rp.contributors} · ${F.fmt.p1(rp.ratio)} each`]);
+    if (!nar) label(pk, pk.bx + pk.rr * 0.8 + 8, pk.by + 4, 'start', [`${pk.submissions} / ${pk.contributors}`]);
+    if (!nar) gReach.append('text').attr('class', 'note rnote').attr('x', a.x0 - 40).attr('y', a.y1 + 50).text(`${VIS.length} visible cells · neutral = pooled HW4/HW5 · area = submissions · withheld cells unplaced`);
   }
   function renderReach(t, R, dt) {
     gReach.attr('opacity', R).style('pointer-events', R > 0.6 ? null : 'none');
-    gReach.select('.ra').selectAll('circle').attr('stroke-opacity', (c) => (st.rhover && st.rhover !== c ? 0.15 : 0.55) * F.la(c.hwName)).attr('opacity', F.seg(R, 0.7, 1));
-    gReach.select('.rb').selectAll('circle').attr('opacity', (c) => F.seg(t, 42.6 + (c.b / 6) * 0.8, 43.6 + (c.b / 6) * 0.8) * F.la(c.hwName) * (st.rhover && st.rhover !== c ? 0.25 : 1));
+    gReach.select('.ra').selectAll('circle').attr('stroke-opacity', (c) => (st.rhover && st.rhover !== c ? 0.15 : 0.55) * (c.hwName ? F.la(c.hwName) : 1)).attr('opacity', F.seg(R, 0.7, 1));
+    gReach.select('.rb').selectAll('circle').attr('opacity', (c) => F.seg(t, 42.6 + (c.b / 6) * 0.8, 43.6 + (c.b / 6) * 0.8) * (c.hwName ? F.la(c.hwName) : 1) * (st.rhover && st.rhover !== c ? 0.25 : 1));
     gReach.select('.call').attr('opacity', Math.max(F.seg(t, 44, 45), st.userReach ? 1 : 0));
     gReach.select('.rnote').attr('opacity', Math.max(F.seg(t, 44.4, 45.4), st.userReach ? 1 : 0));
   }
@@ -346,6 +350,7 @@
   function tipHtml(c) {
     const when = `${dayLabel(c.d)} · ${String(c.hour).padStart(2, '0')}:00–${String(c.hour + 4).padStart(2, '0')}:00`;
     if (c.state === 'inactive') return F.tip.html({ kicker: 'Outside homework windows', title: when, note: 'No homework window was open.' });
+    if (c.state === 'not_observed') return F.tip.html({ kicker: 'Not yet observed', title: when, note: 'This window is after the snapshot. There is no observed value; this is not zero or privacy suppression.' });
     const w = c.win, hrs = w ? Math.max(0, (w.s1 - c.s1) * 24) : null;
     const rows = [];
     if (c.state === 'visible') {
@@ -353,8 +358,8 @@
       if (c.contributors) rows.push(['Per student', F.fmt.p1(c.submissions / c.contributors)]);
     }
     if (w) rows.push(['Deadline in', hrs < 1 ? 'under 1 h' : `${Math.round(hrs)} h`]);
-    return F.tip.html({ kicker: w ? w.homework + ' window' : '', color: w ? F.color[w.homework] : null, title: when, rows,
-      note: c.state === 'suppressed' ? 'Fewer than five students submitted here, so counts are withheld. Withheld is not zero.' : c.submissions === 0 ? 'Visible window with no submissions.' : 'Submissions are events, not study time.' });
+    return F.tip.html({ kicker: w ? w.homework + ' window' : `Pooled ${c.homeworks.join(' / ')} window`, color: w ? F.color[w.homework] : '#a3abbb', title: when, rows,
+      note: `${c.observation_status === 'partial' ? 'Only observed through the snapshot, partway through this cell. ' : ''}${c.homeworks.length > 1 ? 'Overlapping windows are pooled; no per-homework cell counts are published. ' : ''}${c.state === 'suppressed' ? 'Counts withheld for privacy; withheld is not zero.' : c.submissions === 0 ? 'Observed window with no submissions.' : 'Submissions are events, not study time.'}` });
   }
 
   function placeMarks(e) {
@@ -363,12 +368,12 @@
       const ga = [G.gx0 + s * G.cw, G.gy0 - 4], gb = [G.gx0 + s * G.cw, G.gy1 + 4];
       const r1 = G.r0 + s * G.rw + G.rw, sa = [G.cx, G.cy - (r1 - G.rw * 0.2)], sb = [G.cx, G.cy - (r1 + 6)];
       const a = [F.lerp(ga[0], sa[0], e), F.lerp(ga[1], sa[1], e)], b = [F.lerp(gb[0], sb[0], e), F.lerp(gb[1], sb[1], e)];
-      const sel = d3.select(this).attr('opacity', F.la(w.homework));
+      const sel = d3.select(this).attr('opacity', w.s1 <= observedS ? F.la(w.homework) : 0);
       sel.select('line').attr('x1', a[0]).attr('y1', a[1]).attr('x2', b[0]).attr('y2', b[1]);
       // label: above the calendar column / to the right of the spiral's noon line
       const lg = [ga[0], G.gy0 - 10], ls = [G.cx + 8 + 0 * w.h, G.cy - r1 - 2];
       sel.select('text').attr('x', F.lerp(lg[0], ls[0], e)).attr('y', F.lerp(lg[1], ls[1], e))
-        .attr('text-anchor', e < 0.5 ? 'middle' : 'start').attr('opacity', G.narrow ? 0 : e < 0.5 ? 1 : w.h === 3 || w.h === 0 ? 1 : 0.0);
+        .attr('text-anchor', e < 0.5 ? 'middle' : 'start').attr('opacity', G.narrow ? 0 : e < 0.5 ? 1 : w.homework === 'HW4' || w.h === 0 ? 1 : 0.0);
     });
     const ex = sOf('2026-09-16T12:00:00+08:00');
     const p = mixPt(ex, 0.5, e);
@@ -440,8 +445,8 @@
     sel.attr('opacity', alpha);
     sel.select('circle').attr('cx', p[0]).attr('cy', p[1]).attr('r', r);
     sel.select('path').attr('d', `M${p[0] + r * 0.7},${p[1] - r * 0.7}L${lx - 6},${ly + 8}H${lx + 150}`);
-    sel.select('text.big').attr('x', lx).attr('y', ly).text(Math.round(153 * F.clamp(alpha * 1.2)));
-    sel.select('text.sub').attr('x', lx).attr('y', ly + 22).text('Sat 29 Aug · 12–16h · 12 students');
+    sel.select('text.big').attr('x', lx).attr('y', ly).text(Math.round(c.submissions * F.clamp(alpha * 1.2)));
+    sel.select('text.sub').attr('x', lx).attr('y', ly + 22).text(`${dayLabel(c.d)} · ${c.hour}–${c.hour + 4}h · ${c.contributors} students`);
   }
 
   function legendRender(t) {

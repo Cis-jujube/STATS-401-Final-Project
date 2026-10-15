@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import re
 from story_cinema import archive, figure_scenery, portal, strips, title_lines
+from render_figures import snapshot_label, observation_note
 
 ROOT = Path(__file__).resolve().parents[1]
 # Shared figure-to-route mapping, also bundled into the film (assets/app/figures.js).
@@ -33,6 +34,7 @@ def film_return(section_id):
 
 def homework_scenes(data):
     assignments = data['assignments']
+    scope = f"{assignments[0]['homework']}–{assignments[-1]['homework']}"
     visible = [c for c in data['calendar'] if c['state']=='visible' and c['submissions'] > 0]
     peak = max(visible, key=lambda c:c['submissions'])
     day = data['peak_day']
@@ -42,30 +44,35 @@ def homework_scenes(data):
     problems = len(data['score_progression'])
     rates = '; '.join(f"{r['homework']} {r['improvement_pct']:.1f}%" for r in data['event_progress']['by_homework']
                       if r['state']=='visible' and r['eligible_retries'])
-    return [
+    scenes = [
         ('timing', '01-calendar', 'Visible submission peaks', 'A busy window.<br>How many people?',
          f"On {day['date']}, {day['submissions']} submissions came from {day['contributors']} students. The largest publicly visible four-hour cell held {peak['submissions']} submissions from {peak['contributors']} contributors; masked cells keep the overall peak unknown.",
          'Visible cells only · submissions are not study time'),
         ('retries', '02-attempts', 'Retries', 'Similar medians.<br>Different paths.',
-         f'Typical counts across HW1–HW4 are {medians}. The observed ranges are {ranges}.',
+         f'Typical counts across {scope} are {medians}. The observed ranges are {ranges}.',
          'Window submitters only · counts do not measure effort'),
         ('scores', '03-score-progression', 'Problem bottlenecks', 'Which problems<br>keep a gap?',
          f'{remaining} of {problems} problem slots have more than a 10-point gap between mean best through three attempts and best observed. The story selects {len(assignments)*3} rows on desktop and {len(assignments)*2} on mobile; the analysis shows all {problems}.',
          'Same attempters per problem · means do not count students who improved'),
         ('attempt-scores', '04-attempt-scores', 'Actual attempt scores', 'A new attempt.<br>A different cohort.',
-         'Each point averages the actual nth submission to a problem. Pairs that stop submitting leave the later points. Four panels now cover HW1–HW4.',
+         f'Each point averages the actual nth submission to a problem. Pairs that stop submitting leave the later points. {len(assignments)} panels cover {scope}.',
          'N = events · S = students · no carry-forward'),
         ('retry-productivity', '11-retry-productivity', 'Productive retries', 'Another try.<br>A new best?',
          f'Strict improvements among eligible retries: {rates}. First scores establish a baseline; retries after full credit are excluded. Compare the gap bins with their event counts.',
          'New bests / eligible retries · elapsed gaps are not study time'),
         ('deadline-progress', '12-deadline-progress', 'Progress and deadlines', 'A window of time.<br>Where is the progress?',
-         'Split each homework window into five equal-duration phases. Read new-best counts alongside the rate and contributors. Hatched cells are withheld, not zero.',
+         'Split each homework window into five equal-duration phases. Read new-best counts alongside the rate and contributors. Hatched cells are withheld; dotted cells are not yet observed; * marks a partial phase or ongoing homework.',
          'Equal-duration bins within homework · configured deadlines · descriptive'),
     ]
+    note = snapshot_label(data) + '. ' + observation_note(data)
+    return [(*scene[:-1], scene[-1] + ' · ' + note) for scene in scenes]
 
 
 def render_page(source: str, midterm: dict, homework: dict) -> str:
     late = next(row for row in midterm['associations'] if row['metric'] == 'late_pct')
+    example = next((row for row in homework['score_progression'] if 'TicTacToe' in row['problem_name']),
+                   homework['score_progression'][0])
+    example_label = f"{example['homework']} {example['problem_name'].split('-')[-1]}"
     scenes = homework_scenes(homework) + [
         ('midterm-associations', '06-midterm-associations', 'Process and exam', 'How stable is<br>the association?',
          f"Final-day submission share has a negative rank association with exam scores (ρ = {late['rho']:+.2f}). Compare its bootstrap interval, leave-one-out range and two sensitivity cohorts before interpreting it.",
@@ -169,10 +176,11 @@ def render_page(source: str, midterm: dict, homework: dict) -> str:
     routes_intro = (f'All twelve figures with their interpretations, accessible tables, downloads and methods. The data film has two content routes: '
                     f'<a href="index.html?content=core">{core["label"]}</a> presents {len(core["figures"])} essential figures '
                     f'({", ".join(core["figures"])}); <a href="index.html?content=showcase">{show["label"]}</a> presents all {len(show["figures"])}. '
-                    'Each figure section links back to its reading view in the film.')
+                    'Each figure section links back to its reading view in the film. '
+                    f'The {len(core["figures"])} {core["label"]} figures are also drawn for print on the <a href="poster.html">A0 research poster</a>.')
     data_links = ('<a href="data/summary.json">Homework aggregate JSON</a> · <a href="data/midterm-summary.json">Midterm aggregate JSON</a> · '
                   '<a href="data/platform-summary.json">Platform aggregate JSON</a>')
-    analysis = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Analysis &amp; Methods · CS201</title><link rel="stylesheet" href="styles.css"></head><body class="analysis-page" data-surface="paper"><a class="skip" href="#evidence">Skip to analysis</a><header class="topbar"><a href="index.html?content=core" data-film-back>← Data film</a><nav aria-label="Analysis navigation"><a href="#dataset">Dataset</a><a href="#midterm-plan">Methods</a><a href="#evaluation">Evaluation</a></nav></header><main id="evidence" class="evidence-detail"><section><p class="eyebrow">RESEARCH COMPANION</p><h1>Analysis &amp; methods</h1><p>{routes_intro}</p><nav class="analysis-toc" aria-label="Chart analysis">{toc}</nav></section>{detail}</main><footer><p><a href="index.html?content=core" data-film-back>Return to the data film ↗</a> · <a href="index.html?content=core">Core route</a> · <a href="index.html?content=showcase">Showcase route</a></p><p>{data_links}</p></footer><script src="assets/analysis-return.js" defer></script></body></html>'''
+    analysis = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Analysis &amp; Methods · CS201</title><link rel="stylesheet" href="styles.css"></head><body class="analysis-page" data-surface="paper"><a class="skip" href="#evidence">Skip to analysis</a><header class="topbar"><a href="index.html?content=core" data-film-back>← Data film</a><nav aria-label="Analysis navigation"><a href="#dataset">Dataset</a><a href="#midterm-plan">Methods</a><a href="#evaluation">Evaluation</a><a href="poster.html">Poster</a></nav></header><main id="evidence" class="evidence-detail"><section><p class="eyebrow">RESEARCH COMPANION</p><h1>Analysis &amp; methods</h1><p>{routes_intro}</p><nav class="analysis-toc" aria-label="Chart analysis">{toc}</nav></section>{detail}</main><footer><p><a href="index.html?content=core" data-film-back>Return to the data film ↗</a> · <a href="index.html?content=core">Core route</a> · <a href="index.html?content=showcase">Showcase route</a></p><p>{data_links}</p></footer><script src="assets/analysis-return.js" defer></script></body></html>'''
     (ROOT/'analysis.html').write_text(analysis.replace('><', '>\n<')+'\n')
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -185,13 +193,13 @@ def render_page(source: str, midterm: dict, homework: dict) -> str:
 <main id="main">
 <section class="hero-track" aria-labelledby="hero-title"><div class="hero-stage">
 {portal()}
-<div class="hero-heading"><div><p class="eyebrow">OJ + Course Pulse + midterm outcomes / STATS 401</p><h1 id="hero-title"><span class="title-line">The score</span><span class="title-line">has a past.</span></h1></div><p class="hero-context">{homework['window_submissions']:,} submissions.<br>Four homeworks.<br>26 matched exam scores.<br>Two behavior sources.<br>Ten featured views.</p></div>
-<div class="score-composition" aria-label="HW3 TicTacToe: mean first score 37.95, mean best score 100, same 39 attempters">
-<div class="score-start"><p>First submission <span>Mean / 100</span></p><strong>37.95</strong></div>
+<div class="hero-heading"><div><p class="eyebrow">OJ + Course Pulse + midterm outcomes / STATS 401</p><h1 id="hero-title"><span class="title-line">The score</span><span class="title-line">has a past.</span></h1></div><p class="hero-context">{homework['window_submissions']:,} submissions.<br>{len(homework['assignments'])} homeworks.<br>26 matched exam scores.<br>Two behavior sources.<br>Ten featured views.</p></div>
+<div class="score-composition" aria-label="{escape(example_label)}: mean first score {example['first']:.2f}, mean best score {example['best']:g}, same {example['n']} attempters">
+<div class="score-start"><p>First submission <span>Mean / 100</span></p><strong>{example['first']:.2f}</strong></div>
 <svg class="score-arrow" viewBox="0 0 200 80" aria-hidden="true"><path d="M2 40H190M157 8L190 40L157 72"/></svg>
-<div class="score-end"><p>Best submission <span>Mean / 100</span></p><div class="score-sculpture"><span class="score-echo" aria-hidden="true">100</span><span class="score-echo" aria-hidden="true">100</span><strong>100</strong></div></div></div>
-<div class="hero-bottom"><p>HW3 TicTacToe · Same 39 attempters<br><span>First and best scores describe submissions, not a causal learning effect.</span></p><a class="enter" href="#scene-timing">Look behind the score <span>↓</span></a></div>
-<p class="byline">Zaozao Wang &amp; Zhengxiang Liu · Homework snapshot: 30 September 2026</p>
+<div class="score-end"><p>Best submission <span>Mean / 100</span></p><div class="score-sculpture"><span class="score-echo" aria-hidden="true">{example['best']:g}</span><span class="score-echo" aria-hidden="true">{example['best']:g}</span><strong>{example['best']:g}</strong></div></div></div>
+<div class="hero-bottom"><p>{escape(example_label)} · Same {example['n']} attempters<br><span>First and best scores describe submissions, not a causal learning effect.</span></p><a class="enter" href="#scene-timing">Look behind the score <span>↓</span></a></div>
+<p class="byline">Zaozao Wang &amp; Zhengxiang Liu · {snapshot_label(homework)}<br>{observation_note(homework)}</p>
 <div class="hero-rule" aria-hidden="true"></div></div></section>
 <div id="journey"><div class="journey-opening" aria-hidden="true"><canvas id="journey-field"></canvas><div class="journey-type"><span>Follow the</span><span>submissions.</span></div><div class="journey-rule"></div></div>{''.join(chapters)}</div>
 <section id="evidence" class="story-ending"><div class="ending-intro"><p class="eyebrow">CONTINUE THE RESEARCH</p><h2>Behind the figures.</h2><p>Read the detailed analysis, data tables and methods on a separate page.</p><a class="enter" href="analysis.html">Analysis &amp; methods ↗</a></div>{archive(scenes)}</section>

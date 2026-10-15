@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Score Has a Past · research poster (A0)</title>
+<meta name="description" content="A0 research poster for the CS201 homework-process study: the five Core figures (01, 03, 11, 12, 06) drawn for print from the public aggregates, with their definitions, denominators and limits.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/poster/poster.css?v=20261013a">
+</head>
+<body>
+<nav class="screen-bar" aria-label="Poster links">
+  <a href="index.html?content=core">← Data film</a>
+  <a href="analysis.html">Analysis &amp; methods</a>
+  <span class="sb-note">A0 portrait · 841 × 1189 mm · print from Chrome at 100% scale, or use the PDF</span>
+  <a href="assets/poster/the-score-has-a-past-poster-A0.pdf">Print-ready PDF ↗</a>
+</nav>
+
+<div class="stage">
+<main class="sheet" id="poster">
+
+  <header class="band">
+    <div class="band-text">
+      <p class="kicker">STATS 401 · Final project · CS201 homework process</p>
+      <h1>The score <em>has a past</em></h1>
+      <p class="sub">Homework scores cluster near full marks. We followed <b data-t="submissions"></b> online-judge submissions to see how differently students get there, and whether the path travels with the exam.</p>
+      <p class="authors"><b>Zaozao Wang</b> <span>data acquisition, cleaning, analysis</span><i></i><b>Zhengxiang Liu</b> <span>visualization design, D3 implementation</span></p>
+    </div>
+    <a class="qr" href="https://cis-jujube.github.io/STATS-401-Final-Project/" data-qr="https://cis-jujube.github.io/STATS-401-Final-Project/">
+      <span class="qr-code" aria-hidden="true"></span>
+      <span class="qr-t">Watch it move</span>
+      <span class="qr-d">The playable data film, all twelve figures, tables and methods</span>
+    </a>
+  </header>
+
+  <section class="lead" aria-label="Research question and sample">
+    <div class="lead-q">
+      <p class="label">The question</p>
+      <p class="lead-p">The gradebook shows a 100. In <b data-t="fullSlots"></b> of <b data-t="problems"></b> problem slots, every student who attempted the problem reached full marks in the end. What the 100 does not show is the first try, the retries, or the hour they arrived.</p>
+    </div>
+    <dl class="tiles">
+      <div><dt data-t="submissions"></dt><dd>submissions inside <span data-t="homeworkWord"></span> homework windows</dd></div>
+      <div><dt data-t="submitters"></dt><dd>students, <span data-t="problems"></span> problem slots</dd></div>
+      <div><dt data-t="retries"></dt><dd>eligible retries; <span data-t="bests"></span> set a new best</dd></div>
+      <div><dt data-t="grades"></dt><dd>midterm grades, a separate pre-exam sample</dd></div>
+    </dl>
+  </section>
+
+  <div class="figures">
+
+    <section class="fig f1" aria-labelledby="f1-h">
+      <p class="fig-k"><b>1</b><span>When the work arrives</span><i>Film · Figure 01</i></p>
+      <h2 id="f1-h">A burst can be many students, or a few students many times.</h2>
+      <div class="fig-body">
+        <div class="chart" data-chart="reach"></div>
+        <div class="fig-text">
+          <p>Each bubble is one four-hour window in which at least five students submitted. Further right, more students were active; higher up, each of them submitted more often.</p>
+          <p>The largest visible window holds <b data-t="peakSubs"></b> submissions from <b data-t="peakStudents"></b> students. The most intense holds <b data-t="repeatSubs"></b> from only <b data-t="repeatStudents"></b>: <b data-t="repeatEach"></b> each.</p>
+          <p class="care"><b data-t="withheld"></b> submissions sit in <span data-t="withheldCells"></span> windows with fewer than five students. They are withheld for privacy: counted, never placed, never zero. Clock time is not study time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fig f2" aria-labelledby="f2-h">
+      <p class="fig-k"><b>2</b><span>What the 100 hides</span><i>Film · Figure 03</i></p>
+      <h2 id="f2-h">After three tries, <span data-t="gapCount"></span> of <span data-t="problems"></span> problems still trail their best score by more than 10 points.</h2>
+      <p class="fig-lede">For every problem, the same students' mean first try, their best within three tries, and their best observed score. The orange stretch is the distance still to climb after three tries: up to <b data-t="largestGap"></b> points for <span data-t="largestGapName"></span>.</p>
+      <div class="chart" data-chart="gaps"></div>
+      <p class="care">"Best within three" is a cumulative best. It is not the score of the third submission, and not a causal gain.<span class="care-star" data-t="ongoingRows"></span></p>
+    </section>
+
+    <section class="fig f3" aria-labelledby="f3-h">
+      <p class="fig-k"><b>3</b><span>Do retries pay off?</span><i>Film · Figure 11</i></p>
+      <h2 id="f3-h"><span data-t="bests"></span> of <span data-t="retries"></span> eligible retries set a new personal best: <span data-t="rate"></span>%.</h2>
+      <div class="fig-body">
+        <div class="chart" data-chart="retries"></div>
+        <div class="fig-text">
+          <p>An eligible retry is a scored resubmission made while the student's best on that problem is still below 100. A new best must strictly beat every earlier score.</p>
+          <p><b data-t="quickShare"></b>% of these retries came less than a minute after the previous attempt, and they improved least often: <b data-t="quickRate"></b>%, against <b data-t="shortRate"></b>% after 1–10 minutes.</p>
+          <p class="care">Retries are repeated events from the same students, not independent trials. Gaps are clock time, not study time, so these rates do not estimate an effect of waiting. Long gaps have few retries: read the counts.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fig f4" aria-labelledby="f4-h">
+      <p class="fig-k"><b>4</b><span>When in the window?</span><i>Film · Figure 12</i></p>
+      <h2 id="f4-h">Retries progress unevenly from opening to deadline, and each homework has its own rhythm.</h2>
+      <div class="fig-body">
+        <div class="chart" data-chart="phases"></div>
+        <div class="fig-text">
+          <p>Each homework window is cut into five equal phases. A cell shows the share of that phase's eligible retries that set a new best, with its counts and <i>S</i>, the students behind them.</p>
+          <p>Visible rates run from <b data-t="phaseMin"></b>% to <b data-t="phaseMax"></b>%. No single pattern repeats across the homeworks.</p>
+          <p class="care">Hatched cells have fewer than five students: withheld, not zero. A phase lasts <span data-t="phaseHours"></span> hours depending on the homework. Deadlines are the configured ones; individual extensions are unknown. No deadline effect is estimated.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fig f5" aria-labelledby="f5-h">
+      <p class="fig-k"><b>5</b><span>Does it travel with the exam?</span><i>Film · Figure 06</i></p>
+      <h2 id="f5-h">Students who sent less of their work in the final 24 hours tended to score higher on the midterm.</h2>
+      <div class="chart" data-chart="exam"></div>
+      <p class="fig-lede">Among <b data-t="grades"></b> students with a supplied grade, the share of homework submissions sent in the last 24 hours before a deadline has Spearman ρ = <b data-t="lateRho"></b> with the midterm score (95% bootstrap interval <span data-t="lateLo"></span> to <span data-t="lateHi"></span>). It is the only interval that excludes zero, and it stays between <span data-t="looLo"></span> and <span data-t="looHi"></span> when any one student is left out.</p>
+      <p class="care">Grades were supplied for <span data-t="grades"></span> of <span data-t="eligible"></span> eligible students: a partial, non-random sample, using pre-exam <span data-t="preExam"></span> only. An association in a small group, not a cause and not a prediction.</p>
+    </section>
+
+  </div>
+
+  <section class="found" aria-labelledby="found-h">
+    <div class="found-main">
+      <h2 id="found-h">What the <em>100</em> was hiding</h2>
+      <ol>
+        <li><b>One score, many roads.</b> The same full mark is reached in very different ways: windows crowded with students and windows where a few submit again and again; problems nearly solved on the first try and problems still short after three.</li>
+        <li><b>Retries progress unevenly.</b> <span data-t="rate"></span>% of eligible retries set a new best. The rate differs by homework, by how soon a retry follows the last attempt, and by where in the window it falls.</li>
+        <li><b>Timing travels with the exam.</b> In <span data-t="grades"></span> supplied grades, a lower final-day share went with higher midterm scores (ρ <span data-t="lateRho"></span>). An association, not a cause.</li>
+      </ol>
+    </div>
+    <div class="found-care">
+      <h3>Read with care</h3>
+      <ul>
+        <li>Observational data: associations, not causes or predictions.</li>
+        <li>Submissions are not effort. Time between submissions is not study time.</li>
+        <li>Windows and groups with fewer than five students are withheld, never shown as zero. Only aggregates leave the private data.</li>
+        <li data-t="ongoingNote"></li>
+        <li>The exam sample is <span data-t="grades"></span> of <span data-t="eligible"></span> students, with pre-exam homework only.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="credit">
+    <p><b>Data</b> Read-only snapshot of the CS201 online judge, <span data-t="snapshot"></span>. <span data-t="hwRange"></span> configured homework windows. Public aggregates only: no names, IDs or individual scores. Midterm grades were supplied separately and linked privately. Charts are drawn with D3 from the same aggregates as the data film.</p>
+    <p class="credit-r">STATS 401 Final Project<br>Zaozao Wang &amp; Zhengxiang Liu<br><span>cis-jujube.github.io/STATS-401-Final-Project</span></p>
+  </footer>
+
+</main>
+</div>
+
+<noscript><p class="noscript">This poster draws its charts with JavaScript. The <a href="assets/poster/the-score-has-a-past-poster-A0.pdf">print-ready PDF</a> and the <a href="analysis.html">analysis page</a> work without it.</p></noscript>
+
+<script src="assets/vendor/d3.v7.min.js?v=20261001a"></script>
+<script src="assets/app/data.js?v=20261013c"></script>
+<script src="assets/poster/qr.js?v=20261013a"></script>
+<script src="assets/poster/poster.js?v=20261013a"></script>
+</body>
+</html>
