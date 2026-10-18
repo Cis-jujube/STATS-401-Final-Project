@@ -95,3 +95,49 @@ The user asked for a printed poster with five figures and explanations, after co
 - Reopened the film from `file://` at 1440 × 900 after the change: ten figure stops across Core and Showcase, the opening frame and the Core conclusion loaded with the 13 October captions and zero errors.
 
 Not verified: a physical print, color on the print shop's device, legibility at the actual viewing distance, and scanning the QR code with a phone camera from a printed sheet. The five-homework palette of the film is not used on the poster; its pairwise colour-vision validation remains open for the film. No commit, push or deployment was performed.
+
+## Poster revision · 16 October 2026
+
+The user asked for three changes after reviewing the printed layout, and they are applied to the same aggregates without new analysis.
+
+- The question now opens with the evidence ("In 36 of 43 problem slots …") instead of "The gradebook shows a 100."
+- Figures are numbered in reading order down the left column, then the right: 1 timing and reach (film 01), 2 new-best retries (11), 3 window phases (12), 4 remaining score gaps (03), 5 the midterm association (06). Column labels name the halves: Process, then Outcome. The physical arrangement of the charts is unchanged.
+- Figure 5 is headed "Last-minute rushing went with lower midterm scores." The text defines rushing as the share of a student's homework submissions sent in the final 24 hours before each deadline, the same measure as before (ρ −0.48, 95% bootstrap interval −0.78 to −0.07, n = 26), states that it names timing rather than effort or study time, and keeps the association-not-cause limit. The third finding uses the same framing.
+- `tests/test_poster.cjs` now checks the reading order (01, 11, 12, 03, 06), the numbering, the column layout, and that the rushing headline still has a negative final-24h association whose interval excludes zero. It passed with the Python suite (47 tests) and the other four Node suites.
+- Re-exported with cached headless Chromium from `file://`: one A0 page, zero raster images, all three web fonts loaded, nothing clipped, zero page errors. The QR code decoded to the published address. The screen view fits 1440 and 390 pixel widths without horizontal overflow; the film's Core conclusion and the analysis page still load without errors.
+
+- A second pass used the user's own reader questions (what n = 23 and n = 24 mean, what the short bracket is, whether −1 to +1 is a rescaled score, whether the rows compare early and late submitters, what ρ is). Every figure now carries three labelled parts: How to read, What we see, Careful. Figure 5 names each row in plain words, says each row is one correlation across the same students with no grouping, explains ρ under the axis, labels the two subsets and the leave-one-out bracket in plain words, and ends each row with whether its interval lies entirely below 0 or crosses 0. Figure 3 marks the first, middle and last phase in words; Figure 4 names the largest gap and the lowest first try.
+- The two columns now stack independently and end within 2 mm of each other. The problem rows in Figure 4 are denser (11 mm and 4 mm pitch) to make room for the reading guides. `tests/test_poster.cjs` checks the column membership, the three parts in every figure, and the claims behind the new sentences ("the only bar entirely below 0", "set a new best least often", "every published window falls between noon and midnight", the leave-one-out range staying below 0). All suites passed again; the export remained one vector A0 page with the three web fonts, nothing clipped, zero page errors, and a QR code that decodes to the published address.
+
+Not verified: a physical print or a phone scan from paper. These changes were not committed or pushed during this revision.
+
+## Poster size: A1 · 18 October 2026
+
+The user reported that the venue prints at A1. The layout keeps its A0 design millimetres and prints onto a 594 × 841 mm page at 594/841 scale through CSS `zoom`; the night background fills the remaining 1.2 mm under the dark footer. Because everything shrinks to 70.6%, the smallest text was raised: body text now prints at about 16 pt, reading guides at about 14 pt, Careful notes at about 12 pt, and Figure 4's problem names at about 8 pt instead of about 5 pt at A1. To make room, the closing "Read with care" list, which repeated the Careful note in every figure, became one line under the findings; the findings, Figure 4's reading guide and the title band were shortened; Figure 4's rows and Figure 5's rows are slightly denser. No number or definition changed.
+
+- Exported with cached headless Chromium from `file://`: one page, MediaBox 1684.08 × 2383.92 pt (594.1 × 841.0 mm), zero raster images, all three web fonts loaded, sheet content equal to the sheet height, zero page errors and zero failed requests. A Quick Look raster of the PDF matched the screen render with nothing clipped. The QR code decoded to the published address.
+- `the-score-has-a-past-poster-A0.pdf` was replaced by `the-score-has-a-past-poster-A1.pdf`; the poster page, README and analysis page now name A1. The analysis page regenerated with only that word changed; `legacy.html` stayed identical.
+- The Python suite, `test_routes.cjs`, `test_poster.cjs` and the three classic Node suites passed.
+
+Not verified: a physical A1 print or a phone scan from paper. Nothing was committed or pushed.
+
+## Poster against the course brief · 18 October 2026
+
+At the user's request the poster was revised against the final-project brief (motivation, questions, data, story, insights, interactions). The top row now holds Why it matters (including the audience), four questions mapped to figures 1–5, and Data & method with source counts, cleaning, analysis, privacy rule, tools and the website's interactions. The title band adds the film's Figure 1 as a vector spiral clock drawn from `calendar` in the public aggregate (1,874 dots in visible windows, 118 grey withheld arcs; no individual is placed). Figure 4 keeps its 13 labelled rows and shows the other 30 problems as thin unlabelled rows, since the film lists them by name; Read with care moved to the end of the right column and the footer became one line.
+
+- `tests/test_poster.cjs` now also checks the opening panels, the question-to-figure mapping, and that the spiral places exactly the visible submissions and greys exactly the withheld windows. All suites passed.
+- Re-exported: one A1 page (MediaBox 1684.08 × 2383.92 pt), zero raster images, three web fonts loaded, nothing clipped, zero page errors; the QR code decoded to the published address.
+- The film's own spiral view could not be screenshotted above 1440 × 900 in headless Chromium (the capture stalled), which is why the poster draws its spiral directly instead of embedding a screenshot.
+
+Not verified: a physical A1 print or a phone scan from paper. Nothing was committed or pushed.
+
+## Anonymized source data · 18 October 2026
+
+The user chose to submit the source data in anonymized form. `scripts/anonymize_sources.py` read the three private inputs whose SHA-256 fingerprints match the published aggregates (the 13 October filtered OJ input, the 21 September midterm metrics, grades and provenance, and the Course Pulse accounts and daily usage) and wrote a copy to a private folder outside the repository, which was then zipped for private submission.
+
+- Students received random labels (42 homework students, 39 OJ metric rows, 26 grades, 53 platform accounts); the mapping was not stored and labels are not shared across sources. Names, usernames and account IDs were replaced; submission and participation IDs were renumbered in their original order; the OJ class name, which named the instructor, became `CS201`.
+- The built-in scan found no original name, username or identifier in the copy (an earlier run stopped on the instructor's name in the class name, which led to the fix above).
+- Running `prepare_data.py`, `prepare_midterm.py` and `prepare_platform.py` on the copy reproduced `data/summary.json`, `data/midterm-summary.json` and `data/platform-summary.json` exactly, apart from their input fingerprints.
+- `tests/test_anonymize.py` covers the labels, order preservation, link consistency, the leak scan and the refusal to write inside the repository, using synthetic inputs only.
+
+The copy keeps exact timestamps and grades, so it is pseudonymous rather than anonymous to someone who knows the class; it was not committed or published.

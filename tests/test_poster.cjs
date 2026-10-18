@@ -13,15 +13,34 @@ const M = ctx.Poster.model(D), T = M.T;
 const html = readFileSync('poster.html', 'utf8');
 const digits = (s) => Number(String(s).replace(/,/g, ''));
 
-// ── the five Core figures, in route order, each with its film cross-reference ──
+// ── the five Core figures, each with its film cross-reference, read down the left column
+//    (the process: 01, 11, 12) and then the right (the outcomes: 03, 06) ──
 const cited = [...html.matchAll(/Film · Figure (\d\d)/g)].map((m) => m[1]);
-assert.equal(cited.join(), ctx.CS201_FIGURES.routes.core.figures.join(), 'poster shows the Core figures in Core order');
-assert.equal([...html.matchAll(/data-chart="(\w+)"/g)].map((m) => m[1]).join(), 'reach,gaps,retries,phases,exam', 'one chart per Core figure');
+assert.equal(cited.slice().sort().join(), ctx.CS201_FIGURES.routes.core.figures.slice().sort().join(), 'poster shows exactly the Core figures');
+assert.equal(cited.join(), '01,11,12,03,06', 'process figures first, then outcomes');
+assert.equal([...html.matchAll(/<p class="fig-k"><b>(\d)<\/b>/g)].map((m) => m[1]).join(), '1,2,3,4,5', 'numbered in reading order');
+assert.equal([...html.matchAll(/data-chart="(\w+)"/g)].map((m) => m[1]).join(), 'reach,retries,phases,gaps,exam', 'one chart per Core figure');
+const column = (cls) => html.slice(html.indexOf(`<div class="col ${cls}">`), html.indexOf('</div>\n\n', html.indexOf(`<div class="col ${cls}">`) + 1));
+assert.equal([...column('col-l').matchAll(/Film · Figure (\d\d)/g)].map((m) => m[1]).join(), '01,11,12', 'the left column holds the process figures');
+assert.equal([...html.slice(html.indexOf('<div class="col col-r">')).matchAll(/Film · Figure (\d\d)/g)].map((m) => m[1]).join(), '03,06', 'the right column holds the outcomes');
+// every figure answers the same three reader questions, in order
+const sections = [...html.matchAll(/<section class="fig f\d"[\s\S]*?<\/section>/g)].map((m) => m[0]);
+assert.equal(sections.length, 5);
+sections.forEach((sec, i) => assert.deepEqual([...sec.matchAll(/<span class="k">([^<]+)<\/span>/g)].map((m) => m[1]), ['How to read', 'What we see', 'Careful'], `figure ${i + 1} reading guide`));
 
 // ── every bound value exists; none is left for the page to invent ──
 const keys = [...new Set([...html.matchAll(/data-t="(\w+)"/g)].map((m) => m[1]))];
 keys.forEach((k) => assert.ok(k in T, `poster.html binds "${k}", which the model does not provide`));
 keys.filter((k) => !k.startsWith('ongoing')).forEach((k) => assert.ok(String(T[k]).length, `"${k}" is empty`));
+
+// ── the opening states why, the questions and the data, and each question names its figures ──
+['Why it matters', 'Questions', 'Data &amp; method'].forEach((label) => assert.ok(html.includes(`<p class="label">${label}</p>`), `opening panel "${label}"`));
+assert.deepEqual([...html.matchAll(/<li><span>[^<]+<\/span><i>(Fig [^<]+)<\/i><\/li>/g)].map((m) => m[1]), ['Fig 1', 'Fig 2 · 3', 'Fig 4', 'Fig 5'], 'each question points at its figures');
+
+// ── the title band's spiral clock places exactly the visible submissions and greys the withheld windows ──
+assert.equal(M.spiral.cells.filter((c) => c.state === 'visible').reduce((s, c) => s + c.n, 0), M.visibleSubs);
+assert.equal(M.spiral.cells.filter((c) => c.state === 'suppressed').length, M.withheldCells);
+assert.ok(M.spiral.cells.every((c) => c.t0 >= 0 && c.t1 <= M.spiral.days && c.t1 > c.t0), 'every window sits inside the spiral');
 
 // ── units and denominators reconcile with the aggregate ──
 assert.equal(digits(T.submissions), hw.window_submissions);
@@ -54,8 +73,11 @@ assert.equal(M.exam.length, mid.associations.length);
 
 // ── statements made in the poster's prose; a data refresh that breaks one must be rewritten ──
 Object.entries(M.claims).forEach(([name, holds]) => assert.ok(holds, `poster text relies on "${name}", which the current data no longer supports`));
-assert.ok(/only interval that excludes zero/.test(html) && M.claims.lateIntervalExcludesZero && M.claims.otherIntervalsIncludeZero);
-assert.ok(/improved least often/.test(html) && M.claims.quickRetriesImproveLeast);
+assert.ok(/the only bar entirely below 0/.test(html) && M.claims.lateIntervalExcludesZero && M.claims.otherIntervalsIncludeZero);
+assert.ok(/set a new best least often/.test(html) && M.claims.quickRetriesImproveLeast);
+assert.ok(/Last-minute rushing went with lower midterm scores/.test(html) && M.exam[0].rho < 0 && M.claims.lateIntervalExcludesZero, 'the rushing headline needs a negative final-24h association whose interval excludes zero');
+assert.ok(/Leaving out any one student keeps it between/.test(html) && M.claims.subsetsKeepTheSign);
+assert.ok(/Every published window falls between noon and midnight/.test(html) && M.claims.visibleWindowsAfterNoon);
 const ongoing = hw.assignments.filter((a) => a.observation_status === 'ongoing').map((a) => a.homework);
 assert.equal(Boolean(T.ongoingNote), ongoing.length > 0, 'the open-homework note appears exactly while a window is open');
 ongoing.forEach((name) => assert.ok(T.ongoingNote.includes(name) && T.ongoingRows.includes(name)));
