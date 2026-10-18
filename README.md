@@ -85,7 +85,7 @@ The page is print-first: lengths are millimetres, the screen view only scales th
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --no-pdf-header-footer --virtual-time-budget=15000 --print-to-pdf=assets/poster/the-score-has-a-past-poster-A1.pdf "file://$PWD/poster.html"
 ```
 
-The export needs a network connection for the three web fonts; without it the system fallbacks are used. The sheet is laid out in A0 design millimetres and printed onto A1 at 594/841 with CSS `zoom`, so its type sizes were chosen for that reduction: body text prints at about 16 pt and the smallest chart labels at about 8 pt. The vector file also prints at A0 when scaled up by 141%. GitHub Pages serves `main`, so the published site, and with it the QR code, shows the earlier snapshot until this work is merged there.
+The export needs a network connection for the three web fonts; without it the system fallbacks are used. The sheet is laid out in A0 design millimetres and printed onto A1 at 594/841 with CSS `zoom`, so its type sizes were chosen for that reduction: body text prints at about 16 pt and the smallest chart labels at about 8 pt. The vector file also prints at A0 when scaled up by 141%. The committed print file, `the-score-has-a-past-poster-A1.pdf`, is the version the team chose for printing on 18 October; it predates the last `poster.html` revision (the Why it matters / Questions / Data & method row and the spiral clock in the title band), so the HTML page and the PDF differ in that respect. GitHub Pages serves `main`, so the published site, and with it the QR code, shows the earlier snapshot until this work is merged there.
 
 ## Completed static figures
 
