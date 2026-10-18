@@ -1,6 +1,6 @@
 /* Research poster: the five Core figures (01, 03, 11, 12, 06) drawn for print from the public
    aggregates in assets/app/data.js. model() is pure and derives every number and checked claim;
-   the rest renders SVG whose user units are millimetres on the A0 sheet. */
+   the rest renders SVG whose user units are the sheet's design millimetres (printed at 594/841 on A1). */
 (function () {
   const root = typeof window !== 'undefined' ? window : globalThis;
 
@@ -36,11 +36,18 @@
     const bins = [0, 4, 8, 12, 16, 20].map((hour) => ({ hour, cells: cells.filter((c) => c.hour === hour), withheld: withheldCells.filter((c) => c.hour === hour).length }));
     const when = (c) => `${dayMon(new Date(c.date + 'T00:00:00Z'))}, ${pad(c.hour)}:00–${pad(c.hour + 4)}:00`;
     const visibleHours = bins.filter((b) => b.cells.length).map((b) => b.hour);
+    // spiral clock (the website's Figure 1 view): t = days since the first calendar day, Beijing time
+    const day0 = Date.parse(hw.calendar[0].date + 'T00:00:00Z'), dayOf = (d) => (Date.parse(d + 'T00:00:00Z') - day0) / 864e5;
+    const spiral = { days: dayOf(hw.calendar[hw.calendar.length - 1].date) + 1, first: hw.calendar[0].date,
+      exam: (Date.parse(mid.exam_started_at) + BJ - day0) / 864e5,
+      cells: hw.calendar.filter((c) => c.state === 'suppressed' || (c.state === 'visible' && c.submissions > 0))
+        .map((c) => ({ t0: dayOf(c.date) + c.hour / 24, t1: dayOf(c.date) + (c.hour + c.hours) / 24, state: c.state, n: c.submissions, hw: c.homework })) };
 
     // Figure 03 · problem slots, sorted by the gap that remains after three tries
     const rows = hw.score_progression.map((r) => ({ hw: r.homework, name: problemName(r.problem_name), n: r.n, first: r.first, best3: r.best3, best: r.best, gap: r.best - r.best3, ongoing: isOngoing(r.homework) }))
       .sort((a, b) => b.gap - a.gap || a.first - b.first);
     const gapCount = rows.filter((r) => r.gap > 10).length;
+    const lowestFirst = rows.reduce((a, b) => (b.first < a.first ? b : a));
 
     // Figure 11 · eligible retries
     const rate = (r) => ({ n: r.new_bests, N: r.eligible_retries, S: r.contributors, pct: r.improvement_pct, visible: r.state === 'visible' });
@@ -73,6 +80,7 @@
       quickRetriesAreLargestGroup: byGap.slice(1).every((r) => r.N < byGap[0].N),
       everySlotNearFullMarks: rows.every((r) => r.best >= 90),
       visibleWindowsAfterNoon: visibleHours.every((h) => h >= 12),
+      subsetsKeepTheSign: late.full.rho < 0 && late.clean.rho < 0 && late.loo[1] < 0,
     };
 
     const end = ongoing.length ? bj(ongoing[0].end_local) : null;
@@ -85,17 +93,24 @@
       peakSubs: int(peak.submissions), peakStudents: int(peak.students),
       repeatSubs: int(repeat.submissions), repeatStudents: int(repeat.students), repeatEach: p1(repeat.each),
       withheld: int(withheld), withheldCells: int(withheldCells.length),
-      gapCount: int(gapCount), largestGap: p1(rows[0].gap), largestGapName: rows[0].name,
+      gapCount: int(gapCount), largestGap: p1(rows[0].gap), largestGapName: rows[0].name, largestGapHw: rows[0].hw,
+      lowestFirst: p1(lowestFirst.first), lowestFirstName: lowestFirst.name, lowestFirstHw: lowestFirst.hw,
+      morningWithheld: int(bins.filter((b) => b.hour < 12).reduce((n, b) => n + b.withheld, 0)),
+      fullRho: rho(late.full.rho), cleanRho: rho(late.clean.rho),
       quickShare: String(Math.round((100 * byGap[0].N) / retries)), quickRate: p1(byGap[0].pct), shortRate: p1(byGap[1].pct),
       phaseMin: p1(Math.min(...seen.map((c) => c.pct))), phaseMax: p1(Math.max(...seen.map((c) => c.pct))),
       phaseHours: `${Math.round(Math.min(...phaseHours))}–${Math.round(Math.max(...phaseHours))}`,
       lateRho: rho(late.rho), lateLo: rho(late.ci[0]), lateHi: rho(late.ci[1]), looLo: rho(late.loo[0]), looHi: rho(late.loo[1]),
       snapshot: `${snap.getUTCDate()} ${MON[snap.getUTCMonth()]} ${snap.getUTCFullYear()}, ${pad(snap.getUTCHours())}:${pad(snap.getUTCMinutes())} Beijing time`,
+      snapshotDay: `${snap.getUTCDate()} ${MON[snap.getUTCMonth()]} ${snap.getUTCFullYear()}`,
+      spFirst: dayMon(new Date(hw.calendar[0].date + 'T00:00:00Z')), spLast: dayMon(snap),
+      courseEvents: int(hw.all_course_submissions), roster: int(hw.cohort_members), tailCount: int(rows.length - gapCount),
+      ongoingStar: ongoing.length ? `* ${ongoing.map((a) => a.homework).join(', ')} is still open.` : '',
       ongoingRows: ongoing.length ? `* ${ongoing.map((a) => a.homework).join(', ')} is still open: its rows are the scores observed so far.` : '',
       ongoingNote: ongoing.length ? `${ongoing.map((a) => a.homework).join(', ')} is still open until ${dayMon(end)}: its numbers are observations so far.` : '',
     };
 
-    return { T, claims, snap, ongoing: ongoing.map((a) => a.homework), submissions: hw.window_submissions,
+    return { T, claims, snap, spiral, ongoing: ongoing.map((a) => a.homework), submissions: hw.window_submissions,
       cells, visibleSubs, withheld, withheldCells: withheldCells.length, peak, repeat, bins, when,
       rows, gapCount, byHomework, byGap, retries, bests, rate: (100 * bests) / retries, phases, exam, grades: mid.matched };
   }
@@ -210,16 +225,16 @@
     hatched(g, x0 + vis + 0.5, by0, full - vis - 0.5, 7);
     const l1 = text(g, x0, by0 - 3, '', 't-note');
     l1.append('tspan').attr('font-weight', 600).attr('fill', C.ink).text(int(M.visibleSubs));
-    l1.append('tspan').text(` submissions placed above, in ${M.cells.length} visible windows`);
+    l1.append('tspan').text(` placed above (${M.cells.length} visible windows)`);
     const l2 = text(g, bx1, by0 - 3, '', 't-note', 'end');
     l2.append('tspan').attr('font-weight', 600).attr('fill', C.ink).text(int(M.withheld));
-    l2.append('tspan').text(` withheld, in ${M.withheldCells} windows with fewer than five students`);
+    l2.append('tspan').text(` withheld (${M.withheldCells} windows, under five students)`);
   }
 
   // Figure 03 · first try, best within three tries and best observed, per problem slot
   function gaps() {
     const head = M.rows.filter((r) => r.gap > 10), tail = M.rows.filter((r) => r.gap <= 10);
-    const W = 307, P = 13, Q = 5.3, y0 = 21, yTail = y0 + head.length * P + 13, yEnd = yTail + tail.length * Q;
+    const W = 307, P = 10, Q = 2.3, y0 = 21, yTail = y0 + head.length * P + 13, yEnd = yTail + tail.length * Q;
     const H = yEnd + 15, svg = chart('gaps', W, H,
       `Dot plot of ${M.rows.length} problem slots sorted by the gap after three tries: mean first try, best within three tries and best observed.`);
     const lx = 94, x = d3.scaleLinear([30, 100], [100, 262]);
@@ -242,12 +257,12 @@
     text(svg, W, yEnd + 13.5, 'mean score out of 100 · same students in each row · axis starts at 30', 't-axis', 'end');
 
     const row = (g, r, big) => {
-      const s = big ? 1 : 0.55;
-      g.append('line').attr('x1', x(r.first)).attr('x2', x(r.best3)).attr('stroke', C.axis).attr('stroke-width', big ? 0.9 : 0.5);
-      if (r.gap > 0.05) g.append('line').attr('x1', x(r.best3)).attr('x2', x(r.best)).attr('stroke', C.orange).attr('stroke-width', big ? 2.6 : 1.5);
-      g.append('rect').attr('x', x(r.best) - 0.6 * (big ? 1 : 0.75)).attr('y', -3.5 * s).attr('width', 1.2 * (big ? 1 : 0.75)).attr('height', 7 * s).attr('fill', C.ink);
-      g.append('circle').attr('cx', x(r.first)).attr('r', 2.1 * s).attr('fill', C.paper).attr('stroke', C.ink).attr('stroke-width', big ? 0.6 : 0.45);
-      g.append('circle').attr('cx', x(r.best3)).attr('r', 2.3 * s).attr('fill', C.ink).attr('stroke', C.paper).attr('stroke-width', big ? 0.5 : 0.3);
+      const s = big ? 1 : 0.34;
+      g.append('line').attr('x1', x(r.first)).attr('x2', x(r.best3)).attr('stroke', C.axis).attr('stroke-width', big ? 0.9 : 0.35);
+      if (r.gap > 0.05) g.append('line').attr('x1', x(r.best3)).attr('x2', x(r.best)).attr('stroke', C.orange).attr('stroke-width', big ? 2.6 : 1);
+      g.append('rect').attr('x', x(r.best) - (big ? 0.6 : 0.3)).attr('y', -3.5 * s).attr('width', big ? 1.2 : 0.6).attr('height', 7 * s).attr('fill', C.ink);
+      g.append('circle').attr('cx', x(r.first)).attr('r', 2.1 * s).attr('fill', C.paper).attr('stroke', C.ink).attr('stroke-width', big ? 0.6 : 0.3);
+      g.append('circle').attr('cx', x(r.best3)).attr('r', 2.3 * s).attr('fill', C.ink).attr('stroke', C.paper).attr('stroke-width', big ? 0.5 : 0.2);
     };
     head.forEach((r, i) => {
       const g = svg.append('g').attr('transform', `translate(0, ${y0 + i * P + P / 2})`);
@@ -262,12 +277,10 @@
     svg.append('line').attr('class', 'axis').attr('x1', 0).attr('x2', W).attr('y1', mid - 4.6).attr('y2', mid - 4.6);
     text(svg, lx, mid + 1.6, `${tail.length} more problem slots`, 't-anno', 'end');
     halo(text(svg, x(30) + 2, mid + 1.6, 'within 10 points of their best after three tries', 't-note'));
-    tail.forEach((r, i) => {
-      const g = svg.append('g').attr('transform', `translate(0, ${yTail + i * Q + Q / 2})`);
-      text(g, lx, 1.3, `${r.hw}${r.ongoing ? '*' : ''} · ${r.name}`, 't-tail', 'end');
-      row(g, r, false);
-      text(g, x(100) + 4, 1.3, `+${p1(r.gap)}`, 't-tail');
-    });
+    text(svg, lx, yTail + 5.5, 'one thin row each;', 't-sub', 'end');
+    text(svg, lx, yTail + 11, 'names in the film', 't-sub', 'end');
+    tail.forEach((r, i) => row(svg.append('g').attr('transform', `translate(0, ${yTail + i * Q + Q / 2})`), r, false));
+    text(svg, x(100) + 4, yTail + (tail.length * Q) / 2 + 1.8, `≤ +${p1(Math.max(...tail.map((r) => r.gap)))}`, 't-note');
   }
 
   // Figure 11 · share of eligible retries that set a new best, beside the counts behind each share
@@ -281,7 +294,7 @@
       const g = svg.append('g').attr('transform', `translate(0, ${oy})`), y0 = 17, y1 = y0 + rows.length * P;
       text(g, 0, 5.6, title, 't-panel');
       text(g, x(0), 12.5, 'share that set a new best', 't-axis');
-      text(g, cx0, 12.5, 'new bests of eligible retries', 't-axis');
+      text(g, cx0, 12.5, 'new bests of eligible', 't-axis');
       // the pooled rate across all eligible retries: a reference that shows between the bars
       g.append('line').attr('x1', x(M.rate)).attr('x2', x(M.rate)).attr('y1', y0 - 1.5).attr('y2', y1 + 0.8).attr('stroke', C.ink).attr('stroke-width', 0.4);
       rows.forEach((r, i) => {
@@ -310,14 +323,18 @@
 
   // Figure 12 · the same share inside five equal-duration phases of each homework window
   function phases() {
-    const W = 300, x0 = 42, gap = 1.6, cw = (W - x0 - 4 * gap) / 5, ch = 26, y0 = 15;
+    const W = 300, x0 = 42, gap = 1.6, cw = (W - x0 - 4 * gap) / 5, ch = 26, y0 = 21;
     const yEnd = y0 + M.phases.length * (ch + gap) - gap, H = yEnd + 37, svg = chart('phases', W, H,
       `Matrix of ${M.phases.length} homeworks by five window phases: the share of eligible retries that set a new best, with counts; withheld and unobserved phases are marked.`);
     const ramp = d3.scaleSequential(d3.piecewise(d3.interpolateLab, ['#f4f8fe', '#cde2fb', '#86b6ef', '#3987e5', '#1c5cab', '#0d366b'])).domain([0, 100]);
     const dark = (c) => d3.lab(c).l < 58;
 
     text(svg, x0, 4, 'share of the homework window elapsed · opening → deadline', 't-axis');
-    M.phases[0].cells.forEach((c, i) => text(svg, x0 + i * (cw + gap) + cw / 2, 11.5, c.label, 't-tick', 'middle'));
+    const where = ['just opened', '', 'midway', '', 'before the deadline'];
+    M.phases[0].cells.forEach((c, i) => {
+      text(svg, x0 + i * (cw + gap) + cw / 2, 11.5, c.label, 't-tick', 'middle');
+      if (where[i]) text(svg, x0 + i * (cw + gap) + cw / 2, 17, where[i], 't-sub', 'middle');
+    });
     M.phases.forEach((p, j) => {
       const y = y0 + j * (ch + gap), cy = y + ch / 2;
       text(svg, 0, cy - 0.4, p.hw + (p.ongoing ? '*' : ''), 't-panel');
@@ -360,11 +377,18 @@
     text(svg, 0, ky + 22, 'n of N = new bests of eligible retries · S = students contributing', 't-sub');
   }
 
-  // Figure 06 · three pre-exam behaviours and the midterm score, with two robustness checks
+  // Figure 06 · three pre-exam behaviours and the midterm score, with two robustness checks.
+  // The final-24h share is what the poster calls last-minute rushing; each row says what it measures,
+  // the axis says what ρ is, and each row ends with whether its interval stays on one side of 0.
   function exam() {
-    const W = 307, P = 25, y0 = 22, H = y0 + M.exam.length * P + 20, svg = chart('exam', W, H,
+    const W = 307, P = 23.5, y0 = 26, yEnd = y0 + M.exam.length * P, H = yEnd + 23, svg = chart('exam', W, H,
       `Spearman correlations between three pre-exam homework behaviours and the midterm score for ${M.grades} students, with bootstrap intervals, leave-one-out ranges and subset checks.`);
-    const lx = 86, x = d3.scaleLinear([-1, 1], [92, 248]), yEnd = y0 + M.exam.length * P;
+    const lx = 90, x = d3.scaleLinear([-1, 1], [97, 245]), vx = 252;
+    const ROW = {
+      late_pct: ['Last-minute rushing', '% of submissions in the last 24 h'],
+      attempts: ['Submission count', `all submissions, ${M.T.preExam}`],
+      first_score: ['Mean first-try score', "first submission's score, averaged"],
+    };
     const diamond = (g, cx, cy, s, c) => g.append('path').attr('d', `M${cx},${cy - s}L${cx + s},${cy}L${cx},${cy + s}L${cx - s},${cy}Z`).attr('fill', c).attr('stroke', C.paper).attr('stroke-width', 0.3);
     const square = (g, cx, cy, s, c) => g.append('rect').attr('x', cx - s).attr('y', cy - s).attr('width', 2 * s).attr('height', 2 * s).attr('fill', c).attr('stroke', C.paper).attr('stroke-width', 0.3);
     const bracket = (g, a, b, cy, c) => {
@@ -372,37 +396,90 @@
       [a, b].forEach((v) => g.append('line').attr('x1', v).attr('x2', v).attr('y1', cy - 1.5).attr('y2', cy + 1.5).attr('stroke', c).attr('stroke-width', 0.6));
     };
 
-    // key, two rows
+    // key in plain words, two rows
     const k = svg.append('g').attr('transform', 'translate(0, 1.4)');
     k.append('line').attr('x1', 0).attr('x2', 12).attr('y1', 3).attr('y2', 3).attr('stroke', C.ink2).attr('stroke-width', 1.5).attr('stroke-linecap', 'round');
     k.append('circle').attr('cx', 6).attr('cy', 3).attr('r', 2.2).attr('fill', C.ink2).attr('stroke', C.paper).attr('stroke-width', 0.4);
-    text(k, 15, 4.7, 'Spearman ρ and 95% bootstrap interval', 't-note');
-    bracket(k, 112, 123, 3, C.ink2);
-    text(k, 126, 4.7, 'range when one student is left out', 't-note');
-    diamond(k, 2.2, 10.6, 1.9, C.ink2);
-    text(k, 7, 12.3, `all problem slots attempted, n = ${M.exam[0].full.n}`, 't-note');
-    square(k, 113.7, 10.6, 1.6, C.ink2);
-    text(k, 118, 12.3, `two discrepant records omitted, n = ${M.exam[0].clean.n}`, 't-note');
+    text(k, 15, 4.7, `all ${M.grades} students; bar = 95% interval`, 't-note');
+    bracket(k, 133, 144, 3, C.ink2);
+    text(k, 147, 4.7, 'range if any one student is left out', 't-note');
+    diamond(k, 2.2, 11.2, 1.9, C.ink2);
+    text(k, 7, 12.9, `only students who tried every problem (n = ${M.exam[0].full.n})`, 't-note');
+    square(k, 134.6, 11.2, 1.6, C.ink2);
+    text(k, 139, 12.9, `without 2 records whose homework scores disagree (n = ${M.exam[0].clean.n})`, 't-note');
 
     svg.append('rect').attr('x', 0).attr('y', y0 + 0.8).attr('width', W).attr('height', P - 1.6).attr('fill', C.wash);
     [-1, -0.5, 0, 0.5, 1].forEach((v) => {
       svg.append('line').attr('class', v ? 'grid' : 'zero').attr('x1', x(v)).attr('x2', x(v)).attr('y1', y0 - 2).attr('y2', yEnd);
       text(svg, x(v), yEnd + 6, v ? rho(v).replace('.50', '.5').replace('.00', '') : '0', 't-tick', 'middle');
     });
-    text(svg, x(0) - 4, yEnd + 13.5, '← goes with lower midterm scores', 't-axis', 'end');
-    text(svg, x(0) + 4, yEnd + 13.5, 'goes with higher midterm scores →', 't-axis');
+    text(svg, x(0) - 5, yEnd + 12.5, '← more of it, lower midterm', 't-note', 'end');
+    text(svg, x(0) + 5, yEnd + 12.5, 'more of it, higher midterm →', 't-note');
+    text(svg, x(0), yEnd + 19.5, 'ρ: how closely the two rankings agree, from −1 to +1', 't-sub', 'middle').style('fill', C.ink2);
 
     M.exam.forEach((a, i) => {
       const g = svg.append('g'), cy = y0 + i * P + P / 2, lead = i === 0, c = lead ? C.orange : C.ink2;
-      text(g, lx, cy - 3.6, a.label, 't-label', 'end').style('font-weight', lead ? 600 : 400);
-      g.append('line').attr('x1', x(a.ci[0])).attr('x2', x(a.ci[1])).attr('y1', cy - 5.6).attr('y2', cy - 5.6).attr('stroke', c).attr('stroke-width', 1.5).attr('stroke-linecap', 'round');
-      g.append('circle').attr('cx', x(a.rho)).attr('cy', cy - 5.6).attr('r', 2.4).attr('fill', c).attr('stroke', lead ? C.wash : C.paper).attr('stroke-width', 0.5);
-      bracket(g, x(a.loo[0]), x(a.loo[1]), cy + 0.4, c);
-      diamond(g, x(a.full.rho), cy + 4.9, 1.8, c);
-      square(g, x(a.clean.rho), cy + 8.8, 1.5, c);
-      text(g, 254, cy - 3.2, rho(a.rho), 't-value');
-      text(g, 254, cy + 3.2, `${rho(a.ci[0])} to ${rho(a.ci[1])}`, 't-count');
+      const [name, what] = ROW[a.key];
+      text(g, lx, cy - 3.2, name, 't-label', 'end').style('font-weight', lead ? 600 : 400);
+      text(g, lx, cy + 2.8, what, 't-sub', 'end');
+      g.append('line').attr('x1', x(a.ci[0])).attr('x2', x(a.ci[1])).attr('y1', cy - 5).attr('y2', cy - 5).attr('stroke', c).attr('stroke-width', 1.5).attr('stroke-linecap', 'round');
+      g.append('circle').attr('cx', x(a.rho)).attr('cy', cy - 5).attr('r', 2.4).attr('fill', c).attr('stroke', lead ? C.wash : C.paper).attr('stroke-width', 0.5);
+      bracket(g, x(a.loo[0]), x(a.loo[1]), cy + 1, c);
+      diamond(g, x(a.full.rho), cy + 5.6, 1.8, c);
+      square(g, x(a.clean.rho), cy + 9.6, 1.5, c);
+      // value, interval and a verdict: does the 95% interval stay on one side of 0?
+      text(g, vx, cy - 3.6, `ρ ${rho(a.rho)}`, 't-value');
+      text(g, vx, cy + 2.2, `${rho(a.ci[0])} to ${rho(a.ci[1])}`, 't-count');
+      const clear = a.ci[1] < 0 || a.ci[0] > 0, label = clear ? (a.ci[1] < 0 ? 'entirely below 0' : 'entirely above 0') : 'crosses 0: unclear';
+      const chip = g.append('g').attr('transform', `translate(${vx}, ${cy + 5})`), cw = label.length * 2.45 + 5;
+      chip.append('rect').attr('width', cw).attr('height', 6.2).attr('rx', 3.1).attr('fill', clear ? '#b8460f' : 'none')
+        .attr('stroke', clear ? 'none' : C.axis).attr('stroke-width', 0.35);
+      text(chip, cw / 2, 4.5, label, 't-chip', 'middle').style('fill', clear ? '#fff' : C.ink2);
     });
+  }
+
+  // The film's Figure 1 wound into a spiral clock: one turn per day from the first calendar day (centre)
+  // to the snapshot; clockwise from midnight at the top. A visible window places one dot per submission
+  // (seeded positions inside its arc), coloured by homework; a withheld window is a grey arc, never dots.
+  function spiral() {
+    const S = 150, cx = S / 2, cy = S / 2, r0 = 11, r1 = 60, T = M.spiral.days;
+    const HW = { HW1: '#3987e5', HW2: '#199e70', HW3: '#d4a017', HW4: '#e07bb0', HW5: '#8f87ef' };
+    const svg = d3.select('.spiral').append('svg').attr('viewBox', `0 0 ${S} ${S}`).attr('width', `${S}mm`).attr('height', `${S}mm`)
+      .attr('role', 'img').attr('aria-label', `Spiral clock of all in-window submissions: ${int(M.visibleSubs)} dots in visible four-hour windows and ${M.withheldCells} withheld windows.`);
+    const rad = (t) => r0 + ((r1 - r0) * t) / T, pt = (t, dr = 0) => {
+      const a = 2 * Math.PI * (t % 1), r = rad(t) + dr;
+      return [cx + r * Math.sin(a), cy - r * Math.cos(a)];
+    };
+    const path = (a, b, dr = 0) => d3.range(a, b + 1e-9, (b - a) / Math.max(2, Math.ceil((b - a) * 90))).map((t) => pt(t, dr).map((v) => v.toFixed(2)).join(',')).join('L');
+    let seed = 20261013;
+    const rnd = () => { seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+
+    // hour spokes and labels at the four-hour window edges
+    [0, 4, 8, 12, 16, 20].forEach((h) => {
+      const a = (2 * Math.PI * h) / 24, s = Math.sin(a), c = Math.cos(a);
+      svg.append('line').attr('x1', cx + r0 * 0.6 * s).attr('y1', cy - r0 * 0.6 * c).attr('x2', cx + (r1 + 2) * s).attr('y2', cy - (r1 + 2) * c)
+        .attr('stroke', '#ffffff').attr('stroke-opacity', 0.07).attr('stroke-width', 0.25);
+      svg.append('text').attr('x', cx + (r1 + 6.4) * s).attr('y', cy - (r1 + 6.4) * c + 1.4).attr('text-anchor', 'middle').attr('class', 's-tick').text(pad(h));
+    });
+    svg.append('path').attr('d', 'M' + path(0, T)).attr('fill', 'none').attr('stroke', '#ffffff').attr('stroke-opacity', 0.09).attr('stroke-width', 0.22);
+    M.spiral.cells.filter((c) => c.state === 'suppressed').forEach((c) => {
+      svg.append('path').attr('d', 'M' + path(c.t0, c.t1)).attr('fill', 'none').attr('stroke', '#6f7686').attr('stroke-opacity', 0.4).attr('stroke-width', 0.6).attr('stroke-linecap', 'butt');
+    });
+    const dots = svg.append('g');
+    let placed = 0;
+    M.spiral.cells.filter((c) => c.state === 'visible').forEach((c) => {
+      for (let i = 0; i < c.n; i++) {
+        const [x, y] = pt(c.t0 + rnd() * (c.t1 - c.t0), (rnd() - 0.5) * 0.9);
+        dots.append('circle').attr('cx', x.toFixed(2)).attr('cy', y.toFixed(2)).attr('r', 0.36).attr('fill', HW[c.hw] || '#ece7dd');
+        placed++;
+      }
+    });
+    svg.attr('data-dots', placed);
+    // the midterm, the first day and the snapshot
+    const [ex, ey] = pt(M.spiral.exam, 0);
+    svg.append('path').attr('d', d3.symbol(d3.symbolStar, 9)()).attr('transform', `translate(${ex},${ey})`).attr('fill', '#ff6a3d');
+    svg.append('text').attr('x', ex - 2.4).attr('y', ey + 1.4).attr('text-anchor', 'end').attr('class', 's-mark').text('midterm');
+    svg.append('text').attr('x', cx).attr('y', cy + 1.3).attr('text-anchor', 'middle').attr('class', 's-mark').text(dayMon(new Date(M.spiral.first + 'T00:00:00Z')));
   }
 
   function qr() {
@@ -414,7 +491,7 @@
   }
 
   document.querySelectorAll('[data-t]').forEach((el) => { el.textContent = M.T[el.dataset.t] ?? ''; });
-  reach(); gaps(); retries(); phases(); exam(); qr();
+  reach(); gaps(); retries(); phases(); exam(); spiral(); qr();
 
   // screen view: scale the finished sheet to the window; print always uses the physical size
   const sheet = document.getElementById('poster'), stage = sheet.parentElement;
