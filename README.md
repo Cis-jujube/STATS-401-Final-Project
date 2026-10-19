@@ -8,7 +8,7 @@ When homework scores cluster near full marks, what do submission timing, retries
 
 For CS201 students and teaching staff, similar final scores can hide different revision histories and problem-level difficulties. This project uses coordinated visualizations to examine those processes, then asks how pre-exam submission behavior relates to the available midterm grades. The goal is to support reflection and discussion about homework, with explicit limits on what activity logs can tell us.
 
-**[Website](https://cis-jujube.github.io/STATS-401-Final-Project/)** · [Core: five figures](https://cis-jujube.github.io/STATS-401-Final-Project/?content=core) · [Showcase: all twelve](https://cis-jujube.github.io/STATS-401-Final-Project/?content=showcase) · [Analysis and tables](https://cis-jujube.github.io/STATS-401-Final-Project/analysis.html) · [Poster](https://cis-jujube.github.io/STATS-401-Final-Project/poster.html) · [A1 PDF](assets/poster/the-score-has-a-past-poster-A1.pdf)
+**[Website](https://cis-jujube.github.io/STATS-401-Final-Project/)** · [Core: five figures](https://cis-jujube.github.io/STATS-401-Final-Project/?content=core) · [Showcase: all twelve](https://cis-jujube.github.io/STATS-401-Final-Project/?content=showcase) · [Analysis and tables](https://cis-jujube.github.io/STATS-401-Final-Project/analysis.html) · [Final report](docs/STATS401_Final_Report_Group14_Liu_Wang.docx) · [Poster](https://cis-jujube.github.io/STATS-401-Final-Project/poster.html) · [A1 PDF](assets/poster/the-score-has-a-past-poster-A1.pdf)
 
 ## The visualization story
 
@@ -76,4 +76,4 @@ Figure-generation commands are in the methods documents. Source code is in [asse
 
 This repository provides visualization and processing code, public aggregates, figure exports, website, poster, and methods. Source and student-level cleaned datasets belong in the private course submission: [the source-copy script](scripts/anonymize_sources.py) prepares pseudonymous copies outside the repository. Exact timestamps and grades remain sensitive, so those copies must not be published.
 
-The separate **~1,500-word final report**, including screenshots, a What–Why–How design critique, and **confirmed individual contributions**, is not yet included in this repository. The [original proposal](proposal.md) records planned roles, not a final contribution statement.
+The [final report](docs/STATS401_Final_Report_Group14_Liu_Wang.docx) includes the motivation, methods, five main visualizations with screenshots, a What–Why–How design critique, findings, limitations, and team responsibilities. It records Zaozao Wang's responsibility for data acquisition, processing, privacy, analysis, and the poster, and Zhengxiang Liu's responsibility for visualization design, D3 implementation, the report, and presentation.
